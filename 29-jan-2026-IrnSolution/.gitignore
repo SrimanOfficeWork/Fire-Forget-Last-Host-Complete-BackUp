@@ -1,0 +1,38 @@
+# Visual Studio temporary files, build results, and
+# user-specific files
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build results
+bin/
+obj/
+[Bb]uild/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+
+# NuGet Packages
+*.nupkg
+packages/
+*.snupkg
+
+# Visual Studio Code settings
+.vscode/
+
+# Rider IDE settings
+.idea/
+
+# Logs
+*.log
+
+# Other temporary files
+*.tmp
+*.temp
+*.cache
+
+# File indexing (like your error file)
+*.vsidx

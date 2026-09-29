@@ -1,0 +1,52 @@
+version: "3.8"   # Compose file format version
+
+services:
+  # -------------------------
+  # RabbitMQ (Message Broker)
+  # -------------------------
+  rabbitmq:
+    image: rabbitmq:3-management        # RabbitMQ with management UI
+    container_name: rabbitmq            # Container name
+    ports:
+      - "5672:5672"    # AMQP protocol (your .NET 8 API & Worker will connect here)
+      - "15672:15672"  # RabbitMQ Management Web UI
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq  # Persist data even if container restarts
+
+  # -------------------------
+  # Selenium Grid Hub
+  # -------------------------
+  selenium-hub:
+    image: selenium/hub:4.21.0          # Hub that manages browser nodes
+    container_name: selenium-hub
+    ports:
+      - "4444:4444"   # WebDriver URL + Selenium Grid Console
+    environment:
+      - SE_GRID_MAX_SESSION=16          # Max parallel sessions
+      - SE_GRID_SESSION_TIMEOUT=300     # Timeout in seconds
+      - SE_GRID_BROWSER_TIMEOUT=300     # Browser timeout
+
+  # -------------------------
+  # Selenium Node Chrome
+  # -------------------------
+  chrome:
+    image: selenium/node-chrome:4.21.0  # Chrome browser node
+    container_name: chrome
+    shm_size: 2gb                       # Avoid Chrome crashing on large pages
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    volumes:
+      - "D:/c drive downloads/parvathy:/home/seluser/uploads"               # Improve Chrome performance
+
+# -------------------------
+# Volumes (persistent storage)
+# -------------------------
+volumes:
+  rabbitmq_data:
