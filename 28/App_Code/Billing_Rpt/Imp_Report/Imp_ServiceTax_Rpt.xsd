@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ServiceTax_Rpt" targetNamespace="http://tempuri.org/ServiceTax_Rpt.xsd" xmlns:mstns="http://tempuri.org/ServiceTax_Rpt.xsd" xmlns="http://tempuri.org/ServiceTax_Rpt.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ServiceTax_Rpt" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="ServiceTax_Rpt" msprop:Generator_UserDSName="ServiceTax_Rpt">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Service_Tax_Rpt" msprop:Generator_TableClassName="Service_Tax_RptDataTable" msprop:Generator_TableVarName="tableService_Tax_Rpt" msprop:Generator_TablePropName="Service_Tax_Rpt" msprop:Generator_RowDeletingName="Service_Tax_RptRowDeleting" msprop:Generator_RowChangingName="Service_Tax_RptRowChanging" msprop:Generator_RowEvHandlerName="Service_Tax_RptRowChangeEventHandler" msprop:Generator_RowDeletedName="Service_Tax_RptRowDeleted" msprop:Generator_UserTableName="Service_Tax_Rpt" msprop:Generator_RowChangedName="Service_Tax_RptRowChanged" msprop:Generator_RowEvArgName="Service_Tax_RptRowChangeEvent" msprop:Generator_RowClassName="Service_Tax_RptRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="RowNumber" msprop:Generator_ColumnVarNameInTable="columnRowNumber" msprop:Generator_ColumnPropNameInRow="RowNumber" msprop:Generator_ColumnPropNameInTable="RowNumberColumn" msprop:Generator_UserColumnName="RowNumber" type="xs:string" minOccurs="0" />
+              <xs:element name="BILL_INV_NO" msprop:Generator_ColumnVarNameInTable="columnBILL_INV_NO" msprop:Generator_ColumnPropNameInRow="BILL_INV_NO" msprop:Generator_ColumnPropNameInTable="BILL_INV_NOColumn" msprop:Generator_UserColumnName="BILL_INV_NO" type="xs:string" minOccurs="0" />
+              <xs:element name="BILL_INV_DATE" msprop:Generator_ColumnVarNameInTable="columnBILL_INV_DATE" msprop:Generator_ColumnPropNameInRow="BILL_INV_DATE" msprop:Generator_ColumnPropNameInTable="BILL_INV_DATEColumn" msprop:Generator_UserColumnName="BILL_INV_DATE" type="xs:string" minOccurs="0" />
+              <xs:element name="TAXABLE_AMT" msprop:Generator_ColumnVarNameInTable="columnTAXABLE_AMT" msprop:Generator_ColumnPropNameInRow="TAXABLE_AMT" msprop:Generator_ColumnPropNameInTable="TAXABLE_AMTColumn" msprop:Generator_UserColumnName="TAXABLE_AMT" type="xs:string" minOccurs="0" />
+              <xs:element name="LEDGER_1_TAX_AMT" msprop:Generator_ColumnVarNameInTable="columnLEDGER_1_TAX_AMT" msprop:Generator_ColumnPropNameInRow="LEDGER_1_TAX_AMT" msprop:Generator_ColumnPropNameInTable="LEDGER_1_TAX_AMTColumn" msprop:Generator_UserColumnName="LEDGER_1_TAX_AMT" type="xs:string" minOccurs="0" />
+              <xs:element name="LEDGER_2_TAX_AMT" msprop:Generator_ColumnVarNameInTable="columnLEDGER_2_TAX_AMT" msprop:Generator_ColumnPropNameInRow="LEDGER_2_TAX_AMT" msprop:Generator_ColumnPropNameInTable="LEDGER_2_TAX_AMTColumn" msprop:Generator_UserColumnName="LEDGER_2_TAX_AMT" type="xs:string" minOccurs="0" />
+              <xs:element name="LEDGER_4_TAX_AMT" msprop:Generator_ColumnVarNameInTable="columnLEDGER_4_TAX_AMT" msprop:Generator_ColumnPropNameInRow="LEDGER_4_TAX_AMT" msprop:Generator_ColumnPropNameInTable="LEDGER_4_TAX_AMTColumn" msprop:Generator_UserColumnName="LEDGER_4_TAX_AMT" type="xs:string" minOccurs="0" />
+              <xs:element name="TOTAL_AMT_TAX" msprop:Generator_ColumnVarNameInTable="columnTOTAL_AMT_TAX" msprop:Generator_ColumnPropNameInRow="TOTAL_AMT_TAX" msprop:Generator_ColumnPropNameInTable="TOTAL_AMT_TAXColumn" msprop:Generator_UserColumnName="TOTAL_AMT_TAX" type="xs:string" minOccurs="0" />
+              <xs:element name="REPORTDATE" msprop:Generator_ColumnVarNameInTable="columnREPORTDATE" msprop:Generator_ColumnPropNameInRow="REPORTDATE" msprop:Generator_ColumnPropNameInTable="REPORTDATEColumn" msprop:Generator_UserColumnName="REPORTDATE" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="empty_x0020_rpt" msprop:Generator_TableClassName="empty_rptDataTable" msprop:Generator_TableVarName="tableempty_rpt" msprop:Generator_RowChangedName="empty_rptRowChanged" msprop:Generator_TablePropName="empty_rpt" msprop:Generator_RowDeletingName="empty_rptRowDeleting" msprop:Generator_RowChangingName="empty_rptRowChanging" msprop:Generator_RowEvHandlerName="empty_rptRowChangeEventHandler" msprop:Generator_RowDeletedName="empty_rptRowDeleted" msprop:Generator_RowClassName="empty_rptRow" msprop:Generator_UserTableName="empty rpt" msprop:Generator_RowEvArgName="empty_rptRowChangeEvent">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

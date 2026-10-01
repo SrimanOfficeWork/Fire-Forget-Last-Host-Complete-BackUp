@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Expense_Job" targetNamespace="http://tempuri.org/Expense_Job.xsd" xmlns:mstns="http://tempuri.org/Expense_Job.xsd" xmlns="http://tempuri.org/Expense_Job.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="Expense_Job" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="Expense_Job" msprop:Generator_UserDSName="Expense_Job">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Expense_Job" msprop:Generator_TableClassName="Expense_JobDataTable" msprop:Generator_TableVarName="tableExpense_Job" msprop:Generator_TablePropName="_Expense_Job" msprop:Generator_RowDeletingName="Expense_JobRowDeleting" msprop:Generator_RowChangingName="Expense_JobRowChanging" msprop:Generator_RowEvHandlerName="Expense_JobRowChangeEventHandler" msprop:Generator_RowDeletedName="Expense_JobRowDeleted" msprop:Generator_UserTableName="Expense_Job" msprop:Generator_RowChangedName="Expense_JobRowChanged" msprop:Generator_RowEvArgName="Expense_JobRowChangeEvent" msprop:Generator_RowClassName="Expense_JobRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Id" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:string" minOccurs="0" />
+              <xs:element name="VOUCHER_NUMBER" msprop:Generator_ColumnVarNameInTable="columnVOUCHER_NUMBER" msprop:Generator_ColumnPropNameInRow="VOUCHER_NUMBER" msprop:Generator_ColumnPropNameInTable="VOUCHER_NUMBERColumn" msprop:Generator_UserColumnName="VOUCHER_NUMBER" type="xs:string" minOccurs="0" />
+              <xs:element name="PARTY_NAME" msprop:Generator_ColumnVarNameInTable="columnPARTY_NAME" msprop:Generator_ColumnPropNameInRow="PARTY_NAME" msprop:Generator_ColumnPropNameInTable="PARTY_NAMEColumn" msprop:Generator_UserColumnName="PARTY_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="JOB_NUMBER" msprop:Generator_ColumnVarNameInTable="columnJOB_NUMBER" msprop:Generator_ColumnPropNameInRow="JOB_NUMBER" msprop:Generator_ColumnPropNameInTable="JOB_NUMBERColumn" msprop:Generator_UserColumnName="JOB_NUMBER" type="xs:string" minOccurs="0" />
+              <xs:element name="AMOUNT" msprop:Generator_ColumnVarNameInTable="columnAMOUNT" msprop:Generator_ColumnPropNameInRow="AMOUNT" msprop:Generator_ColumnPropNameInTable="AMOUNTColumn" msprop:Generator_UserColumnName="AMOUNT" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

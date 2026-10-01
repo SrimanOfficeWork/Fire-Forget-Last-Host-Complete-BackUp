@@ -1,0 +1,46 @@
+/* IE/Win - Fix animation bug - #4615 */
+.ui-accordion { width: 230px; }
+.ui-accordion .ui-accordion-header { cursor: pointer; position: relative; margin-top: 0px; padding-top:0px;  }
+.ui-accordion .ui-accordion-li-fix {border-bottom: 1px solid thin #c48320; display: inline; }
+.ui-accordion .ui-accordion-header-active { border-bottom: 1px solid thin #c48320;}
+.ui-accordion .ui-accordion-header a { border-bottom: 1px solid thin #c48320; font-family:Arial, Helvetica, sans-serif; color:#FFFFFF; font-weight:normal; display: block; font-size:13px; padding: .9em .7em .7em .7em; }
+.ui-accordion-icons .ui-accordion-header a { border-bottom: 1px solid thin #c48320; padding-left:2em; }
+.ui-accordion .ui-accordion-header .ui-icon { border-bottom: 1px solid thin #c48320; position: absolute; left: .5em; top:10px; margin-top: 8px; }
+.ui-accordion .ui-accordion-content { border-bottom: 1px solid thin #c48320;  border-top: 0; margin-top: -2px; position: relative; top: 0px; margin-bottom: 0px; overflow:hidden; display: none;}
+.ui-accordion .ui-accordion-content-active { display: block; }
+/*
+
+
+/* Component containers
+----------------------------------*/
+
+.ui-widget-content { background: #ffffff; }
+
+/* Interaction states
+----------------------------------*/
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+background-image:url(../images/mu1.gif);
+background-repeat:no-repeat;
+border-bottom: 1px solid thin #c48320;
+}
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: #232323/*{fcDefault}*/; text-decoration: none; }
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
+background-image:url(../images/mu2.gif);
+background-repeat:no-repeat;
+border-bottom: 1px solid thin #c48320;
+color: #FFFFFF/*{fcHover}*/; text-decoration: none;
+ }
+.ui-state-hover a, .ui-state-hover a:hover { color: #FFFFFF/*{fcHover}*/; text-decoration: none; }
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+background-image:url(../images/mu3.gif);
+background-repeat:no-repeat;
+border-bottom: 1px solid thin #c48320;
+ }
+.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { color: #FFFFFF/*{fcActive}*/; text-decoration: none; }
+.ui-widget :active { outline: none; }
+
+
+
+
+
+

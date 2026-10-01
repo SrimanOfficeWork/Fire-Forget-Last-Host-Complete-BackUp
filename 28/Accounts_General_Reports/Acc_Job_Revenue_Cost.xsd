@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Acc_Job_Revenue_Cost" targetNamespace="http://tempuri.org/Acc_Job_Revenue_Cost.xsd" xmlns:mstns="http://tempuri.org/Acc_Job_Revenue_Cost.xsd" xmlns="http://tempuri.org/Acc_Job_Revenue_Cost.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="Acc_Job_Revenue_Cost" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="Acc_Job_Revenue_Cost" msprop:Generator_DataSetName="Acc_Job_Revenue_Cost">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Rev_Cost" msprop:Generator_TableClassName="Rev_CostDataTable" msprop:Generator_TableVarName="tableRev_Cost" msprop:Generator_TablePropName="Rev_Cost" msprop:Generator_RowDeletingName="Rev_CostRowDeleting" msprop:Generator_RowChangingName="Rev_CostRowChanging" msprop:Generator_RowEvHandlerName="Rev_CostRowChangeEventHandler" msprop:Generator_RowDeletedName="Rev_CostRowDeleted" msprop:Generator_UserTableName="Rev_Cost" msprop:Generator_RowChangedName="Rev_CostRowChanged" msprop:Generator_RowEvArgName="Rev_CostRowChangeEvent" msprop:Generator_RowClassName="Rev_CostRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="JOBNO_PS" msprop:Generator_ColumnVarNameInTable="columnJOBNO_PS" msprop:Generator_ColumnPropNameInRow="JOBNO_PS" msprop:Generator_ColumnPropNameInTable="JOBNO_PSColumn" msprop:Generator_UserColumnName="JOBNO_PS" type="xs:string" minOccurs="0" />
+              <xs:element name="CHARGES" msprop:Generator_ColumnVarNameInTable="columnCHARGES" msprop:Generator_ColumnPropNameInRow="CHARGES" msprop:Generator_ColumnPropNameInTable="CHARGESColumn" msprop:Generator_UserColumnName="CHARGES" type="xs:string" minOccurs="0" />
+              <xs:element name="REV_ESTIMATED" msprop:Generator_ColumnVarNameInTable="columnREV_ESTIMATED" msprop:Generator_ColumnPropNameInRow="REV_ESTIMATED" msprop:Generator_ColumnPropNameInTable="REV_ESTIMATEDColumn" msprop:Generator_UserColumnName="REV_ESTIMATED" type="xs:string" minOccurs="0" />
+              <xs:element name="REV_BILLED" msprop:Generator_ColumnVarNameInTable="columnREV_BILLED" msprop:Generator_ColumnPropNameInRow="REV_BILLED" msprop:Generator_ColumnPropNameInTable="REV_BILLEDColumn" msprop:Generator_UserColumnName="REV_BILLED" type="xs:string" minOccurs="0" />
+              <xs:element name="COST_ESTIMATED" msprop:Generator_ColumnVarNameInTable="columnCOST_ESTIMATED" msprop:Generator_ColumnPropNameInRow="COST_ESTIMATED" msprop:Generator_ColumnPropNameInTable="COST_ESTIMATEDColumn" msprop:Generator_UserColumnName="COST_ESTIMATED" type="xs:string" minOccurs="0" />
+              <xs:element name="COST_BILLED" msprop:Generator_ColumnVarNameInTable="columnCOST_BILLED" msprop:Generator_ColumnPropNameInRow="COST_BILLED" msprop:Generator_ColumnPropNameInTable="COST_BILLEDColumn" msprop:Generator_UserColumnName="COST_BILLED" type="xs:string" minOccurs="0" />
+              <xs:element name="MARGIN_ESTIMATED" msprop:Generator_ColumnVarNameInTable="columnMARGIN_ESTIMATED" msprop:Generator_ColumnPropNameInRow="MARGIN_ESTIMATED" msprop:Generator_ColumnPropNameInTable="MARGIN_ESTIMATEDColumn" msprop:Generator_UserColumnName="MARGIN_ESTIMATED" type="xs:string" minOccurs="0" />
+              <xs:element name="MARGIN_EST_PER" msprop:Generator_ColumnVarNameInTable="columnMARGIN_EST_PER" msprop:Generator_ColumnPropNameInRow="MARGIN_EST_PER" msprop:Generator_ColumnPropNameInTable="MARGIN_EST_PERColumn" msprop:Generator_UserColumnName="MARGIN_EST_PER" type="xs:string" minOccurs="0" />
+              <xs:element name="MARGIN_ACTUAL" msprop:Generator_ColumnVarNameInTable="columnMARGIN_ACTUAL" msprop:Generator_ColumnPropNameInRow="MARGIN_ACTUAL" msprop:Generator_ColumnPropNameInTable="MARGIN_ACTUALColumn" msprop:Generator_UserColumnName="MARGIN_ACTUAL" type="xs:string" minOccurs="0" />
+              <xs:element name="MARGIN_ACT_PER" msprop:Generator_ColumnVarNameInTable="columnMARGIN_ACT_PER" msprop:Generator_ColumnPropNameInRow="MARGIN_ACT_PER" msprop:Generator_ColumnPropNameInTable="MARGIN_ACT_PERColumn" msprop:Generator_UserColumnName="MARGIN_ACT_PER" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

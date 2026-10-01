@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Purchase_Job" targetNamespace="http://tempuri.org/Purchase_Job.xsd" xmlns:mstns="http://tempuri.org/Purchase_Job.xsd" xmlns="http://tempuri.org/Purchase_Job.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="Purchase_Job" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="Purchase_Job" msprop:Generator_UserDSName="Purchase_Job">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Purchase_Job" msprop:Generator_TableClassName="Purchase_JobDataTable" msprop:Generator_TableVarName="tablePurchase_Job" msprop:Generator_RowChangedName="Purchase_JobRowChanged" msprop:Generator_TablePropName="_Purchase_Job" msprop:Generator_RowDeletingName="Purchase_JobRowDeleting" msprop:Generator_RowChangingName="Purchase_JobRowChanging" msprop:Generator_RowEvHandlerName="Purchase_JobRowChangeEventHandler" msprop:Generator_RowDeletedName="Purchase_JobRowDeleted" msprop:Generator_RowClassName="Purchase_JobRow" msprop:Generator_UserTableName="Purchase_Job" msprop:Generator_RowEvArgName="Purchase_JobRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="JOBNO" msprop:Generator_ColumnVarNameInTable="columnJOBNO" msprop:Generator_ColumnPropNameInRow="JOBNO" msprop:Generator_ColumnPropNameInTable="JOBNOColumn" msprop:Generator_UserColumnName="JOBNO" type="xs:string" minOccurs="0" />
+              <xs:element name="CR_DE_AMT" msprop:Generator_ColumnVarNameInTable="columnCR_DE_AMT" msprop:Generator_ColumnPropNameInRow="CR_DE_AMT" msprop:Generator_ColumnPropNameInTable="CR_DE_AMTColumn" msprop:Generator_UserColumnName="CR_DE_AMT" type="xs:string" minOccurs="0" />
+              <xs:element name="CGST_AMT" msprop:Generator_ColumnVarNameInTable="columnCGST_AMT" msprop:Generator_ColumnPropNameInRow="CGST_AMT" msprop:Generator_ColumnPropNameInTable="CGST_AMTColumn" msprop:Generator_UserColumnName="CGST_AMT" type="xs:string" minOccurs="0" />
+              <xs:element name="SGST_AMT" msprop:Generator_ColumnVarNameInTable="columnSGST_AMT" msprop:Generator_ColumnPropNameInRow="SGST_AMT" msprop:Generator_ColumnPropNameInTable="SGST_AMTColumn" msprop:Generator_UserColumnName="SGST_AMT" type="xs:string" minOccurs="0" />
+              <xs:element name="IGST_AMT" msprop:Generator_ColumnVarNameInTable="columnIGST_AMT" msprop:Generator_ColumnPropNameInRow="IGST_AMT" msprop:Generator_ColumnPropNameInTable="IGST_AMTColumn" msprop:Generator_UserColumnName="IGST_AMT" type="xs:string" minOccurs="0" />
+              <xs:element name="TDS_AMOUNT" msprop:Generator_ColumnVarNameInTable="columnTDS_AMOUNT" msprop:Generator_ColumnPropNameInRow="TDS_AMOUNT" msprop:Generator_ColumnPropNameInTable="TDS_AMOUNTColumn" msprop:Generator_UserColumnName="TDS_AMOUNT" type="xs:string" minOccurs="0" />
+              <xs:element name="Id" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

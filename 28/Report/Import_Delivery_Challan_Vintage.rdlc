@@ -1,0 +1,1605 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition">
+  <DataSources>
+    <DataSource Name="Import_Report">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>57b04a0f-6a50-4ba9-9b6f-1fde4f333038</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DELIVERY_CHALLAN">
+      <Fields>
+        <Field Name="DC_ID">
+          <DataField>DC_ID</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+        <Field Name="JOBNO">
+          <DataField>JOBNO</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+        <Field Name="FILE_REF_NO">
+          <DataField>FILE_REF_NO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CLIENT_NAME">
+          <DataField>CLIENT_NAME</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CHA_NAME">
+          <DataField>CHA_NAME</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CHA_NO">
+          <DataField>CHA_NO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CHA_ADDRESS">
+          <DataField>CHA_ADDRESS</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CHA_ADDRESS1">
+          <DataField>CHA_ADDRESS1</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CHA_ADDRESS2">
+          <DataField>CHA_ADDRESS2</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CHA_ADDRESS3">
+          <DataField>CHA_ADDRESS3</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CHA_ADDRESS4">
+          <DataField>CHA_ADDRESS4</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="IMPORTER_NAME">
+          <DataField>IMPORTER_NAME</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ADDRESS1">
+          <DataField>ADDRESS1</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ADDRESS2">
+          <DataField>ADDRESS2</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ADDRESS3">
+          <DataField>ADDRESS3</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ADDRESS4">
+          <DataField>ADDRESS4</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ADDRESS5">
+          <DataField>ADDRESS5</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DATE">
+          <DataField>DATE</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="BODY_CONTENTS">
+          <DataField>BODY_CONTENTS</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MARKSNOS">
+          <DataField>MARKSNOS</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="GROSSWEIGHT">
+          <DataField>GROSSWEIGHT</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BE_NO_DATE">
+          <DataField>BE_NO_DATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MAWB_NO">
+          <DataField>MAWB_NO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DESC_GOODS">
+          <DataField>DESC_GOODS</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="IMAGE_FILE">
+          <DataField>IMAGE_FILE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NO_OF_PACKAGE">
+          <DataField>NO_OF_PACKAGE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="HAWB_NO">
+          <DataField>HAWB_NO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MAWB_DATE">
+          <DataField>MAWB_DATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="HAWB_DATE">
+          <DataField>HAWB_DATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TRANSPORT_MODE">
+          <DataField>TRANSPORT_MODE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="INVOICE_NO">
+          <DataField>INVOICE_NO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="INVOICE_DATE">
+          <DataField>INVOICE_DATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CONTAINER_NO">
+          <DataField>CONTAINER_NO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SEAL_NO">
+          <DataField>SEAL_NO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FCL_OR_LCL">
+          <DataField>FCL_OR_LCL</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>Import_Report</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <rd:DataSetInfo>
+        <rd:DataSetName>Import_Report</rd:DataSetName>
+        <rd:SchemaPath>E:\CHAProject\KUMUDHA_DELIVERY\ERoyalimpex_Branchwise_Job_SingleWindow\App_Code\Report\Import\Import_Report.xsd</rd:SchemaPath>
+        <rd:TableName>DELIVERY_CHALLAN</rd:TableName>
+        <rd:TableAdapterFillMethod />
+        <rd:TableAdapterGetDataMethod />
+        <rd:TableAdapterName />
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
+  <Body>
+    <ReportItems>
+      <Rectangle Name="Rectangle1">
+        <ReportItems>
+          <Tablix Name="Tablix1">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>2.43673in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.71465in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.43673in</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.33333in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox8">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>DELIVERY CHALLAN SEA/AIR</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                    <FontSize>20pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox8</rd:DefaultName>
+                          <ZIndex>1</ZIndex>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                        <ColSpan>3</ColSpan>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell />
+                    <TablixCell />
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.52083in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Image Name="Image10">
+                          <Source>External</Source>
+                          <Value>=Parameters!image.Value</Value>
+                          <Sizing>Fit</Sizing>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                              <Width>0.5pt</Width>
+                            </Border>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
+                            <LeftBorder>
+                              <Style>Solid</Style>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Style>Solid</Style>
+                            </RightBorder>
+                            <PaddingLeft>150pt</PaddingLeft>
+                          </Style>
+                        </Image>
+                        <ColSpan>3</ColSpan>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell />
+                    <TablixCell />
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.25in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="CHA_NAME">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Parameters!CHA_NAME.Value</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>CHA_NAME</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>0.5pt</Width>
+                            </Border>
+                            <TopBorder>
+                              <Style>None</Style>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Style>None</Style>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>Black</Color>
+                            </RightBorder>
+                            <PaddingLeft>1pt</PaddingLeft>
+                            <PaddingRight>1pt</PaddingRight>
+                          </Style>
+                        </Textbox>
+                        <ColSpan>3</ColSpan>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell />
+                    <TablixCell />
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.25in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="CHA_ADDRESS">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value xml:space="preserve"> </Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>=Parameters!CHA_ADDRESS.Value</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>CHA_ADDRESS</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                              <Width>0.5pt</Width>
+                            </Border>
+                            <TopBorder>
+                              <Style>None</Style>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Style>None</Style>
+                            </BottomBorder>
+                            <PaddingLeft>1pt</PaddingLeft>
+                            <PaddingRight>1pt</PaddingRight>
+                          </Style>
+                        </Textbox>
+                        <ColSpan>3</ColSpan>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell />
+                    <TablixCell />
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.25in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="JOBNO">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>IMP_REF_NO</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>:</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>=Fields!JOBNO.Value</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>JOBNO</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                              <Width>0.5pt</Width>
+                            </Border>
+                            <PaddingLeft>1pt</PaddingLeft>
+                            <PaddingRight>1pt</PaddingRight>
+                          </Style>
+                        </Textbox>
+                        <ColSpan>2</ColSpan>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell />
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="DATE">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>DATE</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>:</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>=Fields!DATE.Value</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>DATE</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>0.5pt</Width>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Style>None</Style>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>Black</Color>
+                            </RightBorder>
+                            <PaddingLeft>1pt</PaddingLeft>
+                            <PaddingRight>1pt</PaddingRight>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.90625in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="MARKSNOS">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>MARKS&amp;NO'S</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>:</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>=Fields!MARKSNOS.Value</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>MARKSNOS</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>0.5pt</Width>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Style>None</Style>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>Black</Color>
+                            </RightBorder>
+                            <PaddingLeft>1pt</PaddingLeft>
+                            <PaddingRight>1pt</PaddingRight>
+                          </Style>
+                        </Textbox>
+                        <ColSpan>3</ColSpan>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell />
+                    <TablixCell />
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.25in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox24">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>From,</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox24</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>0.5pt</Width>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Style>None</Style>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Style>None</Style>
+                            </RightBorder>
+                            <PaddingLeft>1pt</PaddingLeft>
+                            <PaddingRight>1pt</PaddingRight>
+                          </Style>
+                        </Textbox>
+                        <ColSpan>2</ColSpan>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell />
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox26">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>To,</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox26</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>0.5pt</Width>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Style>None</Style>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>Black</Color>
+                            </RightBorder>
+                            <PaddingLeft>1pt</PaddingLeft>
+                            <PaddingRight>1pt</PaddingRight>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.25in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="CHA_ADDRESS1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!CHA_ADDRESS.Value</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>CHA_ADDRESS1</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>0.5pt</Width>
+                            </Border>
+                            <TopBorder>
+                              <Style>None</Style>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Style>None</Style>
+                            </RightBorder>
+                            <PaddingLeft>1pt</PaddingLeft>
+                            <PaddingRight>1pt</PaddingRight>
+                          </Style>
+                        </Textbox>
+                        <ColSpan>2</ColSpan>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell />
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="ADDRESS1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!ADDRESS1.Value</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>ADDRESS1</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>0.5pt</Width>
+                            </Border>
+                            <TopBorder>
+                              <Style>None</Style>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>Black</Color>
+                            </RightBorder>
+                            <PaddingLeft>1pt</PaddingLeft>
+                            <PaddingRight>1pt</PaddingRight>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.75in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="NO_OF_PACKAGE">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>NO.OF.PKGS</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>:</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>=Fields!NO_OF_PACKAGE.Value</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>GROSS_WEIGHT</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>:</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>=Fields!GROSSWEIGHT.Value</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>NO_OF_PACKAGE</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>0.5pt</Width>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Style>None</Style>
+                            </RightBorder>
+                            <PaddingLeft>1pt</PaddingLeft>
+                            <PaddingRight>1pt</PaddingRight>
+                          </Style>
+                        </Textbox>
+                        <ColSpan>2</ColSpan>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell />
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox35">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>MABL/MBL/NO:</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>=Fields!MAWB_NO.Value</Value>
+                                  <MarkupType>HTML</MarkupType>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>HABL/HBL/NO:</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>=Fields!HAWB_NO.Value</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>DATE:</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>=Fields!MAWB_DATE.Value</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>DATE</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>:</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>=Fields!HAWB_DATE.Value</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox35</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                              <Width>0.5pt</Width>
+                            </Border>
+                            <PaddingLeft>1pt</PaddingLeft>
+                            <PaddingRight>1pt</PaddingRight>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.995in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="CONTAINER_NO">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>SEAL NO:</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>=Fields!SEAL_NO.Value</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>CONTAINER SIZE:</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>=Fields!FCL_OR_LCL.Value</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>CONTAINER NO:</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>=Fields!CONTAINER_NO.Value</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>CONTAINER_NO</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>0.5pt</Width>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Style>None</Style>
+                            </RightBorder>
+                            <PaddingLeft>1pt</PaddingLeft>
+                            <PaddingRight>1pt</PaddingRight>
+                          </Style>
+                        </Textbox>
+                        <ColSpan>2</ColSpan>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell />
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="ANNEX_SEA_CON_CONTAINERNO">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>INVOICE NO</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>:</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>=Fields!INVOICE_NO.Value</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>INVOICE DATE</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>:</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>=Fields!INVOICE_DATE.Value</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>ANNEX_SEA_CON_CONTAINERNO</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                              <Width>0.5pt</Width>
+                            </Border>
+                            <PaddingLeft>1pt</PaddingLeft>
+                            <PaddingRight>1pt</PaddingRight>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.95833in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="BE_NO_DATE">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>BE.NO&amp;DATE</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>:</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>=Fields!BE_NO_DATE.Value</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>BE_NO_DATE</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                              <Width>0.5pt</Width>
+                            </Border>
+                            <PaddingLeft>1pt</PaddingLeft>
+                            <PaddingRight>1pt</PaddingRight>
+                          </Style>
+                        </Textbox>
+                        <ColSpan>2</ColSpan>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell />
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="DESC_GOODS">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>DESCRIPTION OF GOODS</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>:</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>=Fields!DESC_GOODS.Value</Value>
+                                  <Style>
+                                    <FontFamily>Courier New</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>DESC_GOODS</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>Solid</Style>
+                              <Width>0.5pt</Width>
+                            </Border>
+                            <PaddingLeft>1pt</PaddingLeft>
+                            <PaddingRight>1pt</PaddingRight>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <KeepWithGroup>After</KeepWithGroup>
+                </TablixMember>
+                <TablixMember>
+                  <KeepWithGroup>After</KeepWithGroup>
+                </TablixMember>
+                <TablixMember>
+                  <Group Name="Details" />
+                  <TablixMembers>
+                    <TablixMember />
+                    <TablixMember />
+                    <TablixMember />
+                    <TablixMember />
+                    <TablixMember />
+                    <TablixMember />
+                    <TablixMember />
+                    <TablixMember />
+                    <TablixMember />
+                  </TablixMembers>
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>DELIVERY_CHALLAN</DataSetName>
+            <Top>0.1875in</Top>
+            <Left>0.39584in</Left>
+            <Height>5.71374in</Height>
+            <Width>5.58811in</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Tablix>
+        </ReportItems>
+        <KeepTogether>true</KeepTogether>
+        <Top>0.11125in</Top>
+        <Height>6.02624in</Height>
+        <Width>6.27021in</Width>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Rectangle>
+    </ReportItems>
+    <Height>6.13749in</Height>
+    <Style />
+  </Body>
+  <ReportParameters>
+    <ReportParameter Name="image">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="CHA_NAME">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="CHA_ADDRESS">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="CHA_ADDRESS1">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="image1">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+  <Width>6.27021in</Width>
+  <Page>
+    <PageHeader>
+      <Height>1in</Height>
+      <PrintOnFirstPage>true</PrintOnFirstPage>
+      <PrintOnLastPage>true</PrintOnLastPage>
+      <Style>
+        <Border>
+          <Style>None</Style>
+        </Border>
+      </Style>
+    </PageHeader>
+    <PageFooter>
+      <Height>2.77083in</Height>
+      <PrintOnFirstPage>true</PrintOnFirstPage>
+      <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Rectangle Name="Rectangle11">
+          <ReportItems>
+            <Textbox Name="Textbox345">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Declaration:</Value>
+                      <Style>
+                        <FontFamily>Courier New</FontFamily>
+                        <FontSize>11pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>we hereby received cargo in good condition</Value>
+                      <Style>
+                        <FontFamily>Courier New</FontFamily>
+                        <FontSize>11pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox345</rd:DefaultName>
+              <Top>0.06944in</Top>
+              <Left>0.19458in</Left>
+              <Height>0.57292in</Height>
+              <Width>4.97917in</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox362">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Name and Signature of receiver with seal :</Value>
+                      <Style>
+                        <FontFamily>Courier New</FontFamily>
+                        <FontSize>11pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox362</rd:DefaultName>
+              <Top>0.7675in</Top>
+              <Left>0.19458in</Left>
+              <Height>0.45833in</Height>
+              <Width>2.85417in</Width>
+              <ZIndex>1</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox363">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>FOR VINTAGE INTEGRATED LOGISTICS SERVICES PVT LTD.,</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox363</rd:DefaultName>
+              <Top>0.88208in</Top>
+              <Left>3.31958in</Left>
+              <Height>0.45833in</Height>
+              <Width>2.95063in</Width>
+              <ZIndex>2</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox364">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Date:</Value>
+                      <Style>
+                        <FontFamily>Courier New</FontFamily>
+                        <FontSize>11pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox364</rd:DefaultName>
+              <Top>1.36124in</Top>
+              <Left>0.22917in</Left>
+              <Height>0.25in</Height>
+              <Width>1in</Width>
+              <ZIndex>3</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox365">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Time:</Value>
+                      <Style>
+                        <FontFamily>Courier New</FontFamily>
+                        <FontSize>11pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox365</rd:DefaultName>
+              <Top>1.92374in</Top>
+              <Left>0.19458in</Left>
+              <Height>0.25in</Height>
+              <Width>1in</Width>
+              <ZIndex>4</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox366">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Authorised Signatory</Value>
+                      <Style>
+                        <FontFamily>Courier New</FontFamily>
+                        <FontSize>11pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox366</rd:DefaultName>
+              <Top>1.92374in</Top>
+              <Left>3.31958in</Left>
+              <Height>0.25in</Height>
+              <Width>2.95063in</Width>
+              <ZIndex>5</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+          </ReportItems>
+          <KeepTogether>true</KeepTogether>
+          <Height>2.25in</Height>
+          <Width>6.27021in</Width>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </Rectangle>
+      </ReportItems>
+      <Style>
+        <Border>
+          <Style>None</Style>
+        </Border>
+      </Style>
+    </PageFooter>
+    <PageHeight>11.69in</PageHeight>
+    <PageWidth>8.27in</PageWidth>
+    <LeftMargin>0.75in</LeftMargin>
+    <RightMargin>0.5in</RightMargin>
+    <Style>
+      <Border>
+        <Style>None</Style>
+        <Width>0.5pt</Width>
+      </Border>
+    </Style>
+  </Page>
+  <EmbeddedImages>
+    <EmbeddedImage Name="vintage">
+      <MIMEType>image/jpeg</MIMEType>
+      <ImageData>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</ImageData>
+    </EmbeddedImage>
+    <EmbeddedImage Name="vintagelog">
+      <MIMEType>image/jpeg</MIMEType>
+      <ImageData>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</ImageData>
+    </EmbeddedImage>
+  </EmbeddedImages>
+  <rd:ReportID>68cdb94b-1139-4fcb-b6eb-c9120e21c9a1</rd:ReportID>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+</Report>

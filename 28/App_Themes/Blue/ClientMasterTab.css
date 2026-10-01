@@ -1,0 +1,26 @@
+﻿.custom-theme-scope ol#toc li a.active {
+    border-top: solid #1a6eb5 2px !important;
+    border-left: solid #1a6eb5 thin !important;
+    border-right: solid #1a6eb5 thin !important;
+}
+.custom-theme-scope ol#toc_inner li a.active {
+    background-color: #ffffff !important;
+    border-top: solid #1a6eb5 2px !important;
+    border-left: solid #1a6eb5 thin !important;
+    border-right: solid #1a6eb5 thin !important;
+}
+.custom-theme-scope ol#toc_deep li a.active {
+    border-top: solid #1a6eb5 2px !important;
+    border-left: solid #1a6eb5 thin !important;
+    border-right: solid #1a6eb5 thin !important;
+    color: #1a6eb5 !important;
+}
+.custom-theme-scope ol#toc_deep li a:hover { color: #1a6eb5 !important; }
+.custom-theme-scope #toc_bank li a.active {
+    border-top: solid #1a6eb5 2px !important;
+    border-left: solid #1a6eb5 thin !important;
+    border-right: solid #1a6eb5 thin !important;
+    color: #1a6eb5 !important;
+}
+.custom-theme-scope #toc_bank li a:hover { color: #1a6eb5 !important; }
+.custom-theme-scope .grid-view th { background-color: #1a6eb5 !important; color: #fff !important; }

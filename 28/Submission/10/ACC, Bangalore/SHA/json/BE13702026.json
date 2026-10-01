@@ -1,0 +1,174 @@
+{
+  "headerField": {
+    "senderID": "RETRE",
+    "receiverID": "INBLR4",
+    "indicator": "P",
+    "messageID": "CACHI01",
+    "sequenceOrControlNumber": "0137026",
+    "jobNumber": "1370",
+    "jobDate": "20260617",
+    "messageType": "F"
+  },
+  "master": {
+    "beModel": [
+      {
+        "beType": "H",
+        "iecCode": "3216901581",
+        "branchSrNo": "0",
+        "nameOfImporter": "ACADEMI FASHION TECH",
+        "address1": "NO.1-A2, LAKSHMI NAGAR NORTH, CITY,",
+        "address2": "THOTTAM,KANNAMAL TRANSPORT BACKSIDE",
+        "city": "TIRUPUR",
+        "state": "TAMIL NADU",
+        "pin": "641602",
+        "beClass": "N",
+        "modeOfTransport": "A",
+        "importerType": "P",
+        "kachchaBE": "N",
+        "highSeaSaleFlag": "N",
+        "portOfOrigin": "SHA",
+        "chaCode": "ERTERT",
+        "countryOfOrigin": "CN",
+        "countryOfConsignment": "CN",
+        "portOfShipment": "SHA",
+        "greenChannelRequested": "N",
+        "section48Requested": "N",
+        "whetherPriorBE": "N",
+        "authorizedEconomicDealerCode": "1234567",
+        "firstCheckRequested": "N",
+        "paymentMethodCode": "T"
+      }
+    ],
+    "exchangeModel": [
+      {
+        "currencyCode": "GBP",
+        "standardCurrency": "Y",
+        "unitInRs": "1",
+        "rate": "121.7"
+      }
+    ],
+    "invoiceModel": [
+      {
+        "invoiceSerialNumber": "1",
+        "invoiceDate": "20260603",
+        "supplierName": "AGX MATRIX PVT LTD",
+        "supplierAddress1": "ADSEWRWER",
+        "supplierAddress2": "NO5, RAJAJI STREET",
+        "supplierAddress3": "CHENNAI",
+        "supplierCountryName": "INDIA",
+        "invoiceValue": "13.28",
+        "termsOfInvoice": "FOB",
+        "invoiceCurrency": "GBP",
+        "freightRate": "20.0000",
+        "insuranceRate": "1.1250",
+        "natureOfTransaction": "P",
+        "paymentTerms": "SD",
+        "valuationMethodApplicable": "Rule 8 - Computed Value",
+        "actualInvoiceNumber": "2222365422",
+        "whetherBuyerAndSellerAreRelated": "N"
+      }
+    ],
+    "itemsModel": [
+      {
+        "invoiceSerialNumber": "1",
+        "itemSerialNumber": "1",
+        "quantity": "100.000000",
+        "unitQuantityCode": "NOS",
+        "ritcCode": "85369090",
+        "itemDescription1": "7313192 , TE CONNECTIVITY 51864-5 RING TERMINAL",
+        "genericDescriptionOfTheItem": "CRIMP TERMINAL",
+        "manufacturerName": "RS COMPONENTS LTD",
+        "brandName": "N.A",
+        "model": "N.A",
+        "endUseOfItem": "GNX100",
+        "countryOfOrigin": "US",
+        "cth": "85369090",
+        "preferentialStandard": "S",
+        "ceth": "NOEXCISE",
+        "unitPriceInvoiced": "0.132800",
+        "rspApplicability": "N",
+        "whetherReimport": "N"
+      }
+    ],
+    "sbedutyModel": [
+      {
+        "invoiceSerialNumber": "1",
+        "itemSerialNumber": "1",
+        "notificationNo": "009/2025",
+        "notificationSrNo": "II508",
+        "dutyType": "G",
+        "addlDutyFlag": "I"
+      },
+      {
+        "invoiceSerialNumber": "1",
+        "itemSerialNumber": "1",
+        "notificationNo": "001/2017",
+        "notificationSrNo": "56",
+        "dutyType": "G",
+        "addlDutyFlag": "P"
+      },
+      {
+        "invoiceSerialNumber": "1",
+        "itemSerialNumber": "1",
+        "notificationNo": "011/2021",
+        "notificationSrNo": "17",
+        "dutyType": "C",
+        "addlDutyFlag": "A"
+      }
+    ],
+    "ctxModel": [
+      {
+        "stateCode": "33",
+        "commercialTaxType": "G",
+        "commercialTaxRegistrationNo": "33ABEFA8219N1Z9"
+      }
+    ],
+    "infoTypeModel": [
+      {
+        "invoiceSerialNumber": "1",
+        "itemSerialNumber": "1",
+        "infoType": "CHR",
+        "infoQualifier": "SQC",
+        "infoMsr": "100",
+        "infoUqc": "NOS"
+      }
+    ],
+    "statementModel": [
+      {
+        "declarationtype": "B",
+        "invoiceSerialNumber": "0",
+        "itemSerialNumber": "0",
+        "statementType": "DEC",
+        "statementCode": "CUG00"
+      },
+      {
+        "declarationtype": "B",
+        "invoiceSerialNumber": "0",
+        "itemSerialNumber": "0",
+        "statementType": "DEC",
+        "statementCode": "CUG01"
+      },
+      {
+        "declarationtype": "B",
+        "invoiceSerialNumber": "1",
+        "itemSerialNumber": "0",
+        "statementType": "DEC",
+        "statementCode": "CUV01"
+      },
+      {
+        "declarationtype": "B",
+        "invoiceSerialNumber": "1",
+        "itemSerialNumber": "0",
+        "statementType": "DEC",
+        "statementCode": "CUV02"
+      },
+      {
+        "declarationtype": "B",
+        "invoiceSerialNumber": "1",
+        "itemSerialNumber": "0",
+        "statementType": "DEC",
+        "statementCode": "CUV03"
+      }
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+	<soap:Body><Imp_Data xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <API_JOB_REF_NO>BOS/SLI/2526/07/00007</API_JOB_REF_NO>
+  <IECNO>AAPFN8698C</IECNO>
+  <BRANCH_SL_NO>1</BRANCH_SL_NO>
+  <IMPORTER_NAME>NITIUM PIPING LLP</IMPORTER_NAME>
+  <ADCODE>0</ADCODE>
+  <TRANSPORT_MODE>Sea</TRANSPORT_MODE>
+  <PORT_OF_FILLING_CODE>INNSA1</PORT_OF_FILLING_CODE>
+  <PORT_OF_ORIGIN_CODE>CNSHA</PORT_OF_ORIGIN_CODE>
+  <PORT_OF_SHIPMENT_CODE>CNSHA</PORT_OF_SHIPMENT_CODE>
+  <STATE_CODE>27</STATE_CODE>
+  <GSTN_REGISTRATION_NO>27AAPFN8698C1ZK</GSTN_REGISTRATION_NO>
+  <COUNTRY_ORGIN>CH</COUNTRY_ORGIN>
+  <COUNTRY_SHIPMENT>CH</COUNTRY_SHIPMENT>
+  <FLAG>S</FLAG>
+  <API_USER_ID>royalsurways1</API_USER_ID>
+</Imp_Data>	</soap:Body>
+</soap:Envelope>

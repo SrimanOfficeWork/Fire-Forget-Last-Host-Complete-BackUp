@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+	<soap:Body><Imp_Data xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <API_JOB_REF_NO>MUN/FCLIMP/24/12/00008</API_JOB_REF_NO>
+  <IECNO>8903890882</IECNO>
+  <BRANCH_SL_NO />
+  <ADCODE>0</ADCODE>
+  <TRANSPORT_MODE>Sea</TRANSPORT_MODE>
+  <PORT_OF_FILLING_CODE>INAJJ6</PORT_OF_FILLING_CODE>
+  <STATE_CODE>27</STATE_CODE>
+  <GSTN_REGISTRATION_NO>27UUCCD8990Y3ZK</GSTN_REGISTRATION_NO>
+  <FLAG>S</FLAG>
+  <API_USER_ID>ADMIN</API_USER_ID>
+  <IMPORTER_NAME>ROYAL IMPEX TEST</IMPORTER_NAME>
+  <PORT_OF_ORIGIN_CODE>SGSIN</PORT_OF_ORIGIN_CODE>
+  <PORT_OF_SHIPMENT_CODE>SGSIN</PORT_OF_SHIPMENT_CODE>
+  <COUNTRY_ORGIN>SG</COUNTRY_ORGIN>
+  <COUNTRY_SHIPMENT>SG</COUNTRY_SHIPMENT>
+</Imp_Data>	</soap:Body>
+</soap:Envelope>

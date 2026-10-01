@@ -1,0 +1,48 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="eRoyalMasters_01.master.cs"
+    Inherits="LoginPage_Premium_eRoyalMasters_01" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>eRoyal Impex - Premium</title>
+    <link href="premium-theme.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="../css/all.min.css" />
+    <link rel="stylesheet" href="../css/jquery-ui.css" />
+    <link rel="stylesheet" href="../Validation Files/validationEngine.css" type="text/css" />
+    <link rel="stylesheet" href="../Validation Files/template.css" type="text/css" />
+    <link href="../MessageBox_js/jquery.alerts.css" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico" />
+    <script src="../MessageBox_js/jquery.js" type="text/javascript"></script>
+    <script src="../MessageBox_js/jquery.alerts.js" type="text/javascript"></script>
+</head>
+<body class="premium-body" style="overflow: auto;">
+    <form id="form1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true"
+        LoadScriptsBeforeUI="false" EnablePageMethods="true">
+    </asp:ScriptManager>
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional" Visible="true">
+        <ContentTemplate>
+            <div class="pm-shell">
+                <%-- Sidebar removed for now (per request) - top mega-menu on E_royal_Impex_Main.aspx
+                     already covers Masters/Transactions/Admin navigation. Can be re-added later. --%>
+                <div id="maincontent" runat="server">
+                    <%-- Header user-bar (logo/signout/branch/bell/username) removed - those now live
+                         in the top-right of E_royal_Impex_Main.aspx's mega-menu bar. --%>
+                    <div id="innerbox_MidMain_Grid_">
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </div>
+                </div>
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+    </form>
+    <script src="../js/jquery.min.js" type="text/javascript"></script>
+    <script src="../js/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="../js/Validation.js" type="text/javascript"></script>
+    <script src="../js/listpopup.js" type="text/javascript"></script>
+    <script src="../js/iframepopupwin.js" type="text/javascript"></script>
+    <script src="../js/jscolor.js" type="text/javascript"></script>
+    <script src="../Validation%20Files/Ascii.js" type="text/javascript"></script>
+</body>
+</html>

@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Export_doc_Iteam">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="dt">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Export_doc_IteamResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ExportPlanning">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ModeOfShp" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="JobNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="JobDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="shipper" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="InvNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="invDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NoOfPkg" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="consignee" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="curr" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="portname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pod" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pol" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GrossWt" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NetWt" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NatureOfContract" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="client" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="companyid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BRANCH_CODE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DESCRIPTION" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fy" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="unit" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="INVOICE_VALUE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FLAG" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CLG_PLACE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FILE_REF_NO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SB_NO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SB_DATE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PAYMENT_METHOD" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BUYER_NAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="COUNTRY_DISCHARGE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="COUNTRY_FINAL_DEST" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ANNEX_SEA_MARKS_NOS" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ANNEX_SEA_SEAL_TYPE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NO_OF_CONTAINERS" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="User_Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="JOB_NUM" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PACKAGE_TYPE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="EXPORTER_NAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ADDRESS1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ADDRESS2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ADDRESS3" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ADDRESS4" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ADDRESS5" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ADCODE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GSTN_TYPE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GSTN_ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="STATE_OF_EXPORT" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CONSIGNEE_NAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CONSIGNEE_BRANCHSLNO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CONSIGNEE_ADD1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CONSIGNEE_ADD2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CONSIGNEE_ADD3" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CONSIGNEE_ADD4" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CONSIGNEE_ADD5" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BUYER_ADDRESS" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BUYER_ADDRESS1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BUYER_ADDRESS2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BUYER_ADDRESS3" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BUYER_ADDRESS4" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Container_No" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Size" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Container_Type" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Seal_No" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Seal_Date" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TypeIndicator" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExportPlanningResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="RETURN_FILEREFNO">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DOC_NO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FINANCE_YEAR" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="COMPANY_ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TYPE" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RETURN_FILEREFNOResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RETURN_FILEREFNOResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ImportPlanning">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="JobNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="JobDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="modofshp" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BranchCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="shipper" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ClearancePlace" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IGMNO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IGMDATE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MBLNO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MBLDATE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="HBLNO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="HBLDATE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NoOfPkg" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PackageType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GrossWt" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="unit" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="InwardDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="InvNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="invDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="curr" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="InvValue" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="companyid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ITEM_DESCRIPTION" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="compid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="branch" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="finacYear" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FLAG" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LINENO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SHIPMENT_TYPE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FILE_REF_NO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BE_NO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BE_DATE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CONTAINERNO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PORT_ORIGIN" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PORT_SHIPMENT" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SUPPLIER_NAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Country_Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Country_Shipment" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TERMS" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IGM_AIRLINENAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IGM_FLIGHTNO_VESSELNO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IGM_SHIPPING_LINE_NUMBER" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IGM_MARKSNOS" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IGM_VOYAGE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SEAL_NO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TYPE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="THIRDPARTY_NAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SCHEME_CODE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="User_Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="JOB_NUM" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MULTIPLE_CONTAINER" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ASS_VALUE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DUTY_VALUE" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ImportPlanningResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Shipper_Master">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SHIPPER_NAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SHIPPER_IECCODE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SHIPPER_TYPE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SHIPPER_CLASS" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SHIPPER_GSTTYPE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SHIPER_GSTNO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SHIPPER_STATE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SHIPPER_BRCODE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SHIPPER_ADD1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SHIPPER_ADD2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SHIPPER_PIN" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="COMPANYID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FLAG" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="USER_NAME" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Shipper_MasterResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Consignee_Master">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="NAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ADD1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ADD2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ADD3" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="COUNTRY_NAME" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TYPE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="COMPANYID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FLAG" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="USER_NAME" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Consignee_MasterResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="SBBE_UPDATE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="JOB_NO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="COMPANY_ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FINANCE_YEAR" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TYPE" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SB_BE_NO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SB_BE_DATE" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SBBE_UPDATEResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="Export_doc_IteamSoapIn">
+    <wsdl:part name="parameters" element="tns:Export_doc_Iteam" />
+  </wsdl:message>
+  <wsdl:message name="Export_doc_IteamSoapOut">
+    <wsdl:part name="parameters" element="tns:Export_doc_IteamResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExportPlanningSoapIn">
+    <wsdl:part name="parameters" element="tns:ExportPlanning" />
+  </wsdl:message>
+  <wsdl:message name="ExportPlanningSoapOut">
+    <wsdl:part name="parameters" element="tns:ExportPlanningResponse" />
+  </wsdl:message>
+  <wsdl:message name="RETURN_FILEREFNOSoapIn">
+    <wsdl:part name="parameters" element="tns:RETURN_FILEREFNO" />
+  </wsdl:message>
+  <wsdl:message name="RETURN_FILEREFNOSoapOut">
+    <wsdl:part name="parameters" element="tns:RETURN_FILEREFNOResponse" />
+  </wsdl:message>
+  <wsdl:message name="ImportPlanningSoapIn">
+    <wsdl:part name="parameters" element="tns:ImportPlanning" />
+  </wsdl:message>
+  <wsdl:message name="ImportPlanningSoapOut">
+    <wsdl:part name="parameters" element="tns:ImportPlanningResponse" />
+  </wsdl:message>
+  <wsdl:message name="Shipper_MasterSoapIn">
+    <wsdl:part name="parameters" element="tns:Shipper_Master" />
+  </wsdl:message>
+  <wsdl:message name="Shipper_MasterSoapOut">
+    <wsdl:part name="parameters" element="tns:Shipper_MasterResponse" />
+  </wsdl:message>
+  <wsdl:message name="Consignee_MasterSoapIn">
+    <wsdl:part name="parameters" element="tns:Consignee_Master" />
+  </wsdl:message>
+  <wsdl:message name="Consignee_MasterSoapOut">
+    <wsdl:part name="parameters" element="tns:Consignee_MasterResponse" />
+  </wsdl:message>
+  <wsdl:message name="SBBE_UPDATESoapIn">
+    <wsdl:part name="parameters" element="tns:SBBE_UPDATE" />
+  </wsdl:message>
+  <wsdl:message name="SBBE_UPDATESoapOut">
+    <wsdl:part name="parameters" element="tns:SBBE_UPDATEResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ELOGIX_CSSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Export_doc_Iteam">
+      <wsdl:input message="tns:Export_doc_IteamSoapIn" />
+      <wsdl:output message="tns:Export_doc_IteamSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExportPlanning">
+      <wsdl:input message="tns:ExportPlanningSoapIn" />
+      <wsdl:output message="tns:ExportPlanningSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RETURN_FILEREFNO">
+      <wsdl:input message="tns:RETURN_FILEREFNOSoapIn" />
+      <wsdl:output message="tns:RETURN_FILEREFNOSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ImportPlanning">
+      <wsdl:input message="tns:ImportPlanningSoapIn" />
+      <wsdl:output message="tns:ImportPlanningSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Shipper_Master">
+      <wsdl:input message="tns:Shipper_MasterSoapIn" />
+      <wsdl:output message="tns:Shipper_MasterSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Consignee_Master">
+      <wsdl:input message="tns:Consignee_MasterSoapIn" />
+      <wsdl:output message="tns:Consignee_MasterSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SBBE_UPDATE">
+      <wsdl:input message="tns:SBBE_UPDATESoapIn" />
+      <wsdl:output message="tns:SBBE_UPDATESoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ELOGIX_CSSoap" type="tns:ELOGIX_CSSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Export_doc_Iteam">
+      <soap:operation soapAction="http://tempuri.org/Export_doc_Iteam" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExportPlanning">
+      <soap:operation soapAction="http://tempuri.org/ExportPlanning" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RETURN_FILEREFNO">
+      <soap:operation soapAction="http://tempuri.org/RETURN_FILEREFNO" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ImportPlanning">
+      <soap:operation soapAction="http://tempuri.org/ImportPlanning" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Shipper_Master">
+      <soap:operation soapAction="http://tempuri.org/Shipper_Master" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Consignee_Master">
+      <soap:operation soapAction="http://tempuri.org/Consignee_Master" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SBBE_UPDATE">
+      <soap:operation soapAction="http://tempuri.org/SBBE_UPDATE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ELOGIX_CSSoap12" type="tns:ELOGIX_CSSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Export_doc_Iteam">
+      <soap12:operation soapAction="http://tempuri.org/Export_doc_Iteam" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExportPlanning">
+      <soap12:operation soapAction="http://tempuri.org/ExportPlanning" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RETURN_FILEREFNO">
+      <soap12:operation soapAction="http://tempuri.org/RETURN_FILEREFNO" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ImportPlanning">
+      <soap12:operation soapAction="http://tempuri.org/ImportPlanning" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Shipper_Master">
+      <soap12:operation soapAction="http://tempuri.org/Shipper_Master" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Consignee_Master">
+      <soap12:operation soapAction="http://tempuri.org/Consignee_Master" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SBBE_UPDATE">
+      <soap12:operation soapAction="http://tempuri.org/SBBE_UPDATE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ELOGIX_CS">
+    <wsdl:port name="ELOGIX_CSSoap" binding="tns:ELOGIX_CSSoap">
+      <soap:address location="http://www.e-logix.net:8080/ELOGIX_CS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ELOGIX_CSSoap12" binding="tns:ELOGIX_CSSoap12">
+      <soap12:address location="http://www.e-logix.net:8080/ELOGIX_CS.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,359 @@
+{
+  "topic": "PDF / Excel / XML extraction screens (Import + Export + AI Queue)",
+  "analyzedOn": "2026-09-29",
+  "scope": [
+    "E:\\Fire&Forget\\28\\AI_Extraction_Queue",
+    "E:\\Fire&Forget\\28\\Import_Pdf_Reader",
+    "E:\\Fire&Forget\\28\\Export_PDFReader"
+  ],
+  "technology": "Classic ASP.NET Web Forms (.aspx + code-behind .cs, ThemeClass base page, UpdatePanel/ScriptManager, jQuery, jAlert). Not buildable here: business layer (BussinessObject / App_Code) is outside the three folders.",
+  "coverage": {
+    "readFully": [
+      "AI_Extraction_Queue/AI_Extraction_Queue_Status.aspx.cs",
+      "Import_Pdf_Reader/Import_PDF_Reader_AI.aspx.cs",
+      "Export_PDFReader/Export_PDF_Reader_New_AI.aspx.cs",
+      "Import_Pdf_Reader/Import_PDFReader.aspx.cs (all but the last ~15 lines of JobNo_Prefix_Sufix)"
+    ],
+    "readPartially": {
+      "Import_Pdf_Reader/Import_Checklist_Reader_AI.aspx.cs": "Page_Load, preview/Get_Upload_File, upload call, save outline (grep). Not the 2000-3190 helper/bulk-update range.",
+      "Import_Pdf_Reader/Import_Excel_Reader.aspx.cs": "upload/Excel-to-DataTable, template-mapping engine (getlkupval, readinvoDetailPDFval, GetValueFromSheet, readDetailPDFval). Not readHeaderPDFval tail, insert_update body, bulk-update code.",
+      "Import_Pdf_Reader/Import_PDF_Reader_Manual.aspx.cs": "Page_Load, preview, PDF->xlsx conversion. Not insert_update body.",
+      "Import_Pdf_Reader/Imp_Inv_Item_Pdf_Reader.aspx.cs": "entry, Vestas parse start, Update dispatch and stored-proc calls.",
+      "Export_PDFReader/Export_PDF_Reader.aspx.cs": "entry, upload, start of LIZMA parser.",
+      "Export_PDFReader/Export_PDF_Reader_New.aspx.cs": "preview, PDF->xlsx, lookup loading. Not readHeaderPDFval/readDetailPDFval (lines ~1658-3300) or btnupload body.",
+      "Export_PDFReader/Export_XML_JSON_Reader.aspx.cs": "preview (XML read + grid build) only.",
+      "all .aspx files": "only client scripts, hidden fields and grid definitions via grep + queue page script/grid read."
+    },
+    "notRun": "Static analysis only. Nothing was executed; database stored procedures and vendor APIs were not available."
+  },
+  "bigPicture": {
+    "purpose": "Users upload a supplier invoice / checklist (PDF, Excel or XML). The system extracts header, invoice, item and container data, enriches it from local masters (duty notifications, HS/CTH, scheme codes, country/port, exchange rate), lets the user edit it in a grid, then creates a customs job (Import Bill of Entry or Export Shipping Bill) in the company database.",
+    "commonPattern": [
+      "1. Page_Load: aps.checkSession(); read Session (user, branch, working period, COMPANY_ID, license, transport mode); bind importer/exporter dropdown; AUTO_JOBNO().",
+      "2. Preview click (btnPrevData_Click): validate file count (per-company limit), save file under ~/Submission/<Import|Export>PDFReader/, count PDF pages (iTextSharp), pick extraction vendor, call it.",
+      "3. Normalise extractor output into DataTables (invoice / item / container / IGM), apply per-client rules, look up masters (duty, IGST, AIDC, UQC, country, port).",
+      "4. Bind grid (paged, 100 rows/page) with ViewState DataTables; user edits, bulk-applies (Apply to All), filters by invoice/item/RITC, deletes rows.",
+      "5. Upload click (btnupload_Click): re-read grid, validate mandatory fields on ALL pages, insert General -> Invoice -> Item -> IGM -> Container via Transaction/Import_PDF_Upload/Export_PDF_Upload business objects.",
+      "6. Log each step to PDF_AI_COUNT_DETAILS (PageCount_log) and to file log via PDFReaderLog (WriteOcrJobLog)."
+    ],
+    "extractionEngines": {
+      "1_AI_synchronous": "Import_PDF_Reader_AI / Import_Checklist_Reader_AI / Export_PDF_Reader_New_AI call an HTTP OCR/AI service and wait for the JSON result in the same request.",
+      "2_AI_asynchronous_queue": "Export_PDF_Reader_New_AI with vendor PMDG posts the file to the EROYAL (portal-eroyal.pmdgtech.com) workflow engine, gets a processInstanceId, saves a queue row and returns immediately. The AI_Extraction_Queue screen polls EROYAL and stores the OCR JSON; the user later opens the Export AI screen with ?pid= to review and save.",
+      "3_template_mapping_Excel": "Import_Excel_Reader (native .xlsx via ClosedXML) and Export_PDF_Reader_New (PDF converted to xlsx by Aspose then read by ACE OLEDB) use a per-customer JSON mapping stored in IMPORT_PDF_LKUP / EXPORT_PDF_LKUP (column label + row/col offsets + split rules) to pull header/invoice/item values from sheet cells.",
+      "4_rule_based_text_parse": "Export_PDF_Reader (LIZMA customers S.P.APPARELS, KPR SUGAR) and Imp_Inv_Item_Pdf_Reader (Vestas, Suzuki) parse iTextSharp text line by line with hardcoded keywords.",
+      "5_XML_import": "Export_XML_JSON_Reader loads a pre-built XML (DataSet.ReadXml) with EXPORTER/CONSIGNEE/INVOICE/ITEM tables; no extraction.",
+      "6_legacy_OCR_service": "Import_PDFReader (v1) posts to http://ec2-3-87-226-16.compute-1.amazonaws.com:9000/ocr_service and maps to a fixed item grid; saved items are filled entirely from the product master (Select_Whole_Data)."
+    }
+  },
+  "files": {
+    "AI_Extraction_Queue/AI_Extraction_Queue_Status.aspx(.cs)": {
+      "role": "Queue dashboard for asynchronous (EROYAL) extraction jobs. Class AI_Extraction_Queue_Status : ThemeClass.",
+      "uiElements": {
+        "hdnJobType": "IMP / EXP / '' filter set by JS toggle; default IMP (Import) on first load or ?Job_type=",
+        "counts": "lblTotalCount, lblProgressCount, lblReadyCount, lblFailedCount via QueueBO.Queue_Count_Only(status, jobType)",
+        "gvQueue": "columns: checkbox, QUEUE_ID, JOB_NO, FILE_NAME, IMPORTER_NAME, SL_NO (branch), Extraction Status badge, Job Status badge (Draft / Job Saved), CREATED_DATE, UPDATED_DATE, Action (Status icon when IN PROGRESS, View icon when READY). DataKeys: QUEUE_ID, PROCESS_ID, VENDOR_TYPE, STATUS, SL_NO, IMPORTER_NAME, JOB_TYPE.",
+        "filters": "txtJobNo, ddlVendor (hidden), ddlStatus, txtFromDate/txtToDate (CalendarExtender capped at today); server-side paging (page size = gvQueue.PageSize) with First/Prev/Next/Last + page dropdown.",
+        "autoRefresh": "JS setInterval countdown 30s then __doPostBack('btnAutoRefresh') (full postback, page reload restarts the timer)."
+      },
+      "flow": [
+        "Page_Load(!PostBack): calendars limited to today, job type default IMP, LoadSummaryCounts(), GridBind(1).",
+        "btnAutoRefresh_Click: AutoCheckAllInProgressRows() -> LoadSummaryCounts() -> GridBind(current page).",
+        "AutoCheckAllInProgressRows: Queue_Grid_Data with status 'IN PROGRESS', page 1 size 99999; for each row CheckJobStatus(processId, vendorType); FAILED -> Queue_Update_Status(FAILED); READY and vendor != EROYAL -> Queue_Update_Status(READY). EROYAL READY is stored inside CheckStatus_Eroyal itself.",
+        "CheckStatus_Eroyal: POST {field:'processInstanceId', value:pid, matchType:'exact'} to .../designer/api/datatable/getDataByField/dt_eroyaldb with x-api-key; count==0 -> IN PROGRESS; doc.Status=='Extraction_InProgress' -> IN PROGRESS; Status=='Completed' && ocrReady -> if ocrResult non-empty call Queue_Update_Status(pid,'READY', ocrResult) and return READY; anything else -> FAILED; any exception -> FAILED.",
+        "CheckStatus_Royal: ROYAL_STATUS_URL is empty so it always returns IN PROGRESS.",
+        "gvQueue_RowCommand: CommandArgument = PROCESS_ID~VENDOR_TYPE~SL_NO~IMPORTER_NAME~JOB_TYPE. 'CheckStatus' = check + Queue_Update_Status(status, ''). 'ViewResult' = opens popup (window.open 1200x700) to ../Export_PDFReader/Export_PDF_Reader_New_AI.aspx?pid=... for EXP, or ../Import_Pdf_Reader/Import_PDF_Reader_AI.aspx?pid=... for IMP, plus &vendor=&Imp_exp_name=&slno=.",
+        "imgDeleteSelected_Click: Queue_Delete_Multiple with comma-joined QUEUE_IDs.",
+        "gvQueue_RowDataBound: Draft vs Job Saved from JOB_NO (empty or StartsWith 'TEMP' = Draft); file/importer text truncated at 25 chars with tooltip."
+      ],
+      "businessObjectCalls": [
+        "AI_Queue.Queue_Grid_Data(Global_variables A1 jobNo,A3 vendor,A6 status,A8 from,A9 to,A10 jobType,A11 page,A12 size)",
+        "Queue_Count_Only",
+        "Queue_Update_Status(A4 pid,A6 status,A7 json)",
+        "Queue_Delete_Multiple(A1 ids)",
+        "Queue_Insert (called from Export AI)",
+        "Queue_Get_By_ProcessId (called from Export AI)",
+        "Job_No_Update (called from Export AI)"
+      ]
+    },
+    "Export_PDFReader/Export_PDF_Reader_New_AI.aspx(.cs)": {
+      "role": "Main Export AI screen: preview (sync or queued), review grid, create Shipping Bill job. 5236 lines.",
+      "constants": {
+        "EROYAL_UPLOAD_URL": "https://portal-eroyal.pmdgtech.com/engine/engine-rest/message",
+        "EROYAL_STATUS_URL": "https://portal-eroyal.pmdgtech.com/designer/api/datatable/getDataByField/dt_eroyaldb",
+        "EROYAL_MESSAGE": "eroyal_ocr_upload_event_1",
+        "EROYAL_USER_ID": "avignan_eroyal_user",
+        "EroyalCompanyIds": "{ '10' } declared but never used"
+      },
+      "vendorSelection": "checkvendor() -> Admin_Premium_Services_Select(get_vendor_details, JobType 'E') returns VENDOR + PDF_UPLOAD. Vendors handled: Local (test .txt from Submission/ExportPDFReader/Local_Test), PMDG (EROYAL queue), Docker_Vision / empty (Gen_AI_PDF.Get_AccessToken_Invoice_Upload sync). A vendor 'Royal' is not handled on Export.",
+      "previewFlow": [
+        "btnPrevData_Click: per-company file limit (default 5; 2118/293=15; 829=30; 6002=40; 3352/3267=50); save each upload to ~/Submission/ExportPDFReader/; get page count; split ddl_ExporterName 'slno--name'; Get_PdfClientName (FETCH_PDF_CLIENT_NAME); checkvendor().",
+        "Sync vendors: ds_API = vendor result DataSet (Local/Docker) then Getting_Mater_Details().",
+        "PMDG: collect all uploaded files, page-count total, FireAndForget_Eroyal(filePaths, fileNames, exp_name) -> processId. If processId: PageCount_log(PREVIEW_INITIATED), Insert_Queue_Record(processId, fileName, exporter, 'EROYAL', branchSlno, pdfClientName, pdfId), Alert_And_Redirect_Queue() which calls parent.openAistatuscheck('EXP'); then return (no grid). If empty processId: 'Failed to submit job to Eroyal'."
+      ],
+      "queuedResultFlow": "Opened from the queue as ?pid=&vendor=EROYAL&slno=&Imp_exp_name=. Page_Load(!PostBack): Bind_Clients(exp_name, slno) locks the exporter dropdown to 'slno--name'; if vendor=='EROYAL' reads stored JSON via QueueBO.Queue_Get_By_ProcessId(A4=pid).JSON_RESPONSE, Convert_Eroyal_To_Royal_Format(), ConvertJsonToDataSet(), then Getting_Mater_Details(). The live re-fetch Get_Eroyal_API_Output is commented out and never called.",
+      "FireAndForget_Eroyal": "Reads every file into base64, builds JSON array [{fileName,fileBase64}] serialized to a STRING inside processVariables.files, plus fileName (single name or 'Merged_'+first) and userid; POST to EROYAL_UPLOAD_URL (60s timeout, no API key header); returns jsonArr[0].processInstance.id. Any exception is only logged and '' is returned.",
+      "Convert_Eroyal_To_Royal_Format": "Accepts object or array OCR JSON; per invoice keeps Header (always an array), ItemsDetails and ShipmentContainerDetails; drops items whose ItemDesc is blank or numeric; Quantity to string; fills ItemSlNo 1..n per invoice when missing. Output is a JSON array of invoice objects.",
+      "ConvertJsonToDataSet": "Merges all invoices into three DataTables Header(0), ItemsDetails(1), ShipmentContainerDetails(2, only added if it has rows).",
+      "Getting_Mater_Details": "Requires Header[0].Status == 'Success'. Fills exporter/consignee (cut to 100 chars)/buyer (35 chars, 'SAME AS CONSIGNEE' fallback)/notify party/country+port (validated via OCR_PDF_PORT_MASTER VALIDATE_PORT_COUNTRY)/IEC (falls back to Import_Details_Bind master)/AdCode; builds invoice table (one row per Header row, terms normalised e.g. CFR->CF, DAP/DDP->CIF, EXW->FOB) and container table; then loops items building dt_gvew with per-company / per-exporter rules (companies 816, 2118, 579, 3305, 1509, 470, 139, 6002, 293, exporters BRAKES INDIA, DENSO KIRLOSKAR, MAF CLOTHING, STRIDES, MOTHER INDIA FORMING...). Master lookup erm.RetrieveAll_Export_PDF_Settings_MASTER (Get_Master_Data or Get_Master_Data_HS_DBK) supplies scheme, STR, reward, RODTEP, cess, end use, PTA/FTA, IGST, DBK slno/unit and the list of RITC/CTH candidates (CTH_List JSON: 1 = auto-fill, >1 = leave blank for autocomplete). PDF_Master_Mode 'S' (hidden default) skips master values.",
+      "saveFlow": "btnupload_Click: reads ds_xl_Output from ViewState; master-or-extracted consignee and buyer (CleanExportField: ASCII 32-126 only, upper, max 100); BindgridViewData() validates every row on every page (desc, qty, 3-char qty code, end use, unit price, amount, PTA/FTA, 8-digit RITC); builds Dt_gen, Dt_Invoice (single or multi invoice with recomputed invoice value from item amounts), container table, annexure (sea/air defaults from OCR_ANNEXURE_DEFAULT_MASTER + many company overrides), Dt_Item (SQC/UQC via Get_CTH_Info_Uqc, INFO MSR rules), drawback rows (DRAWBACK_MASTER_ALL_Excel_Upload); AUTO_JOBNO(); exp_pdf.Exp_PDF_Upload_New_XML_AI(...flag 'Insert_Desc'); if result==1 then QueueBO.Job_No_Update(A1=job no, A2=pid) links the queue row to the job, sets Session JOBIDexcel and shows the checklist popup.",
+      "gridHelpers": "Paged grid (100/page) backed by ViewState['GridViewData'] and ViewState['dt_Item']; SaveCurrentPageToDataTable on page change; Apply to All (btn_bulk_Update_All_Click); filters by Invoice/Item/RITC/Empty-RITC (ddl_Select_ItemRITC); Add Row; Delete Rows (re-sequences ItemSlNo per invoice); Excel download of PDF_AI_COUNT_DETAILS for a few hard-coded users (RTS, s, k, Aji).",
+      "logging": "PageCount_log -> ds_Page.OCR_PDF_COUNT_UPDATE_INSERT with statuses PREVIEW INITIATED / PREVIEW SUCCESS / PREVIEW FAILED / UPLOAD INITIATED / UPLOAD SUCCESS / UPLOAD FAILED; WriteJobLog -> PDFReaderLog.WriteOcrJobLog(jobNo, stage, message, 'EXP'); page-refresh and close-button PageMethods."
+    },
+    "Import_Pdf_Reader/Import_PDF_Reader_AI.aspx(.cs)": {
+      "role": "Main Import AI screen (synchronous). Creates Bill of Entry job. 4319 lines.",
+      "vendorSelection": "checkvendor() -> Admin_Premium_Services_Select(get_vendor_details, type 'I'); default 'Royal' if no row or error. Branches: Local (test file), Royal (UploadPdfExtraction -> http://www.ocrapiservice.royaltechsystems.co.in/api/invoice/royaltechocr, ApiKey 'Royal'), Docker_Vision/empty (UploadPdfWithParameters -> Nordex uses the royaltechocr service, everyone else https://asia-south1-serene-essence-419307.cloudfunctions.net/royal-invoice, ApiKey '12345'). There is no PMDG/queue branch.",
+      "previewFlow": "btnPrevData_Click -> Get_Upload_File: per file save, PdfReader page count, importer/branch split from 'slno--name', Get_PdfClient_Name (FETCH_IMP_PDF_CLIENT_NAME), multipart POST (CompanyID, UserID, BranchCode, JobNo, JobType 'IMP', WorkingPeriod, PdfClientName...), JSON -> DataSet. Requires tables 0,1,2 non-empty. Then FillHeaderFields, FillInvoiceRows, FillIGMAndContainerRows, ProcessItemsBatch.",
+      "ProcessItemsBatch": "Pre-fetches AIDC and IGST notifications per unique HS code, then for each item: country resolution (cached), European number swap for listed importers/clients, ApplyClientOverrides (~35 client-specific description/qty/rate rules), SetMasterLookupStrategy (Get_Master_Data / _PartNo / _CTH / _PartNo_VSM / BullsEye_Ritc / PartNo_Para by company), caches master results per key, fills BCD/SW/AIDC/IGST/UQC/END_USE; adds rows to Dt_Item (about 60 columns). PDF_Master_Mode 'S' (hidden default) ignores the item master.",
+      "saveFlow": "btnupload_Click -> SaveCurrentPageToDataTable -> BindgridViewData (validates every row: desc, 8-digit CTH, AIDC, IGST unless company 151, manufacturer, end use, country, 3-char qty code, rate, amount, qty) -> insert_update: General (Transact.General_details_insertupdate), Invoice(s) (InsertInvoiceDetails with exchange rate cache, freight 20% and insurance 1.125% defaults for FOB/CI/CF), Items (Transact.Item_Details_insertupdate per row, or Import_PDF_Upload.Ocr_Import_Xml_Converter as one XML for companies 268 and 10), IGM and Container rows. Job number via GENERAL_DETAILS_SP_AUTOID. After success the parent screen is refreshed (General_Details_Update).",
+      "queueLink": "ViewResult in the queue routes IMP jobs here with ?pid=, but this page never reads Request.QueryString (only the Export page does)."
+    },
+    "Import_Pdf_Reader/Import_Checklist_Reader_AI.aspx(.cs)": {
+      "role": "Reads an import CHECKLIST PDF (JobType 'che-imp') so that duty notification data extracted from the checklist (BCD, SW, AIDC, IGST notn/slno/rate) pre-fills items. Adds IGM (MBL/HBL), container and bond tables (Tables[3], Tables[4] ItemsIGMSBondDetails). BE type 'Warehouse'. Company 10 and 100 use local test files under Submission/ImportChecklistReader/Local_Test. Same AI endpoint as Import AI. Logs usage to PDF_AI_COUNT_DETAILS using concatenated raw SQL and mode 'ICH'."
+    },
+    "Import_Pdf_Reader/Import_Excel_Reader.aspx(.cs)": {
+      "role": "Reads customer Excel packing/invoice files (up to 5, 10 for companies 576/584).",
+      "flow": "ClosedXML reads each visible non-empty sheet into DataTable 'ColumnN' (strips circled digits); getCustInvDetls_Excel_Datatable(importer, path, sheets) -> getlkupval() loads the mapping JSON from IMPORT_PDF_LKUP (Importer_Name, Invo_Type 'S', del_flg=0) -> readHeaderPDFval / readinvoDetailPDFval / readDetailPDFval. Mapping rule per field: search cell text ('column'), move Position rows and Col_Pos columns (Reverse flips), optional split with Value index. Item table: find header row via range.start, read rows until 3 consecutive empty cells, then map columns by 'assign' (contains match). Companies 876/427/207 use a single-invoice model and 876/427 also merge N.W(KG) from the packing sheet. Rest of the pipeline (master lookup, grid, insert_update) mirrors Import AI."
+    },
+    "Import_Pdf_Reader/Import_PDF_Reader_Manual.aspx(.cs)": {
+      "role": "Non-AI reader: uploads one PDF, Aspose converts it to .xlsx (Submission/ImportPDFReader/Output), ACE OLEDB reads the sheets, Imp_PDFReader.getCustInvDetls_Excel_Datatable (App_Code) maps them per client. Renames item columns, builds item grid, checks masters with Imp_PDF_Upload flag 'Select_Except_desc_from_Master' and blocks upload if any description is missing from the master. Class is named Import_PDF_Reader."
+    },
+    "Import_Pdf_Reader/Import_PDFReader.aspx(.cs)": {
+      "role": "Original v1 reader. Posts the PDF to an EC2 OCR service (multipart via WebClient, ApiKey '12345'), fills header + item grid, and on Save inserts General/Invoice/Item; item duty data comes entirely from erm.RetrieveAll_Product_import_PDF_MASTER ('Select_Whole_Data' by importer + part no + description). Items not in master are silently skipped on save."
+    },
+    "Import_Pdf_Reader/Imp_Inv_Item_Pdf_Reader.aspx(.cs)": {
+      "role": "Rule-based updater for EXISTING jobs. Reader types: 'Inv Read', 'Item Read', 'Inv & Item Read'; suppliers SUZUKI MOTOR CORPORATION and VESTAS WIND TECHNOLOGY INDIA P.LTD. iTextSharp text extraction with keyword line matching, edit grid, then Import_PDF_Upload procedures Import_Vestas_Inv_item_pdf / Import_Suzuki_Invoice_pdf / Import_Suzuki_Item_pdf (XML payloads). Deletes every file in Submission/ImportPDFReader before each upload."
+    },
+    "Export_PDFReader/Export_PDF_Reader.aspx(.cs)": {
+      "role": "Oldest export reader for LIZMA-style customers (company ids 1, 10, 517). Only S.P.APPARELS LTD and KPR SUGAR AND APPARELS LIMITED are handled, with hard-coded iTextSharp line parsing ('Inv No.& Date', Buyer's Order No...). Upload calls Exp_PDF_Upload_New_XML flag 'Insert_Desc'. Deletes all files in the shared upload folder first."
+    },
+    "Export_PDFReader/Export_PDF_Reader_New.aspx(.cs)": {
+      "role": "Template-mapped export reader: Aspose PDF->xlsx->ACE OLEDB (first two sheets only) then EXPORT_PDF_LKUP mapping JSON (Exporter_Name + Invo_Type; 'Shahi Exports Pvt. Ltd.' with several sheets uses type 'M'). Renames item columns by keyword (Kind, Description, Quantity, Rate/Unit/Price, Total/Amount), applies MAF CLOTHING hanger rules, checks the master via Select_Except_desc_from_Master, gets DBK list, then Exp_PDF_Upload_New_XML on save."
+    },
+    "Export_PDFReader/Export_XML_JSON_Reader.aspx(.cs)": {
+      "role": "Loads an XML file into a DataSet (tables 0,2,4 = header, invoice, item) and builds the standard grid; invoice value is recomputed from unit price x qty. Save uses Exp_XML_JSON_Upload_New_XML_AI. Counts usage in PDF_AI_COUNT_DETAILS with mode 'EXM' via concatenated raw SQL."
+    }
+  },
+  "extractorPayloadContract": {
+    "import": {
+      "tables": [
+        "Header(0)",
+        "InvoiceDetails(1)",
+        "ItemsDetails(2)",
+        "ItemsIGMContainerDetails(3)",
+        "ItemsIGMSBondDetails(4, checklist only)"
+      ],
+      "Header": "ImporterName, ImporterAdd1-4, CountryOfOrigin, PortOfOrigin, IEC, Freight, Insurance, MiscCharge, TotalCarton, TotalGrossWeight, QtyCode",
+      "InvoiceDetails": "SupplierName, SupplierAdd1-4, InvoiceSlNo, InvoiceNo, InvoiceDate, Currency, Terms, InvoiceValue, QtyCode, PurchaseOrderNo/Date, Freight/Insurance/MiscCharge",
+      "ItemsDetails": "InvoiceSlNo, ItemSlNo, ItemDesc, ExtraItemDesc, PartNo, PONumber, Quantity, Rate, Amount, ItemQTYCode, ItemHSCODE, ItemNETWEIGHT, ItemCountry, MasterDesc, MasterCon(P/H/D), ItemManufacture; checklist adds BCD/SW/AIDC/IGST/IGSTCP Notn/Slno/Rate",
+      "Containers": "MBLNo, MBLDate, HBLNo, HBLDate, Containerslno, ContainerNo, ContainerSealNo, ContainerSize, TOTAL_PACKAGES, TOTAL_GROSS_WEIGHT"
+    },
+    "export": {
+      "tables": [
+        "Header(0) = one row per invoice",
+        "ItemsDetails(1)",
+        "ShipmentContainerDetails(2)"
+      ],
+      "Header": "Status ('Success' required), ExporterName, ConsigneeName/Add1-4, BuyerName/Add1-3, NotifyPartyName/Address1-3, ThirdpartyName/Add1-5, CountryOfDischarge, PortOfDischarge, IEC, InvoiceNo, InvoiceDate, Currency, Terms, InvoiceValue, Freight, Insurance, Commission, Discount, Packingcharges, OtherDed, TotalNetWeight, TotalGrossWeight, TotalCarton, CartonNo, BuyerOrderNo, PaymentPeriod, TermsOfPayment, QtyCode, SchemeCode, GSTNID",
+      "ItemsDetails": "InvoiceSlNo, ItemSlNo, ItemDesc, ExtraItemDesc, HSNCode, Rate, Amount, Quantity, InfoQty, InfoUnitPrice, NetWeight, ItemQTYCode, DBK_SL_NO, IGSTRate, IGSTAmount, TaxableAmount",
+      "ShipmentContainerDetails": "Containerslno, ContainerNo, ContainerSealNo, ContainerSealDate, ContainerSize"
+    }
+  },
+  "queueLifecycle": {
+    "states": [
+      "IN PROGRESS",
+      "READY",
+      "FAILED"
+    ],
+    "jobStatusBadge": "Draft while JOB_NO empty or starts with TEMP; Job Saved after Job_No_Update writes the real job no.",
+    "timeline": [
+      "T0 Export AI preview with vendor PMDG: files -> EROYAL message API -> processInstanceId.",
+      "T0 Insert_Queue_Record: A1='temp'+JOBNO, A2=file name, A3='EROYAL-'+pdfId, A4=processId, A5=exporter, A16=branch slno, A17=pdf client name, A10='Exp' -> Queue_Insert. Status starts IN PROGRESS.",
+      "T0 user is sent to the queue screen (parent.openAistatuscheck('EXP')).",
+      "Every 30s (page auto refresh) and on click: EROYAL status check; READY stores OCR JSON in the queue row.",
+      "READY: user clicks View, Export AI page renders the stored JSON, user edits and saves; Job_No_Update marks the queue row with the real job number (status badge becomes Job Saved).",
+      "FAILED: user must re-upload; Delete Selected removes queue rows."
+    ],
+    "importSide": "Only the Export AI page creates queue rows. The IMP toggle, IMP filter and IMP ViewResult route exist but nothing in these three folders inserts IMP rows or consumes ?pid= on the Import AI page."
+  },
+  "externalEndpointsAndTables": {
+    "endpoints": {
+      "EROYAL upload": "https://portal-eroyal.pmdgtech.com/engine/engine-rest/message",
+      "EROYAL status": "https://portal-eroyal.pmdgtech.com/designer/api/datatable/getDataByField/dt_eroyaldb (x-api-key header)",
+      "Royal OCR": "http://www.ocrapiservice.royaltechsystems.co.in/api/invoice/royaltechocr (ApiKey 'Royal')",
+      "GCP function": "https://asia-south1-serene-essence-419307.cloudfunctions.net/royal-invoice (ApiKey '12345')",
+      "Legacy OCR": "http://ec2-3-87-226-16.compute-1.amazonaws.com:9000/ocr_service (ApiKey '12345')"
+    },
+    "tablesAndProcs": [
+      "PDF_AI_COUNT_DETAILS (usage/status log, PDF_MODE IMP/EXP/ICH/EXM)",
+      "IMPORT_PDF_LKUP / EXPORT_PDF_LKUP (template mapping JSON)",
+      "GENERAL_DETAILS_SP_AUTOID (job number)",
+      "AI queue table behind AI_Queue (name not visible)",
+      "SERVER-side masters via Auto_Search, eroyalmaster, adminmaster, OCR_Pdf_Port_Master, Admin_Premium_Services_Select"
+    ],
+    "classesOutsideScope": [
+      "AI_Queue",
+      "Global_variables",
+      "Gen_AI_PDF",
+      "PDFReaderLog",
+      "Page_Count_Details",
+      "Import_PDF_Upload",
+      "Export_PDF_Upload",
+      "Transaction",
+      "eroyalmaster",
+      "adminmaster",
+      "Auto_Search",
+      "OCR_Pdf_Port_Master",
+      "Imp_PDFReader / PDFReader",
+      "ThemeClass",
+      "AppSession",
+      "Connection"
+    ]
+  },
+  "findings": {
+    "security": [
+      {
+        "id": "S1",
+        "title": "Hard-coded API keys",
+        "detail": "EROYAL_API_KEY 'ATIVSTAGMSNVEHEQAUPMS1CE' in AI_Extraction_Queue_Status.aspx.cs:20 and Export_PDF_Reader_New_AI.aspx.cs:82; ApiKey '12345' / 'Royal' in Import and Export readers."
+      },
+      {
+        "id": "S2",
+        "title": "SQL injection via string concatenation",
+        "detail": "getlkupval builds SQL with importer/exporter name (Import_Excel_Reader.aspx.cs:1613, Export_PDF_Reader_New.aspx.cs:1556); PDF_AI_COUNT_DETAILS select/insert/update built from job no, importer name and page count (Import_Checklist_Reader_AI.aspx.cs:902-926,1741-1754; Import_Excel_Reader.aspx.cs:1012-1034,2393; Export_XML_JSON_Reader.aspx.cs:613-640). Also DataTable.Select filters built with raw grid text (Import AI SaveCurrentPage/BindgridViewData); Export AI escapes quotes."
+      },
+      {
+        "id": "S3",
+        "title": "Unsanitised upload file name",
+        "detail": "Path.Combine(folder, uploadedFile.FileName) then SaveAs in all readers; a crafted file name can write outside the upload folder. No file type check on most screens (extension only used for page count)."
+      },
+      {
+        "id": "S4",
+        "title": "Unencrypted external calls",
+        "detail": "Royal OCR and legacy EC2 OCR use http://; customer invoices and CompanyID/UserID are sent in clear."
+      },
+      {
+        "id": "S5",
+        "title": "Queue actions unauthenticated to the row",
+        "detail": "Delete and View trust IDs posted from the grid; no per-company scoping visible in this code (may exist inside AI_Queue)."
+      }
+    ],
+    "correctness": [
+      {
+        "id": "C1",
+        "title": "Retracted after reading PDF_AI_QUEUE_INSERT_UPDATE_SELECT",
+        "detail": "UPDATE_STATUS only overwrites JSON_RESPONSE when the new value is non-empty (CASE WHEN @JSON_RESPONSE != ''), so the A7='' update in gvQueue_RowCommand does NOT wipe stored JSON. The remaining real problem: a manual Check Status click always writes the status it computed, so for a non-EROYAL vendor the Royal path returns IN PROGRESS and could set a READY row back to IN PROGRESS from a stale page."
+      },
+      {
+        "id": "C2",
+        "title": "Transient errors permanently fail a job",
+        "detail": "CheckStatus_Eroyal and CheckJobStatus return FAILED on any exception or timeout (lines 343, 392) and the auto refresh writes FAILED to the DB (lines 88-93). A 30s network blip during polling turns a healthy job into FAILED."
+      },
+      {
+        "id": "C3",
+        "title": "Retracted after reading the procedure",
+        "detail": "INSERT ignores the JOB_NO passed by the page and generates 'TEMP_' + next number (upper case), so the StartsWith('TEMP') Draft check works."
+      },
+      {
+        "id": "C4",
+        "title": "Import queue path is incomplete",
+        "detail": "View routes IMP to Import_PDF_Reader_AI.aspx?pid=... but that page ignores pid/vendor and has no PMDG branch; only Export inserts queue rows. If an Import company were set to vendor PMDG, Get_Upload_File would fall through with an empty ds_API and throw at ds_API.Tables[0]."
+      },
+      {
+        "id": "C5",
+        "title": "Royal vendor jobs cannot complete",
+        "detail": "ROYAL_STATUS_URL is '' so CheckStatus_Royal always returns IN PROGRESS."
+      },
+      {
+        "id": "C6",
+        "title": "READY with empty OCR result",
+        "detail": "If EROYAL reports Completed and ocrReady but ocrResult is empty, status becomes READY without JSON; the Export AI page then shows nothing (Page_Load skips silently when stored JSON is empty)."
+      },
+      {
+        "id": "C7",
+        "title": "vendor field is null on later postbacks",
+        "detail": "The class field vendor is only set by checkvendor() during Preview. On Upload the guards 'if (vendor != \"PMDG\")' (Export_PDF_Reader_New_AI.aspx.cs:1653,1934,2750) are therefore always true and PageCount_log passes PDF_VENDOR = null. For queue-opened jobs (vendor came from the query string into a local variable) UPLOAD_* statuses are logged although the code intends to skip them."
+      },
+      {
+        "id": "C8",
+        "title": "Retracted after reading the procedure",
+        "detail": "INSERT splits VENDOR_TYPE at the first '-': VENDOR_TYPE stores 'EROYAL' and PDF_ID stores the id, so the exact comparison with 'EROYAL' in the queue page is correct."
+      },
+      {
+        "id": "C9",
+        "title": "Queue row records only the first file",
+        "detail": "For multi-file PMDG submissions FILE_NAME stored is uploadedFile.FileName of the first loop item (line 887) while all files are sent as one merged job."
+      },
+      {
+        "id": "C10",
+        "title": "Auto refresh does serial remote calls",
+        "detail": "AutoCheckAllInProgressRows loops every IN PROGRESS row (page size 99999) calling EROYAL with a 30s timeout each, inside a page postback and a bare catch{}. Many pending jobs can stall the page well past the 30s refresh cycle."
+      },
+      {
+        "id": "C11",
+        "title": "Shared upload folders are cleared per request",
+        "detail": "Import_PDF_Reader_Manual, Imp_Inv_Item_Pdf_Reader, Export_PDF_Reader, Export_PDF_Reader_New delete every file in the shared Submission folder before saving, so two users can destroy each other's uploads. Other readers overwrite by file name and never delete."
+      },
+      {
+        "id": "C12",
+        "title": "Multi-file header overwritten",
+        "detail": "Import AI and Export AI (sync path) overwrite header fields (importer, supplier, country, port) with the last file; invoices and items accumulate. hd_PageCount holds only the last PDF's page count."
+      },
+      {
+        "id": "C13",
+        "title": "Export Alert_msg does not escape quotes",
+        "detail": "Export_PDF_Reader_New_AI.aspx.cs:735-745 concatenates msg into JS (Import version escapes apostrophes/newlines). Messages containing ' break the alert."
+      },
+      {
+        "id": "C14",
+        "title": "ViewState carries full DataTables",
+        "detail": "Item, invoice, container and IGM DataTables (60+ columns, up to hundreds of rows, 1000 in listbox) live in ViewState on every postback, causing very large pages and slow round trips."
+      },
+      {
+        "id": "C15",
+        "title": "Job number allocation side effects unknown",
+        "detail": "AUTO_JOBNO()/GENERAL_DETAILS_SP_AUTOID runs on load, at start of save (Import AI line 2115) and after save; whether the procedure consumes a number per call is not visible."
+      },
+      {
+        "id": "C16",
+        "title": "Swallowed errors",
+        "detail": "FireAndForget_Eroyal returns '' on any failure with only a log; many helpers use bare catch {} (AutoCheck, CTH/IGST caches, Get_AdCode). Console.WriteLine is used for errors in WebException handlers (nowhere to read under IIS)."
+      },
+      {
+        "id": "C17",
+        "title": "Hard-coded business rules everywhere",
+        "detail": "COMPANY_IDD and client-name if/else chains (Import ApplyClientOverrides, SetMasterLookupStrategy, Export Getting_Mater_Details/btnupload) and hard-coded lookup tables (BRAKES INDIA, DENSO KIRLOSKAR AdCode/DBK tables, special user names RTS/s/k/Aji/Kavi) make behaviour company-specific and hard to test."
+      }
+    ],
+    "minor": [
+      "Export_PDF_Reader_New_AI: EroyalCompanyIds unused; Get_Eroyal_API_Output unused; Alert_msg typo 'Getting_Mater_Details' naming.",
+      "Import_PDF_Reader_Manual class name 'Import_PDF_Reader' differs from file name; Import_PDFReader derives from System.Web.UI.Page instead of ThemeClass.",
+      "UploadPdfWithParameters request stream is not disposed on exceptions (Import AI:1849).",
+      "Queue Grid_Total sets lblTotalPages.Text to total row count (name mismatch).",
+      "Large commented-out blocks in Manual, Export_PDF_Reader_New and Export_PDF_Reader.",
+      "Multiple duplicate helper implementations (Get_Valid_Date, Get_Valid_Qty_Code, Get_Valid_Curr_Name) with slightly different rules per screen (e.g. Export Get_Valid_Date1 returns MM/dd/yyyy while Get_Valid_Date returns dd/MM/yyyy)."
+    ]
+  },
+  "howToExtendOrDebug": [
+    "New AI vendor on Export: add a branch in Export_PDF_Reader_New_AI.btnPrevData_Click and return the Header/ItemsDetails/ShipmentContainerDetails contract above; for async vendors also implement a status check like CheckStatus_Eroyal and store the JSON via Queue_Update_Status.",
+    "To finish the Import queue: add Insert_Queue_Record (A10='Imp') in Import AI for vendor PMDG, and read pid/vendor/slno/Imp_exp_name in Import_PDF_Reader_AI.Page_Load to load Queue_Get_By_ProcessId JSON before FillHeaderFields/ProcessItemsBatch.",
+    "Where to look when a job stays IN PROGRESS: EROYAL doc for processInstanceId, VENDOR_TYPE value in the queue row, Queue_Update_Status procedure body, PDFReaderLog files in Submission/OCRImpExpLog/<IMP|EXP>/.",
+    "Where to look when the grid is empty after View: JSON_RESPONSE column for the pid, Header[0].Status == 'Success', and that ItemsDetails contain non-numeric ItemDesc."
+  ],
+  "suggestedFixOrder": [
+    "Move all API keys and endpoint URLs to web.config/secret store; rotate the exposed keys.",
+    "Parameterise every raw SQL string and sanitise uploaded file names / restrict extensions.",
+    "Make queue polling tolerant: distinguish transient errors from real FAILED, and remove the A7='' overwrite in gvQueue_RowCommand.",
+    "Normalise vendor and JOB_NO conventions (EROYAL vs EROYAL-<id>, temp vs TEMP) between Export insert and queue display.",
+    "Either finish or hide the Import queue path (pid handling on Import AI).",
+    "Store the vendor in ViewState/HiddenField so PMDG guards and PageCount_log are correct after postback.",
+    "Give each request its own upload subfolder instead of clearing shared folders.",
+    "Move DataTables out of ViewState (session/cache or DB staging table)."
+  ],
+  "databaseFacts": {
+    "verifiedOn": "2026-09-29 by reading the dev client database (read-only)",
+    "queueTable": "dbo.PDF_AI_QUEUE",
+    "columns": "QUEUE_ID int identity, JOB_NO nvarchar(100), FILE_NAME nvarchar(510), COMPANY_ID, USER_ID, BRANCH_CODE, WORKING_PERIOD, VENDOR_TYPE nvarchar(40), PROCESS_ID nvarchar(510), STATUS nvarchar(60), JSON_RESPONSE nvarchar(max), IMPORTER_NAME nvarchar(510), CREATED_DATE, UPDATED_DATE, JOB_TYPE nvarchar(20), SL_NO int, PDF_CLIENT_NAME varchar(100), PDF_ID varchar(50)",
+    "procedure": "dbo.PDF_AI_QUEUE_INSERT_UPDATE_SELECT, flags: INSERT, UPDATE_STATUS (by PROCESS_ID, JSON only when non-empty), DELETE, DELETE_MULTIPLE (dbo.SplitString), COUNT_ONLY, GRID_DATA (no company/branch filter, one DB per company), GET_BY_PROCESS_ID, UPDATE_JOBNO (also sets PDF_AI_COUNT_DETAILS.PDF_PROCESS_STATUS='UPLOAD SUCCESS')",
+    "notes": "INSERT sets JOB_NO to TEMP_<n>; COMPANY_LICENSE parameter is accepted but not stored; ERI ID = company license (confirmed by the user). Existing rows are EROYAL, Exp."
+  }
+}

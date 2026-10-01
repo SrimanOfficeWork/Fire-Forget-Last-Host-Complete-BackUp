@@ -1,0 +1,150 @@
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Import_Annexure_Portrait_Report.aspx.cs" Inherits="Transaction_Default2" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+<%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head id="Head1" runat="server">
+    <title>Import Annexure</title>
+ 
+ 
+   
+  <script>
+
+     // window.onload =
+//function () {
+
+    //$(window.frames[0].window.frames['report'].document.getElementById('oReportDiv')).attr('style', 'overflow: none;');
+
+      //}
+    
+  </script>
+   <script >
+       var win = null;
+
+       function Print_open() {
+           var w = '810';
+           var h = '1024';
+           LeftPosition = (screen.width) ? (screen.width - w) / 2 : 0;
+           TopPosition = (screen.height) ? (screen.height - h) / 2 : 0;
+           settings = 'height=' + h + ',width=' + w + ',top=' + TopPosition + ',left=' + LeftPosition + ',scrollbars=' + scroll + ',resizable';
+           win = window.open('../PrintAnnex.aspx', 'ndf1', settings);
+           win.focus();
+
+           return false;
+           //window.open('../Default.aspx', 'ndf')
+
+       }
+    </script>
+    <script type="text/javascript" >
+        var win = null;
+
+        function Mail_open() {
+            var w = '700';
+            var h = '800';
+            LeftPosition = (screen.width) ? (screen.width - w) / 2 : 0;
+            TopPosition = (screen.height) ? (screen.height - h) / 2 : 0;
+            settings = 'height=' + h + ',width=' + w + ',top=' + TopPosition + ',left=' + LeftPosition + ',scrollbars=' + scroll + ',resizable';
+            win = window.open('../Report/Mail_Send.aspx', 'ndf', settings);
+            win.focus();
+
+            return false;
+        }
+    </script>
+
+ <style >
+ .print_btn{
+	background:url('../images/print_Butt.png') no-repeat;
+	width:101px;
+	height: 30px;
+	text-indent:-9999px;
+	overflow:hidden;
+	text-transform:uppercase;
+	border:none;
+	cursor:pointer;
+}
+
+.print_btn:hover{
+	background-position:left bottom;
+}
+ </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+   
+    <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="false"></asp:ScriptManager>
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional" Visible="true">
+        <ContentTemplate>
+    <div class="loading" align="center" id="load" style="display:none;">
+   
+    <img src="../Loading_Images/indicator_mozilla_blu.gif" alt="" />
+     
+</div>
+    <%--  <input name="b_print" type="button" onclick="printdiv();" value=" Print Report" />
+      --%>
+            
+            <asp:Button ID="btn_print" runat="server" Text="Button"  CssClass="print_btn" OnClientClick="Print_open();"/>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:Button ID="btnSend" CssClass="send_btn" Text="Send" runat="server" OnClientClick="Mail_open();" />
+
+         <%--   <asp:Button ID="Button1" runat="server" Text="Button" OnClick="Button1_Click"/>--%>
+          
+<rsweb:ReportViewer ID="ReportViewer1" runat="server" Width="100%" Height="650"  BackColor="#F2F5F2" AsyncRendering="False" SizeToReportContent="true"
+ExportContentDisposition="AlwaysAttachment"  ProcessingMode="Local" ShowToolBar="true" ShowPageNavigationControls="true" 
+ShowZoomControl="false"  ShowFindControls="False" ShowBackButton="false" 
+
+ShowExportControls="true"  ShowParameterPrompts="false" 
+ToolBarItemBorderStyle="Solid" ShowRefreshButton="true" 
+ToolBarItemBorderColor="Black" EnableTheming="false" ShowReportBody="true" ShowDocumentMapButton="true" ShowPrintButton="false" KeepSessionAlive="true">
+ <LocalReport ReportPath="Import_Annexure/Report_Import_Portrait.rdlc">
+ <%--<LocalReport ReportPath="Import_Annexure/TETSReport.rdlc">--%>
+            </LocalReport>
+           </rsweb:ReportViewer>
+          
+           </div>
+             </ContentTemplate>
+    </asp:UpdatePanel>
+   <%--<div >
+           <br />
+      <rsweb:ReportViewer ID="ReportViewer1" runat="server" Font-Names="Verdana" Font-Size="8pt" ShowFindControls="false" 
+      ShowReportBody="true" ShowDocumentMapButton="true" ShowPrintButton="true" 
+            Height="100%" Width="100%" AsyncRendering="False" SizeToReportContent="false" >
+
+           
+            <LocalReport ReportPath="Report/Import/Report4.rdlc">
+            </LocalReport>
+           </rsweb:ReportViewer>
+           
+            </div>--%>
+    <%--<div >
+      
+        <br />
+        <rsweb:ReportViewer ID="ReportViewer1" runat="server" Font-Names="Verdana" Font-Size="8pt"  ShowToolBar="true" AsyncRendering="False"
+            Height="100%" Width="100%" SizeToReportContent="True" ShowPrintButton="true">
+           
+            <LocalReport ReportPath="Transaction\Report.rdlc">
+            
+            </LocalReport>
+        </rsweb:ReportViewer>
+      
+    
+    </div>--%>
+    </form>
+    
+</body>
+ <script src="../../js/Jquery_Print_Report.js" type="text/javascript"></script>
+<script language="javascript" type="text/javascript">
+  
+    function printdiv() {
+        var headstr = "<html><head><title></title></head><body>";
+        var footstr = "</body>";
+        var newstr = $("#ReportViewer1_ctl10").html()
+        var popupWin = window.open('', '_blank');
+        popupWin.document.write(headstr + newstr + footstr);
+        popupWin.print();
+        return false;
+    }
+</script>
+
+</html>

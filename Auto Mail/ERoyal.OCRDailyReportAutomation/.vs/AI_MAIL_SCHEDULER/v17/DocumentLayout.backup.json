@@ -1,0 +1,66 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Auto Mail\\ERoyal.OCRDailyReportAutomation\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4B505985-732B-47FE-947D-57A3A6F71137}|ERoyal.OCRDailyReportAutomation\\AI_MAIL_SCHEDULER.csproj|d:\\auto mail\\eroyal.ocrdailyreportautomation\\eroyal.ocrdailyreportautomation\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{4B505985-732B-47FE-947D-57A3A6F71137}|ERoyal.OCRDailyReportAutomation\\AI_MAIL_SCHEDULER.csproj|solutionrelative:eroyal.ocrdailyreportautomation\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4B505985-732B-47FE-947D-57A3A6F71137}|ERoyal.OCRDailyReportAutomation\\AI_MAIL_SCHEDULER.csproj|d:\\auto mail\\eroyal.ocrdailyreportautomation\\eroyal.ocrdailyreportautomation\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4B505985-732B-47FE-947D-57A3A6F71137}|ERoyal.OCRDailyReportAutomation\\AI_MAIL_SCHEDULER.csproj|solutionrelative:eroyal.ocrdailyreportautomation\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Auto Mail\\ERoyal.OCRDailyReportAutomation\\ERoyal.OCRDailyReportAutomation\\appsettings.json",
+              "RelativeDocumentMoniker": "ERoyal.OCRDailyReportAutomation\\appsettings.json",
+              "ToolTip": "D:\\Auto Mail\\ERoyal.OCRDailyReportAutomation\\ERoyal.OCRDailyReportAutomation\\appsettings.json",
+              "RelativeToolTip": "ERoyal.OCRDailyReportAutomation\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-07-29T15:13:21.807Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Auto Mail\\ERoyal.OCRDailyReportAutomation\\ERoyal.OCRDailyReportAutomation\\Program.cs",
+              "RelativeDocumentMoniker": "ERoyal.OCRDailyReportAutomation\\Program.cs",
+              "ToolTip": "D:\\Auto Mail\\ERoyal.OCRDailyReportAutomation\\ERoyal.OCRDailyReportAutomation\\Program.cs",
+              "RelativeToolTip": "ERoyal.OCRDailyReportAutomation\\Program.cs",
+              "ViewState": "AgIAAFIAAAAAAAAAAIAwwFoAAACGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-29T15:13:19.274Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

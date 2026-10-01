@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="ELogiXImportData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ds">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ELogiXImportDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ELogiXImportDataResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ELogiXExportData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ds">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ELogiXExportDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ELogiXExportDataResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Supplier_Master">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Add1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Add2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Add3" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Country" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Flag" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Company_License" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="E_Flag" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="User" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Supplier_MasterResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Buyer_Master">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Add1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Add2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Add3" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Country" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Flag" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Company_License" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="E_Flag" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="User" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Buyer_MasterResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Consignee_Master">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Add1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Add2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Add3" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Country" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Flag" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Company_License" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="E_Flag" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="User" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Consignee_MasterResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Ad_Code_Master">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Adcode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ImportAdcode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Iec_Code" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Iec_Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StateName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Pincode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BankName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Address1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Address2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BankAccountNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Remarks" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BranchSlNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="type" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Company_License" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="E_Flag" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="User" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Ad_Code_MasterResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Client_Master">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IECNO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cls" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="gsttype" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="gst" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ststecode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="branchNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Add1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Add2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pincode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Company_License" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="E_Flag" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="User" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Client_MasterResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ELogiXImportDataSoapIn">
+    <wsdl:part name="parameters" element="tns:ELogiXImportData" />
+  </wsdl:message>
+  <wsdl:message name="ELogiXImportDataSoapOut">
+    <wsdl:part name="parameters" element="tns:ELogiXImportDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ELogiXExportDataSoapIn">
+    <wsdl:part name="parameters" element="tns:ELogiXExportData" />
+  </wsdl:message>
+  <wsdl:message name="ELogiXExportDataSoapOut">
+    <wsdl:part name="parameters" element="tns:ELogiXExportDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="Supplier_MasterSoapIn">
+    <wsdl:part name="parameters" element="tns:Supplier_Master" />
+  </wsdl:message>
+  <wsdl:message name="Supplier_MasterSoapOut">
+    <wsdl:part name="parameters" element="tns:Supplier_MasterResponse" />
+  </wsdl:message>
+  <wsdl:message name="Buyer_MasterSoapIn">
+    <wsdl:part name="parameters" element="tns:Buyer_Master" />
+  </wsdl:message>
+  <wsdl:message name="Buyer_MasterSoapOut">
+    <wsdl:part name="parameters" element="tns:Buyer_MasterResponse" />
+  </wsdl:message>
+  <wsdl:message name="Consignee_MasterSoapIn">
+    <wsdl:part name="parameters" element="tns:Consignee_Master" />
+  </wsdl:message>
+  <wsdl:message name="Consignee_MasterSoapOut">
+    <wsdl:part name="parameters" element="tns:Consignee_MasterResponse" />
+  </wsdl:message>
+  <wsdl:message name="Ad_Code_MasterSoapIn">
+    <wsdl:part name="parameters" element="tns:Ad_Code_Master" />
+  </wsdl:message>
+  <wsdl:message name="Ad_Code_MasterSoapOut">
+    <wsdl:part name="parameters" element="tns:Ad_Code_MasterResponse" />
+  </wsdl:message>
+  <wsdl:message name="Client_MasterSoapIn">
+    <wsdl:part name="parameters" element="tns:Client_Master" />
+  </wsdl:message>
+  <wsdl:message name="Client_MasterSoapOut">
+    <wsdl:part name="parameters" element="tns:Client_MasterResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ELogiXSoap">
+    <wsdl:operation name="ELogiXImportData">
+      <wsdl:input message="tns:ELogiXImportDataSoapIn" />
+      <wsdl:output message="tns:ELogiXImportDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ELogiXExportData">
+      <wsdl:input message="tns:ELogiXExportDataSoapIn" />
+      <wsdl:output message="tns:ELogiXExportDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Supplier_Master">
+      <wsdl:input message="tns:Supplier_MasterSoapIn" />
+      <wsdl:output message="tns:Supplier_MasterSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Buyer_Master">
+      <wsdl:input message="tns:Buyer_MasterSoapIn" />
+      <wsdl:output message="tns:Buyer_MasterSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Consignee_Master">
+      <wsdl:input message="tns:Consignee_MasterSoapIn" />
+      <wsdl:output message="tns:Consignee_MasterSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Ad_Code_Master">
+      <wsdl:input message="tns:Ad_Code_MasterSoapIn" />
+      <wsdl:output message="tns:Ad_Code_MasterSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Client_Master">
+      <wsdl:input message="tns:Client_MasterSoapIn" />
+      <wsdl:output message="tns:Client_MasterSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ELogiXSoap" type="tns:ELogiXSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ELogiXImportData">
+      <soap:operation soapAction="http://tempuri.org/ELogiXImportData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ELogiXExportData">
+      <soap:operation soapAction="http://tempuri.org/ELogiXExportData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Supplier_Master">
+      <soap:operation soapAction="http://tempuri.org/Supplier_Master" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Buyer_Master">
+      <soap:operation soapAction="http://tempuri.org/Buyer_Master" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Consignee_Master">
+      <soap:operation soapAction="http://tempuri.org/Consignee_Master" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Ad_Code_Master">
+      <soap:operation soapAction="http://tempuri.org/Ad_Code_Master" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Client_Master">
+      <soap:operation soapAction="http://tempuri.org/Client_Master" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ELogiXSoap12" type="tns:ELogiXSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ELogiXImportData">
+      <soap12:operation soapAction="http://tempuri.org/ELogiXImportData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ELogiXExportData">
+      <soap12:operation soapAction="http://tempuri.org/ELogiXExportData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Supplier_Master">
+      <soap12:operation soapAction="http://tempuri.org/Supplier_Master" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Buyer_Master">
+      <soap12:operation soapAction="http://tempuri.org/Buyer_Master" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Consignee_Master">
+      <soap12:operation soapAction="http://tempuri.org/Consignee_Master" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Ad_Code_Master">
+      <soap12:operation soapAction="http://tempuri.org/Ad_Code_Master" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Client_Master">
+      <soap12:operation soapAction="http://tempuri.org/Client_Master" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ELogiX">
+    <wsdl:port name="ELogiXSoap" binding="tns:ELogiXSoap">
+      <soap:address location="http://admin.e-logix.in/Service/ELogiX.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ELogiXSoap12" binding="tns:ELogiXSoap12">
+      <soap12:address location="http://admin.e-logix.in/Service/ELogiX.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

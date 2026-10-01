@@ -1,0 +1,199 @@
+*                      { margin: 0; padding: 0; }
+#textSlidehrn             { width:960px; height:130px; margin:auto; }
+#sliderScrlNws .panelhrn1       { width: 960px; height:130px; margin:auto; padding-top:15px; }
+#sliderScrlNws .panelhrn2       { width: 960px; height:130px; margin:auto; padding-top:15px; }
+#sliderScrlNws .panelhrn3       { width: 960px; height:130px; margin:auto; padding-top:15px; }
+/* Scroll News All tags */
+#hrninnertag1{
+width:890px;
+height:130px;
+margin:auto;
+}
+#hrninnertag2{
+width:890px;
+height:130px;
+margin:auto;
+}
+#hrninnertag3{
+width:890px;
+height:130px;
+margin:auto;
+}
+#hrninnertag1a{
+float:left;
+width:260px;
+height:130px;
+}
+#hrninnertag1atop{
+margin:auto;
+width:260px;
+height:75px;
+}
+#hrninnertag1abot{
+margin:auto;
+width:260px;
+height:50px;
+}
+
+#hrninnertag1b{
+float:left;
+width:260px;
+height:130px;
+margin-left:50px;
+}
+#hrninnertag1c{
+float:right;
+width:260px;
+height:130px;
+}
+
+/* Caption Link */
+.hrntopnewsnavcaption{
+float:inherit;
+width: 260px; /*width of menu*/
+height:50px;
+margin:auto;
+padding-top:5px;
+}
+
+.hrntopnewsnavcaption ul{
+list-style-type: none;
+margin: 0;
+padding: 0;
+margin-bottom: 5px; /*bottom spacing between each UL and rest of content*/
+}
+
+.hrntopnewsnavcaption ul li{
+padding-bottom: 2px; /*bottom spacing between menu items*/
+}
+
+.hrntopnewsnavcaption ul li a{
+color: #004fb0;
+display: block;
+text-decoration: none;
+text-align:left;
+font-family:Arial, Helvetica, sans-serif;
+font-weight:bold;
+font-size:14px;
+text-align:center;
+}
+
+.hrntopnewsnavcaption ul li a:visited{
+color: #004fb0;
+}
+
+.hrntopnewsnavcaption ul li a:hover{ /*hover state CSS*/
+color: #ed1c24;
+}
+/*navcaption end */
+div.SliderMainNews {
+	width: 700px;
+	height: 130px;
+	margin: 0 auto;
+}
+
+/****** SET COLORS HERE *******/
+/* Default State */
+div.SliderMainNews .thumbNav a.cur, div.SliderMainNews .thumbNav a {
+	background: #777;
+	color: #000;
+}
+div.SliderMainNews .anythingWindow {
+	border-top: 0px solid #777;
+	border-bottom: 0px solid #777;
+}
+div.SliderMainNews .start-stop {
+	background-color: #040;
+	color: #fff;
+}
+div.SliderMainNews .start-stop.playing {
+	background-color: #800;
+}
+div.SliderMainNews .start-stop:hover, div.SliderMainNews .start-stop.hover {
+	color: #ddd;
+}
+
+/* Active State */
+div.SliderMainNews.activeSlider .anythingWindow {
+	border-color: #7C9127;
+}
+div.SliderMainNews.activeSlider .thumbNav a.cur, div.SliderMainNews.activeSlider .thumbNav a {
+	background-color: #7C9127;
+}
+div.SliderMainNews .start-stop {
+	background-color: #080;
+	color: #fff;
+}
+div.SliderMainNews .start-stop.playing {
+	background-color: #d00;
+}
+div.SliderMainNews .start-stop:hover, div.SliderMainNews .start-stop.hover {
+	color: #fff;
+}
+
+/**** DO NOT CHANGE BELOW THIS LINE ****/
+/* SliderMainNews viewport window */
+div.SliderMainNews .anythingWindow {
+	overflow: hidden;
+	position: relative;
+	width: 920px;
+	height: 130px;
+	padding-left:30px;
+}
+/* wrapper: 45px right & left padding for the arrows, 28px @ bottom for navigation */
+div.SliderMainNews {
+	position: relative;
+	padding: 6px 40px 30px 30px;
+}
+/* SliderMainNews base UL */
+ul.nwsscrlbase {
+	background: transparent;
+	list-style: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: 0;
+	padding: 0;
+}
+ul.nwsscrlbase li.panel {
+	display: block;
+	float: left;
+	padding: 0;
+	margin: 0;
+}
+
+/* Navigation Arrows */
+div.SliderMainNews .arrow {
+	padding-top:70px;
+	position: absolute;
+	display: block;
+}
+div.SliderMainNews .arrow a {
+	display: block;
+	height: 120px;
+	margin: -60px 17px 0 0;
+	width: 45px;
+	text-align: center;
+	outline: 0;
+	background: url(../images/arrows-default.gif) no-repeat;
+	text-indent: -9999px;
+}
+div.SliderMainNews .forward { right: 0; }
+div.SliderMainNews .back { left: 0; }
+div.SliderMainNews .forward a { background-position: 0 -40px; }
+div.SliderMainNews .back a { background-position: -88px -40px; }
+div.SliderMainNews .forward a:hover, div.SliderMainNews .forward a.hover { background-position: 0 -240px; }
+div.SliderMainNews .back a:hover, div.SliderMainNews .back a.hover { background-position: -88px -240px; }
+
+div.SliderMainNews .thumbNav a:hover {
+	background-image: none;
+}
+
+/* slider autoplay right-to-left, reverse order of nav links to look better */
+div.SliderMainNews.rtl .thumbNav a { float: right; } /* reverse order of nav links */
+div.SliderMainNews.rtl .thumbNav { float: left; }    /* move nav link group to left */
+/* div.SliderMainNews.rtl .start-stop { float: right; } */ /* move start/stop button - in case you want to switch sides */
+
+
+
+/* End Scroll News All tags */

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="GST_Exp_Invoice_Head_Rpt" targetNamespace="http://tempuri.org/GST_Exp_Invoice_Head_Rpt.xsd" xmlns:mstns="http://tempuri.org/GST_Exp_Invoice_Head_Rpt.xsd" xmlns="http://tempuri.org/GST_Exp_Invoice_Head_Rpt.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="GST_Exp_Invoice_Head_Rpt" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="GST_Exp_Invoice_Head_Rpt" msprop:Generator_UserDSName="GST_Exp_Invoice_Head_Rpt">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="General_1" msprop:Generator_TableClassName="General_1DataTable" msprop:Generator_TableVarName="tableGeneral_1" msprop:Generator_TablePropName="General_1" msprop:Generator_RowDeletingName="General_1RowDeleting" msprop:Generator_RowChangingName="General_1RowChanging" msprop:Generator_RowEvHandlerName="General_1RowChangeEventHandler" msprop:Generator_RowDeletedName="General_1RowDeleted" msprop:Generator_UserTableName="General_1" msprop:Generator_RowChangedName="General_1RowChanged" msprop:Generator_RowEvArgName="General_1RowChangeEvent" msprop:Generator_RowClassName="General_1Row">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="BILL_INV_NO" msprop:Generator_ColumnVarNameInTable="columnBILL_INV_NO" msprop:Generator_ColumnPropNameInRow="BILL_INV_NO" msprop:Generator_ColumnPropNameInTable="BILL_INV_NOColumn" msprop:Generator_UserColumnName="BILL_INV_NO" type="xs:string" minOccurs="0" />
+              <xs:element name="YOUR_REF" msprop:Generator_ColumnVarNameInTable="columnYOUR_REF" msprop:Generator_ColumnPropNameInRow="YOUR_REF" msprop:Generator_ColumnPropNameInTable="YOUR_REFColumn" msprop:Generator_UserColumnName="YOUR_REF" type="xs:string" minOccurs="0" />
+              <xs:element name="SB_NO" msdata:Caption="BE_NO" msprop:Generator_ColumnVarNameInTable="columnSB_NO" msprop:Generator_ColumnPropNameInRow="SB_NO" msprop:Generator_ColumnPropNameInTable="SB_NOColumn" msprop:Generator_UserColumnName="SB_NO" type="xs:string" minOccurs="0" />
+              <xs:element name="BILL_INV_DATE" msprop:Generator_ColumnVarNameInTable="columnBILL_INV_DATE" msprop:Generator_ColumnPropNameInRow="BILL_INV_DATE" msprop:Generator_ColumnPropNameInTable="BILL_INV_DATEColumn" msprop:Generator_UserColumnName="BILL_INV_DATE" type="xs:string" minOccurs="0" />
+              <xs:element name="EXPORTER_NAME" msdata:Caption="IMPORTER_NAME" msprop:Generator_ColumnVarNameInTable="columnEXPORTER_NAME" msprop:Generator_ColumnPropNameInRow="EXPORTER_NAME" msprop:Generator_ColumnPropNameInTable="EXPORTER_NAMEColumn" msprop:Generator_UserColumnName="EXPORTER_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="DESCRIPTION" msprop:Generator_ColumnVarNameInTable="columnDESCRIPTION" msprop:Generator_ColumnPropNameInRow="DESCRIPTION" msprop:Generator_ColumnPropNameInTable="DESCRIPTIONColumn" msprop:Generator_UserColumnName="DESCRIPTION" type="xs:string" minOccurs="0" />
+              <xs:element name="AMOUNT" msprop:Generator_ColumnVarNameInTable="columnAMOUNT" msprop:Generator_ColumnPropNameInRow="AMOUNT" msprop:Generator_ColumnPropNameInTable="AMOUNTColumn" msprop:Generator_UserColumnName="AMOUNT" type="xs:string" minOccurs="0" />
+              <xs:element name="EXP" msprop:Generator_ColumnVarNameInTable="columnEXP" msprop:Generator_ColumnPropNameInRow="EXP" msprop:Generator_ColumnPropNameInTable="EXPColumn" msprop:Generator_UserColumnName="EXP" type="xs:string" minOccurs="0" />
+              <xs:element name="TAX_NONTAX" msprop:Generator_ColumnVarNameInTable="columnTAX_NONTAX" msprop:Generator_ColumnPropNameInRow="TAX_NONTAX" msprop:Generator_ColumnPropNameInTable="TAX_NONTAXColumn" msprop:Generator_UserColumnName="TAX_NONTAX" type="xs:string" minOccurs="0" />
+              <xs:element name="BRANCH_NO_LOC" msprop:Generator_ColumnVarNameInTable="columnBRANCH_NO_LOC" msprop:Generator_ColumnPropNameInRow="BRANCH_NO_LOC" msprop:Generator_ColumnPropNameInTable="BRANCH_NO_LOCColumn" msprop:Generator_UserColumnName="BRANCH_NO_LOC" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

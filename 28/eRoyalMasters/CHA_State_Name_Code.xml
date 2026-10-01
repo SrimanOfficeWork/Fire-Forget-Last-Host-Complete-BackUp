@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ListItems>
+    <ListItem Text="" Value=""></ListItem>
+    <ListItem Text="JAMMU and KASHMIR" Value="01"></ListItem>
+    <ListItem Text="HIMACHAL PRADESH" Value="02"></ListItem>
+    <ListItem Text="PUNJAB" Value="03"></ListItem>
+    <ListItem Text="CHANDIGARH" Value="04"></ListItem>
+    <ListItem Text="UTTARAKHAND" Value="05"></ListItem>
+    <ListItem Text="HARYANA" Value="06"></ListItem>
+    <ListItem Text="DELHI" Value="07"></ListItem>
+    <ListItem Text="RAJASTHAN" Value="08"></ListItem>
+    <ListItem Text="UTTAR PRADESH" Value="09"></ListItem>
+    <ListItem Text="BIHAR" Value="10"></ListItem>
+    <ListItem Text="SIKKIM" Value="11"></ListItem>
+    <ListItem Text="ARUNACHAL PRADESH" Value="12"></ListItem>
+    <ListItem Text="NAGALAND" Value="13"></ListItem>
+    <ListItem Text="MANIPUR" Value="14"></ListItem>
+    <ListItem Text="MIZORAM" Value="15"></ListItem>
+    <ListItem Text="TRIPURA" Value="16"></ListItem>
+    <ListItem Text="MEGHALAYA" Value="17"></ListItem>
+    <ListItem Text="ASSAM" Value="18"></ListItem>
+    <ListItem Text="WEST BENGAL" Value="19"></ListItem>
+    <ListItem Text="JHARKHAND" Value="20"></ListItem>
+    <ListItem Text="ORISSA" Value="21"></ListItem>
+    <ListItem Text="CHATTISGARH" Value="22"></ListItem>
+    <ListItem Text="MADHYA PRADESH" Value="23"></ListItem>
+    <ListItem Text="GUJARAT" Value="24"></ListItem>
+    <ListItem Text="DAMAN and DIU" Value="25"></ListItem>
+    <ListItem Text="DADRA and NAGAR HAVELI" Value="26"></ListItem>
+    <ListItem Text="MAHARASHTRA" Value="27"></ListItem>
+    <ListItem Text="KARNATAKA" Value="29"></ListItem>
+    <ListItem Text="GOA" Value="30"></ListItem>
+    <ListItem Text="LAKSHADWEEP" Value="31"></ListItem>
+    <ListItem Text="KERALA" Value="32"></ListItem>
+    <ListItem Text="TAMIL NADU" Value="33"></ListItem>
+    <ListItem Text="PONDICHERRY" Value="34"></ListItem>
+    <ListItem Text="ANDAMAN and NICOBAR" Value="35"></ListItem>
+    <ListItem Text="TELANGANA" Value="36"></ListItem>
+    <ListItem Text="ANDHRA PRADESH" Value="37"></ListItem>
+    <ListItem Text="OTHER TERRITORY" Value="97"></ListItem>
+</ListItems>
+

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Imp_Exp_Job_Count_Status" targetNamespace="http://tempuri.org/Imp_Exp_Job_Count_Status.xsd" xmlns:mstns="http://tempuri.org/Imp_Exp_Job_Count_Status.xsd" xmlns="http://tempuri.org/Imp_Exp_Job_Count_Status.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="Imp_Exp_Job_Count_Status" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="Imp_Exp_Job_Count_Status" msprop:Generator_UserDSName="Imp_Exp_Job_Count_Status">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="SaleJobcount" msprop:Generator_TableClassName="SaleJobcountDataTable" msprop:Generator_TableVarName="tableSaleJobcount" msprop:Generator_TablePropName="SaleJobcount" msprop:Generator_RowDeletingName="SaleJobcountRowDeleting" msprop:Generator_UserTableName="SaleJobcount" msprop:Generator_RowChangingName="SaleJobcountRowChanging" msprop:Generator_RowEvHandlerName="SaleJobcountRowChangeEventHandler" msprop:Generator_RowDeletedName="SaleJobcountRowDeleted" msprop:Generator_RowEvArgName="SaleJobcountRowChangeEvent" msprop:Generator_RowChangedName="SaleJobcountRowChanged" msprop:Generator_RowClassName="SaleJobcountRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Branch_code" msprop:Generator_ColumnVarNameInTable="columnBranch_code" msprop:Generator_ColumnPropNameInRow="Branch_code" msprop:Generator_ColumnPropNameInTable="Branch_codeColumn" msprop:Generator_UserColumnName="Branch_code" type="xs:string" minOccurs="0" />
+              <xs:element name="No_of_Jobs" msprop:Generator_ColumnVarNameInTable="columnNo_of_Jobs" msprop:Generator_ColumnPropNameInRow="No_of_Jobs" msprop:Generator_ColumnPropNameInTable="No_of_JobsColumn" msprop:Generator_UserColumnName="No_of_Jobs" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="SaleJobcount_2" msprop:Generator_TableClassName="SaleJobcount_2DataTable" msprop:Generator_TableVarName="tableSaleJobcount_2" msprop:Generator_TablePropName="SaleJobcount_2" msprop:Generator_RowDeletingName="SaleJobcount_2RowDeleting" msprop:Generator_UserTableName="SaleJobcount_2" msprop:Generator_RowChangingName="SaleJobcount_2RowChanging" msprop:Generator_RowEvHandlerName="SaleJobcount_2RowChangeEventHandler" msprop:Generator_RowDeletedName="SaleJobcount_2RowDeleted" msprop:Generator_RowEvArgName="SaleJobcount_2RowChangeEvent" msprop:Generator_RowChangedName="SaleJobcount_2RowChanged" msprop:Generator_RowClassName="SaleJobcount_2Row">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Job_Type" msprop:Generator_ColumnVarNameInTable="columnJob_Type" msprop:Generator_ColumnPropNameInRow="Job_Type" msprop:Generator_ColumnPropNameInTable="Job_TypeColumn" msprop:Generator_UserColumnName="Job_Type" type="xs:string" minOccurs="0" />
+              <xs:element name="Working_period" msprop:Generator_ColumnVarNameInTable="columnWorking_period" msprop:Generator_ColumnPropNameInRow="Working_period" msprop:Generator_ColumnPropNameInTable="Working_periodColumn" msprop:Generator_UserColumnName="Working_period" type="xs:string" minOccurs="0" />
+              <xs:element name="JobFiles" msprop:Generator_ColumnVarNameInTable="columnJobFiles" msprop:Generator_ColumnPropNameInRow="JobFiles" msprop:Generator_ColumnPropNameInTable="JobFilesColumn" msprop:Generator_UserColumnName="JobFiles" type="xs:string" minOccurs="0" />
+              <xs:element name="F_date" msprop:Generator_ColumnVarNameInTable="columnF_date" msprop:Generator_ColumnPropNameInRow="F_date" msprop:Generator_ColumnPropNameInTable="F_dateColumn" msprop:Generator_UserColumnName="F_date" type="xs:string" minOccurs="0" />
+              <xs:element name="T_date" msprop:Generator_ColumnVarNameInTable="columnT_date" msprop:Generator_ColumnPropNameInRow="T_date" msprop:Generator_ColumnPropNameInTable="T_dateColumn" msprop:Generator_UserColumnName="T_date" type="xs:string" minOccurs="0" />
+              <xs:element name="From_lbl" msprop:Generator_ColumnVarNameInTable="columnFrom_lbl" msprop:Generator_ColumnPropNameInRow="From_lbl" msprop:Generator_ColumnPropNameInTable="From_lblColumn" msprop:Generator_UserColumnName="From_lbl" type="xs:string" minOccurs="0" />
+              <xs:element name="To_lbl" msprop:Generator_ColumnVarNameInTable="columnTo_lbl" msprop:Generator_ColumnPropNameInRow="To_lbl" msprop:Generator_ColumnPropNameInTable="To_lblColumn" msprop:Generator_UserColumnName="To_lbl" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

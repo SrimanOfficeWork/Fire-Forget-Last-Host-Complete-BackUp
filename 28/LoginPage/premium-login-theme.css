@@ -1,0 +1,865 @@
+/* =====================================================================
+   eRoyal Impex — Premium Login
+   Reskins the untouched #log-* markup copied from ../Default.aspx.
+   Loaded AFTER main.css so these rules win the cascade; main.css stays
+   linked (unchanged) so the AMC-renewal modal popup (.modalPopup12 /
+   .modalBackground) keeps its working styles. Relies on the :root
+   variables from premium-theme.css (linked just before this file).
+   NOTE: Only visual styling. Control IDs/logic are untouched originals.
+   ===================================================================== */
+
+/* #bg1 is an ID selector, so it outranks main.css's ID-based orange sprite
+   background AND premium-theme.css's (class-based) body.premium-body
+   gradient - redeclaring the same gradient here directly is what actually
+   makes it win. */
+html {
+    height: 100%;
+    overflow: hidden;
+}
+#bg1 {
+    background: var(--bg-deep);
+    height: 100vh;
+    height: 100dvh; /* mobile-correct viewport height - ignores the address-bar show/hide jump that 100vh gets wrong */
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* ---------------------------------------------------------------------
+   Split-screen shell: left = rotating IMPEX visual, right = login form.
+   No page-level scrollbar - the shell is pinned to exactly one viewport
+   height, and only the form side scrolls internally if its content is
+   ever taller than the screen (e.g. a very short/zoomed-in window).
+   --------------------------------------------------------------------- */
+#pm-login-shell {
+    display: flex;
+    height: 100vh;
+    height: 100dvh;
+    width: 100%;
+}
+
+/* ---- Left: premium product showcase (eRoyal Suite - 8 products) ---- */
+#pm-login-visual {
+    position: relative;
+    flex: 1 1 58%;
+    overflow: hidden;
+    background: radial-gradient(120% 140% at 15% 0%, #16264d 0%, #101d3d 45%, #0a1428 100%);
+}
+/* Thin gold seam along the join with the form panel - reads as one
+   deliberately designed surface rather than two stacked boxes. */
+#pm-login-visual::after {
+    content: "";
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    width: 1px;
+    z-index: 3;
+    pointer-events: none;
+    background: linear-gradient(180deg, transparent 0%, rgba(215, 152, 41, 0.6) 45%, transparent 100%);
+}
+
+/* Fine film-grain texture (SVG feTurbulence, tiled) - breaks up the flat
+   gradient/orb backdrop so it reads as a textured surface instead of a
+   flat digital gradient. Barely visible on its own; it's the difference
+   between "premium material" and "CSS gradient". */
+#pm-login-visual-grain {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Slow-drifting blurred glow circles - a decorative, non-photographic
+   backdrop that stands in for the old rotating photo carousel. */
+#pm-login-visual-orbs {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+#pm-login-visual-orbs span {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.55;
+    animation: pmOrbFloat 16s ease-in-out infinite;
+}
+#pm-login-visual-orbs span:nth-child(1) {
+    width: 320px; height: 320px;
+    top: -60px; left: -40px;
+    background: rgba(215, 152, 41, 0.30);
+    animation-delay: 0s;
+}
+#pm-login-visual-orbs span:nth-child(2) {
+    width: 260px; height: 260px;
+    bottom: 10%; right: -60px;
+    background: rgba(14, 165, 183, 0.22);
+    animation-delay: 3s;
+}
+#pm-login-visual-orbs span:nth-child(3) {
+    width: 220px; height: 220px;
+    bottom: -80px; left: 30%;
+    background: rgba(108, 71, 255, 0.20);
+    animation-delay: 6s;
+}
+@keyframes pmOrbFloat {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50%      { transform: translate(24px, -18px) scale(1.08); }
+}
+
+/* Header (brand + tagline) stays a compact, fixed-height strip; the
+   product grid below gets flex:1 so it - not the hero copy - dominates
+   the panel. This is the layout-pattern change: previously a big
+   headline + paragraph were the hero and the grid was a small addition
+   underneath it; now the 8 modules ARE the hero. */
+#pm-login-visual-overlay {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 28px;
+    padding: 40px 44px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+#pm-login-visual-header {
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#pm-login-visual-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+#pm-login-visual-brandmark {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--brand) 0%, #f0b942 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font);
+    font-size: 13px;
+    font-weight: 800;
+    color: #3a2705;
+    box-shadow: 0 6px 16px rgba(215, 152, 41, 0.35);
+    flex: none;
+}
+#pm-login-visual-brandname {
+    font-family: var(--font);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.72);
+}
+#pm-login-visual-tagline {
+    font-family: var(--font);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.68);
+}
+
+/* ---- 8-product grid: this IS the hero now. Cards size themselves by
+   aspect-ratio rather than stretching to fill the panel, and the header+
+   grid are centered together as one block (via justify-content:center on
+   the overlay) - so there's one balanced gap above and below the whole
+   group instead of the grid stretching full-height with its own internal
+   centering. ---- */
+#pm-login-products {
+    flex: none;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    /* start (not the default stretch) so a taller card (.pm-product-card--tall)
+       doesn't force its shorter row-mates to stretch and re-letterbox their
+       own already-correctly-fitted images. */
+    align-items: start;
+}
+
+/* Cards are <a> elements (each opens the WhatsApp sales chat) - reset the
+   default link underline/color so they still read as tiles, not text. */
+.pm-product-card {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 5 / 6;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(14px);
+    animation: pmProductIn 0.6s ease forwards;
+    animation-delay: calc(var(--pm-i) * 0.07s + 0.15s);
+    /* Glass top-edge highlight (inset) + soft ambient drop shadow at rest;
+       hover swaps the drop shadow for a brand-colored glow (below). */
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.12) inset, 0 8px 18px rgba(0, 0, 0, 0.22);
+    transition: border-color .2s ease, transform .2s ease, box-shadow .25s ease;
+}
+/* Smart IRN / ExtractAI are 1024x1536 (2:3) - noticeably taller/narrower
+   than the other six ~5:6 graphics. Giving them their own true aspect
+   ratio (with align-items:start on the grid, above) lets "contain" fill
+   the box exactly with zero letterboxing, instead of pillarboxing inside
+   a 5:6 frame that doesn't match their real shape. */
+.pm-product-card--tall {
+    aspect-ratio: 2 / 3;
+}
+/* Each graphic is a pre-designed card (own baked-in title/description/
+   border) at its own aspect ratio, not a photo to crop-fill - "contain"
+   shows the whole thing; the navy fill behind it matches the panel's own
+   background so any left/right letterboxing is invisible as a seam. */
+.pm-product-img {
+    position: absolute;
+    inset: 0;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #0c1730;
+    transition: transform .45s ease;
+}
+/* Diagonal light sweep on hover - a small "premium card" flourish (same
+   idea as a credit-card shine). */
+.pm-product-shine {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(115deg, transparent 40%, rgba(255, 255, 255, 0.22) 50%, transparent 60%);
+    transform: translateX(-130%);
+    transition: transform .65s ease;
+    pointer-events: none;
+}
+.pm-product-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    z-index: 3;
+    background: linear-gradient(90deg, transparent, var(--brand), transparent);
+    opacity: 0;
+    transition: opacity .2s ease;
+}
+.pm-product-card:hover {
+    border-color: rgba(215, 152, 41, 0.55);
+    transform: translateY(-3px);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.16) inset, 0 0 0 1px rgba(215, 152, 41, 0.25), 0 14px 26px rgba(0, 0, 0, 0.4), 0 0 22px rgba(215, 152, 41, 0.25);
+}
+.pm-product-card:hover .pm-product-img {
+    transform: scale(1.06);
+}
+.pm-product-card:hover .pm-product-shine {
+    transform: translateX(130%);
+}
+.pm-product-card:hover::before {
+    opacity: 1;
+}
+
+@keyframes pmProductIn {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- Right: the untouched login form, on a plain panel ---- */
+#pm-login-formside {
+    flex: 1 1 42%;
+    min-width: 380px;
+    max-width: 560px;
+    height: 100vh;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-panel);
+    padding: 24px 32px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+/* ---- Card shell (was: fixed-width 3-slice sprite box) ---- */
+#log-pageout {
+    width: 100%;
+    max-width: 380px;
+    height: auto;
+    margin: 0;
+    background: none;
+    overflow: visible;
+}
+
+#log-bg-l, #log-bg-r {
+    display: none;
+}
+
+#log-bg-m {
+    float: none;
+    width: 100%;
+    height: auto;
+    background: none;
+}
+
+/* ---- Header: brand mark + tagline (was: sprite-image logo + caption) ---- */
+#log-top1 {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    background: linear-gradient(135deg, #12203f 0%, #1a2a52 100%);
+    border-radius: var(--radius) var(--radius) 0 0;
+    padding: 20px 28px 16px;
+    text-align: center;
+}
+
+#log-mainlogo {
+    float: none;
+    width: auto;
+    height: 34px;
+    margin: 0 auto;
+    background-image: url('../images/login_logo.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+#logpage-capt {
+    float: none;
+    width: auto;
+    height: auto;
+    margin: 6px 0 0;
+    background: none;
+}
+
+#logpage-capt::after {
+    content: "Sign in to your account";
+    display: block;
+    font-family: var(--font);
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    color: rgba(255, 255, 255, 0.72);
+}
+
+/* ---- Form body ---- */
+#log-top2 {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 var(--radius) var(--radius);
+    padding: 16px 28px 16px;
+    box-sizing: border-box;
+}
+
+#log-top2-left {
+    float: none;
+    width: 100%;
+    height: auto;
+    margin: 0;
+}
+
+#log-txtandlabelcontainer {
+    width: 100%;
+    height: auto;
+    margin: 8px 0 11px;
+}
+
+/* id="log-txtandlabelcontainer" is reused on every field row, so :has() on
+   its own input is the only way to bump spacing above just one row. */
+#log-txtandlabelcontainer:has(#txtUserId),
+#log-txtandlabelcontainer:has(#txtPassword),
+#log-txtandlabelcontainer:has(.pm-login-label-split),
+#log-txtandlabelcontainer:has(#ddlWorkingPeriod) {
+    margin-top: 16px;
+}
+
+#log-label {
+    width: 100%;
+    height: auto;
+    font-family: var(--font);
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+/* Group Name + Branch Name: each label sits directly above its own dropdown
+   via CSS Grid template-areas. The label markup (#log-label) and the input
+   markup (#log-txt-container > #log-txtcon-m) are SEPARATE sibling
+   containers in the original markup - stacking each independently (the old
+   flex approach) put both labels together, then both dropdowns together
+   below them, so it was ambiguous which dropdown belonged to which label.
+   display:contents "unwraps" those sibling containers so their children
+   become direct items of one shared grid, which can then place each label
+   directly above its matching dropdown - and the grid-area mapping is
+   simply redefined per breakpoint (see @media below) to go from 2 columns
+   side-by-side (desktop) to one interleaved column (mobile/tablet). */
+#log-txtandlabelcontainer:has(.pm-login-label-split) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+        "glabel blabel"
+        "ginput binput";
+    column-gap: 8px;
+    row-gap: 4px;
+}
+#log-label:has(.pm-login-label-split),
+#log-txtandlabelcontainer:has(.pm-login-label-split) #log-txt-container,
+#log-txtandlabelcontainer:has(.pm-login-label-split) #log-txtcon-m {
+    display: contents;
+}
+.pm-login-label-split:nth-of-type(1) { grid-area: glabel; }
+.pm-login-label-split:nth-of-type(2) { grid-area: blabel; }
+#ddlGroupname { grid-area: ginput; width: 100% !important; }
+#ddlBranch { grid-area: binput; width: 100% !important; }
+
+#log-txt-container {
+    width: 100%;
+    height: auto;
+    margin-top: 0;
+    display: flex;
+}
+
+#log-txtcon-l, #log-txtcon-r {
+    display: none;
+}
+
+#log-txtcon-m {
+    width: 100%;
+    height: auto;
+    float: none;
+}
+
+.txt-s, .listtxt-s {
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    font-family: var(--font);
+    font-size: 13.5px;
+    color: var(--text-primary);
+    padding: 7px 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--bg-panel-alt);
+    transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
+}
+
+/* Room for the eye-toggle icon so typed characters don't run under it. */
+#txtPassword {
+    padding-right: 38px;
+}
+
+/* The eye icon's own markup carries inline SVG margins (margin-right:-10px
+   etc.) tuned for the old, much narrower password field - on this wider,
+   padded, rounded input that pushed/overlapped the icon right against the
+   border instead of sitting inset inside it. Resetting the position and
+   clearing those inline margins here re-centers it neatly inside the field. */
+#togglePassword {
+    right: 10px !important;
+}
+#togglePassword svg {
+    margin: 0 !important;
+    width: 18px;
+    height: 18px;
+}
+
+.txt-s:focus, .listtxt-s:focus {
+    outline: none;
+    border-color: var(--brand);
+    background: var(--bg-panel);
+    box-shadow: 0 0 0 3px rgba(215, 152, 41, 0.16);
+}
+
+/* Login ID / Password / Group / Branch / Working Period start disabled and
+   only unlock once Company License has been validated server-side
+   (txtCompany_License_TextChanged) - this makes that locked state visibly
+   obvious instead of looking like a plain, editable-but-empty field. */
+.txt-s:disabled, .listtxt-s:disabled {
+    background: var(--border-soft);
+    color: var(--text-faint);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+
+/* ---- Error / status message ---- */
+#log-top2-rght {
+    float: none;
+    width: 100%;
+    height: auto;
+    margin: 0;
+}
+
+#log-errmsg {
+    width: 100%;
+    height: auto;
+    font-family: var(--font);
+    font-size: 12.5px;
+    text-align: left;
+    color: var(--danger);
+    margin: 0 0 4px;
+}
+
+/* ---- Buttons (was: text-hidden PNG sprites) ---- */
+#log-butt-container {
+    width: 100%;
+    height: auto;
+    margin: 8px 0 4px;
+    display: flex;
+    gap: 10px;
+}
+
+#log-butt-left, #log-butt-rght {
+    float: none;
+    width: 50%;
+    height: auto;
+}
+
+.loginButt {
+    /* Inline sign-in arrow icon via background-image data URI - <input>
+       elements can't take child markup (no ::before/::after either, both
+       unsupported on replaced elements), so this is the only way to add an
+       icon without changing the control to a LinkButton. The icon layer
+       must be listed FIRST: in CSS multi-layer backgrounds the first image
+       paints on TOP, so listing the (opaque, full-size) gradient first was
+       completely hiding the icon underneath it. */
+    background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%233a2705' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='4' y1='12' x2='17' y2='12'/%3E%3Cpolyline points='11 5 18 12 11 19'/%3E%3C/svg%3E"),
+        linear-gradient(135deg, var(--brand) 0%, #f0b942 100%);
+    background-repeat: no-repeat, no-repeat;
+    /* Icon offset left of center by roughly half the "Login" text width
+       plus its own width/gap, so icon+text read as one centered group.
+       (The earlier "icon jumps on hover" bug wasn't actually caused by
+       this calc() - it was main.css's legacy .loginButt:hover rule
+       fighting for the background-position property; see the :hover
+       block below, which now wins that fight directly.) */
+    background-position: calc(50% - 30px) center, center;
+    background-size: 16px 16px, 100% 100%;
+    width: 100%;
+    height: 38px;
+    text-align: center;
+    padding: 0;
+    text-indent: 0;
+    overflow: visible;
+    text-transform: none;
+    border: none;
+    border-radius: var(--radius-sm);
+    color: #3a2705;
+    font-family: var(--font);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    transition: filter .15s ease, transform .1s ease;
+}
+/* main.css (still linked, for the AMC-renewal popup's styles) has its own
+   legacy .loginButt:hover { background-position: left bottom; } left over
+   from the old sprite-image button. That rule has an extra :hover
+   pseudo-class, so it's MORE SPECIFIC than the plain .loginButt base rule
+   above and wins the background-position property on hover regardless of
+   stylesheet order - it was silently overriding the icon's position,
+   snapping it to 0% 100% (left bottom) on hover. Redeclaring the same
+   position here, at equal :hover specificity, wins on source order instead. */
+.loginButt:hover {
+    background-position: calc(50% - 30px) center, center;
+    filter: brightness(1.08);
+    box-shadow: 0 6px 16px rgba(215, 152, 41, 0.35);
+    transform: translateY(-1px);
+}
+.loginButt:active {
+    background-position: calc(50% - 30px) center, center;
+    transform: translateY(1px);
+    box-shadow: none;
+}
+
+.logincancelButt {
+    background: var(--bg-panel-alt);
+    width: 100%;
+    height: 38px;
+    text-indent: 0;
+    overflow: visible;
+    text-transform: none;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text-muted);
+    font-family: var(--font);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    transition: background .15s ease, color .15s ease, border-color .15s ease, transform .1s ease, box-shadow .15s ease;
+}
+.logincancelButt:hover {
+    background: var(--border-soft);
+    color: var(--text-primary);
+    border-color: var(--text-faint);
+    box-shadow: 0 4px 12px rgba(30, 41, 80, 0.08);
+    transform: translateY(-1px);
+}
+.logincancelButt:active { transform: translateY(1px); box-shadow: none; }
+
+/* ---- Footer ---- */
+#log-footer {
+    width: 100%;
+    max-width: 380px;
+    height: auto;
+    margin: 22px auto 0;
+    font-family: var(--font);
+    font-size: 11.5px;
+    line-height: 1.45;
+    text-align: center;
+    color: var(--text-faint);
+}
+#log-footer span, #log-footer a {
+    color: var(--text-faint) !important;
+    font-weight: 400 !important;
+    font-size: 11.5px !important;
+}
+#log-footer a:hover {
+    color: var(--brand-text) !important;
+}
+
+#pm-login-support a {
+    color: var(--brand-text) !important;
+    font-weight: 600 !important;
+}
+
+#pm-login-policy-links {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+#pm-login-policy-links a {
+    color: var(--brand-text) !important;
+    font-weight: 600 !important;
+    text-decoration: none;
+}
+#pm-login-policy-links a:hover {
+    text-decoration: underline;
+}
+#pm-login-policy-links span {
+    color: var(--border);
+}
+
+#pm-login-copyright {
+    margin-top: 6px;
+    font-family: var(--font);
+    font-size: 10.5px;
+    color: var(--text-faint);
+    text-align: center;
+}
+#pm-login-copyright a {
+    color: var(--text-faint);
+    text-decoration: underline;
+}
+#pm-login-copyright a:hover {
+    color: var(--brand-text);
+}
+
+/* =======================================================================
+   Responsive breakpoints - kept at the END of the file on purpose: several
+   of these override earlier ID/`:has()` rules of equal specificity, and
+   for ties the cascade picks whichever comes LAST in source order
+   regardless of the media query - so these must physically sit after the
+   base rules they're meant to override, not just be wrapped in @media.
+
+   >1024px      desktop/laptop : full split-screen (default rules above)
+   <=1024px     tablet + phone : form only, full width, single-column -
+                                  including Group Name / Branch Name, which
+                                  would otherwise be the only two fields left
+                                  squeezed side by side while every other
+                                  field on the form is already full-width.
+   ======================================================================= */
+@media (max-width: 1024px) {
+    #pm-login-visual { display: none; }
+    /* With the visual panel gone, justify-content:center (fine on a short
+       desktop window) leaves large equal gaps above AND below the card on
+       tall phone/tablet screens, since the form is much shorter than the
+       viewport - e.g. ~81px empty space top and bottom on a 390x844 phone.
+       flex-start + top padding reads as a normal mobile login screen instead. */
+    #pm-login-formside {
+        flex: 1 1 100%;
+        max-width: none;
+        min-width: 0;
+        justify-content: flex-start;
+        padding-top: 48px;
+        padding-bottom: 48px;
+    }
+
+    /* Same grid, re-mapped to one column - each label now sits directly
+       above its own dropdown (glabel/ginput, then blabel/binput) instead
+       of both labels stacking above both dropdowns. */
+    #log-txtandlabelcontainer:has(.pm-login-label-split) {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "glabel"
+            "ginput"
+            "blabel"
+            "binput";
+        row-gap: 4px;
+    }
+    #log-txtandlabelcontainer:has(.pm-login-label-split) .pm-login-label-split:nth-of-type(2) {
+        margin-top: 8px;
+    }
+}
+
+@media (max-width: 640px) {
+    #pm-login-formside { padding: 20px 20px; }
+    #log-top1 { padding: 18px 20px 14px; }
+    #log-top2 { padding: 14px 20px 4px; }
+}
+
+@media (max-width: 480px) {
+    #pm-login-formside { padding: 16px 14px; }
+    #log-top1 { padding: 16px 16px 12px; }
+    #log-top2 { padding: 12px 16px 4px; }
+    #log-mainlogo { height: 30px; }
+}
+
+/* Short/landscape viewports (phones rotated sideways, small laptops with
+   the window resized down) - trim vertical rhythm so the form still fits
+   without relying on the internal scroll fallback. */
+@media (max-height: 560px) {
+    #pm-login-formside { padding-top: 12px; padding-bottom: 12px; }
+    #log-top1 { padding-top: 12px; padding-bottom: 10px; }
+    #log-mainlogo { height: 26px; }
+    #logpage-capt { margin-top: 3px; }
+    #log-top2 { padding-top: 10px; }
+    #log-txtandlabelcontainer { margin-bottom: 7px; }
+    #log-footer { margin-top: 6px; }
+    #pm-login-policy-links { margin-top: 6px; padding-top: 6px; }
+}
+
+/* =====================================================================
+   jAlert / jConfirm popups - premium reskin.
+   This is the jQuery "jquery.alerts" plugin, which reuses the SAME
+   #popup_container/#popup_title/#popup_message/#popup_panel ids for every
+   alert/confirm/prompt it shows. This stylesheet is only ever linked from
+   THIS login page (Default.aspx), so restyling those ids directly here -
+   with no .pm-login-conflict gate - only re-skins popups shown on the
+   login page (blank-field validation alerts, invalid login, the "already
+   logged in?" confirm, etc.) and cannot leak into any other page's jAlert,
+   which keeps loading the old jquery.alerts.css look on its own.
+   min/max-width/width carry !important because jquery.alerts.js locks an
+   inline min-width/max-width (its own computed outerWidth in px) onto
+   #popup_container right after building it - without !important that
+   inline value would win and this box would silently keep the OLD UI's
+   sizing instead of adapting to the current (including mobile) viewport. */
+#popup_container {
+    font-family: var(--font);
+    min-width: 280px !important;
+    max-width: min(92vw, 420px) !important;
+    width: auto !important;
+    background: var(--bg-panel);
+    border: none;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    padding: 0;
+    overflow: hidden;
+}
+/* Same dark-navy gradient as #log-top1 (the "Sign in to your account"
+   header on the login card itself) - ties every popup back into the same
+   visual language instead of the flat-white title bar it had before. */
+#popup_container #popup_title {
+    background: linear-gradient(135deg, #12203f 0%, #1a2a52 100%);
+    background-image: linear-gradient(135deg, #12203f 0%, #1a2a52 100%);
+    border: none;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: normal;
+    padding: 16px 24px;
+    margin: 0;
+}
+#popup_container #popup_content {
+    background: linear-gradient(180deg, var(--bg-panel-alt) 0%, var(--bg-panel) 55%) !important;
+    padding: 20px 24px 20px;
+    margin: 0;
+}
+#popup_container #popup_message {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 13.5px;
+    line-height: 1.55;
+    white-space: normal;
+    word-break: break-word;
+}
+#popup_container #popup_panel {
+    text-align: center;
+    margin: 18px 0 0;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+/* The "already logged in?" confirm keeps its buttons right-aligned, as
+   before - every other popup on this page (plain jAlert, single Ok
+   button) reads better centered, which is the new default above. */
+#popup_container.pm-login-conflict #popup_panel {
+    justify-content: flex-end;
+}
+#popup_container #popup_ok,
+#popup_container #popup_cancel {
+    font-family: var(--font);
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 9px 20px;
+    cursor: pointer;
+    transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+#popup_container #popup_ok {
+    background: linear-gradient(135deg, var(--brand) 0%, #f0b942 100%);
+    border: none;
+    color: #fff;
+    box-shadow: 0 3px 10px rgba(215, 152, 41, 0.35);
+}
+#popup_container #popup_ok:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 14px rgba(215, 152, 41, 0.45);
+}
+#popup_container #popup_cancel {
+    background: var(--bg-panel-alt);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+}
+#popup_container #popup_cancel:hover {
+    background: #fff;
+    color: var(--text-primary);
+    border-color: var(--text-faint);
+}
+/* #popup_overlay is the plugin's shared backdrop (its position/size/base
+   color/opacity are set inline via jQuery .css(), for every alert/
+   confirm/prompt on this page - not just the login-conflict one). A
+   light blur + soft dim behind ANY popup is a general improvement here,
+   not something that needs the same per-dialog scoping as the card
+   above, so it isn't gated behind .pm-login-conflict. !important only on
+   the two properties the plugin already sets inline (background,
+   opacity) - everything else it sets (position/size) is left alone. */
+#popup_overlay {
+    background: rgba(15, 23, 42, 0.32) !important;
+    opacity: 1 !important;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}

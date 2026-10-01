@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="SeaAirExportDetails">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Ds">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SeaAirExportDetailsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SeaAirExportDetailsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SeaAirImportDetails">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Ds">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SeaAirImportDetailsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SeaAirImportDetailsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SeaAirExportDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:SeaAirExportDetails" />
+  </wsdl:message>
+  <wsdl:message name="SeaAirExportDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:SeaAirExportDetailsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SeaAirImportDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:SeaAirImportDetails" />
+  </wsdl:message>
+  <wsdl:message name="SeaAirImportDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:SeaAirImportDetailsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="CHAIntegrationSoap">
+    <wsdl:operation name="SeaAirExportDetails">
+      <wsdl:input message="tns:SeaAirExportDetailsSoapIn" />
+      <wsdl:output message="tns:SeaAirExportDetailsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SeaAirImportDetails">
+      <wsdl:input message="tns:SeaAirImportDetailsSoapIn" />
+      <wsdl:output message="tns:SeaAirImportDetailsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="CHAIntegrationHttpGet" />
+  <wsdl:portType name="CHAIntegrationHttpPost" />
+  <wsdl:binding name="CHAIntegrationSoap" type="tns:CHAIntegrationSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SeaAirExportDetails">
+      <soap:operation soapAction="http://tempuri.org/SeaAirExportDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SeaAirImportDetails">
+      <soap:operation soapAction="http://tempuri.org/SeaAirImportDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CHAIntegrationSoap12" type="tns:CHAIntegrationSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SeaAirExportDetails">
+      <soap12:operation soapAction="http://tempuri.org/SeaAirExportDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SeaAirImportDetails">
+      <soap12:operation soapAction="http://tempuri.org/SeaAirImportDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CHAIntegrationHttpGet" type="tns:CHAIntegrationHttpGet">
+    <http:binding verb="GET" />
+  </wsdl:binding>
+  <wsdl:binding name="CHAIntegrationHttpPost" type="tns:CHAIntegrationHttpPost">
+    <http:binding verb="POST" />
+  </wsdl:binding>
+  <wsdl:service name="CHAIntegration">
+    <wsdl:port name="CHAIntegrationSoap" binding="tns:CHAIntegrationSoap">
+      <soap:address location="https://ltsolutions.ifact.co.in/ERoyal2Ifact/CHAIntegration.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CHAIntegrationSoap12" binding="tns:CHAIntegrationSoap12">
+      <soap12:address location="https://ltsolutions.ifact.co.in/ERoyal2Ifact/CHAIntegration.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CHAIntegrationHttpGet" binding="tns:CHAIntegrationHttpGet">
+      <http:address location="https://ltsolutions.ifact.co.in/ERoyal2Ifact/CHAIntegration.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CHAIntegrationHttpPost" binding="tns:CHAIntegrationHttpPost">
+      <http:address location="https://ltsolutions.ifact.co.in/ERoyal2Ifact/CHAIntegration.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

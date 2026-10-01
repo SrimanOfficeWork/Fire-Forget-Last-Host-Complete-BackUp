@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="KK_Form_DataSet" targetNamespace="http://tempuri.org/KK_Form_DataSet.xsd" xmlns:mstns="http://tempuri.org/KK_Form_DataSet.xsd" xmlns="http://tempuri.org/KK_Form_DataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="KK_Form_DataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="KK_Form_DataSet" msprop:Generator_UserDSName="KK_Form_DataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="KK_Form_DS" msprop:Generator_TableClassName="KK_Form_DSDataTable" msprop:Generator_TableVarName="tableKK_Form_DS" msprop:Generator_TablePropName="KK_Form_DS" msprop:Generator_RowDeletingName="KK_Form_DSRowDeleting" msprop:Generator_UserTableName="KK_Form_DS" msprop:Generator_RowChangingName="KK_Form_DSRowChanging" msprop:Generator_RowEvHandlerName="KK_Form_DSRowChangeEventHandler" msprop:Generator_RowDeletedName="KK_Form_DSRowDeleted" msprop:Generator_RowEvArgName="KK_Form_DSRowChangeEvent" msprop:Generator_RowChangedName="KK_Form_DSRowChanged" msprop:Generator_RowClassName="KK_Form_DSRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="KK_JOBNO" msprop:Generator_ColumnVarNameInTable="columnKK_JOBNO" msprop:Generator_ColumnPropNameInRow="KK_JOBNO" msprop:Generator_ColumnPropNameInTable="KK_JOBNOColumn" msprop:Generator_UserColumnName="KK_JOBNO" type="xs:string" minOccurs="0" />
+              <xs:element name="KK_ChaName" msprop:Generator_ColumnVarNameInTable="columnKK_ChaName" msprop:Generator_ColumnPropNameInRow="KK_ChaName" msprop:Generator_ColumnPropNameInTable="KK_ChaNameColumn" msprop:Generator_UserColumnName="KK_ChaName" type="xs:string" minOccurs="0" />
+              <xs:element name="KK_ChaAdd1" msprop:Generator_ColumnVarNameInTable="columnKK_ChaAdd1" msprop:Generator_ColumnPropNameInRow="KK_ChaAdd1" msprop:Generator_ColumnPropNameInTable="KK_ChaAdd1Column" msprop:Generator_UserColumnName="KK_ChaAdd1" type="xs:string" minOccurs="0" />
+              <xs:element name="KK_ChaAdd2" msprop:Generator_ColumnVarNameInTable="columnKK_ChaAdd2" msprop:Generator_ColumnPropNameInRow="KK_ChaAdd2" msprop:Generator_ColumnPropNameInTable="KK_ChaAdd2Column" msprop:Generator_UserColumnName="KK_ChaAdd2" type="xs:string" minOccurs="0" />
+              <xs:element name="KK_dealerName" msdata:Caption="DataColumn1" msprop:Generator_ColumnVarNameInTable="columnKK_dealerName" msprop:Generator_ColumnPropNameInRow="KK_dealerName" msprop:Generator_ColumnPropNameInTable="KK_dealerNameColumn" msprop:Generator_UserColumnName="KK_dealerName" type="xs:string" minOccurs="0" />
+              <xs:element name="KK_TIN" msdata:Caption="DataColumn2" msprop:Generator_ColumnVarNameInTable="columnKK_TIN" msprop:Generator_ColumnPropNameInRow="KK_TIN" msprop:Generator_ColumnPropNameInTable="KK_TINColumn" msprop:Generator_UserColumnName="KK_TIN" type="xs:string" minOccurs="0" />
+              <xs:element name="KK_CSTRegNo" msdata:Caption="DataColumn3" msprop:Generator_ColumnVarNameInTable="columnKK_CSTRegNo" msprop:Generator_ColumnPropNameInRow="KK_CSTRegNo" msprop:Generator_ColumnPropNameInTable="KK_CSTRegNoColumn" msprop:Generator_UserColumnName="KK_CSTRegNo" type="xs:string" minOccurs="0" />
+              <xs:element name="KK_Designation" msdata:Caption="DataColumn4" msprop:Generator_ColumnVarNameInTable="columnKK_Designation" msprop:Generator_ColumnPropNameInRow="KK_Designation" msprop:Generator_ColumnPropNameInTable="KK_DesignationColumn" msprop:Generator_UserColumnName="KK_Designation" type="xs:string" minOccurs="0" />
+              <xs:element name="KK_Description" msdata:Caption="DataColumn5" msprop:Generator_ColumnVarNameInTable="columnKK_Description" msprop:Generator_ColumnPropNameInRow="KK_Description" msprop:Generator_ColumnPropNameInTable="KK_DescriptionColumn" msprop:Generator_UserColumnName="KK_Description" type="xs:string" minOccurs="0" />
+              <xs:element name="KK_Quality" msdata:Caption="DataColumn6" msprop:Generator_ColumnVarNameInTable="columnKK_Quality" msprop:Generator_ColumnPropNameInRow="KK_Quality" msprop:Generator_ColumnPropNameInTable="KK_QualityColumn" msprop:Generator_UserColumnName="KK_Quality" type="xs:string" minOccurs="0" />
+              <xs:element name="KK_ValueOfGoods" msdata:Caption="DataColumn1" msprop:Generator_ColumnVarNameInTable="columnKK_ValueOfGoods" msprop:Generator_ColumnPropNameInRow="KK_ValueOfGoods" msprop:Generator_ColumnPropNameInTable="KK_ValueOfGoodsColumn" msprop:Generator_UserColumnName="KK_ValueOfGoods" type="xs:string" minOccurs="0" />
+              <xs:element name="KK_ClearingBENo" msdata:Caption="DataColumn2" msprop:Generator_ColumnVarNameInTable="columnKK_ClearingBENo" msprop:Generator_ColumnPropNameInRow="KK_ClearingBENo" msprop:Generator_ColumnPropNameInTable="KK_ClearingBENoColumn" msprop:Generator_UserColumnName="KK_ClearingBENo" type="xs:string" minOccurs="0" />
+              <xs:element name="KK_Signature" msdata:Caption="DataColumn3" msprop:Generator_ColumnVarNameInTable="columnKK_Signature" msprop:Generator_ColumnPropNameInRow="KK_Signature" msprop:Generator_ColumnPropNameInTable="KK_SignatureColumn" msprop:Generator_UserColumnName="KK_Signature" type="xs:string" minOccurs="0" />
+              <xs:element name="KK_SignatureCl_Fwd" msdata:Caption="DataColumn4" msprop:Generator_ColumnVarNameInTable="columnKK_SignatureCl_Fwd" msprop:Generator_ColumnPropNameInRow="KK_SignatureCl_Fwd" msprop:Generator_ColumnPropNameInTable="KK_SignatureCl_FwdColumn" msprop:Generator_UserColumnName="KK_SignatureCl_Fwd" type="xs:string" minOccurs="0" />
+              <xs:element name="KK_TransportName" msdata:Caption="DataColumn5" msprop:Generator_ColumnVarNameInTable="columnKK_TransportName" msprop:Generator_ColumnPropNameInRow="KK_TransportName" msprop:Generator_ColumnPropNameInTable="KK_TransportNameColumn" msprop:Generator_UserColumnName="KK_TransportName" type="xs:string" minOccurs="0" />
+              <xs:element name="KK_deliveryOfTrans" msdata:Caption="DataColumn6" msprop:Generator_ColumnVarNameInTable="columnKK_deliveryOfTrans" msprop:Generator_ColumnPropNameInRow="KK_deliveryOfTrans" msprop:Generator_ColumnPropNameInTable="KK_deliveryOfTransColumn" msprop:Generator_UserColumnName="KK_deliveryOfTrans" type="xs:string" minOccurs="0" />
+              <xs:element name="KK_Place" msprop:Generator_ColumnVarNameInTable="columnKK_Place" msprop:Generator_ColumnPropNameInRow="KK_Place" msprop:Generator_ColumnPropNameInTable="KK_PlaceColumn" msprop:Generator_UserColumnName="KK_Place" type="xs:string" minOccurs="0" />
+              <xs:element name="KK_FOR" msprop:Generator_ColumnVarNameInTable="columnKK_FOR" msprop:Generator_ColumnPropNameInRow="KK_FOR" msprop:Generator_ColumnPropNameInTable="KK_FORColumn" msprop:Generator_UserColumnName="KK_FOR" type="xs:string" minOccurs="0" />
+              <xs:element name="KK_Date" msprop:Generator_ColumnVarNameInTable="columnKK_Date" msprop:Generator_ColumnPropNameInRow="KK_Date" msprop:Generator_ColumnPropNameInTable="KK_DateColumn" msprop:Generator_UserColumnName="KK_Date" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

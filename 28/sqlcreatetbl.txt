@@ -1,0 +1,1793 @@
+
+
+CREATE TABLE [dbo].[BE_ENTRY](
+	[BE_ID] [bigint] NULL,
+	[BE_JOBNO] [varchar](50) NULL,
+	[BE_JOBDATE] [datetime] NULL,
+	[BE_NO_OF_PACKAGES] [varchar](50) NULL,
+	[BE_PACKAGE_CODE] [varchar](3) NULL,
+	[BE_WEIGHT] [varchar](50) NULL,
+	[BE_UNIT_CODE] [varchar](3) NULL,
+	[BE_TRANSPORT_MODE] [varchar](50) NULL,
+	[BE_TYPE] [varchar](50) NULL,
+	[BE_NO] [varchar](50) NULL,
+	[BE_DATE] [datetime] NULL,
+	[BE_ASSESSABLE_VALUE] [varchar](50) NULL,
+	[BE_DUTY] [varchar](50) NULL,
+	[BE_INBOND_NO] [varchar](50) NULL,
+	[BE_INBOND_DATE] [datetime] NULL,
+	[BE_WAREHOUSE_CUSTOMS] [varchar](50) NULL,
+	[BE_WAREHOUSE_CUSTOMS_CODE] [varchar](50) NULL,
+	[USER_ID] [varchar](30) NULL,
+	[DATE_TIME] [datetime] NULL,
+	[STATUS] [varchar](1) NULL,
+	[BRANCH_CODE] [varchar](20) NULL,
+	[YEAR] [varchar](9) NULL,
+	[WORKING_PERIOD] [varchar](30) NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+
+
+CREATE TABLE [dbo].[EmailsRead](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[COMPANY_ID] [bigint] NULL,
+	[CUSTOM_HOUSE_ID] [varchar](30) NULL,
+	[MailDate] [datetime] NULL,
+	[JOB_NO] [varchar](30) NULL,
+	[JOB_DATE] [varchar](15) NULL,
+	[BE_NO] [varchar](30) NULL,
+	[BE_DATE] [varchar](15) NULL,
+	[SB_NO] [varchar](30) NULL,
+	[SB_DATE] [varchar](15) NULL,
+	[IMP_TOTAL_DUTY_VALUE] [varchar](30) NULL,
+	[IMP_TOTAL_ASSBL_VALUE] [varchar](30) NULL,
+	[Emailid] [varchar](300) NULL,
+	[MailMessageId] [bigint] NOT NULL,
+	[MailFrom] [varchar](300) NULL,
+	[MailSubject] [varchar](300) NULL,
+	[Mailbody] [varchar](max) NULL,
+	[IsAttachments] [bit] NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+CREATE TABLE [dbo].[EXPORT_SB_ENTRY](
+	[SB_ID] [bigint] NULL,
+	[SB_JOBNO] [bigint] NULL,
+	[SB_JOBDATE] [datetime] NULL,
+	[SB_NO] [varchar](25) NULL,
+	[SB_DATE] [datetime] NULL,
+	[SB_PMV_VALUE] [varchar](25) NULL,
+	[SB_FOB_VALUE] [varchar](25) NULL,
+	[SB_DRAWBACK_VALUE] [varchar](25) NULL,
+	[USER_ID] [varchar](30) NULL,
+	[DATE_TIME] [datetime] NULL,
+	[STATUS] [varchar](1) NULL,
+	[BRANCH_CODE] [varchar](20) NULL,
+	[YEAR] [varchar](9) NULL,
+	[WORKING_PERIOD] [varchar](30) NULL
+) ON [PRIMARY]
+
+GO
+create  Function [dbo].[IMPORT_PRN_SEARCH] (@JOBNO as varchar(50),@char as varchar(50)
+
+)
+Returns varchar(50)
+As
+begin
+
+if(@char='.prn')
+begin
+set @JOBNO=''
+
+end
+else
+
+begin
+set @JOBNO=@JOBNO
+
+end
+
+RETURN @JOBNO
+
+
+End
+
+
+ALTER PROCEDURE [dbo].[MAIL_CONTENTS_INSERT_UPDATE]
+	 @Mode				VARCHAR(100) = NULL
+	,@MessageDetails	XML = NULL	
+	,@Emailid			VARCHAR(300) = NULL
+	,@COMPANY_ID			VARCHAR(30) = NULL
+	
+	,@CUSTOM_HOUSE		VARCHAR(30) = NULL
+	,@FILE_FORMAT		VARCHAR(30) = NULL
+	,@WORKING_PERIOD  		VARCHAR(50) = NULL
+,@totalRows int OUTPUT
+		,@ErrorMsg			nvarchar(max) output
+AS
+
+begin try
+	begin transaction
+		set @ErrorMsg=''
+		
+		declare @JOB_NO varchar(30),@JOB_DATE varchar(30),@a varchar(50)
+		if((select isnull(count(r.Id),0) from EmailsRead r) = 0)
+		begin
+		        dbcc checkident(EmailsRead,reseed,1)
+		end
+	IF(@Mode = 'STORE MAIL CONTENTS')
+		BEGIN
+		
+		 --delete from EmailsRead
+  --dbcc checkident(EmailsRead,reseed,1)
+  
+	with myTable(COMPANY_ID,CUSTOM_HOUSE_ID,MailDate,JOB_NO,JOB_DATE,BE_NO,BE_DATE,SB_NO,SB_DATE,IMP_TOTAL_DUTY_VALUE,IMP_TOTAL_ASSBL_VALUE
+				 ,Emailid
+				,MailMessageId
+				,MailFrom
+				,MailSubject
+				,Mailbody
+				,IsAttachments)
+	as(
+	
+	SELECT	 
+			@COMPANY_ID
+			
+			,@CUSTOM_HOUSE
+			,ISNULL(msgObj.value('MailDate[1]','Datetime'),'01/01/1900') as MailDate
+		
+			,
+			(select CASE  WHEN ISNULL((select top 1 ISNULL(a.JOBNO,'') from IGM_DETAILS a 
+			where a.IGM_MAWB_MBL=ISNULL(msgObj.value('JOB_NO[1]','VARCHAR(30)'),'')),'')=''   --or
+					
+			--a.IGM_HAWB_HBLNO=ISNULL(msgObj.value('JOB_DATE[1]','VARCHAR(30)'),'')),'')=''
+			 THEN   dbo.IMPORT_PRN_SEARCH(msgObj.value('JOB_NO[1]','VARCHAR(30)'),@FILE_FORMAT)
+			  else (select top 1 ISNULL(a.JOBNO,'') from IGM_DETAILS a 
+			where a.IGM_MAWB_MBL=ISNULL(msgObj.value('JOB_NO[1]','VARCHAR(30)'),''))   --or
+					
+			--a.IGM_HAWB_HBLNO=ISNULL(msgObj.value('JOB_DATE[1]','VARCHAR(30)'),''))
+			   END
+			 as JOB_NO)
+			 
+			 ,(select CASE  WHEN ISNULL((select top 1 ISNULL(Convert(varchar(11),IGM_JOBDATE, 103),'') from IGM_DETAILS a
+			where a.IGM_MAWB_MBL=ISNULL(msgObj.value('JOB_NO[1]','VARCHAR(30)'),'')),'')=''   --or
+					
+			--a.IGM_HAWB_HBLNO=ISNULL(msgObj.value('JOB_DATE[1]','VARCHAR(30)'),'')),'')=''
+			 THEN   dbo.IMPORT_PRN_SEARCH(msgObj.value('JOB_DATE[1]','VARCHAR(30)'),@FILE_FORMAT) 
+			  else (select top 1 ISNULL(Convert(varchar(11),IGM_JOBDATE, 103),'') from IGM_DETAILS a
+			where a.IGM_MAWB_MBL=ISNULL(msgObj.value('JOB_NO[1]','VARCHAR(30)'),''))   --or
+					
+			--a.IGM_HAWB_HBLNO=ISNULL(msgObj.value('JOB_DATE[1]','VARCHAR(30)'),''))
+			 END
+			 as JOB_DATE)
+					
+			
+			--,(select  ISNULL(a.JOBNO,'') from IGM_DETAILS a 
+			--where a.IGM_MAWB_MBL=ISNULL(msgObj.value('JOB_NO[1]','VARCHAR(30)'),'')   and
+					
+			--a.IGM_HAWB_HBLNO=ISNULL(msgObj.value('JOB_DATE[1]','VARCHAR(30)'),'')) as JOB_NO
+					
+			--,(select ISNULL(Convert(varchar(11),IGM_JOBDATE, 103),'') from IGM_DETAILS 
+			--where IGM_MAWB_MBL=ISNULL(msgObj.value('JOB_NO[1]','VARCHAR(30)'),'') 
+			--and IGM_HAWB_HBLNO=ISNULL(msgObj.value('JOB_DATE[1]','VARCHAR(30)'),'')) as JOB_DATE
+					
+					--,msgObj.value('JOB_DATE[1]','VARCHAR(10)') as JOB_DATE
+					,ISNULL(msgObj.value('BE_NO[1]','VARCHAR(30)'),'') as BE_NO
+					,ISNULL(msgObj.value('BE_DATE[1]','VARCHAR(15)'),'') as BE_DATE
+					,ISNULL(msgObj.value('SB_NO[1]','VARCHAR(30)'),'') as SB_NO
+					,ISNULL(msgObj.value('SB_DATE[1]','VARCHAR(15)'),'') as SB_DATE
+					,ISNULL(msgObj.value('IMP_TOTAL_DUTY_VALUE[1]','VARCHAR(30)'),'') as IMP_TOTAL_DUTY_VALUE
+					,ISNULL(msgObj.value('IMP_TOTAL_ASSBL_VALUE[1]','VARCHAR(30)'),'') as IMP_TOTAL_ASSBL_VALUE
+			
+			,@Emailid
+					,msgObj.value('MessageId[1]','BIGINT') as MailMessageId
+					,ISNULL(msgObj.value('MailFrom[1]','VARCHAR(200)'),'') as MailFrom	
+					,ISNULL(msgObj.value('MailSubject[1]','VARCHAR(300)'),'') as MailSubject
+					,ISNULL(msgObj.value('Body[1]','VARCHAR(MAX)'),'') as Mailbody									
+					,ISNULL(msgObj.value('IsAttachments[1]','BIT'),0) as IsAttachments
+					
+			FROM	@MessageDetails.nodes('//MessageDetails') as R (msgObj))
+
+
+INSERT  EmailsRead
+        (COMPANY_ID,CUSTOM_HOUSE_ID,MailDate,JOB_NO,JOB_DATE,BE_NO,BE_DATE,SB_NO,SB_DATE,IMP_TOTAL_DUTY_VALUE,IMP_TOTAL_ASSBL_VALUE
+				 ,Emailid
+				,MailMessageId
+				,MailFrom
+				,MailSubject
+				,Mailbody
+				,IsAttachments)
+SELECT  COMPANY_ID,CUSTOM_HOUSE_ID,MailDate,JOB_NO,JOB_DATE,BE_NO,BE_DATE,SB_NO,
+SB_DATE,IMP_TOTAL_DUTY_VALUE,IMP_TOTAL_ASSBL_VALUE
+				 ,Emailid
+				,MailMessageId
+				,MailFrom
+				,MailSubject
+				,Mailbody
+				,IsAttachments
+FROM    myTable temp
+WHERE   NOT EXISTS
+        (
+        SELECT  *
+        FROM    EmailsRead
+        WHERE   MailDate= temp.MailDate and 
+				JOB_NO=temp.JOB_NO and 
+				JOB_DATE=temp.JOB_DATE
+        )
+        
+        --searching problem : values are empty
+        UPDATE EmailsRead SET JOB_NO=ISNULL(JOB_NO,''),JOB_DATE=ISNULL(JOB_DATE,'')
+    ---------------------------------------------------------------IMPORT INSERT BE ENTRY-----------------------------------------------
+    ;
+			with temp_BE_Entry(BE_ID,BE_JOBNO,BE_JOBDATE,BE_NO_OF_PACKAGES,BE_PACKAGE_CODE,BE_WEIGHT,BE_UNIT_CODE,
+			BE_TRANSPORT_MODE,BE_TYPE,BE_NO,BE_DATE,BE_ASSESSABLE_VALUE,BE_DUTY,BE_INBOND_NO,BE_INBOND_DATE,
+			BE_WAREHOUSE_CUSTOMS,BE_WAREHOUSE_CUSTOMS_CODE,USER_ID,DATE_TIME,STATUS,BRANCH_CODE,YEAR,
+			WORKING_PERIOD) 
+			as (
+			SELECT  
+			id,
+			(SELECT  GEN.JOBNO
+        FROM   GENERAL_DETAILS GEN
+        WHERE  GEN.JOBNO=a.JOB_NO and GEN.JOBDATE=CONVERT(datetime, ISNULL(a.JOB_DATE,'01/01/1900'),103 )),
+				(SELECT  ISNULL(GEN.JOBDATE,'01/01/1900')
+        FROM   GENERAL_DETAILS GEN
+        WHERE GEN.JOBNO=a.JOB_NO and GEN.JOBDATE=CONVERT(datetime, ISNULL(a.JOB_DATE,'01/01/1900'),103 )),
+			--CONVERT(datetime,isnull(JOB_DATE,'01/01/1900'),103 ),
+			IGM.IGM_NOOFPACKAGE,
+	IGM.IGM_PACKAGETYPE,
+	IGM.IGM_GROSSWEIGHT,
+	IGM.IGM_TYPEOFWEIGHT,
+	GEN.TRANSPORT_MODE,
+	GEN.BE_TYPE,
+			BE_NO,
+			CONVERT(datetime,isnull(BE_DATE,'01/01/1900'),103 ),
+			--,CONVERT(datetime,'01/01/1900')
+			IMP_TOTAL_ASSBL_VALUE,
+			IMP_TOTAL_DUTY_VALUE,
+			'',
+			CONVERT(datetime,'01/01/1900'),
+			GEN.WAREHOUSE_NAME,
+			GEN.WAREHOUSE_CODE,
+			'',
+			GETDATE(),
+			'N',
+			'',
+			'',
+			@WORKING_PERIOD from  EmailsRead a,GENERAL_DETAILS GEN,IGM_DETAILS IGM
+			where
+			
+			GEN.JOBNO=a.JOB_NO and 
+				GEN.JOBDATE=CONVERT(datetime, ISNULL(a.JOB_DATE,'01/01/1900'),103) and
+				IGM.JOBNO=a.JOB_NO and IGM.IGM_JOBDATE=CONVERT(datetime, ISNULL(a.JOB_DATE,'01/01/1900'),103)
+				and
+				a.BE_NO IS NOT NULL and a.BE_DATE IS NOT NULL
+				)
+           
+           
+    --WHERE   EXISTS
+    --    (
+    --      SELECT  GEN.*,IGM.*
+    --    FROM   GENERAL_DETAILS GEN,IGM_DETAILS IGM
+    --    WHERE   
+				----gen.JOBNO=ISNULL(a.JOB_NO,'') and 
+				----gen.JOBDATE=CONVERT(datetime, ISNULL(a.JOB_DATE,'01/01/1900'),103 )-- and 
+				
+				--GEN.JOBNO=a.JOB_NO and 
+				--GEN.JOBDATE=CONVERT(datetime, ISNULL(a.JOB_DATE,'01/01/1900'),103 ) or
+				--GEN.JOBNO=IGM.JOBNO 
+				
+    --    ))
+       
+       
+         INSERT  BE_ENTRY
+           --(ANNEX_AIR_ID,
+           (BE_ID,
+			BE_JOBNO,
+			BE_JOBDATE,
+			BE_NO_OF_PACKAGES,
+			BE_PACKAGE_CODE,
+			BE_WEIGHT,
+			BE_UNIT_CODE,
+			BE_TRANSPORT_MODE,
+			BE_TYPE,
+			BE_NO,
+			BE_DATE,
+			BE_ASSESSABLE_VALUE,
+			BE_DUTY,
+			BE_INBOND_NO,
+			BE_INBOND_DATE,
+			BE_WAREHOUSE_CUSTOMS,
+			BE_WAREHOUSE_CUSTOMS_CODE,
+			USER_ID,
+			DATE_TIME,
+			STATUS,
+			BRANCH_CODE,
+			YEAR,
+			WORKING_PERIOD)SELECT  
+			BE_ID
+			,BE_JOBNO
+			,CONVERT(datetime,isnull(BE_JOBDATE,'01/01/1900'),103 )
+			
+	,a.BE_NO_OF_PACKAGES
+	,a.BE_PACKAGE_CODE
+	,a.BE_WEIGHT
+	,a.BE_UNIT_CODE
+	,a.BE_TRANSPORT_MODE
+	,a.BE_TYPE
+	
+			,BE_NO
+			,CONVERT(datetime,isnull(BE_DATE,'01/01/1900'),103 )
+			--,CONVERT(datetime,'01/01/1900')
+			,BE_ASSESSABLE_VALUE
+			,BE_DUTY
+			,''
+			,CONVERT(datetime,'01/01/1900')
+			,a.BE_WAREHOUSE_CUSTOMS
+			,a.BE_WAREHOUSE_CUSTOMS_CODE
+			,''
+			,GETDATE()
+			,'N'
+			,''
+			,''
+			,@WORKING_PERIOD from  temp_BE_Entry a
+           
+    WHERE  not EXISTS
+        (
+        SELECT  *
+        FROM   BE_Entry b
+        WHERE   
+				b.BE_JOBNO=ISNULL(a.BE_JOBNO,'') and 
+				b.BE_JOBDATE=CONVERT(datetime, ISNULL(a.BE_JOBDATE,'01/01/1900'),103 ) and 
+				b.BE_NO=ISNULL(a.BE_NO,'') and 
+				b.BE_DATE=CONVERT(datetime, ISNULL(a.BE_DATE,'01/01/1900'),103 )
+				
+				
+        )
+        
+--------UPDATE TOTAL ASSL.VALUE AND DUTY VALUE FROM PRN FILE FORMAT WHEN BENO AND JOBNO JOBDATE ARE SAME(UPDATED AFTER ACK FILE FORMAT)--------------
+   ;
+   if(@FILE_FORMAT='.prn')
+   begin
+			with update_BE_Entry(BE_JOBNO,BE_JOBDATE,BE_NO,BE_DATE,BE_ASSESSABLE_VALUE,BE_DUTY) 
+			as (
+			SELECT  
+			
+			(SELECT  GEN.JOBNO
+        FROM   GENERAL_DETAILS GEN
+        WHERE  GEN.JOBNO=a.JOB_NO and GEN.JOBDATE=CONVERT(datetime, ISNULL(a.JOB_DATE,'01/01/1900'),103 )),
+				(SELECT  ISNULL(GEN.JOBDATE,'01/01/1900')
+        FROM   GENERAL_DETAILS GEN
+        WHERE GEN.JOBNO=a.JOB_NO and GEN.JOBDATE=CONVERT(datetime, ISNULL(a.JOB_DATE,'01/01/1900'),103 )),
+			
+			BE_NO,
+			CONVERT(datetime,isnull(BE_DATE,'01/01/1900'),103 ),
+			
+			IMP_TOTAL_ASSBL_VALUE,
+			IMP_TOTAL_DUTY_VALUE
+			 from  EmailsRead a,GENERAL_DETAILS GEN,IGM_DETAILS IGM
+			where
+			
+			GEN.JOBNO=a.JOB_NO and 
+				GEN.JOBDATE=CONVERT(datetime, ISNULL(a.JOB_DATE,'01/01/1900'),103) and
+				IGM.JOBNO=a.JOB_NO and IGM.IGM_JOBDATE=CONVERT(datetime, ISNULL(a.JOB_DATE,'01/01/1900'),103)
+				and
+				a.BE_NO IS NOT NULL and a.BE_DATE IS NOT NULL
+				)
+   update  b set
+         			
+			b.BE_ASSESSABLE_VALUE=a.BE_ASSESSABLE_VALUE
+			,b.BE_DUTY=a.BE_DUTY from  BE_ENTRY b,	update_BE_Entry a
+			where b.BE_JOBNO=a.BE_JOBNO and
+			b.BE_JOBDATE=a.BE_JOBDATE and
+			b.BE_NO=a.BE_NO and
+			b.BE_DATE=a.BE_DATE 
+	end
+--------UPDATE TOTAL ASSL.VALUE AND DUTY VALUE FROM PRN FILE FORMAT WHEN BENO AND JOBNO JOBDATE ARE SAME(UPDATED AFTER ACK FILE FORMAT)--------------
+ 
+    ---------------------------------------------------------------EXPORT INSERT  SB ENTRY-----------------------------------------------
+    ;
+			with temp_SB_Entry(SB_ID,
+			SB_JOBNO,
+			SB_JOBDATE,
+			SB_NO,
+			SB_DATE,
+			SB_PMV_VALUE,
+			SB_FOB_VALUE,
+			SB_DRAWBACK_VALUE,
+			
+			USER_ID,
+			DATE_TIME,
+			STATUS,
+			BRANCH_CODE,
+			YEAR,
+			WORKING_PERIOD) 
+			as (
+			SELECT  
+			id,
+			(SELECT  GEN.JOBNO
+        FROM   EXPORT_GENERAL_DETAILS GEN
+        WHERE  GEN.JOBNO=a.JOB_NO and GEN.JOBDATE=CONVERT(datetime, ISNULL(a.JOB_DATE,'01/01/1900'),103 )),
+				(SELECT  ISNULL(GEN.JOBDATE,'01/01/1900')
+        FROM   EXPORT_GENERAL_DETAILS GEN
+        WHERE GEN.JOBNO=a.JOB_NO and GEN.JOBDATE=CONVERT(datetime, ISNULL(a.JOB_DATE,'01/01/1900'),103 )),
+			--CONVERT(datetime,isnull(JOB_DATE,'01/01/1900'),103 ),
+			
+			SB_NO,
+			CONVERT(datetime,isnull(SB_DATE,'01/01/1900'),103 ),
+			'',
+			'',
+			'',
+			'',
+			GETDATE(),
+			'N',
+			'',
+			'',
+			@WORKING_PERIOD from  EmailsRead a,EXPORT_GENERAL_DETAILS GEN
+			where
+			
+			GEN.JOBNO=a.JOB_NO and 
+				GEN.JOBDATE=CONVERT(datetime, ISNULL(a.JOB_DATE,'01/01/1900'),103) and
+				a.SB_NO IS NOT NULL and a.SB_DATE IS NOT NULL
+				) 
+				
+			INSERT INTO EXPORT_SB_ENTRY
+           --(ANNEX_AIR_ID,
+           (SB_ID,
+			SB_JOBNO,
+			SB_JOBDATE,
+			SB_NO,
+			SB_DATE,
+			--SB_PMV_VALUE,
+			--SB_FOB_VALUE,
+			--SB_DRAWBACK_VALUE,
+			
+			USER_ID,
+			DATE_TIME,
+			STATUS,
+			BRANCH_CODE,
+			YEAR,
+			WORKING_PERIOD)
+			SELECT  SB_ID
+			,SB_JOBNO
+			,CONVERT(datetime,isnull(SB_JOBDATE,'01/01/1900'),103)
+			
+			,SB_NO
+			,CONVERT(datetime,isnull(SB_DATE,'01/01/1900'),103)
+			--,CONVERT(datetime,'01/01/1900')
+			--,''
+			--,''
+			--,''
+			
+			,''
+			,GETDATE()
+			,'N'
+			,''
+			,''
+			,@WORKING_PERIOD from  temp_SB_Entry b
+           
+    WHERE    NOT EXISTS
+        (
+        SELECT  b.*
+        FROM    EXPORT_SB_ENTRY a
+        WHERE   
+				a.SB_JOBNO=ISNULL(b.SB_JOBNO,'') and 
+				a.SB_JOBDATE=CONVERT(datetime, ISNULL(b.SB_JOBDATE,'01/01/1900'),103 ) and 
+				
+				
+				a.SB_NO=ISNULL(b.SB_NO,'') and 
+				a.SB_DATE=CONVERT(datetime, ISNULL(b.SB_DATE,'01/01/1900'),103)
+        
+        )
+        -- -- ---------------------------------------------------------------IMPORT ITEM DETAILS UPDATE-----------------------------------------------
+ 
+        --update ITEM  set ITEM.ASSESSABLE_VALUE=BE.BE_ASSESSABLE_VALUE ,ITEM.DUTY_VALUE=BE.BE_DUTY
+        --from ITEM_PRODUCT_DETAILS ITEM,BE_ENTRY BE
+        --where 
+        --JOBNO=BE.BE_JOBNO and BE.BE_NO IS NOT NULL and BE.BE_DATE IS NOT NULL
+        -- -- ---------------------------------------------------------------IMPORT ITEM DETAILS UPDATE-----------------------------------------------
+ 
+   -- ---------------------------------------------------------------EXPORT INSERT  SB ENTRY-----------------------------------------------
+        
+				select distinct * from EmailsRead where  COMPANY_ID = @COMPANY_ID and CUSTOM_HOUSE_ID=@CUSTOM_HOUSE order by MailDate desc
+				SELECT @totalRows = count(ID) FROM EmailsRead 
+where  COMPANY_ID = @COMPANY_ID and CUSTOM_HOUSE_ID=@CUSTOM_HOUSE
+end
+commit
+end try
+begin catch
+rollback transaction
+	set @ErrorMsg=error_message()
+	
+end catch
+
+ALTER PROCEDURE  [dbo].[SP_GENERAL_DETAILS_SEARCH_SELECT] 
+	-- Add the parameters for the stored procedure here
+	@JOBID	varchar(35),
+	@JOBNO varchar(35),
+
+	@IMPORTER_NAME varchar(40),
+	@TRANSPORT_MODE varchar(10),
+	@CUSTOMS_HOUSE varchar(50),
+	
+	@Working_Period varchar(30),
+	@name 	varchar(300),
+	
+	@Mstatus  int output,
+	@startRowIndex int,
+@maximumRows int,
+@totalRows int OUTPUT,
+	@ErrorMsg nvarchar(max) output
+AS
+begin try
+	begin transaction
+		set @ErrorMsg=''
+		--declare @jobid as bigint
+
+DECLARE @first_id int, @startRow int
+
+--SET @startRowIndex =  (@startRowIndex - 1)  * @maximumRows
+--if(@startRowIndex=1)
+--SET @startRowIndex =  (@startRowIndex* @maximumRows) + (@maximumRows-10)
+--else
+--SET @startRowIndex =  @startRowIndex -- - 1)--  * @maximumRows
+--SET @startRowIndex =  (@startRowIndex-10) -- - 1)--  * @maximumRows
+if(@IMPORTER_NAME ='' or @TRANSPORT_MODE ='' or @CUSTOMS_HOUSE ='' or @JOBNO ='')
+begin
+IF(@startRowIndex = 100000000)
+begin
+SELECT @startRowIndex = count(JOBID) FROM GENERAL_DETAILS where WORKINGPERIOD=@Working_Period 
+--SET @startRowIndex = (@startRowIndex+1)
+if(@startRowIndex>=23)
+SET @startRowIndex = (@startRowIndex+1)-23
+else
+begin
+--SET @startRowIndex = 15-(@startRowIndex+1)
+set @maximumRows=@startRowIndex
+set @startRowIndex=1
+end
+end
+else if(@startRowIndex = 100000001)
+SET @startRowIndex = 1
+--SET @startRowIndex =  ((@startRowIndex+10) % 10)  * @maximumRows
+end
+else
+begin
+SET @startRowIndex =  (@startRowIndex - 1)  * @maximumRows
+
+IF @startRowIndex = 0
+SET @startRowIndex = 1
+end
+
+if(@name='select_con')
+	begin
+SET ROWCOUNT @startRowIndex
+SELECT @first_id = JOBID FROM GENERAL_DETAILS 
+	where JOBNO like @JOBNO+ '%' and  IMPORTER_NAME like @IMPORTER_NAME+'%' and TRANSPORT_MODE 
+	like @TRANSPORT_MODE+'%' and CUSTOMS_HOUSE like @CUSTOMS_HOUSE+'%'  and  WORKINGPERIOD=@Working_Period ORDER BY JOBID   
+
+PRINT @first_id
+
+SET ROWCOUNT @maximumRows
+SELECT JOBID,JOBNO,TRANSPORT_MODE,CUSTOMS_HOUSE,IMPORTER_NAME,
+Convert(varchar(11),JOBDATE, 103)JOBDATE,BE.BE_NO,Convert(varchar(11),BE.BE_DATE, 103)BE_DATE,BE.BE_ASSESSABLE_VALUE,BE.BE_DUTY
+ FROM GENERAL_DETAILS  left join BE_ENTRY BE on BE.BE_JOBNO=JOBNO and BE.BE_JOBDATE=JOBDATE
+	where JOBNO like @JOBNO+ '%' and  IMPORTER_NAME like @IMPORTER_NAME+'%' and TRANSPORT_MODE 
+	like @TRANSPORT_MODE+'%' and CUSTOMS_HOUSE like @CUSTOMS_HOUSE+'%'  and  WORKINGPERIOD=@Working_Period and
+	
+JOBID >= @first_id
+ORDER BY JOBID 
+ 
+SET ROWCOUNT 0
+
+-- GEt the total rows
+
+SELECT @totalRows = count(JOBID) FROM GENERAL_DETAILS 
+	where JOBNO like @JOBNO+ '%' and  IMPORTER_NAME like @IMPORTER_NAME+'%' and TRANSPORT_MODE 
+	like @TRANSPORT_MODE+'%' and CUSTOMS_HOUSE like @CUSTOMS_HOUSE+'%'  and  WORKINGPERIOD=@Working_Period 
+
+end
+
+
+
+else if(@name='select_Id')
+	begin
+	SELECT Convert(varchar(11),JOBDATE, 103)JOBDATE,Convert(varchar(11),EXBOND_INBOND_BE_DATE, 103)EXBOND_INBOND_BE_DATE,
+	Convert(varchar(11),EXBOND_BOND_DATE, 103)EXBOND_BOND_DATE,
+	BE.BE_NO,Convert(varchar(11),BE.BE_DATE, 103)BE_DATE,BE.BE_ASSESSABLE_VALUE,BE.BE_DUTY,*
+ FROM GENERAL_DETAILS  left join BE_ENTRY BE on BE.BE_JOBNO=JOBNO and BE.BE_JOBDATE=JOBDATE
+	where JOBID=@JOBID  and  WORKINGPERIOD=@Working_Period  ORDER BY JOBID 
+end
+else if(@name='Exbond_select_Id')
+	begin
+	SELECT Convert(varchar(11),JOBDATE, 103)JOBDATE,Convert(varchar(11),EXBOND_INBOND_BE_DATE, 103)EXBOND_INBOND_BE_DATE,
+	Convert(varchar(11),EXBOND_BOND_DATE, 103)EXBOND_BOND_DATE,* FROM GENERAL_DETAILS 
+	where JOBNO=@JOBID  and  WORKINGPERIOD=@Working_Period  ORDER BY JOBID 
+end
+
+else if(@name='delete')
+	begin
+
+delete from BOND_DETAILS where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period
+delete from CERTIFICATE_DETAILS where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period
+delete from CONTAINER_DETAILS where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period
+delete from IGM_DETAILS where JOBNO=@JOBNO and IGM_WORKING_PERIOD=@Working_Period
+delete from INVOICE_DETAILS where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period
+delete from ITEM_PRODUCT_DETAILS where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period
+delete from LICENSE_DETAILS where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period
+delete from MULTIPLE_INVOICE where MULTIPLE_JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period
+delete from OTHER_DETAILS where JOBNO=@JOBNO and OTHER_WORKING_PERIOD=@Working_Period
+delete from OTHER_DUTY_DETAILS where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period
+delete from RE_IMPORT_DETAILS where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period
+delete from SUPPLIER_DETAILS where JOBNO=@JOBNO and SUPPLIER_WORKING_PERIOD=@Working_Period
+delete from SVB_DETAILS where JOBNO=@JOBNO and SVB_WORKING_PERIOD=@Working_Period
+delete from BE_ENTRY where BE_JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period
+
+delete from GENERAL_DETAILS where JOBNO=@JOBNO and WORKINGPERIOD=@Working_Period
+	select @Mstatus=1
+end
+
+commit
+end try
+begin catch
+rollback transaction
+	set @ErrorMsg=error_message()
+	set @MStatus=0
+end catch
+ALTER PROCEDURE  [dbo].[SP_EXPORT_GENERAL_DETAILS_SEARCH_SELECT] 
+	-- Add the parameters for the stored procedure here
+	@JOBID	varchar(35),
+	@JOBNO varchar(35),
+
+	@EXPORTER_NAME varchar(40),
+	@TRANSPORT_MODE varchar(10),
+	@CUSTOMS_HOUSE varchar(50),
+	
+	@Working_Period varchar(30),
+	@name 	varchar(300),
+	
+	@Mstatus  int output,
+	@startRowIndex int,
+    @maximumRows int,
+    @totalRows int OUTPUT,
+	@ErrorMsg nvarchar(max) output
+AS
+begin try
+	begin transaction
+		set @ErrorMsg=''
+		--declare @jobid as bigint
+
+DECLARE @first_id int, @startRow int
+
+--SET @startRowIndex =  (@startRowIndex - 1)  * @maximumRows
+
+--IF @startRowIndex = 0
+--SET @startRowIndex = 1
+if(@EXPORTER_NAME ='' or @TRANSPORT_MODE ='' or @CUSTOMS_HOUSE ='' or @JOBNO ='')
+begin
+IF(@startRowIndex = 100000000)
+begin
+SELECT @startRowIndex = count(JOBID) FROM EXPORT_GENERAL_DETAILS 
+--SET @startRowIndex = (@startRowIndex+1)-15
+if(@startRowIndex>=23)
+SET @startRowIndex = (@startRowIndex+1)-23
+else
+begin
+--SET @startRowIndex = 15-(@startRowIndex+1)
+set @maximumRows=@startRowIndex
+set @startRowIndex=1
+end
+
+end
+else if(@startRowIndex = 100000001)
+SET @startRowIndex = 1
+--SET @startRowIndex =  ((@startRowIndex+10) % 10)  * @maximumRows
+end
+else
+begin
+SET @startRowIndex =  (@startRowIndex - 1)  * @maximumRows
+
+IF @startRowIndex = 0
+SET @startRowIndex = 1
+end
+
+if(@name='select_con')
+	begin
+SET ROWCOUNT @startRowIndex
+SELECT @first_id = JOBID FROM EXPORT_GENERAL_DETAILS 
+	where JOBNO like @JOBNO+ '%' and  EXPORTER_NAME like @EXPORTER_NAME+'%' and TRANSPORT_MODE 
+	like @TRANSPORT_MODE+'%' and CUSTOMS_HOUSE like @CUSTOMS_HOUSE+'%'  and  WORKINGPERIOD=@Working_Period ORDER BY JOBID
+
+PRINT @first_id
+
+SET ROWCOUNT @maximumRows
+SELECT JOBID,JOBNO,TRANSPORT_MODE,CUSTOMS_HOUSE,EXPORTER_NAME, 
+Convert(varchar(11),JOBDATE, 103)JOBDATE,SB.SB_NO,Convert(varchar(11),SB.SB_DATE, 103)SB_DATE
+ FROM EXPORT_GENERAL_DETAILS  left join EXPORT_SB_ENTRY SB on SB.SB_JOBNO=JOBNO and SB.SB_JOBDATE=JOBDATE
+
+	where JOBNO like @JOBNO+ '%' and  EXPORTER_NAME like @EXPORTER_NAME+'%' and TRANSPORT_MODE 
+	like @TRANSPORT_MODE+'%' and CUSTOMS_HOUSE like @CUSTOMS_HOUSE+'%'  and  WORKINGPERIOD=@Working_Period and
+JOBID >= @first_id
+ORDER BY JOBID 
+ 
+SET ROWCOUNT 0
+
+-- GEt the total rows
+
+SELECT @totalRows = COUNT(JOBID) FROM EXPORT_GENERAL_DETAILS 
+	where JOBNO like @JOBNO+ '%' and  EXPORTER_NAME like @EXPORTER_NAME+'%' and TRANSPORT_MODE 
+	like @TRANSPORT_MODE+'%' and CUSTOMS_HOUSE like @CUSTOMS_HOUSE+'%'  and  WORKINGPERIOD=@Working_Period
+
+end
+
+
+
+else if(@name='select_Id')
+	begin
+	SELECT Convert(varchar(11),JOBDATE, 103)JOBDATE,
+	       Convert(varchar(11),RBI_WAIVER_DATE, 103)RBI_WAIVER_DATE,SB.SB_NO,Convert(varchar(11),SB.SB_DATE, 103)SB_DATE,*
+ FROM EXPORT_GENERAL_DETAILS  left join EXPORT_SB_ENTRY SB on SB.SB_JOBNO=JOBNO and SB.SB_JOBDATE=JOBDATE
+	where JOBID=@JOBID  and  WORKINGPERIOD=@Working_Period  ORDER BY JOBID 
+end
+
+--else if(@name='select_bind')
+--	begin
+--	SELECT PRODUCT_IMPORT_ID,PRODUCT_DESCRIPTION,PRODUCT_CTH,PRODUCT_CETH,PRODUCT_RITC,PRODUCT_GENERAL_DESC,PRODUCT_CODE,PRODUCT_MANUFACTURER,PRODUCT_BRAND,PRODUCT_MODEL,PRODUCT_ACCESSORIES  FROM PRODUCT_IMPORT_MASTER where PRODUCT_WORKING_PERIOD=@Working_Period 
+--end
+else if(@name='delete')
+	begin
+
+delete from EXPORT_LICENSE_DETAILS where JOB_NO=@JOBNO and WORKING_PERIOD=@Working_Period
+delete from EXPORT_JOBBING where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period
+delete from EXPORT_DRAWBACK_DETAILS where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period
+delete from ANNEXURE_C1_DETAILS where ANNEX_JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period
+delete from EXPORT_ITEM_DETAILS where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period
+delete from EXPORT_SB_ENTRY where SB_JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period
+delete from EXPORT_INVOICE_DETAILS where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period
+delete from EXPORT_GENERAL_DETAILS where JOBNO=@JOBNO and WORKINGPERIOD=@Working_Period
+
+--delete from OTHER_DETAILS where JOBNO=@JOBNO and OTHER_WORKING_PERIOD=@Working_Period
+--delete from OTHER_DUTY_DETAILS where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period
+--delete from RE_IMPORT_DETAILS where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period
+--delete from SUPPLIER_DETAILS where JOBNO=@JOBNO and SUPPLIER_WORKING_PERIOD=@Working_Period
+--delete from SVB_DETAILS where JOBNO=@JOBNO and SVB_WORKING_PERIOD=@Working_Period
+
+--delete from GENERAL_DETAILS where JOBNO=@JOBNO and WORKINGPERIOD=@Working_Period
+	select @Mstatus=1
+end
+
+commit
+end try
+begin catch
+rollback transaction
+	set @ErrorMsg=error_message()
+	set @MStatus=0
+end catch
+
+ALTER PROCEDURE  [dbo].[IMPORT_JOB_STATEMENT_SEARCH_SELECT] 
+	-- Add the parameters for the stored procedure here
+	
+	@JOBNO varchar(35),
+	
+	@Working_Period varchar(30),
+	@name 	varchar(300),
+	
+	@Mstatus  int output,
+	
+	@ErrorMsg nvarchar(max) output
+AS
+begin try
+	begin transaction
+		set @ErrorMsg=''
+
+
+if(@name='select_All_JobNo')
+	begin
+
+--DECLARE @TMPINVOICE TABLE
+--(
+--	JOBNO INT,INVSLNO INT,INVNO INT,INVVALUE INT,TOTAL_ITEM_QTY NUMERIC(14,0)
+--)
+--INSERT INTO @TMPINVOICE
+--select  in3.JOBNO,in3.INVOICE_SLNO ,in3.INVOICE_NO,in3.INVOICE_VALUE,SUM(Convert(NUMERIC(14,0),it4.ITEM_QTY)) as TOTAL_ITEM_QTY from INVOICE_DETAILS in3 left join ITEM_PRODUCT_DETAILS it4 on in3.jobno =it4.jobno and in3.INVOICE_NO =it4.INVOICE_NO 
+--group by in3.JOBNO,in3.INVOICE_SLNO,in3.INVOICE_NO,in3.INVOICE_VALUE
+--DECLARE  @TMP TABLE
+--(
+-- JOBNO INT,
+-- JOBDATE DATETIME,TRANSPORT_MODE VARCHAR(10),IMPORTER_NAME VARCHAR(10),IGMSLNO INT,IGMNO INT,[NO OF IGM] VARCHAR(20),OTHER1 VARCHAR(50)
+--)
+--INSERT INTO @TMP
+--SELECT A.JOBNO,A.JOBDATE,A.TRANSPORT_MODE,A.IMPORTER_NAME,IG2.IGM_SLNO,IG2.IGM_NO,A.[NO OF IGM],IG2.IGM_MAWB_MBL 
+--FROM 
+--(
+--	SELECT GE1.JOBNO, GE1.JOBDATE,GE1.TRANSPORT_MODE,GE1.IMPORTER_NAME,
+--	CASE WHEN COUNT(IG2.JOBNO) = 0 THEN 'NO IGM' ELSE CONVERT(VARCHAR(20),COUNT(IG2.JOBNO)) + '   IGM' END AS 'NO OF IGM'
+--	FROM GENERAL_DETAILS GE1 INNER JOIN IGM_DETAILS IG2 ON IG2.JOBNO=GE1.JOBNO
+--	GROUP BY GE1.JOBNO, GE1.JOBDATE,GE1.TRANSPORT_MODE,GE1.IMPORTER_NAME,IG2.JOBNO
+--)A
+--INNER JOIN IGM_DETAILS IG2 On IG2.JOBNO=A.JOBNO
+--WHERE IG2.IGM_SLNO=1
+--SELECT CASE  WHEN INV.INVSLNO > 1 THEN NULL ELSE T1.JOBNO END AS JOBNO,
+--CASE  WHEN INV.INVSLNO > 1 THEN NULL ELSE CONVERT(VARCHAR,T1.JOBDATE,103) END AS JOBDATE,
+--CASE  WHEN INV.INVSLNO > 1 THEN NULL ELSE T1.IMPORTER_NAME END AS IMPORTER_NAME,
+--CASE  WHEN INV.INVSLNO > 1 THEN NULL ELSE T1.TRANSPORT_MODE END AS TRANSPORT_MODE,
+--CASE  WHEN INV.INVSLNO > 1 THEN NULL ELSE T1.IGMSLNO END AS IGMSLNO,
+--CASE  WHEN INV.INVSLNO > 1 THEN NULL ELSE T1.IGMNO END AS IGMNO,
+--CASE  WHEN INV.INVSLNO > 1 THEN NULL ELSE T1.[NO OF IGM]   END AS [NO OF IGM],
+--INV.* FROM @TMP T1
+--LEFT OUTER JOIN @TMPINVOICE INV ON INV.JOBNO=T1.JOBNO
+
+
+
+DECLARE @TMPINVOICE TABLE
+(
+	JOBNO INT,
+	INVSLNO INT,
+	INVNO varchar(17),
+	INVOICE_DATE datetime,
+	OTHER_PURCHASE_ORDER varchar(20),
+	OTHER_PURCHASE_ORDER_DATE datetime,	
+	SUPPLIER_NAME varchar(50),
+	INVVALUE  NUMERIC(14,2),
+	TERMS varchar(3),
+	INVOICE_CURRENCY varchar(3),
+	INVOICE_EXRATE varchar(14),
+	MIS_FREIGHT_CHARGES varchar(14),
+	MIS_FREIGHT_CURRENCY varchar(3),
+	MIS_INSURANCE_CHARGES varchar(14),
+	MIS_INSURANCE_CURRENCY varchar(3),
+	
+	TOTAL_ITEM_QTY NUMERIC(14,2),
+	ITEM_UNIT_PRICE varchar(17),
+	ITEM_TOTAL_AMOUNT numeric(15,2),
+	ASSESSABLE_VALUE varchar(30),
+	DUTY_VALUE varchar(30),
+	CIF_VALUE varchar(30),
+	CVD_VALUE varchar(30)
+	
+)
+INSERT INTO @TMPINVOICE
+
+select  in3.JOBNO,in3.INVOICE_SLNO ,in3.INVOICE_NO,in3.INVOICE_DATE,
+in3.OTHER_PURCHASE_ORDER,in3.OTHER_PURCHASE_ORDER_DATE,in3.SUPPLIER_NAME,
+in3.INVOICE_VALUE,in3.TERMS,in3.INVOICE_CURRENCY,in3.INVOICE_EXRATE,in3.MIS_FREIGHT_CHARGES,in3.MIS_FREIGHT_CURRENCY,
+in3.MIS_INSURANCE_CHARGES,in3.MIS_INSURANCE_CURRENCY,
+SUM(Convert(NUMERIC(14,2),ISNULL(it4.ITEM_QTY,'0'))) as TOTAL_ITEM_QTY,
+SUM(Convert(NUMERIC(17,0),ISNULL(it4.ITEM_UNIT_PRICE,'0'))) as ITEM_UNIT_PRICE,
+SUM(Convert(NUMERIC(15,2),ISNULL(it4.ITEM_TOTAL_AMOUNT,'0'))) as ITEM_TOTAL_AMOUNT,
+--SUM(Convert(NUMERIC(17,2),ISNULL(it4.ASSESSABLE_VALUE,'0'))) as ASSESSABLE_VALUE,
+--SUM(Convert(NUMERIC(17,2),ISNULL(it4.DUTY_VALUE,'0'))) as DUTY_VALUE,
+--SUM(Convert(NUMERIC(17,2),ISNULL(it4.CIF_VALUE,'0'))) as CIF_VALUE
+--SUM(Convert(NUMERIC(17,2),ISNULL(it4.CVD_VALUE,'0'))) as CVD_VALUE
+
+--CASE  WHEN SUM(Convert(NUMERIC(17,2),ISNULL(it4.CIF_VALUE,''))) =''
+--THEN   '0' else SUM(Convert(NUMERIC(17,2),ISNULL(it4.CIF_VALUE,''))) end,
+
+--CASE  WHEN SUM(Convert(NUMERIC(17,2),ISNULL(it4.CVD_VALUE,''))) =''
+--THEN   '0' else SUM(Convert(NUMERIC(17,2),ISNULL(it4.CVD_VALUE,''))) end,
+
+--CASE  WHEN SUM(Convert(NUMERIC(17,2),ISNULL(BE.BE_ASSESSABLE_VALUE,''))) =''
+--THEN  SUM(Convert(NUMERIC(17,2),ISNULL(it4.ASSESSABLE_VALUE,''))) else  '0' end as ASSESSABLE_VALUE,
+
+--CASE  WHEN SUM(Convert(NUMERIC(17,2),ISNULL(BE.BE_DUTY,''))) =''
+--THEN  SUM(Convert(NUMERIC(17,2),ISNULL(it4.DUTY_VALUE,''))) else  '0' end as DUTY_VALUE
+
+SUM(Convert(NUMERIC(17,2),CASE  WHEN ISNULL(it4.CIF_VALUE,'') =''
+THEN   '0'
+			  else it4.CIF_VALUE end)) as CIF_VALUE,
+			  
+SUM(Convert(NUMERIC(17,2),CASE  WHEN ISNULL(it4.CVD_VALUE,'') =''
+THEN   '0'
+			  else it4.CVD_VALUE end)) as CVD_VALUE,
+			  
+SUM(Convert(NUMERIC(17,2),CASE  WHEN ISNULL(BE.BE_ASSESSABLE_VALUE,'') =''
+THEN   it4.ASSESSABLE_VALUE
+			  else '0' end)) as ASSESSABLE_VALUE,
+			  
+SUM(Convert(NUMERIC(17,2),CASE  WHEN ISNULL(BE.BE_DUTY,'') =''
+THEN   it4.DUTY_VALUE
+			  else '0' end)) as DUTY_VALUE
+ from INVOICE_DETAILS in3 left join ITEM_PRODUCT_DETAILS it4 on in3.jobno =it4.jobno and in3.INVOICE_NO =it4.INVOICE_NO 
+
+ left join GENERAL_DETAILS GEN 
+ on GEN.JOBNO=it4.JOBNO  
+ left join BE_ENTRY BE 
+ on BE.BE_JOBNO=GEN.JOBNO and BE.BE_JOBDATE=GEN.JOBDATE
+
+group by in3.JOBNO,in3.INVOICE_SLNO,in3.INVOICE_NO,in3.INVOICE_VALUE,
+in3.OTHER_PURCHASE_ORDER,in3.OTHER_PURCHASE_ORDER_DATE,in3.SUPPLIER_NAME,
+INVOICE_DATE,in3.TERMS,in3.INVOICE_CURRENCY,in3.INVOICE_EXRATE,in3.MIS_FREIGHT_CHARGES,
+in3.MIS_FREIGHT_CURRENCY,in3.MIS_INSURANCE_CHARGES,in3.MIS_INSURANCE_CURRENCY
+
+--select * from @TMPINVOICE
+
+
+DECLARE  @TMPIGMHALF TABLE
+(
+ JOBNO BIGINT,
+JOBDATE DATETIME,
+TRANSPORT_MODE VARCHAR(10),
+BE_TYPE varchar(10),
+IMPORTER_NAME VARCHAR(40),
+IEC_NO varchar(10),
+PORT_SHIPMENT varchar(50),
+COUNTRY_SHIPMENT varchar(50),
+BE_NO varchar(50),
+BE_DATE datetime,
+IGM_FLIGHTNO_VESSELNO varchar(20),
+IGM_MAWB_MBL varchar(30),
+IGM_MAWB_MBLDATE datetime,
+IGM_NOOFPACKAGE bigint,
+IGM_PACKAGETYPE varchar(3),
+IGM_GROSSWEIGHT numeric(9,2),
+IGM_TYPEOFWEIGHT varchar(3),
+IGM_MARKSNOS varchar(300),
+
+IGMSLNO INT,
+IGMNO INT,
+NO_OF_IGM VARCHAR(20),
+OTHER1 VARCHAR(50)
+
+
+)
+INSERT INTO @TMPIGMHALF
+SELECT A.JOBNO,A.JOBDATE,A.TRANSPORT_MODE,A.BE_TYPE,A.IMPORTER_NAME,A.IEC_NO,
+A.PORT_SHIPMENT,A.COUNTRY_SHIPMENT,
+A.BE_NO,A.BE_DATE,
+
+IG2.IGM_FLIGHTNO_VESSELNO,IG2.IGM_MAWB_MBL,IG2.IGM_MAWB_MBLDATE,IG2.IGM_NOOFPACKAGE,IG2.IGM_PACKAGETYPE,
+IG2.IGM_GROSSWEIGHT,IG2.IGM_TYPEOFWEIGHT,IG2.IGM_MARKSNOS,
+IG2.IGM_SLNO,IG2.IGM_NO,A.NO_OF_IGM,IG2.IGM_MAWB_MBL 
+
+FROM 
+(
+	SELECT GE1.JOBNO, GE1.JOBDATE,GE1.TRANSPORT_MODE,GE1.BE_TYPE,GE1.IMPORTER_NAME,GE1.IEC_NO,
+	--GE1.PORT_SHIPMENT,
+	CASE WHEN CHARINDEX('-', GE1.PORT_SHIPMENT) > 0
+             THEN LEFT(GE1.PORT_SHIPMENT, CHARINDEX('-', GE1.PORT_SHIPMENT) - 1)
+             ELSE GE1.PORT_SHIPMENT
+        END AS PORT_SHIPMENT,
+	GE1.COUNTRY_SHIPMENT,BE.BE_NO,BE.BE_DATE,
+	CASE WHEN COUNT(IG2.JOBNO) = 0 THEN 'NIL' ELSE CONVERT(VARCHAR(20),COUNT(IG2.JOBNO)) + '   IGM' END AS 'NO_OF_IGM'
+	FROM GENERAL_DETAILS GE1 INNER JOIN IGM_DETAILS IG2 ON IG2.JOBNO=GE1.JOBNO
+	inner join BE_ENTRY BE ON BE.BE_JOBNO=GE1.JOBNO	
+	
+	GROUP BY GE1.JOBNO, GE1.JOBDATE,GE1.TRANSPORT_MODE,GE1.BE_TYPE,GE1.IMPORTER_NAME,GE1.IEC_NO,GE1.PORT_SHIPMENT,GE1.COUNTRY_SHIPMENT,IG2.JOBNO,
+	BE.BE_NO,BE.BE_DATE
+
+)A
+INNER JOIN IGM_DETAILS IG2 On IG2.JOBNO=A.JOBNO
+
+WHERE IG2.IGM_SLNO=1
+
+--select * from @TMPIGMHALF
+
+DECLARE  @TMPIGM TABLE
+(
+ JOBNO INT,
+JOBDATE DATETIME,
+TRANSPORT_MODE VARCHAR(10),
+BE_TYPE varchar(10),
+IMPORTER_NAME VARCHAR(40),
+IEC_NO varchar(10),
+PORT_SHIPMENT varchar(50),
+COUNTRY_SHIPMENT varchar(50),
+BE_NO varchar(50),
+BE_DATE datetime,
+IGM_FLIGHTNO_VESSELNO varchar(20),
+IGM_MAWB_MBL varchar(30),
+IGM_MAWB_MBLDATE datetime,
+
+IGM_NOOFPACKAGE bigint,
+IGM_PACKAGETYPE varchar(3),
+IGM_GROSSWEIGHT numeric(9,2),
+IGM_TYPEOFWEIGHT varchar(3),
+IGM_MARKSNOS varchar(300),
+
+IGMSLNO INT,
+IGMNO INT,
+NO_OF_IGM VARCHAR(20),
+OTHER1 VARCHAR(50)
+
+)
+INSERT INTO @TMPIGM
+SELECT GE1.JOBNO,GE1.JOBDATE,GE1.TRANSPORT_MODE,GE1.BE_TYPE,GE1.IMPORTER_NAME,GE1.IEC_NO,
+--GE1.PORT_SHIPMENT,
+CASE WHEN CHARINDEX('-', GE1.PORT_SHIPMENT) > 0
+             THEN LEFT(GE1.PORT_SHIPMENT, CHARINDEX('-', GE1.PORT_SHIPMENT) - 1)
+             ELSE GE1.PORT_SHIPMENT
+        END AS PORT_SHIPMENT,
+
+GE1.COUNTRY_SHIPMENT,BE.BE_NO,BE.BE_DATE,
+TIH.IGM_FLIGHTNO_VESSELNO,TIH.IGM_MAWB_MBL,TIH.IGM_MAWB_MBLDATE,
+TIH.IGM_NOOFPACKAGE,TIH.IGM_PACKAGETYPE,TIH.IGM_GROSSWEIGHT,TIH.IGM_TYPEOFWEIGHT,TIH.IGM_MARKSNOS,
+TIH.IGMSLNO,TIH.IGMNO,ISNULL(TIH.NO_OF_IGM,'NIL'),TIH.OTHER1 FROM GENERAL_DETAILS GE1 LEFT JOIN @TMPIGMHALF TIH ON GE1.JOBNO =TIH.JOBNO
+ LEFT JOIN BE_ENTRY BE ON BE.BE_JOBNO=GE1.JOBNO
+
+
+
+DECLARE  @TMPITEM TABLE
+(
+ JOBNO BIGINT,
+ITEM_DESCRIPTION VARCHAR(120),
+CTH_NO varchar(50),
+SCHEME_CODE varchar(50)
+
+)
+
+INSERT INTO @TMPITEM
+SELECT  ITEM.JOBNO,ITEM.ITEM_DESCRIPTION,ITEM.CTH_NO,
+ITEM.SCHEME_CODE
+from INVOICE_DETAILS in3 left join ITEM_PRODUCT_DETAILS ITEM  on in3.jobno =ITEM.jobno and in3.INVOICE_NO =ITEM.INVOICE_NO 
+and ITEM.ITEM_SLNO=1 and ITEM.INVOICE_SLNO=1
+
+
+
+SELECT CASE  WHEN INV.INVSLNO > 1 THEN NULL ELSE IGM.JOBNO END AS JOBNO,
+CASE  WHEN INV.INVSLNO > 1 THEN NULL ELSE CONVERT(VARCHAR,IGM.JOBDATE,103) END AS JOBDATE,
+CASE  WHEN INV.INVSLNO > 1 THEN NULL ELSE IGM.TRANSPORT_MODE END AS TRANSPORT_MODE,
+CASE  WHEN INV.INVSLNO > 1 THEN NULL ELSE IGM.BE_TYPE END AS BE_TYPE,
+CASE  WHEN INV.INVSLNO > 1 THEN NULL ELSE IGM.IMPORTER_NAME END AS IMPORTER_NAME,
+CASE  WHEN INV.INVSLNO > 1 THEN NULL ELSE IGM.IEC_NO END AS IEC_NO,
+CASE  WHEN INV.INVSLNO > 1 THEN NULL ELSE IGM.COUNTRY_SHIPMENT END AS COUNTRY_SHIPMENT,
+CASE  WHEN INV.INVSLNO > 1 THEN NULL ELSE IGM.PORT_SHIPMENT END AS PORT_SHIPMENT,
+--CASE  WHEN INV.INVSLNO > 1 THEN NULL ELSE substring(IGM.PORT_SHIPMENT,1,charindex('-',IGM.PORT_SHIPMENT)-1) END AS PORT_SHIPMENT,
+
+--CASE WHEN CHARINDEX('-', IGM.PORT_SHIPMENT) > 0
+--             THEN LEFT(IGM.PORT_SHIPMENT, CHARINDEX('-', IGM.PORT_SHIPMENT) - 1)
+--             ELSE IGM.PORT_SHIPMENT
+--        END AS PORT_SHIPMENT,
+
+
+CASE  WHEN INV.INVSLNO > 1 THEN NULL ELSE IGM.BE_NO END AS BE_NO,
+CASE  WHEN INV.INVSLNO > 1 THEN NULL ELSE  CONVERT(VARCHAR,IGM.BE_DATE,103) END AS BE_DATE,
+CASE  WHEN INV.INVSLNO > 1 THEN NULL ELSE IGM.NO_OF_IGM   END AS NO_OF_IGM,
+CASE  WHEN INV.INVSLNO > 1 THEN NULL ELSE IGM.IGMNO END AS IGMNO,
+CASE  WHEN INV.INVSLNO > 1 THEN NULL ELSE IGM.IGM_FLIGHTNO_VESSELNO END AS FLIGHTNO_VESSELNO,
+CASE  WHEN INV.INVSLNO > 1 THEN NULL ELSE IGM.IGM_MAWB_MBL END AS IGM_MAWB_MBL,
+CASE  WHEN INV.INVSLNO > 1 THEN NULL ELSE CONVERT(VARCHAR,IGM.IGM_MAWB_MBLDATE,103) END AS IGM_MAWB_MBLDATE,
+
+CASE  WHEN INV.INVSLNO > 1 THEN NULL ELSE  CONVERT(VARCHAR,IGM.IGM_NOOFPACKAGE)+' '+IGM.IGM_PACKAGETYPE END AS NO_OF_PACKAGE,
+CASE  WHEN INV.INVSLNO > 1 THEN NULL ELSE CONVERT(VARCHAR,IGM.IGM_GROSSWEIGHT)+' '+IGM.IGM_TYPEOFWEIGHT END AS GROSS_WEIGHT,
+CASE  WHEN INV.INVSLNO > 1 THEN NULL ELSE IGM.IGM_MARKSNOS END AS MARKS_NOS,
+
+--CASE  WHEN INV.INVSLNO > 1 THEN NULL ELSE IGM.IGMSLNO END AS IGMSLNO,
+
+
+INV.INVSLNO,INV.INVNO,CONVERT(VARCHAR,INV.INVOICE_DATE,103)INVOICE_DATE,
+INV.OTHER_PURCHASE_ORDER  'PO_NO',
+REPLACE(CONVERT(VARCHAR,INV.OTHER_PURCHASE_ORDER_DATE,103),'01/01/1900','') 'PO_DATE',
+INV.SUPPLIER_NAME,
+INV.INVVALUE,INV.TERMS,INV.INVOICE_CURRENCY,INV.INVOICE_EXRATE ,
+INV.MIS_FREIGHT_CHARGES+' '+INV.MIS_FREIGHT_CURRENCY AS FREIGHT_CHARGES,
+INV.MIS_INSURANCE_CHARGES+' '+INV.MIS_INSURANCE_CURRENCY AS INSURANCE_CHARGES,
+
+CASE  WHEN INV.INVSLNO > 1 THEN NULL ELSE ITEM.ITEM_DESCRIPTION END AS ITEM_DESCRIPTION,
+CASE  WHEN INV.INVSLNO > 1 THEN NULL ELSE ITEM.CTH_NO END AS CTH_NO,
+CASE  WHEN INV.INVSLNO > 1 THEN NULL ELSE ITEM.SCHEME_CODE END AS SCHEME_CODE,
+
+INV.TOTAL_ITEM_QTY,INV.ITEM_UNIT_PRICE,INV.ITEM_TOTAL_AMOUNT,INV.ASSESSABLE_VALUE,INV.DUTY_VALUE,
+INV.CIF_VALUE,INV.CVD_VALUE FROM @TMPIGM IGM
+LEFT OUTER JOIN @TMPINVOICE INV ON INV.JOBNO=IGM.JOBNO
+LEFT OUTER JOIN @TMPITEM ITEM ON ITEM.JOBNO=IGM.JOBNO
+order by igm.JOBNO
+
+select * from @TMPIGM
+
+end
+else if(@name='select_All_JobNo1')
+	begin
+
+select distinct * from GENERAL_DETAILS
+select distinct * from INVOICE_DETAILS
+end
+
+
+commit
+end try
+begin catch
+rollback transaction
+	set @ErrorMsg=error_message()
+	set @MStatus=0
+end catch
+
+
+ALTER PROCEDURE [dbo].[SP_CHECKLIST_SEARCH]
+	-- Add the parameters for the stored procedure here
+	@JOBNO	varchar(35),
+	
+	@Working_Period varchar(30),
+	@name 	varchar(300),
+	
+	@Mstatus  int output,
+	@ErrorMsg nvarchar(max) output
+	
+AS
+begin try
+	begin transaction
+		set @ErrorMsg=''
+		declare @jobid as bigint
+
+if(@name='select_jobno')
+	begin
+	SELECT distinct(JOBNO) FROM GENERAL_DETAILS where  WORKINGPERIOD=@Working_Period order by JOBNO desc
+end
+else if(@name='select_jobno_CheckList')
+	begin
+		SELECT CUSTOMS_HOUSE,IMPORTER_NAME,BE_TYPE
+FROM GENERAL_DETAILS 
+where JOBNO=@JOBNO and WORKINGPERIOD=@Working_Period 
+
+SELECT  top 1 SUPPLIER_NAME
+FROM INVOICE_DETAILS 
+where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period 
+
+SELECT COUNT(INVOICE_NO) INVOICE_NO
+FROM INVOICE_DETAILS 
+where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period 
+
+SELECT COUNT(ITEM_SLNO) ITEM_SLNO
+FROM ITEM_PRODUCT_DETAILS
+where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period 
+
+	
+
+end
+else if(@name='Checklist')
+	begin
+	SELECT 
+	Convert(varchar(11),JOBDATE, 103)JOBDATE,
+	
+TRANSPORT_MODE,
+gen.BE_TYPE,
+CUSTOMS_HOUSE,
+CUSTOMS_HOUSE_NAME,
+FILING_STATUS,
+SECTION46,
+FIRSTCHECK,
+GREEN_CHANNEL,
+KACHHA_BE,
+SECTION48,
+	
+	IMPORTER_NAME,
+ADDRESS1,
+ADDRESS2,
+ADDRESS3,
+ADDRESS4,
+ADDRESS5,
+IEC_NO,
+BRANCH_NO,
+PORT_ORIGIN,
+COUNTRY_ORIGIN,
+COUNTRY_SHIPMENT,
+HIGH_SEA_SALE_NAME,
+HIGH_SEA_IEC,
+HIGH_SEA_BRANCH_SL_NO,
+HSS_ADD1,
+HSS_ADD2,
+HSS_ADD3,
+HSS_ADD4,
+HSS_ADD5,
+COMMERCIAL_DETAILS_STATUS,
+           COMMERCIAL_TAX_STATECODE ,
+           COMMERCIAL_TAX_TYPE ,
+           COMMERCIAL_TAX_REGISTRATION_NO,
+           EXBOND_INBOND_BE_NO,
+        Convert(varchar(11),EXBOND_INBOND_BE_DATE, 103)EXBOND_INBOND_BE_DATE,
+           EXBOND_BOND_NO ,
+        Convert(varchar(11),EXBOND_BOND_DATE, 103)EXBOND_BOND_DATE,
+           EXBOND_WAREHOUSE_CUSTOMS ,
+           EXBOND_WAREHOUSE_CUSTOMS_CODE ,
+           EXBOND_NOOFPACKAGE ,
+           EXBOND_NOOFPACKAGE_UNITCODE ,
+           EXBOND_GROSS_WEIGHT ,
+           EXBOND_GROSS_WEIGHT_UNITCODE ,
+           EXBOND_DIRECT_EXBONDING,
+           IMP_EXP_TYPE,
+BE.BE_NO,Convert(varchar(11),BE.BE_DATE, 103)BE_DATE
+FROM GENERAL_DETAILS gen
+left join
+  BE_ENTRY BE on BE.BE_JOBNO=gen.JOBNO and BE.BE_JOBDATE=gen.JOBDATE where JOBNO=@JOBNO  and WORKINGPERIOD=@Working_Period order by JOBNO
+ --FROM GENERAL_DETAILS where JOBNO=@JOBNO and WORKINGPERIOD=@Working_Period order by JOBNO
+
+--IGM DETAILS-----------------------------------
+
+	SELECT IGM_NO,
+	Convert(varchar(11),IGM_JOBDATE, 103)IGM_JOBDATE,
+	Convert(varchar(11),IGM_DATE, 103)IGM_DATE,
+
+
+
+	Convert(varchar(11),IGM_FLIGHT_VESSELDATE, 103)IGM_FLIGHT_VESSELDATE,
+
+IGM_MAWB_MBL,
+IGM_HAWB_HBLNO,
+	Convert(varchar(11),IGM_MAWB_MBLDATE, 103)IGM_MAWB_MBLDATE,
+
+
+	Convert(varchar(11),IGM_HAWB_HBLDATE, 103)IGM_HAWB_HBLDATE,IGM_TRANSPORTMODE,
+
+
+IGM_NOOFPACKAGE,
+IGM_PACKAGETYPE,
+IGM_GROSSWEIGHT,
+IGM_TYPEOFWEIGHT,
+IGM_MARKSNOS,
+IGM_GATEWAY_IGM_NO,
+Convert(varchar(11),IGM_GATEWAY_IGM_DATE, 103)IGM_GATEWAY_IGM_DATE,
+
+IGM_GATEWAY_PORT_CODE FROM IGM_DETAILS where JOBNO=@JOBNO and IGM_WORKING_PERIOD=@Working_Period order by JOBNO,IGM_SLNO
+
+---------CONTAINER DETAILS-------------------------
+	SELECT ROW_NUMBER() OVER (ORDER BY CONTAINER_DETAILS.CONTAINER_IGM_SLNO ASC) as CONTAINER_IGM_SLNO,* FROM CONTAINER_DETAILS where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period order by JOBNO
+	
+---------BOND_DETAILS-------------------------
+
+	SELECT * FROM BOND_DETAILS where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period order by JOBNO
+	
+---------CERTIFICATE_DETAILS-------------------------
+	
+	SELECT Convert(varchar(11),CERTIFICATE_DATE, 103)CERTIFICATE_DATE,* FROM CERTIFICATE_DETAILS where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period order by JOBNO
+	
+---------INVOICE_DETAILS-------------------------
+SELECT 
+	INVOICE_NO,
+	Convert(varchar(11),INVOICE_DATE, 103)INVOICE_DATE,INVOICE_VALUE,
+TERMS,
+
+INVOICE_CURRENCY,
+INVOICE_EXRATE ,
+SUPPLIER_NAME,
+SUPPLIER_ADDRESS,
+SUPPLIER_ADDRESS1,
+SUPPLIER_ADDRESS2,
+SUPPLIER_COUNTRY_NAME,
+SUPPLIER_COUNTRY_PINCODE,
+MIS_FREIGHT_CHARGES,
+MIS_FREIGHT_RATE,
+MIS_FREIGHT_CURRENCY,
+MIS_FREIGHT_EXRATE,
+MIS_INSURANCE_CHARGES,
+MIS_INSURANCE_RATE,
+MIS_INSURANCE_CURRENCY,
+MIS_INSURANCE_EXRATE,
+SVB_RELATION,
+SVB_REF_NO,
+SVB_ASSESABLE_RATE,
+SVB_DUTY_RATE,
+SVB_CUSTOM_HOUSE,
+MIS_CHARGES,
+MIS_RATE,
+MIS_EXRATE,
+MIS_HIGHSEASALE_RATE,
+MIS_HIGHSEASALE_CHARGES,
+MIS_DISCOUNT_RATE,
+MIS_DISCOUNT_CHARGES,
+MIS_CURRENCY,
+MIS_LOADING_CHARGES,
+MIS_LOADING_CURRENCY,
+MIS_LOADING_EXRATE,
+MIS_DISCOUNT_CURRENCY,
+MIS_DISCOUNT_EXRATE,
+SVB_ASSESABLE_STATUS,
+SVB_DUTY_STATUS,
+MIS_HIGHSEASALE_CURRENCY,MIS_HIGHSEASALE_EXRATE,
+
+ * FROM INVOICE_DETAILS where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period order by INVOICE_SLNO
+	SELECT * FROM ITEM_PRODUCT_DETAILS where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period order by ITEM_SLNO
+	--SELECT * FROM ITEM_PRODUCT_DETAILS where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period order by JOBNO,INVOICE_SLNO,ITEM_SLNO
+	SELECT Convert(varchar(11),SB_DATE, 103)SB_DATE,* FROM RE_IMPORT_DETAILS where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period order by JOBNO
+	SELECT Convert(varchar(11),REGISTRATION_DATE, 103)REGISTRATION_DATE, LEFT(SCHEME_CODE,2)SCHEME_CODE,* FROM LICENSE_DETAILS where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period order by JOBNO,INVOICE_SLNO,ITEM_SLNO
+end
+
+
+
+
+commit
+end try
+begin catch
+rollback transaction
+	set @ErrorMsg=error_message()
+	set @MStatus=0
+end catch
+
+
+ALTER PROCEDURE [dbo].[SP_EXPORT_FLAT_FILE_GENERATION]
+	-- Add the parameters for the stored procedure here
+	@JOBNO	varchar(35),
+	@TRANSPORT_MODE varchar(50),
+	@Working_Period varchar(30),
+	@name 	varchar(300),
+	
+	@Mstatus  int output,
+	@ErrorMsg nvarchar(max) output
+	
+AS
+begin try
+	begin transaction
+		set @ErrorMsg=''
+		declare @jobid as bigint
+
+if(@name='select_jobno')
+	begin
+	SELECT distinct(JOBNO) FROM EXPORT_GENERAL_DETAILS where  WORKINGPERIOD=@Working_Period order by JOBNO desc
+end
+
+else if(@name='FlatFile')
+	begin
+	
+-------EXPORT GENERAL DETAILS---------------------------
+	
+	declare @AIR_JOBNO varchar(10),@SEA_JOBNO varchar(10)
+	SELECT @AIR_JOBNO=ANNEX_AIR_JOBNO  FROM EXPORT_ANNEXURE_C_AIR where ANNEX_AIR_JOBNO=@JOBNO and FLAG='Active' and WORKING_PERIOD=@Working_Period
+	SELECT @SEA_JOBNO=ANNEX_SEA_JOBNO  FROM EXPORT_ANNEXURE_C_SEA where ANNEX_SEA_JOBNO=@JOBNO and FLAG='Active' and WORKING_PERIOD=@Working_Period
+		
+	----------------------------------------------------
+		
+		if(@AIR_JOBNO!='')
+	begin
+	
+    SELECT distinct REPLACE(CONVERT(VARCHAR(10),JOBDATE,4),'.','') as JOBDT_DDMMYY,
+	Convert(varchar(11),JOBDATE, 112) JOBDATE,Convert(varchar(11),RBI_WAIVER_DATE, 112) RBI_WAIVER_DATE,
+	Air.ANNEX_AIR_GROSS_WEIGHT as GROSS_WEIGHT,Air.ANNEX_AIR_GR_UNIT_CODE as UNIT_CODE,
+	Air.ANNEX_AIR_NET_WEIGHT AS NET_WEIGHT,Air.ANNEX_AIR_NATURE_OF_CARGO AS NATURE_OF_CARGO,Air.ANNEX_AIR_MARKS_NOS AS MARKS_NOS,
+	Air.ANNEX_AIR_TOTAL_PACKAGES AS TOTAL_PACKAGES,Air.ANNEX_AIR_MAWB_NO,Air.ANNEX_AIR_HAWB_NO,
+	Air.ANNEX_AIR_ROTATION_NO as ROTATION_NO,Convert(varchar(11),ANNEX_AIR_ROTATION_DATE, 112) ROTATION_DATE  
+	,SB.SB_NO,Convert(varchar(11),SB.SB_DATE, 112)SB_DATE,General.*
+	
+	FROM EXPORT_GENERAL_DETAILS General join  EXPORT_ANNEXURE_C_AIR as Air on General.JOBNO=Air.ANNEX_AIR_JOBNO  
+	left join
+  EXPORT_SB_ENTRY SB on SB.SB_JOBNO=General.JOBNO and SB.SB_JOBDATE=General.JOBDATE 
+	where JOBNO=@JOBNO and WORKINGPERIOD=@Working_Period order by JOBNO
+	
+	set @MStatus=1
+	end
+	
+	else if(@SEA_JOBNO!='')
+	begin
+		
+	SELECT distinct REPLACE(CONVERT(VARCHAR(10),JOBDATE,4),'.','') as JOBDT_DDMMYY,
+	Convert(varchar(11),JOBDATE, 112) JOBDATE,Convert(varchar(11),RBI_WAIVER_DATE, 112) RBI_WAIVER_DATE,
+	Sea.ANNEX_SEA_GROSS_WEIGHT as GROSS_WEIGHT,ANNEX_SEA_UNIT_MEASUREMENT as UNIT_CODE,
+	Sea.ANNEX_SEA_NET_WEIGHT as NET_WEIGHT,Sea.ANNEX_SEA_NATURE_OF_CARGO as NATURE_OF_CARGO,
+	Sea.ANNEX_SEA_MARKS_NOS as MARKS_NOS,Sea.ANNEX_SEA_TOTAL_PACKAGES as TOTAL_PACKAGES,
+	Sea.ANNEX_SEA_LOOSE_PACKETS as LOOSE_PACKETS,Sea.ANNEX_SEA_NO_CONTAINERS as NO_CONTAINERS,
+	Sea.ANNEX_SEA_ROTATION_NO as ROTATION_NO,Convert(varchar(11),ANNEX_SEA_ROTATION_DATE, 112) ROTATION_DATE,
+	ANNEX_SEA_FAC_STUFFED,ANNEX_SEA_SAMPLE_ACCOM 
+	,SB.SB_NO,Convert(varchar(11),SB.SB_DATE, 112)SB_DATE,General.*
+	
+	FROM EXPORT_GENERAL_DETAILS General join  EXPORT_ANNEXURE_C_SEA as Sea on General.JOBNO=Sea.ANNEX_SEA_JOBNO  
+	left join
+  EXPORT_SB_ENTRY SB on SB.SB_JOBNO=General.JOBNO and SB.SB_JOBDATE=General.JOBDATE 
+	where JOBNO=@JOBNO and WORKINGPERIOD=@Working_Period order by JOBNO
+	
+	set @MStatus=1
+	
+	end
+	else
+	begin
+	
+	SELECT distinct REPLACE(CONVERT(VARCHAR(10),JOBDATE,4),'.','') as JOBDT_DDMMYY,
+	Convert(varchar(11),JOBDATE, 112) JOBDATE,Convert(varchar(11),RBI_WAIVER_DATE, 112) RBI_WAIVER_DATE 
+	,SB.SB_NO,Convert(varchar(11),SB.SB_DATE, 112)SB_DATE,General.*
+	FROM EXPORT_GENERAL_DETAILS General
+	left join
+  EXPORT_SB_ENTRY SB on SB.SB_JOBNO=General.JOBNO and SB.SB_JOBDATE=General.JOBDATE 
+	where JOBNO=@JOBNO and WORKINGPERIOD=@Working_Period order by JOBNO
+	
+	set @MStatus=2
+	end
+					
+		
+	-------------------------------------------------------		
+		
+	--	if not exists(SELECT ANNEX_AIR_JOBNO  FROM EXPORT_ANNEXURE_C_AIR where ANNEX_AIR_JOBNO=@JOBNO and FLAG='Active' and WORKING_PERIOD=@Working_Period)
+	--begin
+	
+	--SELECT 
+	--Convert(varchar(11),JOBDATE, 112) JOBDATE,Convert(varchar(11),RBI_WAIVER_DATE, 112) RBI_WAIVER_DATE,General.*,Sea.ANNEX_SEA_GROSS_WEIGHT as GROSS_WEIGHT,ANNEX_SEA_UNIT_MEASUREMENT as UNIT_CODE,Sea.ANNEX_SEA_NET_WEIGHT as NET_WEIGHT,Sea.ANNEX_SEA_NATURE_OF_CARGO as NATURE_OF_CARGO,Sea.ANNEX_SEA_MARKS_NOS as MARKS_NOS,Sea.ANNEX_SEA_TOTAL_PACKAGES as TOTAL_PACKAGES,Sea.ANNEX_SEA_LOOSE_PACKETS as LOOSE_PACKETS,Sea.ANNEX_SEA_NO_CONTAINERS as NO_CONTAINERS,Sea.ANNEX_SEA_ROTATION_NO as ROTATION_NO,Convert(varchar(11),ANNEX_SEA_ROTATION_DATE, 112) ROTATION_DATE,ANNEX_SEA_FAC_STUFFED,ANNEX_SEA_SAMPLE_ACCOM FROM EXPORT_GENERAL_DETAILS General join  EXPORT_ANNEXURE_C_SEA as Sea on General.JOBNO=Sea.ANNEX_SEA_JOBNO  where JOBNO=@JOBNO and WORKINGPERIOD=@Working_Period order by JOBNO
+	
+	--end
+	--else if not exists(SELECT ANNEX_SEA_JOBNO  FROM EXPORT_ANNEXURE_C_SEA where ANNEX_SEA_JOBNO=@JOBNO and FLAG='Active' and WORKING_PERIOD=@Working_Period)
+	--begin
+	----declare LOOSE_PACKETS as int
+	--SELECT 
+	--Convert(varchar(11),JOBDATE, 112) JOBDATE,Convert(varchar(11),RBI_WAIVER_DATE, 112) RBI_WAIVER_DATE,General.*,Air.ANNEX_AIR_GROSS_WEIGHT as GROSS_WEIGHT,Air.ANNEX_AIR_GR_UNIT_CODE as UNIT_CODE,Air.ANNEX_AIR_NET_WEIGHT AS NET_WEIGHT,Air.ANNEX_AIR_NATURE_OF_CARGO AS NATURE_OF_CARGO,Air.ANNEX_AIR_MARKS_NOS AS MARKS_NOS,Air.ANNEX_AIR_TOTAL_PACKAGES AS TOTAL_PACKAGES,Air.ANNEX_AIR_MAWB_NO,Air.ANNEX_AIR_HAWB_NO,Air.ANNEX_AIR_ROTATION_NO as ROTATION_NO,Convert(varchar(11),ANNEX_AIR_ROTATION_DATE, 112) ROTATION_DATE  FROM EXPORT_GENERAL_DETAILS General join  EXPORT_ANNEXURE_C_AIR as Air on General.JOBNO=Air.ANNEX_AIR_JOBNO  where JOBNO=@JOBNO and WORKINGPERIOD=@Working_Period order by JOBNO
+		
+	--end
+	--else
+	--begin
+	--SELECT 
+	--Convert(varchar(11),JOBDATE, 112) JOBDATE,Convert(varchar(11),RBI_WAIVER_DATE, 112) RBI_WAIVER_DATE,* FROM EXPORT_GENERAL_DETAILS where JOBNO=@JOBNO and WORKINGPERIOD=@Working_Period order by JOBNO
+	--end
+		
+	
+---------EXPORT INVOICE_DETAILS-------------------------
+SELECT 
+	INVOICE_NO,
+	Convert(varchar(11),INVOICE_DATE, 112)INVOICE_DATE,INVOICE_VALUE,
+substring(BUYER_NAME,1,35) as BUYER_NAME,
+  substring(BUYER_ADDRESS1,1,35) as BUYER_ADDRESS1,
+   substring(BUYER_ADDRESS2,1,35) as BUYER_ADDRESS2,
+    substring(BUYER_ADDRESS3,1,35) as BUYER_ADDRESS3,
+ * FROM EXPORT_INVOICE_DETAILS where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period order by JOBNO,INVOICE_SLNO
+ 
+ 
+ --------EXPORT ITEM DETAILS----------------------------
+ 
+	SELECT 
+	LEFT(ITEM_SCHEME_CODE,2)ITEM_SCHEME_CODE,
+	 substring(ITEM_DESCRIPTION,1,40) as ITEM_DESCRIPTION1,
+   substring(ITEM_DESCRIPTION,41,40) as ITEM_DESCRIPTION2,
+    substring(ITEM_DESCRIPTION,81,40) as ITEM_DESCRIPTION3,
+    Convert(varchar(11),ITEM_AR4_DATE, 112)ITEM_AR4_DATE,
+	* FROM EXPORT_ITEM_DETAILS where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period order by JOBNO,INVOICE_SLNO,ITEM_SLNO
+	
+	--------EXPORT DRAWBACK DETAILS------------------------
+ 
+ SELECT * FROM EXPORT_DRAWBACK_DETAILS where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period order by JOBNO,INVOICE_SLNO,ITEM_SLNO
+	
+ --------EXPORT LICENSE DETAILS-------------------------
+ 
+ --SELECT Convert(varchar(11),LICENSE_DATE, 112)LICENSE_DATE,* FROM EXPORT_LICENSE_DETAILS where JOB_NO=@JOBNO and WORKING_PERIOD=@Working_Period order by JOB_NO,INV_SL_NO,ITEM_SL_NO
+ 
+  SELECT distinct a.*,Convert(varchar(11),b.LICENSE_DATE, 112) LICENSE_DATE, b.*
+FROM EXPORT_LICENSE_IMP_EXP_DETAILS a, EXPORT_LICENSE_DETAILS b
+WHERE a.LICENSE_NO = b.LICENSE_NO and a.LICENSE_ID = b.LICENSE_ID and a.JOB_NO=@JOBNO  and a.WORKING_PERIOD=@Working_Period
+ 
+   
+ --------EXPORT JOBBING DETAILS-------------------------
+ 
+ SELECT Convert(varchar(11),BE_DATE, 112)BE_DATE,* FROM EXPORT_JOBBING where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period order by JOBNO,INVOICE_SLNO,ITEM_SLNO
+ 	
+ --------EXPORT PACKAGE LIST DETAILS-------------------------
+ 	
+ 	 SELECT * FROM EXPORT_ANNEXURE_C_SEA_PACKAGE where ANNEX_SEA_PACK_JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period order by ANNEX_SEA_PACK_JOBNO
+ 	
+  --------EXPORT ANNEXURE C1 DETAILS -------------------------
+  
+ 	select Convert(varchar(11),ANNEX_EXAM_DATE, 112)ANNEX_EXAM_DATE,* from ANNEXURE_C1_DETAILS where ANNEX_JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period order by ANNEX_JOBNO
+ 	
+ 	 --------EXPORT ANNEXURE C SEA CONTAINER -------------------------
+  
+ 	select Convert(varchar(11),ANNEX_SEA_CON_SEAL_DATE, 112)ANNEX_SEA_CON_SEAL_DATE,* from EXPORT_ANNEXURE_C_SEA_CONTAINER where ANNEX_SEA_CON_JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period order by ANNEX_SEA_CON_JOBNO
+ 	
+ 	 --------EXPORT Exchange Rate -------------------------
+ 	
+ 	SELECT INVOICE_CURRENCY FROM EXPORT_INVOICE_DETAILS  where  JOBNO=@JOBNO and isnull(INVOICE_CURRENCY,'') <>  ''
+    UNION
+    SELECT FREIGHT_CURRENCY FROM EXPORT_INVOICE_DETAILS where  JOBNO=@JOBNO and isnull(FREIGHT_CURRENCY,'') <> ''
+    UNION
+    SELECT INSURANCE_CURRENCY FROM EXPORT_INVOICE_DETAILS where  JOBNO=@JOBNO and isnull(INSURANCE_CURRENCY,'') <> ''
+ 	
+end
+
+
+--------------------------------------------GOODS REGISTRATION FLATFILE-------------------------------------------------------------
+else if(@name='Export_Goods_Registration_FlatFile')
+	begin
+	
+-------EXPORT GENERAL DETAILS---------------------------
+
+if(@TRANSPORT_MODE='Air')
+begin
+select Convert(varchar(11),GOODS_AIR_SB_DATE, 112)GOODS_SB_DATE,Convert(varchar(11),GOODS_AIR_MAWB_DATE, 112)GOODS_MAWB_DATE,
+Convert(varchar(11),GOODS_AIR_HAWB_DATE, 112)GOODS_HAWB_DATE,
+GOODS_AIR_SB_NO GOODS_SB_NO,
+
+ substring(GOODS_AIR_SEAL_TYPE,1,1) GOODS_SEAL_TYPE,
+GOODS_AIR_NATURE_OF_CARGO GOODS_NATURE_OF_CARGO,
+GOODS_AIR_GROSS_WEIGHT GOODS_GROSS_WEIGHT,
+GOODS_AIR_NET_WEIGHT GOODS_NET_WEIGHT,
+GOODS_AIR_UNIT_MESUR GOODS_UNIT_MESUR,
+GOODS_AIR_TOTAL_PACKAGES GOODS_TOTAL_PACKAGES,
+GOODS_AIR_MARKS_NOS GOODS_MARKS_NOS,
+GOODS_AIR_MAWB_NO GOODS_MAWB_NO,
+GOODS_AIR_HAWB_NO GOODS_HAWB_NO,
+
+* from EXPORT_GOODS_REG_AIR where GOODS_AIR_JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period
+end
+else --if(@TRANSPORT_MODE='Sea')
+begin
+select Convert(varchar(11),GOODS_SEA_SB_DATE, 112)GOODS_SB_DATE,Convert(varchar(11),GOODS_SEA_ROTATION_DATE, 112)GOODS_ROTATION_DATE,
+GOODS_SEA_SB_NO GOODS_SB_NO,
+ substring(GOODS_SEA_SEAL_TYPE,1,1) GOODS_SEAL_TYPE,
+
+
+GOODS_SEA_NATURE_OF_CARGO GOODS_NATURE_OF_CARGO,
+GOODS_SEA_MARKS_NOS GOODS_MARKS_NOS,
+GOODS_SEA_TOTAL_PACKAGES GOODS_TOTAL_PACKAGES,
+GOODS_SEA_LOOSE_PACKETS GOODS_LOOSE_PACKETS,
+GOODS_SEA_NO_CONTAINERS GOODS_NO_OF_CONTAINERS,
+GOODS_SEA_GROSS_WEIGHT GOODS_GROSS_WEIGHT,
+GOODS_SEA_NET_WEIGHT GOODS_NET_WEIGHT,
+GOODS_SEA_UNIT_MEASUREMENT GOODS_UNIT_MESUR,
+GOODS_SEA_ROTATION_NO GOODS_ROTATION_NO,
+* from EXPORT_GOODS_REG_SEA where GOODS_SEA_JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period
+end
+
+select TERMS,WHEATHER_UNIT_PRICE,INVOICE_SLNO,INVOICE_NO,Convert(varchar(11),INVOICE_DATE, 112)INVOICE_DATE,FREIGHT_CHARGES,
+FREIGHT_CURRENCY,
+INSURANCE_CHARGES,INSURANCE_CURRENCY,INSURANCE_RATE
+from EXPORT_INVOICE_DETAILS where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period
+
+select * from EXPORT_GOODS_REG_PACKAGE 
+where GOODS_PACK_JOBNO=@JOBNO and GOODS_PACK_MODE=@TRANSPORT_MODE and WORKING_PERIOD=@Working_Period
+
+select CONVERT(DATETIME,GOODS_SEA_CON_SEAL_DATE,114) AS GOODS_SEA_CON_SEAL_DATE,* from EXPORT_GOODS_REG_SEA_CONTAINER where GOODS_SEA_CON_JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period
+
+select Convert(varchar(11),GOODS_EOU_EXAM_DATE, 112)GOODS_EOU_EXAM_DATE,* from EXPORT_GOODS_REG_EOU 
+where GOODS_EOU_JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period
+
+select Convert(varchar(11),GOODS_AR4_DATE, 112)GOODS_AR4_DATE,* from EXPORT_GOODS_REG_AR4 
+where GOODS_AR4_JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period
+
+select INVOICE_SLNO,ITEM_SLNO from EXPORT_ITEM_DETAILS 
+where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period
+select REPLACE(CONVERT(VARCHAR(10),JOBDATE,4),'.','') as JOBDT_DDMMYY,
+Convert(varchar(11),JOBDATE, 112) JOBDATE,TRANSPORT_MODE 
+from EXPORT_GENERAL_DETAILS
+where JOBNO=@JOBNO and WORKINGPERIOD=@Working_Period
+
+end
+
+--------------------------------------------GOODS REGISTRATION FLATFILE-------------------------------------------------------------
+
+--SELECT
+--CONVERT(TIME,GETDATE()) AS HourMinuteSecond
+
+commit
+end try
+begin catch
+rollback transaction
+	set @ErrorMsg=error_message()
+	set @MStatus=0
+end catch
+
+ALTER PROCEDURE [dbo].[SP_EXPORT_CHECKLIST_SEARCH]
+	-- Add the parameters for the stored procedure here
+	@JOBNO	varchar(35),
+	
+	@Working_Period varchar(30),
+	@name 	varchar(300),
+	@TRANSPORT_MODE varchar(50),
+	@CUSTOM_HOUSE varchar(50),
+	@Mstatus  int output,
+	@STR_status  int output,
+	@ErrorMsg nvarchar(max) output
+	
+AS
+begin try
+	begin transaction
+		set @ErrorMsg=''
+		declare @jobid as bigint
+
+if(@name='select_jobno')
+	begin
+	SELECT distinct(JOBNO) FROM EXPORT_GENERAL_DETAILS where  WORKINGPERIOD=@Working_Period order by JOBNO desc
+end
+else if(@name='select_jobno_CheckList')
+	begin
+		SELECT CUSTOMS_HOUSE,TRANSPORT_MODE, EXPORTER_NAME,CONSIGNEE_NAME,Convert(varchar(11),JOBDATE, 112)JOBDATE
+FROM EXPORT_GENERAL_DETAILS 
+where JOBNO=@JOBNO and WORKINGPERIOD=@Working_Period 
+
+SELECT ITEM_SCHEME_CODE
+FROM EXPORT_ITEM_DETAILS
+where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period 
+
+SELECT COUNT(INVOICE_NO) INVOICE_NO
+FROM EXPORT_INVOICE_DETAILS 
+where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period 
+
+SELECT COUNT(ITEM_SLNO) ITEM_SLNO
+FROM EXPORT_ITEM_DETAILS
+where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period 
+
+
+	
+
+end
+else if(@name='Checklist')
+	begin
+	
+-------EXPORT GENERAL DETAILS---------------------------
+	
+	--SELECT 
+	--Convert(varchar(11),JOBDATE, 105)JOBDATE,* FROM EXPORT_GENERAL_DETAILS where JOBNO=@JOBNO and WORKINGPERIOD=@Working_Period order by JOBNO
+	
+	declare @AIR_JOBNO varchar(10),@SEA_JOBNO varchar(10)
+	SELECT @AIR_JOBNO=ANNEX_AIR_JOBNO  FROM EXPORT_ANNEXURE_C_AIR where ANNEX_AIR_JOBNO=@JOBNO and FLAG='Active' and WORKING_PERIOD=@Working_Period
+	SELECT @SEA_JOBNO=ANNEX_SEA_JOBNO  FROM EXPORT_ANNEXURE_C_SEA where ANNEX_SEA_JOBNO=@JOBNO and FLAG='Active' and WORKING_PERIOD=@Working_Period
+	
+	--if not exists(SELECT ANNEX_AIR_JOBNO  FROM EXPORT_ANNEXURE_C_AIR where ANNEX_AIR_JOBNO=@JOBNO and FLAG='Active' and WORKING_PERIOD=@Working_Period)
+	if(@AIR_JOBNO!='')
+	begin
+	SELECT distinct
+	Convert(varchar(11),JOBDATE, 103) JOBDATE,Convert(varchar(11),RBI_WAIVER_DATE, 103) RBI_WAIVER_DATE,Air.ANNEX_AIR_GROSS_WEIGHT+' '+Air.ANNEX_AIR_GR_UNIT_CODE as GROSS_WEIGHT,Air.ANNEX_AIR_NET_WEIGHT+' '+Air.ANNEX_AIR_GR_UNIT_CODE AS NET_WEIGHT,Air.ANNEX_AIR_NATURE_OF_CARGO AS NATURE_OF_CARGO,Air.ANNEX_AIR_MARKS_NOS AS MARKS_NOS,Air.ANNEX_AIR_TOTAL_PACKAGES AS TOTAL_PACKAGES,Air.ANNEX_AIR_MAWB_NO AS ANNEX_AIR_MAWB_NO,Air.ANNEX_AIR_HAWB_NO AS ANNEX_AIR_HAWB_NO 
+	,SB.SB_NO,Convert(varchar(11),SB.SB_DATE, 103)SB_DATE,General.*
+	FROM EXPORT_GENERAL_DETAILS General join  EXPORT_ANNEXURE_C_AIR as Air on General.JOBNO=Air.ANNEX_AIR_JOBNO 
+	left join
+  EXPORT_SB_ENTRY SB on SB.SB_JOBNO=General.JOBNO and SB.SB_JOBDATE=General.JOBDATE 
+	where JOBNO=@JOBNO and WORKINGPERIOD=@Working_Period order by JOBNO
+	
+	set @MStatus=1
+	end
+	
+	--if not exists(SELECT ANNEX_SEA_JOBNO  FROM EXPORT_ANNEXURE_C_SEA where ANNEX_SEA_JOBNO=@JOBNO and FLAG='Active' and WORKING_PERIOD=@Working_Period)
+	else if(@SEA_JOBNO!='')
+	begin
+	--declare LOOSE_PACKETS as int
+	
+	SELECT distinct
+	Convert(varchar(11),JOBDATE, 103) JOBDATE,Convert(varchar(11),RBI_WAIVER_DATE, 103) RBI_WAIVER_DATE,
+	Sea.ANNEX_SEA_GROSS_WEIGHT+' '+ANNEX_SEA_UNIT_MEASUREMENT as GROSS_WEIGHT,
+	Sea.ANNEX_SEA_NET_WEIGHT+' '+ANNEX_SEA_UNIT_MEASUREMENT as NET_WEIGHT,
+	Sea.ANNEX_SEA_NATURE_OF_CARGO as NATURE_OF_CARGO,Sea.ANNEX_SEA_MARKS_NOS as MARKS_NOS,
+	Sea.ANNEX_SEA_TOTAL_PACKAGES as TOTAL_PACKAGES,Sea.ANNEX_SEA_LOOSE_PACKETS as LOOSE_PACKETS,
+	Sea.ANNEX_SEA_NO_CONTAINERS as NO_CONTAINERS, 
+	SB.SB_NO,Convert(varchar(11),SB.SB_DATE, 103)SB_DATE,General.*
+	FROM EXPORT_GENERAL_DETAILS General 
+	join  EXPORT_ANNEXURE_C_SEA as Sea on General.JOBNO=Sea.ANNEX_SEA_JOBNO  
+	left join
+  EXPORT_SB_ENTRY SB on SB.SB_JOBNO=General.JOBNO and SB.SB_JOBDATE=General.JOBDATE
+	where JOBNO=@JOBNO and WORKINGPERIOD=@Working_Period order by JOBNO
+	
+		set @MStatus=1
+	
+	--join  EXPORT_ANNEXURE_C_SEA as Sea on Air.ANNEX_AIR_JOBNO=General.JOBNO
+--join EXPORT_ANNEXURE_C_AIR as Air on Sea.ANNEX_SEA_JOBNO=General.JOBNO 
+
+--,Sea.ANNEX_SEA_LOOSE_PACKETS as LOOSE_PACKETS,Sea.ANNEX_SEA_NO_CONTAINERS as NO_CONTAINERS
+
+	end
+	else
+	begin
+	SELECT distinct
+	Convert(varchar(11),JOBDATE, 103)JOBDATE,Convert(varchar(11),RBI_WAIVER_DATE, 103) RBI_WAIVER_DATE,
+		SB.SB_NO,Convert(varchar(11),SB.SB_DATE, 103)SB_DATE,General.*
+	FROM EXPORT_GENERAL_DETAILS General
+	left join
+  EXPORT_SB_ENTRY SB on SB.SB_JOBNO=General.JOBNO and SB.SB_JOBDATE=General.JOBDATE
+	where JOBNO=@JOBNO and WORKINGPERIOD=@Working_Period order by JOBNO
+	set @MStatus=2
+	end
+		
+
+---------EXPORT INVOICE_DETAILS-------------------------
+SELECT 
+	INVOICE_NO,
+	Convert(varchar(11),INVOICE_DATE, 103)INVOICE_DATE,INVOICE_VALUE,
+
+ * FROM EXPORT_INVOICE_DETAILS where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period order by JOBNO,INVOICE_SLNO
+ 
+ 
+ --------EXPORT ITEM DETAILS----------------------------
+ 
+	SELECT Convert(varchar(11),ITEM_AR4_DATE, 103) ITEM_AR4_DATE,* FROM EXPORT_ITEM_DETAILS where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period order by JOBNO,INVOICE_SLNO,ITEM_SLNO
+	
+ --------EXPORT LICENSE DETAILS-------------------------
+ 
+ SELECT Convert(varchar(11),LICENSE_DATE, 103)LICENSE_DATE,* FROM EXPORT_LICENSE_DETAILS where JOB_NO=@JOBNO and WORKING_PERIOD=@Working_Period order by JOB_NO,INV_SL_NO,ITEM_SL_NO
+ 
+ --select * from EXPORT_LICENSE_IMP_EXP_DETAILS where JOB_NO=@JOBNO  and WORKING_PERIOD=@Working_Period
+ 
+-- SELECT A.*, B.LICENSE_NO
+--FROM EXPORT_LICENSE_IMP_EXP_DETAILS A
+--INNER JOIN EXPORT_LICENSE_DETAILS B
+--ON A.LICENSE_NO = B.LICENSE_NO  where A.JOB_NO=@JOBNO  and A.WORKING_PERIOD=@Working_Period
+ 
+ SELECT distinct a.*
+FROM EXPORT_LICENSE_IMP_EXP_DETAILS a, EXPORT_LICENSE_DETAILS b
+WHERE  a.JOB_NO=@JOBNO  and a.WORKING_PERIOD=@Working_Period
+--WHERE a.LICENSE_NO = b.LICENSE_NO and a.LICENSE_IMP_EXP_ID = b.LICENSE_ID and a.JOB_NO=@JOBNO  and a.WORKING_PERIOD=@Working_Period
+ 
+ 
+ --------EXPORT DRAWBACK DETAILS------------------------
+ 
+ SELECT * FROM EXPORT_DRAWBACK_DETAILS where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period order by JOBNO,INVOICE_SLNO,ITEM_SLNO
+ 
+ --------EXPORT JOBBING DETAILS-------------------------
+ 
+ SELECT Convert(varchar(11),BE_DATE, 103)BE_DATE,* FROM EXPORT_JOBBING where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period order by JOBNO,INVOICE_SLNO,ITEM_SLNO
+ 	
+
+ --------EXPORT STR DETAILS-------------------------
+
+if not exists(SELECT ITEM_STR_CODE FROM EXPORT_ITEM_DETAILS where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period)
+begin
+set @STR_status=1
+end
+else
+begin
+set @STR_status=2
+
+end
+ --------EXPORT ANNEXURE C1 DETAILS-------------------------
+
+SELECT Convert(varchar(11),ANNEX_EXAM_DATE, 103)ANNEX_EXAM_DATE,* FROM ANNEXURE_C1_DETAILS 
+where ANNEX_JOBNO=@JOBNO and WORKING_PERIOD=@WORKING_PERIOD
+---------------------------------------------FOR EXPORT ANNEXURE REPORT------------------------------------------------------------------
+select top 1 ITEM_EXPORTER_NAME from EXPORT_ITEM_DETAILS 
+where JOBNO=@JOBNO and WORKING_PERIOD=@WORKING_PERIOD and ITEM_EXPORTER_NAME NOT IN('')
+end
+--------------------------------------------GOODS REGISTRATION CHECKLIST-------------------------------------------------------------
+else if(@name='Export_Goods_Registration_Checklist')
+	begin
+	
+-------EXPORT GENERAL DETAILS---------------------------
+
+if(@TRANSPORT_MODE='Air')
+begin
+select Convert(varchar(11),GOODS_AIR_SB_DATE, 103)GOODS_SB_DATE,Convert(varchar(11),GOODS_AIR_MAWB_DATE, 103)GOODS_MAWB_DATE,
+Convert(varchar(11),GOODS_AIR_HAWB_DATE, 103)GOODS_HAWB_DATE,
+GOODS_AIR_SB_NO GOODS_SB_NO,
+
+GOODS_AIR_SEAL_TYPE GOODS_SEAL_TYPE,
+GOODS_AIR_NATURE_OF_CARGO GOODS_NATURE_OF_CARGO,
+GOODS_AIR_GROSS_WEIGHT GOODS_GROSS_WEIGHT,
+GOODS_AIR_NET_WEIGHT GOODS_NET_WEIGHT,
+GOODS_AIR_UNIT_MESUR GOODS_UNIT_MESUR,
+GOODS_AIR_TOTAL_PACKAGES GOODS_TOTAL_PACKAGES,
+GOODS_AIR_MARKS_NOS GOODS_MARKS_NOS,
+GOODS_AIR_MAWB_NO GOODS_MAWB_NO,
+GOODS_AIR_HAWB_NO GOODS_HAWB_NO,
+
+* from EXPORT_GOODS_REG_AIR where GOODS_AIR_JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period
+end
+else --if(@TRANSPORT_MODE='Sea')
+begin
+select Convert(varchar(11),GOODS_SEA_SB_DATE, 103)GOODS_SB_DATE,Convert(varchar(11),GOODS_SEA_ROTATION_DATE, 103)GOODS_ROTATION_DATE,
+GOODS_SEA_SB_NO GOODS_SB_NO,
+
+GOODS_SEA_SEAL_TYPE GOODS_SEAL_TYPE,
+GOODS_SEA_NATURE_OF_CARGO GOODS_NATURE_OF_CARGO,
+GOODS_SEA_MARKS_NOS GOODS_MARKS_NOS,
+GOODS_SEA_TOTAL_PACKAGES GOODS_TOTAL_PACKAGES,
+GOODS_SEA_LOOSE_PACKETS GOODS_LOOSE_PACKETS,
+GOODS_SEA_NO_CONTAINERS GOODS_NO_OF_CONTAINERS,
+GOODS_SEA_GROSS_WEIGHT GOODS_GROSS_WEIGHT,
+GOODS_SEA_NET_WEIGHT GOODS_NET_WEIGHT,
+GOODS_SEA_UNIT_MEASUREMENT GOODS_UNIT_MESUR,
+GOODS_SEA_ROTATION_NO GOODS_ROTATION_NO,
+* from EXPORT_GOODS_REG_SEA where GOODS_SEA_JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period
+end
+
+select TERMS,WHEATHER_UNIT_PRICE,INVOICE_SLNO,INVOICE_NO,Convert(varchar(11),INVOICE_DATE, 103)INVOICE_DATE,FREIGHT_CHARGES,
+FREIGHT_CURRENCY,
+INSURANCE_CHARGES,INSURANCE_CURRENCY,INSURANCE_RATE
+from EXPORT_INVOICE_DETAILS where JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period order by INVOICE_SLNO
+
+select Convert(varchar(11),GOODS_SEA_CON_SEAL_DATE, 103)GOODS_SEA_CON_SEAL_DATE,* from EXPORT_GOODS_REG_SEA_CONTAINER where GOODS_SEA_CON_JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period
+
+select * from EXPORT_GOODS_REG_PACKAGE 
+where GOODS_PACK_JOBNO=@JOBNO and GOODS_PACK_MODE=@TRANSPORT_MODE and WORKING_PERIOD=@Working_Period
+
+select Convert(varchar(11),GOODS_EOU_EXAM_DATE, 103)GOODS_EOU_EXAM_DATE,* from EXPORT_GOODS_REG_EOU 
+where GOODS_EOU_JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period
+
+select Convert(varchar(11),GOODS_AR4_DATE, 103)GOODS_AR4_DATE,* from EXPORT_GOODS_REG_AR4 
+where GOODS_AR4_JOBNO=@JOBNO and WORKING_PERIOD=@Working_Period
+end
+
+--------------------------------------------GOODS REGISTRATION CHECKLIST-------------------------------------------------------------
+
+
+commit
+end try
+begin catch
+rollback transaction
+	set @ErrorMsg=error_message()
+	set @MStatus=0
+end catch
+
+

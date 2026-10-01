@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="GST_BILL_JOB_CONTAINER_RPT" targetNamespace="http://tempuri.org/GST_BILL_JOB_CONTAINER_RPT.xsd" xmlns:mstns="http://tempuri.org/GST_BILL_JOB_CONTAINER_RPT.xsd" xmlns="http://tempuri.org/GST_BILL_JOB_CONTAINER_RPT.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="GST_BILL_JOB_CONTAINER_RPT" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="GST_BILL_JOB_CONTAINER_RPT" msprop:Generator_UserDSName="GST_BILL_JOB_CONTAINER_RPT">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="General_1" msprop:Generator_TableClassName="General_1DataTable" msprop:Generator_TableVarName="tableGeneral_1" msprop:Generator_TablePropName="General_1" msprop:Generator_RowDeletingName="General_1RowDeleting" msprop:Generator_RowChangingName="General_1RowChanging" msprop:Generator_RowEvHandlerName="General_1RowChangeEventHandler" msprop:Generator_RowDeletedName="General_1RowDeleted" msprop:Generator_UserTableName="General_1" msprop:Generator_RowChangedName="General_1RowChanged" msprop:Generator_RowEvArgName="General_1RowChangeEvent" msprop:Generator_RowClassName="General_1Row">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CUSTOMER_NAME" msprop:Generator_ColumnVarNameInTable="columnCUSTOMER_NAME" msprop:Generator_ColumnPropNameInRow="CUSTOMER_NAME" msprop:Generator_ColumnPropNameInTable="CUSTOMER_NAMEColumn" msprop:Generator_UserColumnName="CUSTOMER_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="TWENTY_FEET_CNT" msprop:Generator_ColumnVarNameInTable="columnTWENTY_FEET_CNT" msprop:Generator_ColumnPropNameInRow="TWENTY_FEET_CNT" msprop:Generator_ColumnPropNameInTable="TWENTY_FEET_CNTColumn" msprop:Generator_UserColumnName="TWENTY_FEET_CNT" type="xs:string" minOccurs="0" />
+              <xs:element name="FORTY_FEET_CNT" msprop:Generator_ColumnVarNameInTable="columnFORTY_FEET_CNT" msprop:Generator_ColumnPropNameInRow="FORTY_FEET_CNT" msprop:Generator_ColumnPropNameInTable="FORTY_FEET_CNTColumn" msprop:Generator_UserColumnName="FORTY_FEET_CNT" type="xs:string" minOccurs="0" />
+              <xs:element name="LCL_CNT" msprop:Generator_ColumnVarNameInTable="columnLCL_CNT" msprop:Generator_ColumnPropNameInRow="LCL_CNT" msprop:Generator_ColumnPropNameInTable="LCL_CNTColumn" msprop:Generator_UserColumnName="LCL_CNT" type="xs:string" minOccurs="0" />
+              <xs:element name="NO_OF_BILL_CNT" msprop:Generator_ColumnVarNameInTable="columnNO_OF_BILL_CNT" msprop:Generator_ColumnPropNameInRow="NO_OF_BILL_CNT" msprop:Generator_ColumnPropNameInTable="NO_OF_BILL_CNTColumn" msprop:Generator_UserColumnName="NO_OF_BILL_CNT" type="xs:string" minOccurs="0" />
+              <xs:element name="TOTAL_BILL_AMT" msprop:Generator_ColumnVarNameInTable="columnTOTAL_BILL_AMT" msprop:Generator_ColumnPropNameInRow="TOTAL_BILL_AMT" msprop:Generator_ColumnPropNameInTable="TOTAL_BILL_AMTColumn" msprop:Generator_UserColumnName="TOTAL_BILL_AMT" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

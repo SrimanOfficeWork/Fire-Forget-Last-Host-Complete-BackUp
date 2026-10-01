@@ -1,0 +1,704 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="eRoyalMasters.master.cs"
+    Inherits="Import_MasterPage_eRoyalMasters" %>
+
+<%--<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>--%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>Main Master</title>
+    <link href="../js/Grid_header_script/GridviewScroll.css" rel="stylesheet" />
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link href="../gridmain.css" rel="stylesheet" type="text/css" />
+    <link href="../css/MainStyle.css" rel="stylesheet" media="screen, projection" type="text/css" />
+    <link href="../main.css" rel="stylesheet" media="screen, projection" type="text/css" />
+    <link rel="stylesheet" href="../css/jquery-ui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/dddropdownpanel.css" />
+    <link rel="stylesheet" href="../windowfiles/dhtmlwindow.css" type="text/css" />
+    <link rel="stylesheet" href="../modalfiles/modal.css" type="text/css" />
+    <link href="../tabs/tabs.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .hideGridColumn
+        {
+            display: none;
+        }
+    </style>
+    <style type="text/css">
+        /* Autocomplete Textbox Search Loading Image*/
+        .ui-autocomplete-loading
+        {
+            background: white url('../images/ui-anim_basic_16x16.gif') right center no-repeat;
+        }
+        /* Autocomplete Textbox Search Loading Image*/
+    </style>
+    <style>
+        body
+        {
+            font-family: Arial, sans-serif;
+            padding: 50px;
+            background: #f0f0f0;
+        }
+        .ad-wrapper
+        {
+            position: relative;
+            display: inline-block;
+            margin-left: -10px;
+            left: 0px;
+            width: 80px;
+        }
+        .menu-item
+        {
+            color: black;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .ad-popup
+        {
+            display: none;
+            position: absolute;
+            top: 80%;
+            right: 50%;
+            background: white;
+            box-shadow: 0 4px 10px rgb(114, 185, 150);
+            border-radius: 8px;
+            padding: 5px;
+            z-index: 200;
+            width: 500px;
+            text-align: center;
+        }
+        .ad-popup img
+        {
+            width: 100%;
+            height: auto; /* Adjusts height proportionally */
+            max-height: none; /* Remove limitation */
+            object-fit: contain;
+            border-radius: 4px;
+            cursor: zoom-in;
+            display: block;
+        }
+        .nav-btn
+        {
+            margin: 5px;
+            height: 25px;
+            font-size: 14px;
+            width: 55px;
+            background: #f5f9f7;
+            background-color: rgb(245, 249, 247);
+            font: bold;
+            box-shadow: blue;
+            border-radius: 4px;
+            transition: background-color 0.3s, color 0.3s;
+            font-size: medium;
+            box-shadow: 0 6px 5px rgba(83, 151, 191, 0.58);
+            border-bottom: 1px solid #26272899;
+            border-top: 1px solid #26272899;
+            border-left: 1px solid #26272899;
+            border-right: 1px solid #26272899;
+            font-size: 15px;
+            background-color: white;
+            font-weight: bold;
+        }
+        /* Zoom overlay styles */.zoom-overlay
+        {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            transition: opacity 0.3s ease;
+        }
+        .zoom-overlay.visible
+        {
+            display: flex;
+            opacity: 1;
+        }
+        .zoom-overlay.closing
+        {
+            opacity: 0;
+        }
+        .zoom-overlay img
+        {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+            transform: scale(1);
+        }
+        .zoom-overlay.closing img
+        {
+            transform: scale(0.8);
+        }
+        .close-btn
+        {
+            position: absolute;
+            top: 20px;
+            right: -60px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+            margin-right: 360px;
+        }
+    </style>
+    <style type="text/css">
+        #Div2
+        {
+            overflow: visible !important;
+        }
+        .neon-button-wrapper
+        {
+            display: block;
+            text-align: center;
+            width: 100%;
+            padding: 6px 0;
+        }
+        .neon-button
+        {
+            display: -webkit-inline-box;
+            display: -ms-inline-flexbox;
+            display: inline-flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 24px;
+            background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            position: relative;
+            box-shadow: 0 0 20px rgba(124, 58, 237, 0.6), 0 0 40px rgba(124, 58, 237, 0.4), 0 0 60px rgba(124, 58, 237, 0.25), 0 0 80px rgba(124, 58, 237, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid rgba(167, 139, 250, 0.5);
+            overflow: hidden;
+            cursor: pointer;
+            margin: 4px 10px;
+        }
+        
+        /* Shimmer/Transmission effect */
+        .neon-button::before
+        {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -100%;
+            width: 100%;
+            height: 200%;
+            background: linear-gradient(
+                                            90deg,
+                                            transparent,
+                                            rgba(255, 255, 255, 0.3),
+                                            rgba(255, 255, 255, 0.5),
+                                            rgba(255, 255, 255, 0.3),
+                                            transparent
+                                        );
+            -webkit-transform: skewX(-25deg);
+            -ms-transform: skewX(-25deg);
+            transform: skewX(-25deg);
+            transition: left 0.7s ease;
+            pointer-events: none;
+        }
+        
+        .neon-button:hover::before
+        {
+            left: 150%;
+        }
+        
+        /* Static glow on hover */
+        .neon-button:hover
+        {
+            -webkit-transform: translateY(-2px);
+            -ms-transform: translateY(-2px);
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(124, 58, 237, 0.9), 0 0 60px rgba(124, 58, 237, 0.6), 0 0 90px rgba(124, 58, 237, 0.4), 0 0 120px rgba(124, 58, 237, 0.2), inset 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Sparkle styling */
+        .neon-button .sparkle
+        {
+            -webkit-flex-shrink: 0;
+            -ms-flex-negative: 0;
+            flex-shrink: 0;
+            -webkit-filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
+            filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
+            transition: all 0.3s ease;
+            width: 14px;
+            height: 14px;
+        }
+        
+        .neon-button:hover .sparkle
+        {
+            -webkit-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            transform: scale(1.1);
+            -webkit-filter: drop-shadow(0 0 8px rgba(255, 255, 255, 1));
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 1));
+        }
+        
+        /* Active/Click state */
+        .neon-button:active
+        {
+            -webkit-transform: translateY(0px);
+            -ms-transform: translateY(0px);
+            transform: translateY(0px);
+            box-shadow: 0 0 15px rgba(124, 58, 237, 0.6), 0 0 30px rgba(124, 58, 237, 0.4), inset 0 0 15px rgba(255, 255, 255, 0.15);
+        }
+    </style>
+    <style type="text/css">
+    @keyframes bellRing {
+        0%   { transform: rotate(0deg);   }
+        10%  { transform: rotate(15deg);  }
+        20%  { transform: rotate(-15deg); }
+        30%  { transform: rotate(10deg);  }
+        40%  { transform: rotate(-10deg); }
+        50%  { transform: rotate(5deg);   }
+        60%  { transform: rotate(-5deg);  }
+        70%  { transform: rotate(0deg);   }
+        100% { transform: rotate(0deg);   }
+    }
+</style>
+    <link rel="stylesheet" type="text/css" href="../css/jquerycssmenu.css" />
+    <!--[if lte IE 7]>
+<style type="text/css">
+html .jquerycssmenu{height: 1%;} /*Holly Hack for IE7 and below*/
+</style>
+<![endif]-->
+    <link rel="stylesheet" href="../Validation Files/validationEngine.css" type="text/css" />
+    <link rel="stylesheet" href="../Validation Files/template.css" type="text/css" />
+    <link href="../MessageBox_js/jquery.alerts.css" rel="stylesheet" type="text/css" />
+    <script src="../MessageBox_js/jquery.js" type="text/javascript"></script>
+    <script src="../MessageBox_js/jquery.alerts.js" type="text/javascript"></script>
+    <script src="../js/cssverticalmenu.js" type="text/javascript"></script>
+    <link href="../AutoComplete_CSS/MIS_jquery-ui.css" rel="stylesheet" type="text/css" />
+    <link href="../css/cssverticalmenu.css" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico" />
+    <script type="text/javascript">
+
+        function HideModalPopup_U() {
+
+            $find("MP_U").hide();
+            return false;
+        }
+    </script>
+    <style type="text/css">
+        .modalPopup12
+        {
+            background-color: transparent;
+            width: 940px;
+            height: 180px;
+        }
+    </style>
+</head>
+<body style="overflow: scroll;">
+    <form id="form1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="false"
+        LoadScriptsBeforeUI="false" EnablePageMethods="true">
+    </asp:ScriptManager>
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional" Visible="true">
+        <ContentTemplate>
+            <div class="loading" align="center" id="load" style="display: none;">
+                <img src="../Loading_Images/indicator_mozilla_blu.gif" alt="" />
+            </div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+            <div id="maincontent" runat="server">
+                <div id="innerbox_MidMain_Grid_">
+                    <%--<asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>--%>
+                </div>
+            </div>
+            <asp:HiddenField ID="hdAdsJson" runat="server" ClientIDMode="Static" />
+            <asp:HiddenField ID="hdAdsUrl" runat="server" ClientIDMode="Static" /> 
+            <asp:HiddenField ID="hdnBellImagePath" runat="server" ClientIDMode="Static" />
+            <%--<div id="divBellImagePopup" style="display: none; position: fixed; top: 0; left: 0;
+                width: 100%; height: 100%; z-index: 9999; background: rgba(0,0,0,0.6); text-align: center;">
+                <div style="position: relative; display: inline-block; margin-top: 80px;">
+                    <div onclick="CloseBellPopup()" style="position: absolute; top: -15px; right: -15px;
+                        width: 32px; height: 32px; background: #ff4d4f; color: white; border-radius: 50%;
+                        cursor: pointer; font-size: 18px; font-weight: bold; line-height: 32px; text-align: center;">
+                        &#10005;
+                    </div>
+ 
+                    <div style="width:430px; border-radius:10px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.4); font-family:Arial, sans-serif;">
+                        <img id="imgBellDisplay" src="" alt="Announcement" style="width: 430px; height: 420px;display:block;" />
+                        <div id="divBellLinksFooter" runat="server" style="background:#f5f5f5;padding:14px;text-align:center;">
+                            <span style="font-size:15px;font-weight:bold;">For More Details:</span>
+                            <br><br>
+                            <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:10px;">
+                                <asp:HyperLink ID="hlBellWhatsApp" runat="server" Target="_blank"
+                                    Style="background:#25D366; color:#fff; text-decoration:none;
+                                           padding:8px 16px; border-radius:5px; font-weight:bold;
+                                           font-size:13px; display:inline-block;">
+                                    &#128172; WhatsApp
+                                </asp:HyperLink>
+                                <asp:HyperLink ID="hlDrive" runat="server" Target="_blank"
+                                    Style="background:#4285F4; color:#fff; text-decoration:none;
+                                           padding:8px 16px; border-radius:5px; font-weight:bold;
+                                           font-size:13px; display:inline-block;">
+                                    &#128193; Drive File
+                                </asp:HyperLink>
+                                <asp:HyperLink ID="hlBellYoutube" runat="server" Target="_blank"
+                                    Style="background:#FF0000; color:#fff; text-decoration:none;
+                                           padding:8px 16px; border-radius:5px; font-weight:bold;
+                                           font-size:13px; display:inline-block;">
+                                    &#9654;&#65039; YouTube
+                                </asp:HyperLink>
+                                <asp:HyperLink ID="hlBellWebsite" runat="server" Target="_blank"
+                                    Style="background:#333333; color:#fff; text-decoration:none;
+                                           padding:8px 16px; border-radius:5px; font-weight:bold;
+                                           font-size:13px; display:inline-block;">
+                                    &#127760; Website
+                                </asp:HyperLink>
+                            </div>
+                        </div>
+                    </div>--%>
+                    <div id="divBellImagePopup" style="display: none; position: fixed; top: 0; left: 0;
+                width: 100%; height: 100%; z-index: 9999; background: rgba(0,0,0,0.6); text-align: center;">
+                <div style="position: relative; display: inline-block; margin-top: 80px;">
+                    <div onclick="CloseBellPopup()" style="position: absolute; top: -15px; right: -15px;
+                        width: 32px; height: 32px; background: #ff4d4f; color: white; border-radius: 50%;
+                        cursor: pointer; font-size: 18px; font-weight: bold; line-height: 32px; text-align: center;">
+                        &#10005;
+                    </div>
+
+                    <div style="width:430px; border-radius:10px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.4); font-family:Arial, sans-serif;">
+                        <img id="imgBellDisplay" src="" alt="Announcement" style="width: 430px; height: 420px;display:block;" />
+                        <div id="divBellLinksFooter" runat="server" style="background:#f5f5f5; padding:8px 10px;
+                            text-align:center; border-radius: 0 0 10px 10px; margin-top: 2px;
+                            width:430px; box-sizing:border-box;">
+                            <span style="font-size:13px;font-weight:bold;">For More Details:</span>
+                            <br>
+                            <div style="display:flex; flex-wrap:nowrap; justify-content:center; gap:5px; margin-top:6px;">
+                                <asp:HyperLink ID="hlBellWhatsApp" runat="server" Target="_blank"
+                                    Style="background:#25D366; color:#fff; text-decoration:none;
+                                           padding:5px 8px; border-radius:5px; font-weight:bold;
+                                           font-size:11px; display:inline-block; white-space:nowrap;">
+                                    &#128172; WhatsApp
+                                </asp:HyperLink>
+                                <asp:HyperLink ID="hlDrive" runat="server" Target="_blank"
+                                    Style="background:#4285F4; color:#fff; text-decoration:none;
+                                           padding:5px 8px; border-radius:5px; font-weight:bold;
+                                           font-size:11px; display:inline-block; white-space:nowrap;">
+                                    &#128193; Drive
+                                </asp:HyperLink>
+                                <asp:HyperLink ID="hlBellYoutube" runat="server" Target="_blank"
+                                    Style="background:#FF0000; color:#fff; text-decoration:none;
+                                           padding:5px 8px; border-radius:5px; font-weight:bold;
+                                           font-size:11px; display:inline-block; white-space:nowrap;">
+                                    &#9654;&#65039; YouTube
+                                </asp:HyperLink>
+                                <asp:HyperLink ID="hlBellWebsite" runat="server" Target="_blank"
+                                    Style="background:#333333; color:#fff; text-decoration:none;
+                                           padding:5px 8px; border-radius:5px; font-weight:bold;
+                                           font-size:11px; display:inline-block; white-space:nowrap;">
+                                    &#127760; Website
+                                </asp:HyperLink>
+                            </div>
+                        </div>
+                    </div>
+ 
+                    <div id="divBellNoImage" style="display: none; background: white; padding: 30px 50px;
+                        border-radius: 10px; font-size: 16px; color: #333;">
+                        No active announcement found.
+                    </div>
+                </div>
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+    </form>
+    <script src="../js/query.js" type="text/javascript"></script>
+    <script src="../js/Validation.js" type="text/javascript"></script>
+    <script type="text/javascript" src="../windowfiles/dhtmlwindow.js"></script>
+    <script type="text/javascript" src="../modalfiles/modal.js"></script>
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../js/slide.js"></script>
+    <script type="text/javascript" src="../js/jscolor.js"></script>
+    <script src="../js/listpopup.js" type="text/javascript"></script>
+    <script src="../js/iframepopupwin.js" type="text/javascript"></script>
+    <script src="../Validation%20Files/Ascii.js" type="text/javascript"></script>
+    <script src="../AutoComplete_JS/jquery.min.js" type="text/javascript"></script>
+    <script src="../AutoComplete_JS/jquery-ui.min.js" type="text/javascript"></script>
+    <!-- VALIDATION SCRIPT -->
+    <script src="../Validation Files/jquery_002.js" type="text/javascript" charset="utf-8">
+    </script>
+    <script src="../Validation Files/jquery.js" type="text/javascript" charset="utf-8">
+    </script>
+    <script src="../Validation%20Files/Ascii.js" type="text/javascript"></script>
+    <script src="../js/Autotab.js" type="text/javascript"></script>
+    <link rel="Stylesheet" href="../Dropdown/chosen.css" />
+    <link rel="Stylesheet" href="../Dropdown/chosen.min.css" />
+    <script src="../Dropdown/chosen.jquery.js" type="text/javascript"></script>
+    <script src="../Dropdown/chosen.jquery.min.js" type="text/javascript"></script>
+    <script src="../Dropdown/chosen.proto.js" type="text/javascript"></script>
+    <script src="../Dropdown/chosen.proto.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="../js/Grid_header_script/gridviewScroll.min.js"></script>
+    <script type="text/javascript">
+        function Session_Clear() {
+            var FTC = '<%= Session["FTC"].ToString() %>';
+
+            if (FTC != '') {
+            }
+            else {
+                Loading_ShowImage();
+                $.ajax({
+                    url: "../AutoComplete_Pages/Auto_Complete_Searching.asmx/Sign_out",
+                    data: "{ 'mail': 'a'}",
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    dataFilter: function (data) { return data; },
+                    async: true,
+                    success: function (data) {
+                        Loading_HideImage();
+                        if (data.d == '1') {
+
+                            window.open('../LoginPage/Default.aspx', '_top');
+                        }
+
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        //////alert(textStatus);
+                    }
+
+                });
+            }
+        }
+
+        var win = null;
+        function NewWindow2(mypage, myname, w, h, scroll) {
+            LeftPosition = (screen.width) ? (screen.width - w) / 2 : 0;
+            TopPosition = (screen.height) ? (screen.height - h) / 2 : 0;
+            settings = 'height=' + h + ',width=' + w + ',top=' + TopPosition + ',left=' + LeftPosition + ',scrollbars=' + scroll + ',resizable';
+            win = window.open(mypage, myname, settings);
+            win.focus();
+
+            return false;
+        }
+
+
+        jQuery(document).ready(function () {
+
+            jQuery("#form1").validationEngine();
+        });
+
+
+        function checkHELLO(field, rules, i, options) {
+            if (field.val() != "HELLO") {
+
+                return options.allrules.validate2fields.alertText;
+            }
+        }
+
+        function SessionClear() {
+
+            $.post("../Session_Clear.ashx", null, function () {
+
+            });
+        }
+
+        function DSC() {
+            win = window.open('../FlatFile/MIS_report_1.aspx?DSC=DSC', 'ndf');
+            Loading_HideImage();
+        }
+
+    </script>
+    <script type="text/javascript">
+
+        function Session_Clear_Elogix() {
+
+
+            $.ajax({
+                url: "../AutoComplete_Pages/Auto_Complete_Searching.asmx/Sign_out",
+                data: "{ 'mail': 'a'}",
+                dataType: "json",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                dataFilter: function (data) { return data; },
+                async: true,
+                success: function (data) {
+                    Loading_HideImage();
+                    if (data.d == '1') {
+
+                        window.open('https://www.e-logix.in', '_top');
+                    }
+
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    //////alert(textStatus);
+                }
+            });
+
+
+        }
+
+        function SessionClear_Elogix() {
+
+            $.post("../Session_Clear.ashx", null, function () {
+
+            });
+        }
+
+            
+
+    </script>
+    <!-- VALIDATION SCRIPT -->
+    <script type="text/javascript">
+
+        var config = {
+            '.chosen-select': {},
+            '.chosen-select-deselect': { allow_single_deselect: true },
+            '.chosen-select-no-single': { disable_search_threshold: 10 },
+            '.chosen-select-no-results': { no_results_text: 'Oops, nothing found!' },
+            '.chosen-select-width': { width: "95%" }
+        };
+
+
+        for (var selector in config) {
+            if (config.hasOwnProperty(selector)) {
+                $(selector).chosen(config[selector]);
+            };
+        }
+    </script>
+    <script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function () {
+    const ads = JSON.parse('<%= HttpUtility.JavaScriptStringEncode(hdAdsJson.Value) %>') || [];
+    let current = 0;
+
+    const menuItem = document.getElementById('menuItem');
+    const adPopup = document.getElementById('adPopup');
+    const adImg = document.getElementById('adImg');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    const zoomOverlay = document.getElementById('zoomOverlay');
+    const zoomImg = document.getElementById('zoomImg');
+    const closeZoomBtn = document.getElementById('closeZoom');
+
+    function showAd(index) {
+        current = index;
+        adImg.src = ads[current] || "";
+    }
+
+    if (ads.length > 0) {
+        showAd(current);
+    }
+
+    if (prevBtn) {
+        prevBtn.onclick = () => {
+            current = (current - 1 + ads.length) % ads.length;
+            showAd(current);
+        };
+    }
+
+    if (nextBtn) {
+        nextBtn.onclick = () => {
+            current = (current + 1) % ads.length;
+            showAd(current);
+        };
+    }
+
+    if (menuItem) {
+        menuItem.addEventListener("mouseenter", () => {
+            adPopup.style.display = "block";
+        });
+        menuItem.addEventListener("mouseleave", () => {
+            setTimeout(() => {
+                if (!adPopup.matches(':hover')) {
+                    adPopup.style.display = "none";
+                }
+            }, 200);
+        });
+    }
+
+    if (adPopup) {
+        adPopup.addEventListener("mouseleave", () => {
+            adPopup.style.display = "none";
+        });
+        adPopup.addEventListener("mouseenter", () => {
+            adPopup.style.display = "block";
+        });
+    }
+
+    if (adImg) {
+        adImg.addEventListener('click', () => {
+            zoomImg.src = ads[current] || "";
+            zoomOverlay.classList.add('visible');
+            zoomOverlay.classList.remove('closing');
+        });
+    }
+
+    function closeZoom() {
+        zoomOverlay.classList.add('closing');
+        setTimeout(() => {
+            zoomOverlay.classList.remove('visible');
+            zoomOverlay.classList.remove('closing');
+        }, 300);
+    }
+
+    if (closeZoomBtn) closeZoomBtn.addEventListener('click', closeZoom);
+
+    if (zoomOverlay) {
+        zoomOverlay.addEventListener('click', (e) => {
+            if (e.target === zoomOverlay) {
+                closeZoom();
+            }
+        });
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeZoom();
+        }
+    });
+});
+    </script>
+    <script type="text/javascript">
+        // On page load &#8212; highlight bell if image active
+        document.addEventListener('DOMContentLoaded', function () {
+            var imgPath = document.getElementById(
+            'hdnBellImagePath').value;
+            if (imgPath && imgPath !== '') {
+                var dot = document.getElementById('spanBellDot');
+                if (dot) dot.style.display = 'block';
+                var bell = document.getElementById('spanBellIcon');
+                if (bell) {
+                    bell.style.animation = 'bellRing 1s infinite';
+                }
+            }
+        });
+
+        function OpenBellPopup() {
+            var imgPath = document.getElementById(
+            'hdnBellImagePath').value;
+            var div = document.getElementById('divBellImagePopup');
+            var img = document.getElementById('imgBellDisplay');
+            var noImg = document.getElementById('divBellNoImage');
+
+            if (imgPath && imgPath !== '') {
+                img.src = imgPath;
+                img.style.display = 'block';
+                noImg.style.display = 'none';
+            }
+            else {
+                img.style.display = 'none';
+                noImg.style.display = 'block';
+            }
+            div.style.display = 'block';
+        }
+
+        function CloseBellPopup() {
+            var div = document.getElementById('divBellImagePopup');
+            var img = document.getElementById('imgBellDisplay');
+            if (div) div.style.display = 'none';
+            if (img) img.src = '';
+        }
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+﻿ol#toc li a.active {
+    border-top: solid #6a1b9a 2px !important;
+    border-left: solid #6a1b9a thin !important;
+    border-right: solid #6a1b9a thin !important;
+}
+ol#toc_inner li a.active {
+    background-color: #ffffff !important;
+    border-top: solid #6a1b9a 2px !important;
+    border-left: solid #6a1b9a thin !important;
+    border-right: solid #6a1b9a thin !important;
+}
+ol#toc_deep li a.active {
+    border-top: solid #6a1b9a 2px !important;
+    border-left: solid #6a1b9a thin !important;
+    border-right: solid #6a1b9a thin !important;
+    color: #6a1b9a !important;
+}
+ol#toc_deep li a:hover { color: #6a1b9a !important; }
+#toc_bank li a.active {
+    border-top: solid #6a1b9a 2px !important;
+    border-left: solid #6a1b9a thin !important;
+    border-right: solid #6a1b9a thin !important;
+    color: #6a1b9a !important;
+}
+#toc_bank li a:hover { color: #6a1b9a !important; }
+.grid-view th { background-color: #6a1b9a !important; color: #fff !important; }

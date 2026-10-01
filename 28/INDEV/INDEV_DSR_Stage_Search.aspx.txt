@@ -1,0 +1,7 @@
+ <div id="mainmastop2container_rght_tag2_txt1" style="width:100% ; height:10%;"><asp:Button ID="btnstage_I" runat="server" CssClass="roundcorner" Text=" Stage I "  
+                                OnClientClick="open_Imp_DSR_State_I_New('New'); return false"   />
+                                 * Status, Remarks, Aging 
+                                  </div> <br />
+                               <div id="mainmastop2container_rght_tag2_txt1" style="width:100% ; height:10%;"><asp:Button ID="btnstage_II" runat="server"  OnClientClick="open_Imp_DSR_State_II_New('New'); return false"  CssClass="roundcorner" Text="Stage II " />
+                                 * Doc. Rec. Date, Gate in Export, I ETD from orgin Port, I Transit Port ETA, II Transit Port ETA, II ETD from Transit Port ... etc
+                                 </div> <br />

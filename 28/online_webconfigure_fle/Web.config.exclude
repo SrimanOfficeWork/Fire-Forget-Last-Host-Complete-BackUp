@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+
+<!--
+
+//////////////// URL References for ASP.NET Performance for Below Configure Files Setting /////////////////
+
+http:////www.codeproject.com/Articles/23306/10-ASP-NET-Performance-and-Scalability-Secrets
+
+//////////////// URL References for ASP.NET Performance for Below Configure Files Setting /////////////////
+
+  ///For more information on how to configure your ASP.NET application, please visit
+  http://go.microsoft.com/fwlink/?LinkId=169433
+  -->
+<configuration>
+  <appSettings>
+    <clear />
+    <add key="sessionExpiredPath" value="../LoginPage/Default.aspx?from=expired" />
+    <add key="sessionExpiredPath_Subfolder" value="../../LoginPage/Default.aspx?from=expired" />
+    <add key="loginInvalidPath" value="LoginPage/Default.aspx?from=invalid" />
+    <add key="isdeactivate" value="LoginPage/Default.aspx?from=isdeactivate" />
+    <add key="CheckLoginValue" value="LoginPage/Default.aspx?from=CheckLoginValue" />
+    <!--<add key="con" value="Server=server\sqlexpress;database=ImpexLogin;uid=sa;pwd=sa,123;" />-->
+    <add key="con" value="Server=208.91.198.196;database=IMPEXLOGIN;uid=rtsloginnew;pwd=rtsimpexnew123;"/>
+    <!--<clear/>
+    <add key="logFolder" value="logs"/>-->
+
+  </appSettings>
+  <connectionStrings>
+    <add name="ApplicationServices" connectionString="data source=.\SQLEXPRESS;Integrated Security=SSPI;AttachDBFilename=|DataDirectory|\aspnetdb.mdf;User Instance=true" providerName="System.Data.SqlClient" />
+    <add name="ERoyalImpexConnectionString" connectionString="Data Source=SYSTEM1;Initial Catalog=ERoyalImpex;Integrated Security=True" providerName="System.Data.SqlClient" />
+  </connectionStrings>
+  <!--KeyWord For Improve web Performance-->
+  <system.net>
+    <connectionManagement>
+      <add address="*" maxconnection="100" />
+    </connectionManagement>
+  </system.net>
+  <!--KeyWord For Improve web Performance-->
+
+  <system.web>
+    <!--KeyWord For Improve Web Performance-->
+
+    <httpModules>
+
+      <remove name="Session" />
+      <remove name="WindowsAuthentication" />
+      <remove name="PassportAuthentication" />
+      <remove name="AnonymousIdentification" />
+      <remove name="UrlAuthorization" />
+      <remove name="FileAuthorization" />
+    </httpModules>
+
+    <caching>
+      <outputCacheSettings>
+        <outputCacheProfiles>
+          <add name="cached" duration="600"
+						varyByParam="none" enabled="true"/>
+        </outputCacheProfiles>
+      </outputCacheSettings>
+    </caching>
+    <trace enabled="false" pageOutput="false" requestLimit="10"  traceMode="SortByTime"/>
+    <!--KeyWord For Improve Web Performance-->
+
+    <httpHandlers>
+      <!--KeyWord For Improve Web javascript Performance-->
+      <add verb="*" path="*.js"
+           type="MinifyingHttpHandler.JavaScriptHttpHandler,
+     MinifyingHttpHandler" />
+      <!--KeyWord For Improve Web javascript Performance-->
+      <add path="Reserved.ReportViewerWebControl.axd" verb="*" type="Microsoft.Reporting.WebForms.HttpHandler, Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" validate="false"/>
+    </httpHandlers>
+    <pages validateRequest="false" enableEventValidation="false" viewStateEncryptionMode ="Never" />
+
+    <sessionState mode="StateServer" stateConnectionString="tcpip=127.0.0.1:42424" sqlConnectionString="data source=127.0.0.1;Trusted_Connection=yes" cookieless="AutoDetect" timeout="2880">
+
+    </sessionState>
+
+
+
+    <compilation debug="true" targetFramework="4.0">
+      <assemblies>
+        <add assembly="System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=B03F5F7F11D50A3A" />
+        <add assembly="System.Web.Extensions.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" />
+        <add assembly="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=B77A5C561934E089" />
+        <add assembly="Microsoft.Build.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=B03F5F7F11D50A3A" />
+        <add assembly="System.Management, Version=4.0.0.0, Culture=neutral, PublicKeyToken=B03F5F7F11D50A3A" />
+      </assemblies>
+
+      <buildProviders>
+        <add extension=".rdlc" type="Microsoft.Reporting.RdlBuildProvider, Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+      </buildProviders>
+    </compilation>
+    <authentication mode="Forms">
+      <forms loginUrl="LoginPage/Default.aspx" defaultUrl="LoginPage/Default.aspx" protection="All" path="/" timeout="2880">
+        <credentials passwordFormat="Clear">
+
+        </credentials>
+      </forms>
+    </authentication>
+    <membership>
+      <providers>
+        <clear />
+        <add name="AspNetSqlMembershipProvider" type="System.Web.Security.SqlMembershipProvider" connectionStringName="ApplicationServices" enablePasswordRetrieval="false" enablePasswordReset="true" requiresQuestionAndAnswer="false" requiresUniqueEmail="false" maxInvalidPasswordAttempts="5" minRequiredPasswordLength="6" minRequiredNonalphanumericCharacters="0" passwordAttemptWindow="10" applicationName="/" />
+      </providers>
+    </membership>
+    <!--KeyWord For Improve Web Performance-->
+
+    <profile enabled="true" automaticSaveEnabled="false">
+      <providers>
+        <clear />
+        <add name="AspNetSqlProfileProvider" type="System.Web.Profile.SqlProfileProvider" connectionStringName="ApplicationServices" applicationName="/" />
+      </providers>
+    </profile>
+
+    <roleManager enabled="true" cacheRolesInCookie="true">
+      <providers>
+        <clear />
+        <add name="AspNetSqlRoleProvider" type="System.Web.Security.SqlRoleProvider" connectionStringName="ApplicationServices" applicationName="/" />
+        <add name="AspNetWindowsTokenRoleProvider" type="System.Web.Security.WindowsTokenRoleProvider" applicationName="/" />
+      </providers>
+    </roleManager>
+    <!--KeyWord For Improve Web Performance-->
+
+    <customErrors mode="Off"  />
+    <machineKey
+	validationKey="E46300A099B0EE8BFB55262C0F1BAC3CCAA1698F2F7C353A840A2789D5974DAA3774D2AE51A75A01C5B24A29BBCDED87FABC5340B409AF7456C966F3E4B98CE8"
+	decryptionKey="99886C583857046015A0AEDF1E342A08AE0E4ADC6F65A1D18AEC0D9BD4CB2516"
+	validation="SHA1" decryption="AES"
+/>
+
+  </system.web>
+
+  <system.webServer>
+    <modules runAllManagedModulesForAllRequests="true" />
+    <validation validateIntegratedModeConfiguration="false" />
+    <handlers>
+      <add name="ReportViewerWebControlHandler" preCondition="integratedMode" verb="*" path="Reserved.ReportViewerWebControl.axd" type="Microsoft.Reporting.WebForms.HttpHandler, Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
+    </handlers>
+
+  </system.webServer>
+</configuration>

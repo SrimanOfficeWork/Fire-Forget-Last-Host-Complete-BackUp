@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Balance_Sheet" targetNamespace="http://tempuri.org/Balance_Sheet.xsd" xmlns:mstns="http://tempuri.org/Balance_Sheet.xsd" xmlns="http://tempuri.org/Balance_Sheet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="Balance_Sheet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="Balance_Sheet" msprop:Generator_UserDSName="Balance_Sheet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Balance_Sheet" msprop:Generator_TableClassName="Balance_SheetDataTable" msprop:Generator_TableVarName="tableBalance_Sheet" msprop:Generator_RowChangedName="Balance_SheetRowChanged" msprop:Generator_TablePropName="_Balance_Sheet" msprop:Generator_RowDeletingName="Balance_SheetRowDeleting" msprop:Generator_RowChangingName="Balance_SheetRowChanging" msprop:Generator_RowEvHandlerName="Balance_SheetRowChangeEventHandler" msprop:Generator_RowDeletedName="Balance_SheetRowDeleted" msprop:Generator_RowClassName="Balance_SheetRow" msprop:Generator_UserTableName="Balance_Sheet" msprop:Generator_RowEvArgName="Balance_SheetRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CAPITAL_NAME" msprop:Generator_ColumnVarNameInTable="columnCAPITAL_NAME" msprop:Generator_ColumnPropNameInRow="CAPITAL_NAME" msprop:Generator_ColumnPropNameInTable="CAPITAL_NAMEColumn" msprop:Generator_UserColumnName="CAPITAL_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="PAN_NO" msprop:Generator_ColumnVarNameInTable="columnPAN_NO" msprop:Generator_ColumnPropNameInRow="PAN_NO" msprop:Generator_ColumnPropNameInTable="PAN_NOColumn" msprop:Generator_UserColumnName="PAN_NO" type="xs:string" minOccurs="0" />
+              <xs:element name="ADDRESS_1" msprop:Generator_ColumnVarNameInTable="columnADDRESS_1" msprop:Generator_ColumnPropNameInRow="ADDRESS_1" msprop:Generator_ColumnPropNameInTable="ADDRESS_1Column" msprop:Generator_UserColumnName="ADDRESS_1" type="xs:string" minOccurs="0" />
+              <xs:element name="ADDRESS_2" msprop:Generator_ColumnVarNameInTable="columnADDRESS_2" msprop:Generator_ColumnPropNameInRow="ADDRESS_2" msprop:Generator_ColumnPropNameInTable="ADDRESS_2Column" msprop:Generator_UserColumnName="ADDRESS_2" type="xs:string" minOccurs="0" />
+              <xs:element name="DISTRICT" msprop:Generator_ColumnVarNameInTable="columnDISTRICT" msprop:Generator_ColumnPropNameInRow="DISTRICT" msprop:Generator_ColumnPropNameInTable="DISTRICTColumn" msprop:Generator_UserColumnName="DISTRICT" type="xs:string" minOccurs="0" />
+              <xs:element name="STATE_CODE" msprop:Generator_ColumnVarNameInTable="columnSTATE_CODE" msprop:Generator_ColumnPropNameInRow="STATE_CODE" msprop:Generator_ColumnPropNameInTable="STATE_CODEColumn" msprop:Generator_UserColumnName="STATE_CODE" type="xs:string" minOccurs="0" />
+              <xs:element name="Trade_Payables" msprop:Generator_ColumnVarNameInTable="columnTrade_Payables" msprop:Generator_ColumnPropNameInRow="Trade_Payables" msprop:Generator_ColumnPropNameInTable="Trade_PayablesColumn" msprop:Generator_UserColumnName="Trade_Payables" type="xs:string" minOccurs="0" />
+              <xs:element name="Inventories" msprop:Generator_ColumnVarNameInTable="columnInventories" msprop:Generator_ColumnPropNameInRow="Inventories" msprop:Generator_ColumnPropNameInTable="InventoriesColumn" msprop:Generator_UserColumnName="Inventories" type="xs:string" minOccurs="0" />
+              <xs:element name="CASH_EQUIVALENTS" msprop:Generator_ColumnVarNameInTable="columnCASH_EQUIVALENTS" msprop:Generator_ColumnPropNameInRow="CASH_EQUIVALENTS" msprop:Generator_ColumnPropNameInTable="CASH_EQUIVALENTSColumn" msprop:Generator_UserColumnName="CASH_EQUIVALENTS" type="xs:string" minOccurs="0" />
+              <xs:element name="Salary_Advance" msprop:Generator_ColumnVarNameInTable="columnSalary_Advance" msprop:Generator_ColumnPropNameInRow="Salary_Advance" msprop:Generator_ColumnPropNameInTable="Salary_AdvanceColumn" msprop:Generator_UserColumnName="Salary_Advance" type="xs:string" minOccurs="0" />
+              <xs:element name="Total_Assets" msprop:Generator_ColumnVarNameInTable="columnTotal_Assets" msprop:Generator_ColumnPropNameInRow="Total_Assets" msprop:Generator_ColumnPropNameInTable="Total_AssetsColumn" msprop:Generator_UserColumnName="Total_Assets" type="xs:string" minOccurs="0" />
+              <xs:element name="Grand_Total" msprop:Generator_ColumnVarNameInTable="columnGrand_Total" msprop:Generator_ColumnPropNameInRow="Grand_Total" msprop:Generator_ColumnPropNameInTable="Grand_TotalColumn" msprop:Generator_UserColumnName="Grand_Total" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

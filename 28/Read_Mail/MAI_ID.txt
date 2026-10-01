@@ -1,0 +1,9 @@
+﻿Import
+
+pcspl.chennai@gmail.com
+
+logu12345
+//////////////////////////////////////
+user_name = "iplpltd@gmail.com";
+  
+pwd = "iplchennai";

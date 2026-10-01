@@ -1,0 +1,87 @@
+{
+    "Header": [
+        {
+            "Branch": "Acc, Chennai",
+            "CompanyID": null,
+            "CountryOfOrigin": "DK",
+            "CountryOfShipment": "DK",
+            "CustomHouse": null,
+            "FileName": null,
+            "Freight": null,
+            "IEC": null,
+            "ImporterAdd1": "5/41, 5th Cross St, Balaji Nagar",
+            "ImporterAdd2": "Ekkatuthangal,Chennai,",
+            "ImporterAdd3": "",
+            "ImporterAdd4": null,
+            "ImporterName": "Royal Tech",
+            "Insurance": null,
+            "InvoiceResponseTime": "24/09/2025 10:50:18",
+            "InvoiceStartTime": "29-07-2024",
+            "JobNo": null,
+            "JobStatus": "N",
+            "JobType": "imp",
+            "MiscCharge": null,
+            "PageCount": 1,
+            "PageNumber": 1,
+            "PdfClientName": "Royal Tech",
+            "PdfCount": 1,
+            "PortOfOrigin": "Singapore",
+            "PortOfShipment":"Singapore",
+            "Status": "Success",
+            "TotalCarton":  "1",
+            "TotalGrossWeight": "66,300",
+            "TotalMeasurement": null,
+            "TotalNetWeight":"75,000",
+            "UserID": "c",
+            "WorkingPeriod": null
+        }
+    ],
+    "InvoiceDetails": [
+        {
+            "InvoiceSlNo": "1",
+            "InvoiceNo": "123456789369",
+            "InvoiceDate": "13.02.2025",
+            "QtyCode": "PCE",
+            "Currency": "USD",
+            "Terms": "CIP",
+            "TermsofPayment": "",
+            "InvoiceValue": "3.100,25",
+            "SupplierName": "RTS SYSTEMS",
+            "SupplierAdd1": "Theilerstr. 1a",
+            "SupplierAdd2": "International Headquarters",
+            "SupplierAdd3": "Head:Matthias Rebellius",
+            "SupplierAdd4": ""
+        }
+    ],
+    "ItemsDetails": [
+        { 
+            "Amount": "2.970,50",
+            "ExtraItemDesc": "",
+            "InvoiceSlNo": 1,
+            "ItemCountry": null,
+            "ItemDesc": "S55264-V128 VPI46.32F4Q Combi valveDN32 4000 l/hPT-ports, female threads",
+            "ItemHSCODE": "84818063",
+            "ItemNETWEIGHT": null,
+            "ItemQTYCode": "NOS",
+            "ItemSlNo": 1,
+            "PONumber": null,
+            "PartNo": null,
+            "Quantity": "50",
+            "Rate": "135.00"
+
+       }
+    ],
+    "ItemsIGMContainerDetails": [
+        {
+            "ContainerNo": null,
+            "ContainerSealDate": null,
+            "ContainerSealNo": null,
+            "ContainerSize": null,
+            "Containerslno": 1,
+            "HBLDate": null,
+            "HBLNo": null,
+            "MBLDate": null,
+            "MBLNo": null
+        }
+    ]
+}

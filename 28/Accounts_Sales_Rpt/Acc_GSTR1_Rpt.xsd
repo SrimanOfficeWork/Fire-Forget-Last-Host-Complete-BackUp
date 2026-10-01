@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Acc_GSTR1_Rpt" targetNamespace="http://tempuri.org/Acc_GSTR1_Rpt.xsd" xmlns:mstns="http://tempuri.org/Acc_GSTR1_Rpt.xsd" xmlns="http://tempuri.org/Acc_GSTR1_Rpt.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="Acc_GSTR1_Rpt" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DataTable1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="GSTN_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="CUSTOMER_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="BILL_INV_NO" type="xs:string" minOccurs="0" />
+              <xs:element name="BILL_INV_DATE" type="xs:string" minOccurs="0" />
+              <xs:element name="INVOICE_VALUE" type="xs:string" minOccurs="0" />
+              <xs:element name="PLACE_OF_SUPPLY" type="xs:string" minOccurs="0" />
+              <xs:element name="REVERSE_CHARGE" type="xs:string" minOccurs="0" />
+              <xs:element name="INVOICE_TYPE" type="xs:string" minOccurs="0" />
+              <xs:element name="RATE" type="xs:string" minOccurs="0" />
+              <xs:element name="TAXABLE_VALUE" type="xs:string" minOccurs="0" />
+              <xs:element name="NON_TAXABLE_VALUE" type="xs:string" minOccurs="0" />
+              <xs:element name="TAX_AMOUNT" type="xs:string" minOccurs="0" />
+              <xs:element name="CGST_AMT" type="xs:string" minOccurs="0" />
+              <xs:element name="SGST_AMT" type="xs:string" minOccurs="0" />
+              <xs:element name="IGST_AMT" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="DataTable2">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="GSTN_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="CUSTOMER_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="BILL_INV_NO" type="xs:string" minOccurs="0" />
+              <xs:element name="NON_TAXABLE_VALUE" type="xs:string" minOccurs="0" />
+              <xs:element name="TAXABLE_VALUE" type="xs:string" minOccurs="0" />
+              <xs:element name="TAX_AMOUNT" type="xs:string" minOccurs="0" />
+              <xs:element name="MIN_BILL_INV_DATE" type="xs:string" minOccurs="0" />
+              <xs:element name="MAX_BILL_INV_DATE" type="xs:string" minOccurs="0" />
+              <xs:element name="TOTAL_CGST_AMT" type="xs:string" minOccurs="0" />
+              <xs:element name="TOTAL_SGST_AMT" type="xs:string" minOccurs="0" />
+              <xs:element name="TOTAL_IGST_AMT" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="DataTable3">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="INVOICE_VALUE" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

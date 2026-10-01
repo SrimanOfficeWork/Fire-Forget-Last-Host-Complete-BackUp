@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+	<soap:Body><Imp_Data xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <API_JOB_REF_NO>BOL/SIC/25/05/00001</API_JOB_REF_NO>
+  <IECNO>1234567892</IECNO>
+  <BRANCH_SL_NO>1</BRANCH_SL_NO>
+  <IMPORTER_NAME>ALLCARGO LOGISTICS</IMPORTER_NAME>
+  <ADCODE>0</ADCODE>
+  <TRANSPORT_MODE>Sea</TRANSPORT_MODE>
+  <PORT_OF_FILLING_CODE>INNSA1</PORT_OF_FILLING_CODE>
+  <PORT_OF_ORIGIN_CODE>INNSA</PORT_OF_ORIGIN_CODE>
+  <PORT_OF_SHIPMENT_CODE>INNSA</PORT_OF_SHIPMENT_CODE>
+  <STATE_CODE>27</STATE_CODE>
+  <GSTN_REGISTRATION_NO>27AACCA2894D1ZS</GSTN_REGISTRATION_NO>
+  <COUNTRY_ORGIN>IN</COUNTRY_ORGIN>
+  <COUNTRY_SHIPMENT>IN</COUNTRY_SHIPMENT>
+  <FLAG>S</FLAG>
+  <API_USER_ID>royalsurways1</API_USER_ID>
+</Imp_Data>	</soap:Body>
+</soap:Envelope>

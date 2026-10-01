@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+	<soap:Body><Imp_Data xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <API_JOB_REF_NO>BOL/SIC/2526/05/00395</API_JOB_REF_NO>
+  <BRANCH_SL_NO>1</BRANCH_SL_NO>
+  <IMPORTER_NAME>KULODAY TECHNOPACK PVT LTD</IMPORTER_NAME>
+  <ADCODE>0</ADCODE>
+  <TRANSPORT_MODE>Sea</TRANSPORT_MODE>
+  <PORT_OF_FILLING_CODE>INNSA1</PORT_OF_FILLING_CODE>
+  <PORT_OF_ORIGIN_CODE>MYPKG</PORT_OF_ORIGIN_CODE>
+  <PORT_OF_SHIPMENT_CODE>MYPKG</PORT_OF_SHIPMENT_CODE>
+  <STATE_CODE>27</STATE_CODE>
+  <GSTN_REGISTRATION_NO>27AAACK3957H1ZE</GSTN_REGISTRATION_NO>
+  <COUNTRY_ORGIN>MY</COUNTRY_ORGIN>
+  <COUNTRY_SHIPMENT>MY</COUNTRY_SHIPMENT>
+  <FLAG>S</FLAG>
+  <API_USER_ID>royalsurways1</API_USER_ID>
+</Imp_Data>	</soap:Body>
+</soap:Envelope>

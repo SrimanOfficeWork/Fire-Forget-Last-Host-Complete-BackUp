@@ -1,0 +1,353 @@
+/* CSS Document */
+#tag_innerGRDstyl{
+width:790px;
+height:44px;
+float:left;
+margin-left:10px;
+}
+.txtheader
+{
+background-color: #B3E1FD;
+    background-image: url("images/grid_Row_title_bit.gif");
+    background-position: center top;
+    background-repeat: repeat-x;
+    color: #232323;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    height: 20px;
+    line-height: 2em;
+    text-align: center;
+    vertical-align: middle;
+}
+.grid-view
+{
+	padding: 0;
+	margin: 0;
+	text-align:center;
+	font-family:Arial, Helvetica, sans-serif;
+    font-size:12px;
+    font-weight:normal;
+    color:#232323;
+	margin-left:0px;
+}
+
+.grid-view tr.header
+{
+	background-image:url(images/grid_Row_title_bit.gif);
+    background-repeat:repeat-x;
+    background-position:top;
+    background-color:#f7c374;
+   	height: 20px;
+	vertical-align: middle;
+	text-align:center;
+	font-family:Arial, Helvetica, sans-serif;
+    font-size:12px;
+    font-weight:normal;
+    color:#232323;
+	line-height:2.0em;
+	
+	
+	
+}
+
+
+
+
+.grid-view tr.normal
+{
+   	background-color: #FFFFFF;
+	height: 20px;
+	vertical-align: middle;
+	background-image:url(images/grid_Row_1_bit.gif);
+background-repeat:repeat-x;
+background-position:top;
+border-left:#c8c8c8 solid thin;
+border-right:#c8c8c8 solid thin;
+border-bottom:#c8c8c8 solid thin;
+font-family:Arial, Helvetica, sans-serif;
+font-size:12px;
+font-weight:normal;
+text-align:center;
+color:#232323;
+line-height:1.5em;
+    }
+    
+    .grid-view tr.normal_2
+{
+   	background-color: #FFFFFF;
+	height: 20px;
+	vertical-align: middle;
+	/*background-image:url(images/grid_Row_1_bit.gif);*/
+background-repeat:repeat-x;
+background-position:top;
+
+border-left:#9C9C9C solid thin;
+border-right:#9C9C9C solid thin;
+border-bottom:#9C9C9C solid thin;
+
+font-family:Arial, Helvetica, sans-serif;
+font-size:12px;
+font-weight:normal;
+text-align:center;
+color:#232323;
+line-height:1.5em;
+padding-bottom:50px;
+    }
+    
+.grid-view tr.alternate
+{
+background-color: #FFFFFF;
+height: 20px;
+vertical-align: middle;
+background-image:url(images/grid_Row_2_bit.gif);
+background-repeat:repeat-x;
+background-position:top;
+border-left:#c8c8c8 solid thin;
+border-right:#c8c8c8 solid thin;
+border-bottom:#c8c8c8 solid thin;
+font-family:Arial, Helvetica, sans-serif;
+font-size:12px;
+font-weight:normal;
+color:#232323;
+text-align:center;
+line-height:1.5em;
+}
+
+.grid-view tr.normal:hover, .grid-view tr.alternate:hover
+{
+	color: #232323;
+	text-align: center;
+	font-family:Arial, Helvetica, sans-serif;
+    font-size:12px;
+    font-weight:bold;
+    text-align:center;
+}
+
+ td.column_style_left
+        {
+            line-height:1.5em;
+            border-left: #c8c8c8 solid thin; 
+            text-align:left;
+            padding-left:18px;
+            padding-right:18px;
+           
+        }
+       
+       td.column_style_left1
+        {
+            line-height:1.5em;
+           border-left: #c8c8c8 solid thin;          
+            text-align:right;
+            padding-left:0px;
+            padding-right:0px;
+           
+        }
+        
+        td.column_style_right
+        {
+            line-height:1.5em;
+            border-left: #c8c8c8 solid thin; 
+            text-align:right;
+            padding-left:0px;
+            padding-right:0px;
+           
+        }
+         td.column_style_right_gen_grid
+        {
+            line-height:1.5em;
+            border-left: #c8c8c8 solid thin; 
+            text-align:right;
+            padding-left:0px;
+            padding-right:8px;
+           
+        }
+        
+         td.column_style_left5
+        {
+            line-height:1.5em;
+            border-left: #c8c8c8 solid thin; 
+            text-align:left;
+            padding-left:6px;
+            padding-right:6px;
+        }
+        
+        
+        
+        
+               td.column_style_left6
+        {
+            line-height:1.5em;
+            border-left: #c8c8c8 solid thin; 
+            text-align:left;
+            padding-left:6px;
+            padding-right:5px;
+        }
+        
+        td.column_style_left_line_hide
+        {
+            line-height:1.5em;
+            /*border-left: #c8c8c8 solid thin;*/
+            text-align:left;
+            padding-left:3px;
+            padding-right:2px;
+        }
+       
+        
+        td.column_style_left9
+        {
+            line-height:1.5em;
+            border-left: #c8c8c8 solid thin; 
+            text-align:left;
+            padding-left:5px;
+            padding-right:0px;
+            width:10px;
+        }
+    
+    /* grid page next Previous */
+    
+     .pager a
+    {
+	    border: 1px solid #EDF5FF;
+	    color: blue;
+	    text-decoration: underline;
+	    padding: 2px 5px;
+	     
+    }
+    .pager span
+    {
+	    background-color: #0067A5;
+	    border: 1px solid #DBEAFF;
+	    color: #FFFFFF;
+	    padding: 2px 5px;
+	    
+    }
+
+
+    .pager a:hover
+    {
+        color:Blue;
+        font-weight:bold;
+    }
+   td.column_style_left_border
+        {
+            line-height:1.5em;
+            border-left: #c8c8c8 solid thin; 
+          
+        }
+          td.column_style_left_border_pa
+        {
+             line-height:1.5em;
+             border-left: #c8c8c8 solid thin; 
+             padding-left:7px;
+        }
+        
+         td.column_style_left_border_2
+        {
+            line-height:1.5em;
+            border-left: #c8c8c8 solid thin;
+            padding-right:0px;
+            padding-left:0px;
+            color: #232323;
+	        text-align:left;
+          
+        }
+          td.column_style_left_border_3
+        {
+            line-height:1.5em;
+            border-left: #c8c8c8 solid thin;
+            padding-right:0px;
+            padding-left:3px;
+            color: #232323;
+	        text-align:left;
+          
+        }
+       
+          td.column_style_left_border_4
+        {
+            line-height:1.5em;
+            border-left: #c8c8c8 solid thin;
+          
+            color: #232323;
+	        text-align:center;
+          
+        }
+        
+        
+        /*---------------------Grid Column Line Color Change-------------------------*/
+        
+         td.column_style_left1_new
+        {
+            line-height:1.5em;
+          /*  border-left: #c8c8c8 solid thin; */
+            border-left: #9C9C9C solid thin; 
+            text-align:right;
+            padding-left:0px;
+            padding-right:0px;
+           
+        }
+        
+          td.column_style_left_border_2_new
+        {
+            line-height:1.5em;
+            /*  border-left: #c8c8c8 solid thin; */
+            border-left:#9C9C9C  solid thin; 
+            padding-right:0px;
+            padding-left:0px;
+            color: #232323;
+	        text-align:left;
+          
+        }
+        
+          td.column_style_left_border_3_new
+        {
+            line-height:1.5em;
+            /*  border-left: #c8c8c8 solid thin; */
+            border-left: #9C9C9C solid thin; 
+            padding-right:0px;
+            padding-left:3px;
+            color: #232323;
+	        text-align:left;
+          
+        }
+        
+         td.column_style_right_new
+        {
+            line-height:1.5em;
+             /*  border-left: #c8c8c8 solid thin; */
+            border-left: #9C9C9C solid thin;
+            text-align:right;
+            padding-left:0px;
+            padding-right:0px;
+           
+        }
+        
+            td.column_style_left_border_4_new
+        {
+            line-height:1.5em;
+            /*  border-left: #c8c8c8 solid thin; */
+            border-left: #9C9C9C solid thin;
+          
+            color: #232323;
+	        text-align:center;
+          
+        }
+   
+     td.column_style_left5_new
+        {
+            line-height:1.5em;
+            border-left: #9C9C9C solid thin; 
+            text-align:left;
+            padding-left:6px;
+            padding-right:6px;
+        }
+        
+         td.column_style_left_new
+        {
+            line-height:1.5em;
+            border-left: #9C9C9C solid thin; 
+            text-align:left;
+            padding-left:18px;
+            padding-right:18px;
+           
+        }

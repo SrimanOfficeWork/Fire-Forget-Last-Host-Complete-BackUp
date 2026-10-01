@@ -1,0 +1,125 @@
+{
+  "project": "IrnSolution (29-jan-2026)",
+  "analyzedOn": "2026-09-29",
+  "method": "Static line-by-line read of all source/config files plus a successful dotnet build (0 errors, 35 nullable warnings). App was not run (needs RabbitMQ, Selenium Grid, ICEGATE credentials, mailbox service).",
+  "summary": "Fire-and-forget IRN generation: an ASP.NET Core API accepts jobs, saves files to disk and queues them in RabbitMQ; a .NET Windows-service worker consumes the queue and uses Selenium (RemoteWebDriver via Grid) to log in to ICEGATE, read the OTP from a mailbox API, upload documents to eSANCHIT, harvest IRN/DRN and save results via an HTTP DB service or SQL stored procedure.",
+  "projects": {
+    "Contracts": {
+      "file": "Contracts/Models.cs",
+      "role": "Shared records",
+      "types": ["UploadRequest", "UploadResult", "FileDescriptor", "FileUploadOutcome"]
+    },
+    "IRN_API_CONTROLLER": {
+      "files": ["Program.cs", "SettingsService.cs", "appsettings.json"],
+      "framework": "net8.0 Web",
+      "packages": ["Dapper", "Microsoft.Data.SqlClient", "NLog", "RabbitMQ.Client 6.8.1"],
+      "routes": {
+        "POST /api/v2/Jobs/CreateJob": "Live endpoint. Validates CorrelationId/TransId/CompanyId, writes base64 files to D:\\IRN_DOC\\UploadedFiles\\{cid}, nulls FileContent, caches 'Queued', publishes to RabbitMQ, returns 202.",
+        "POST /api/v2/Jobs/CreateJob_v1": "Legacy. Publishes base64 inside the message and writes nothing to disk; worker cannot process it (broken).",
+        "GET /api/v2/Jobs/{cid}": "Reads StatusStore; only ever 'Queued' then 404 after 20 min.",
+        "GET /api/v2/Jobs/test": "Test ping",
+        "GET /": "Health check"
+      },
+      "classes": {
+        "StatusStore": "IMemoryCache wrapper, 20 min expiry, keyed by CorrelationId. Only the API writes to it.",
+        "RabbitPublisher": "Singleton connection, channel per publish, durable queue icegate.irn.requests, persistent messages, no publisher confirms, default guest credentials.",
+        "SettingsService": "Reads SERVER_SETTINGS (ModuleName='IRN') maintenance flag, cached RefreshIntervalMinutes (10). Returns 'Y' on error."
+      }
+    },
+    "IrnWorker": {
+      "files": ["Program.cs", "Services/Worker.cs", "Services/RpaUploader.cs", "appsettings.json"],
+      "framework": "net8.0 Worker, Windows service",
+      "packages": ["Selenium.WebDriver 4.35.0", "Selenium.Support", "DotNetSeleniumExtras.WaitHelpers", "RabbitMQ.Client 6.8.1", "Microsoft.Data.SqlClient", "NLog"],
+      "worker": {
+        "queues": {
+          "request": "icegate.irn.requests (durable)",
+          "response": "icegate.irn.results (durable, NO consumer)"
+        },
+        "prefetch": "RabbitMq:ParallelJobCount = 5",
+        "ackPolicy": "Ack after processing regardless of success; nack requeue=false on invalid payload/unhandled error; no dead-letter queue",
+        "consumer": "EventingBasicConsumer with async lambda; shared IModel used concurrently (not thread-safe)"
+      }
+    }
+  },
+  "requestFlow": [
+    "Client POST CreateJob",
+    "API validates, saves files, caches Queued, publishes UploadRequest",
+    "Worker receives message, creates DI scope, resolves RpaUploader",
+    "RpaUploader.ProcessUploadAsync: build results DataTable, create RemoteWebDriver (grid)",
+    "VerifyOtpWithRetryAsync: login to ICEGATE, wait 15s (mailtracktimedelay), POST mailbox API for OTP, type OTP, wait role-dashboard (2 attempts)",
+    "NavigateToESanchitAsync: Services panel -> eSANCHIT -> switch to 2nd window (esanchit/home)",
+    "ProcessBatchAsync per Batchsizedoc (10) files: #modal -> #fileIn SendKeys -> #uploadSubmit -> set #docTypeSelect_i -> #submitDocs -> #submitDocsConfirm -> wait #irn_0 -> read irn_i/drn_i",
+    "Logout (#logout), close window",
+    "finally: quit driver; save XML via PostJobPayloadAsync (UseApiSave=true) or SQL SP IMP_EXP_IRN_AUTOMATION_INS_UPD_DEL_BG (UseApiSave=false; shipped config is false); delete job folder",
+    "Worker publishes UploadResult to results queue and acks"
+  ],
+  "seleniumLocators": {
+    "login": ["#ym-auto-pop-up-close-button", "#icegateId", "#password", "button.btn.login"],
+    "otp": ["input.otp-input", "//button[contains(@class,'btn-submit')]"],
+    "dashboard": ["//mat-expansion-panel-header[.//h5[contains(text(),'Services')]]", "//div[contains(text(),'eSANCHIT')]", "//a[text()='eSANCHIT']"],
+    "upload": ["#modal", "#fileIn", "#uploadSubmit", "docTypeSelect_{i}", "fileName_{i}", "#submitDocs", "#submitDocsConfirm", ".modal-content"],
+    "results": ["irn_{i}", "drn_{i}", "#maxSizeMb", "#docs_error"],
+    "logout": ["#logout"],
+    "errors": ["span.text-error", "div.text-error", "p.text-error", "div.content.ng-star-inserted"]
+  },
+  "externalDependencies": {
+    "rabbitMq": "localhost, guest/guest (docker-compose exposes 5672/15672)",
+    "seleniumGrid": "http://localhost:4444; compose has hub 4.21.0 + one Chrome node only, while appsettings selects Firefox",
+    "otpMailbox": "http://mailboxservices.royaltechsystems.co.in/api/OTP/read",
+    "dbService": "http://irndbservices.royaltechsystems.co.in/irndata/saveirn",
+    "sql": "ImpexLogin DB on SERVER\\SQLEXPRESS (sa credentials committed in appsettings)",
+    "icegate": "https://foservices.icegate.gov.in/#/login"
+  },
+  "notes": {
+    "views": "No MVC views exist; API is JSON only. The 'view' is the status endpoint and the ICEGATE pages the worker automates.",
+    "resultChannel": "The real result channel is the DB-service/SQL save, not the results queue or GET status endpoint.",
+    "repoHygiene": "README is the GitLab template; .http file references /weatherforecast; docker-compose volume/path do not match worker paths."
+  },
+  "findings": {
+    "security": [
+      {"id": "S1", "title": "Path traversal / arbitrary recursive delete", "detail": "FileName and CorrelationId are used unsanitised in Path.Combine (API Program.cs:175,188); worker Directory.Delete(recursive) at RpaUploader.cs:1044. API has no authentication."},
+      {"id": "S2", "title": "Secrets logged", "detail": "ICEGATE password (RpaUploader.cs:254), mailbox password (RpaUploader.cs:843), DB connection string (SettingsService.cs:64), full request via {@Request} in v1 (Program.cs:115)."},
+      {"id": "S3", "title": "Committed secrets and plain HTTP", "detail": "sa password in both appsettings.json; OTP mailbox and DB-service calls use http://."}
+    ],
+    "correctness": [
+      {"id": "C1", "title": "Stale Icegateerror saved on success", "detail": "Not cleared after a successful retry (RpaUploader.cs:300)."},
+      {"id": "C2", "title": "Redirect wait passes immediately", "detail": "RpaUploader.cs:262 Url.Contains(login base URL) is already true; slow OTP redirect (>2s) treated as login failure."},
+      {"id": "C3", "title": "Driver creation outside try/finally", "detail": "RpaUploader.cs:96; grid failure means no DB save of error and no folder cleanup. Retry only covers Selenium Manager error."},
+      {"id": "C4", "title": "Grid capacity vs prefetch", "detail": "Prefetch 5, compose has one Chrome node with 1 session; new-session requests exceed 90s TimeoutSeconds."},
+      {"id": "C5", "title": "IRN data loss on save failure", "detail": "Save errors only logged, folder deleted anyway; DeleteCorrelationFolder not guarded."},
+      {"id": "C6", "title": "Zero batch size infinite loop", "detail": "index += Batchsizedoc (RpaUploader.cs:119); Selenium:BatchSize unused."},
+      {"id": "C7", "title": "IRNs matched by position", "detail": "irn_i/drn_i mapped to batch[i]; fileName_i element is not read."},
+      {"id": "C8", "title": "Silent partial failures", "detail": "WaitForElementAsync/WaitForIrnAsync return silently after 3 refreshes; HarvestIrnResult skips missing IRNs; SetDocumentType errors only warn; job still Success=true."},
+      {"id": "C9", "title": "FileUploadOutcome.Success never set", "detail": "RpaUploader.cs:577."},
+      {"id": "C10", "title": "API vs SQL save payload differ", "detail": "API save hardcodes jobNo='1234' and client_Name=TransId (RpaUploader.cs:779); SQL uses real Client; mFlag 's' vs 'S'."},
+      {"id": "C11", "title": "Login lockout / OTP race", "detail": "Retries with same credentials; parallel jobs sharing a mailbox may read each other's or stale OTP (unverified, depends on mail service)."},
+      {"id": "C12", "title": "maxSizeMb false positives (unverified)", "detail": "Any non-empty innerHTML flags an error."},
+      {"id": "C13", "title": "Second batch may fail (unverified)", "detail": "#modal may not exist on the submit screen."},
+      {"id": "C14", "title": "Upload path / file detector", "detail": "No LocalFileDetector; paths must exist on grid node; API hardcodes D:\\IRN_DOC\\UploadedFiles vs worker FilePath config; FolderPath ignored."},
+      {"id": "C15", "title": "Maintenance override and v1", "detail": "Program.cs:160 forces maintenanceFlag='N' in CreateJob; SettingsService returns 'Y' on DB error blocking v1 with 200."},
+      {"id": "C16", "title": "Status/results not wired", "detail": "Worker never updates StatusStore; results queue has no consumer and grows unbounded."},
+      {"id": "C17", "title": "Worker concurrency/shutdown", "detail": "Shared IModel across concurrent jobs; StopAsync closes channel mid-job so messages are redelivered (possible duplicate IRN runs); no DLQ."},
+      {"id": "C18", "title": "CreateJob_v1 broken", "detail": "Worker never decodes FileContent."}
+    ],
+    "minor": [
+      "PostOTPPayloadAsync uses new HttpClient per call and ignores status code",
+      "Mailssl 'Y'/'1' parses as false",
+      "HandleAutomationErrorAsync uses exact URL match and may inspect wrong window",
+      "Microsoft.Extensions.Http 10.0.3 on net8 / Hosting 9.0.8",
+      "Unused packages: Selenium.WebDriver.ChromeDriver, NLog.Web in worker",
+      "Unused driver service objects and Driverpath/SeleniumManagerSourceExe config effectively dead with RemoteWebDriver",
+      "API LoadConfigurationFromAppSettings has no NLog section (unverified)",
+      "Error message says 'JobNo is required' when TransId missing",
+      "docker-compose has Chrome node only but config selects Firefox"
+    ]
+  },
+  "suggestedFixOrder": [
+    "Sanitise FileName/CorrelationId and add API auth",
+    "Remove password/connection-string logging and rotate committed secrets",
+    "Clear Icegateerror on success; fix OTP redirect wait to check 'otp-verification' only",
+    "Move driver creation inside try; guard folder deletion",
+    "Add results-queue consumer to update StatusStore, or drop GetJob",
+    "Cap prefetch at grid session count",
+    "Match IRNs by file name and fail job when a file gets no IRN"
+  ]
+}

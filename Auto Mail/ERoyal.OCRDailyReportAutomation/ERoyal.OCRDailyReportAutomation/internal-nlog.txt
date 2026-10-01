@@ -1,0 +1,476 @@
+2026-07-23 18:13:20.4007 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-23 18:13:20.4615 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-23 18:13:20.4615 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-23 18:13:20.4975 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-23 18:13:40.8572 Info AppDomain Shutting down. LogFactory closing...
+2026-07-23 18:13:40.8572 Info LogFactory has been disposed.
+2026-07-23 18:17:17.7724 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-23 18:17:17.7905 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-23 18:17:17.7905 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-23 18:17:17.8201 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-23 18:17:30.2244 Info AppDomain Shutting down. LogFactory closing...
+2026-07-23 18:17:30.2424 Info LogFactory has been disposed.
+2026-07-23 19:09:18.9503 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-23 19:09:18.9743 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-23 19:09:18.9743 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-23 19:09:19.0037 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-23 19:09:31.3718 Info AppDomain Shutting down. LogFactory closing...
+2026-07-23 19:09:31.3805 Info LogFactory has been disposed.
+2026-07-23 19:11:03.9736 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-23 19:11:03.9924 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-23 19:11:03.9924 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-23 19:11:04.0231 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-23 19:11:15.8680 Info AppDomain Shutting down. LogFactory closing...
+2026-07-23 19:11:15.8680 Info LogFactory has been disposed.
+2026-07-23 19:11:34.5736 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-23 19:11:34.5910 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-23 19:11:34.5910 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-23 19:11:34.6222 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-23 19:11:46.1467 Info AppDomain Shutting down. LogFactory closing...
+2026-07-23 19:11:46.1650 Info LogFactory has been disposed.
+2026-07-23 19:16:07.6930 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-23 19:16:07.7106 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-23 19:16:07.7106 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-23 19:16:07.7424 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-23 19:16:19.3806 Info AppDomain Shutting down. LogFactory closing...
+2026-07-23 19:16:19.3806 Info LogFactory has been disposed.
+2026-07-24 10:40:01.1949 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-24 10:40:01.2212 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-24 10:40:01.2271 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-24 10:40:01.2525 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-24 10:40:02.3530 Info AppDomain Shutting down. LogFactory closing...
+2026-07-24 10:40:02.3675 Info LogFactory has been disposed.
+2026-07-24 10:42:50.0968 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-24 10:42:50.1172 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-24 10:42:50.1172 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-24 10:42:50.1499 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-24 10:42:51.1412 Info AppDomain Shutting down. LogFactory closing...
+2026-07-24 10:42:51.1511 Info LogFactory has been disposed.
+2026-07-24 10:45:55.8529 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-24 10:45:55.8718 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-24 10:45:55.8718 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-24 10:45:55.9125 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-24 10:46:08.4539 Info AppDomain Shutting down. LogFactory closing...
+2026-07-24 10:46:08.4539 Info LogFactory has been disposed.
+2026-07-24 10:48:30.4118 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-24 10:48:30.4361 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-24 10:48:30.4437 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-24 10:48:30.4713 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-24 10:48:40.1454 Info AppDomain Shutting down. LogFactory closing...
+2026-07-24 10:48:40.1454 Info LogFactory has been disposed.
+2026-07-24 11:56:43.6831 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-24 11:56:43.7096 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-24 11:56:43.7096 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-24 11:56:43.7645 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-24 11:57:17.7116 Info AppDomain Shutting down. LogFactory closing...
+2026-07-24 11:57:17.7116 Info LogFactory has been disposed.
+2026-07-24 11:59:21.9196 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-24 11:59:21.9372 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-24 11:59:21.9439 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-24 11:59:21.9683 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-24 11:59:41.7490 Info AppDomain Shutting down. LogFactory closing...
+2026-07-24 11:59:41.7627 Info LogFactory has been disposed.
+2026-07-24 12:08:29.0643 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-24 12:08:29.0846 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-24 12:08:29.0846 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-24 12:08:29.1182 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-24 12:08:48.6728 Info AppDomain Shutting down. LogFactory closing...
+2026-07-24 12:08:48.6943 Info LogFactory has been disposed.
+2026-07-24 12:12:38.6778 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-24 12:12:38.6956 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-24 12:12:38.6956 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-24 12:12:38.7285 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-24 12:12:54.4798 Info AppDomain Shutting down. LogFactory closing...
+2026-07-24 12:12:54.4798 Info LogFactory has been disposed.
+2026-07-24 12:15:56.0417 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-24 12:15:56.0596 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-24 12:15:56.0596 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-24 12:15:56.0922 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-24 12:16:13.9403 Info AppDomain Shutting down. LogFactory closing...
+2026-07-24 12:16:13.9560 Info LogFactory has been disposed.
+2026-07-24 12:18:21.8384 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-24 12:18:21.8575 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-24 12:18:21.8575 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-24 12:18:21.8913 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-24 12:18:32.3478 Info AppDomain Shutting down. LogFactory closing...
+2026-07-24 12:18:32.3578 Info LogFactory has been disposed.
+2026-07-24 14:52:48.3675 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-24 14:52:48.4483 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-24 14:52:48.4709 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-24 14:52:48.5659 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-24 14:53:07.3014 Info AppDomain Shutting down. LogFactory closing...
+2026-07-24 14:53:07.3193 Info LogFactory has been disposed.
+2026-07-27 18:42:29.0422 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-27 18:42:29.1186 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-27 18:42:29.1294 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-27 18:42:29.1895 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-27 18:42:44.5441 Info AppDomain Shutting down. LogFactory closing...
+2026-07-27 18:42:44.5660 Info LogFactory has been disposed.
+2026-07-27 18:43:57.6633 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-27 18:43:57.6880 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-27 18:43:57.6880 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-27 18:43:57.7275 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-27 18:44:19.3270 Info AppDomain Shutting down. LogFactory closing...
+2026-07-27 18:44:19.3588 Info LogFactory has been disposed.
+2026-07-28 10:43:56.5348 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-28 10:43:56.5706 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-28 10:43:56.5706 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-28 10:43:56.6060 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-28 10:44:14.4094 Info AppDomain Shutting down. LogFactory closing...
+2026-07-28 10:44:14.4241 Info LogFactory has been disposed.
+2026-07-28 11:05:46.3845 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-28 11:05:46.4033 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-28 11:05:46.4033 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-28 11:05:46.4546 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-28 11:06:00.3693 Info AppDomain Shutting down. LogFactory closing...
+2026-07-28 11:06:00.3923 Info LogFactory has been disposed.
+2026-07-28 11:06:43.0239 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-28 11:06:43.0451 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-28 11:06:43.0545 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-28 11:06:43.0854 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-28 11:06:56.7646 Info AppDomain Shutting down. LogFactory closing...
+2026-07-28 11:06:56.7753 Info LogFactory has been disposed.
+2026-07-28 11:20:01.5721 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-28 11:20:01.5936 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-28 11:20:01.6017 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-28 11:20:01.6268 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-28 11:20:13.4849 Info AppDomain Shutting down. LogFactory closing...
+2026-07-28 11:20:13.4849 Info LogFactory has been disposed.
+2026-07-28 11:26:16.5090 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-28 11:26:16.5283 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-28 11:26:16.5283 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-28 11:26:16.5624 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-28 11:26:26.9361 Info AppDomain Shutting down. LogFactory closing...
+2026-07-28 11:26:26.9454 Info LogFactory has been disposed.
+2026-07-28 15:48:57.5638 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-28 15:48:57.5960 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-28 15:48:57.5960 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-28 15:48:57.6438 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-28 15:49:14.4990 Info AppDomain Shutting down. LogFactory closing...
+2026-07-28 15:49:14.5120 Info LogFactory has been disposed.
+2026-07-28 15:49:33.2508 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-28 15:49:33.2738 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-28 15:49:33.2810 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-28 15:49:33.3208 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-28 15:49:48.0163 Info AppDomain Shutting down. LogFactory closing...
+2026-07-28 15:49:48.0288 Info LogFactory has been disposed.
+2026-07-28 15:51:03.6454 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-28 15:51:03.6762 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-28 15:51:03.6762 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-28 15:51:03.7137 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-28 15:51:21.9177 Info AppDomain Shutting down. LogFactory closing...
+2026-07-28 15:51:21.9177 Info LogFactory has been disposed.
+2026-07-28 15:51:35.9811 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-28 15:51:36.0109 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-28 15:51:36.0109 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-28 15:51:36.0436 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-28 15:51:46.7011 Info AppDomain Shutting down. LogFactory closing...
+2026-07-28 15:51:46.7125 Info LogFactory has been disposed.
+2026-07-28 16:01:36.0031 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-28 16:01:36.0344 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-28 16:01:36.0344 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-28 16:01:36.0665 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-28 16:01:46.5486 Info AppDomain Shutting down. LogFactory closing...
+2026-07-28 16:01:46.5581 Info LogFactory has been disposed.
+2026-07-28 16:44:34.7546 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-28 16:44:34.7726 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-28 16:44:34.7726 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-28 16:44:34.8038 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-28 16:44:51.8528 Info AppDomain Shutting down. LogFactory closing...
+2026-07-28 16:44:51.8627 Info LogFactory has been disposed.
+2026-07-28 17:02:43.5301 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-28 17:02:43.5482 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-28 17:02:43.5482 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-28 17:02:43.5801 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-28 17:03:02.1630 Info AppDomain Shutting down. LogFactory closing...
+2026-07-28 17:03:02.1806 Info LogFactory has been disposed.
+2026-07-28 17:08:38.0956 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-28 17:08:38.1137 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-28 17:08:38.1137 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-28 17:08:38.1458 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-28 17:08:47.6918 Info AppDomain Shutting down. LogFactory closing...
+2026-07-28 17:08:47.7159 Info LogFactory has been disposed.
+2026-07-28 17:11:49.9411 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-28 17:11:49.9629 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-28 17:11:49.9629 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-28 17:11:49.9951 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-28 17:12:15.9560 Info AppDomain Shutting down. LogFactory closing...
+2026-07-28 17:12:15.9654 Info LogFactory has been disposed.
+2026-07-28 17:12:26.9041 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-28 17:12:26.9237 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-28 17:12:26.9237 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-28 17:12:26.9561 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-28 17:13:01.8640 Info AppDomain Shutting down. LogFactory closing...
+2026-07-28 17:13:01.8640 Info LogFactory has been disposed.
+2026-07-28 17:22:09.0661 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-28 17:22:09.0844 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-28 17:22:09.0844 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-28 17:22:09.1195 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-28 17:22:25.9612 Info AppDomain Shutting down. LogFactory closing...
+2026-07-28 17:22:25.9788 Info LogFactory has been disposed.
+2026-07-28 17:22:35.0073 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-28 17:22:35.0287 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-28 17:22:35.0350 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-28 17:22:35.0638 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-28 17:22:48.7227 Info AppDomain Shutting down. LogFactory closing...
+2026-07-28 17:22:48.7227 Info LogFactory has been disposed.
+2026-07-29 10:09:45.9387 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-29 10:09:45.9910 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-29 10:09:46.0484 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-29 10:09:46.1497 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-29 10:09:58.7961 Info AppDomain Shutting down. LogFactory closing...
+2026-07-29 10:09:58.8093 Info LogFactory has been disposed.
+2026-07-29 11:15:58.1952 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-29 11:15:58.2330 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-29 11:15:58.2540 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-29 11:15:58.3206 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-29 11:16:13.2247 Info AppDomain Shutting down. LogFactory closing...
+2026-07-29 11:16:13.2247 Info LogFactory has been disposed.
+2026-07-29 11:21:56.6149 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-29 11:21:56.6344 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-29 11:21:56.6344 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-29 11:21:56.6677 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-29 11:22:07.4573 Info AppDomain Shutting down. LogFactory closing...
+2026-07-29 11:22:07.4794 Info LogFactory has been disposed.
+2026-07-29 11:22:37.8863 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-29 11:22:37.9049 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-29 11:22:37.9114 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-29 11:22:37.9359 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-29 11:23:01.5776 Info AppDomain Shutting down. LogFactory closing...
+2026-07-29 11:23:01.5917 Info LogFactory has been disposed.
+2026-07-29 11:51:36.1492 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-29 11:51:36.1674 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-29 11:51:36.1756 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-29 11:51:36.2013 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-29 11:51:47.8699 Info AppDomain Shutting down. LogFactory closing...
+2026-07-29 11:51:47.8798 Info LogFactory has been disposed.
+2026-07-29 17:48:12.4733 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-29 17:48:12.5255 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-29 17:48:12.5371 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-29 17:48:12.5685 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-29 17:48:27.4646 Info AppDomain Shutting down. LogFactory closing...
+2026-07-29 17:48:27.4756 Info LogFactory has been disposed.
+2026-07-29 18:01:52.3340 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-29 18:01:52.3506 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-29 18:01:52.3506 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-29 18:01:52.3803 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-29 18:02:08.6291 Info AppDomain Shutting down. LogFactory closing...
+2026-07-29 18:02:08.6384 Info LogFactory has been disposed.
+2026-07-29 18:47:42.7608 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-29 18:47:42.7778 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-29 18:47:42.7847 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-29 18:47:42.8109 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-29 18:48:02.4073 Info AppDomain Shutting down. LogFactory closing...
+2026-07-29 18:48:02.4073 Info LogFactory has been disposed.
+2026-07-29 19:31:53.1397 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-29 19:31:53.1649 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-29 19:31:53.1649 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-29 19:31:53.1927 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-29 19:31:54.5174 Info AppDomain Shutting down. LogFactory closing...
+2026-07-29 19:31:54.5352 Info LogFactory has been disposed.
+2026-07-29 19:32:32.3155 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-29 19:32:32.3395 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-29 19:32:32.3472 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-29 19:32:32.3878 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-29 19:32:41.1735 Info AppDomain Shutting down. LogFactory closing...
+2026-07-29 19:32:41.1914 Info LogFactory has been disposed.
+2026-07-29 19:33:17.0648 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-29 19:33:17.0906 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-29 19:33:17.0906 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-29 19:33:17.1201 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-29 19:33:18.3566 Info AppDomain Shutting down. LogFactory closing...
+2026-07-29 19:33:18.3566 Info LogFactory has been disposed.
+2026-07-29 19:35:04.6085 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-29 19:35:04.6245 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-29 19:35:04.6245 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-29 19:35:04.6541 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-29 19:35:06.0218 Info AppDomain Shutting down. LogFactory closing...
+2026-07-29 19:35:06.0334 Info LogFactory has been disposed.
+2026-07-29 19:35:42.1844 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-29 19:35:42.2018 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-29 19:35:42.2018 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-29 19:35:42.2298 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-29 19:35:53.9712 Info AppDomain Shutting down. LogFactory closing...
+2026-07-29 19:35:53.9916 Info LogFactory has been disposed.
+2026-07-29 19:40:58.2971 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-29 19:40:58.3128 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-29 19:40:58.3128 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-29 19:40:58.3425 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-29 19:41:16.4269 Info AppDomain Shutting down. LogFactory closing...
+2026-07-29 19:41:16.4570 Info LogFactory has been disposed.
+2026-07-29 20:06:44.3580 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-29 20:06:44.3878 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-29 20:06:44.3878 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-29 20:06:44.4248 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-29 20:06:45.9878 Info AppDomain Shutting down. LogFactory closing...
+2026-07-29 20:06:46.0046 Info LogFactory has been disposed.
+2026-07-29 20:07:11.7129 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-29 20:07:11.7307 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-29 20:07:11.7377 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-29 20:07:11.7614 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-29 20:07:20.2308 Info AppDomain Shutting down. LogFactory closing...
+2026-07-29 20:07:20.2487 Info LogFactory has been disposed.
+2026-07-29 20:16:37.0713 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-29 20:16:37.0993 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-29 20:16:37.0993 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-29 20:16:37.1444 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-29 20:16:49.2603 Info AppDomain Shutting down. LogFactory closing...
+2026-07-29 20:16:49.2708 Info LogFactory has been disposed.
+2026-07-29 20:42:50.9228 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-29 20:42:50.9729 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-29 20:42:50.9729 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-29 20:42:51.0051 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-29 20:42:53.1385 Info AppDomain Shutting down. LogFactory closing...
+2026-07-29 20:42:53.1498 Info LogFactory has been disposed.
+2026-07-29 20:44:18.5644 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-29 20:44:18.5825 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-29 20:44:18.5884 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-29 20:44:18.6140 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-29 20:44:30.3582 Info AppDomain Shutting down. LogFactory closing...
+2026-07-29 20:44:30.3582 Info LogFactory has been disposed.
+2026-07-29 20:45:16.4583 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-29 20:45:16.5117 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-29 20:45:16.5873 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-29 20:45:16.8358 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-29 20:45:35.0826 Info AppDomain Shutting down. LogFactory closing...
+2026-07-29 20:45:35.0940 Info LogFactory has been disposed.
+2026-07-30 09:52:33.7997 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-30 09:52:33.8354 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-30 09:52:33.8456 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-30 09:52:33.8827 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-30 09:52:43.7489 Info AppDomain Shutting down. LogFactory closing...
+2026-07-30 09:52:43.7489 Info LogFactory has been disposed.
+2026-07-30 10:51:10.3901 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-30 10:51:10.4587 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-30 10:51:10.5157 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-30 10:51:10.6160 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-30 10:51:23.8652 Info AppDomain Shutting down. LogFactory closing...
+2026-07-30 10:51:23.8652 Info LogFactory has been disposed.
+2026-07-30 11:59:51.2521 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-30 11:59:51.2826 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-30 11:59:51.2826 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-30 11:59:51.3252 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-30 12:00:11.7276 Info AppDomain Shutting down. LogFactory closing...
+2026-07-30 12:00:11.7375 Info LogFactory has been disposed.
+2026-07-30 12:01:29.0464 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-30 12:01:29.0674 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-30 12:01:29.0674 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-30 12:01:29.1044 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-30 12:01:47.4814 Info AppDomain Shutting down. LogFactory closing...
+2026-07-30 12:01:47.4982 Info LogFactory has been disposed.
+2026-07-30 12:07:51.8565 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-07-30 12:07:51.8794 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-07-30 12:07:51.8861 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-07-30 12:07:51.9180 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-07-30 12:08:11.1321 Info AppDomain Shutting down. LogFactory closing...
+2026-07-30 12:08:11.1321 Info LogFactory has been disposed.
+2026-08-03 17:46:56.3302 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-08-03 17:46:56.3726 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-08-03 17:46:56.3791 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-08-03 17:46:56.4260 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-08-03 17:47:09.9224 Info AppDomain Shutting down. LogFactory closing...
+2026-08-03 17:47:09.9224 Info LogFactory has been disposed.
+2026-08-03 17:48:43.0621 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-08-03 17:48:43.0833 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-08-03 17:48:43.0914 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-08-03 17:48:43.1169 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-08-03 17:48:55.5637 Info AppDomain Shutting down. LogFactory closing...
+2026-08-03 17:48:55.5727 Info LogFactory has been disposed.
+2026-08-03 17:54:13.5513 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-08-03 17:54:13.5803 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-08-03 17:54:13.5910 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-08-03 17:54:13.6278 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-08-03 17:54:26.0539 Info AppDomain Shutting down. LogFactory closing...
+2026-08-03 17:54:26.0539 Info LogFactory has been disposed.
+2026-08-03 17:57:50.1951 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-08-03 17:57:50.2166 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-08-03 17:57:50.2252 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-08-03 17:57:50.2536 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-08-03 17:58:09.8253 Info AppDomain Shutting down. LogFactory closing...
+2026-08-03 17:58:09.8393 Info LogFactory has been disposed.
+2026-08-03 18:00:17.3744 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-08-03 18:00:17.3952 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-08-03 18:00:17.3952 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-08-03 18:00:17.4289 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-08-03 18:00:25.9332 Info AppDomain Shutting down. LogFactory closing...
+2026-08-03 18:00:25.9539 Info LogFactory has been disposed.
+2026-08-03 18:03:16.4465 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-08-03 18:03:16.4677 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-08-03 18:03:16.4753 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-08-03 18:03:16.5042 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-08-03 18:03:36.7462 Info AppDomain Shutting down. LogFactory closing...
+2026-08-03 18:03:36.7462 Info LogFactory has been disposed.
+2026-08-03 18:07:56.0915 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign unknown property 'enableArchiveFileCompression'='true'
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2026-08-03 18:07:56.1192 Info Registered target NLog.Targets.FileTarget(Name=fileLogger)
+2026-08-03 18:07:56.1192 Info NLog, Version=6.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 6.0.6.4706. Product version: 6.0.6+1913a823347d47c0b004ce714af74436261daf20. GlobalAssemblyCache: False
+2026-08-03 18:07:56.1543 Info Configuration initialized: TargetNames=fileLogger, ConfigItems=16, FilePath=D:\Auto Mail\ERoyal.OCRDailyReportAutomation\ERoyal.OCRDailyReportAutomation\bin\Debug\net8.0\NLog.config
+2026-08-03 18:08:15.0992 Info AppDomain Shutting down. LogFactory closing...
+2026-08-03 18:08:15.1163 Info LogFactory has been disposed.

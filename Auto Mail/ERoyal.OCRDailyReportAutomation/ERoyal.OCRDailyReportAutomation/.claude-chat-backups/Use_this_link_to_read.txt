@@ -1,0 +1,3 @@
+markdownviewer into human readable format for all chats
+
+https://markdownviewer.org/

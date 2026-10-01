@@ -1,0 +1,42 @@
+.ddpanel .ddpanelcontent{ /*CSS for "content" DIV of Drop Down Panel*/
+color: white;
+background-color:#ffffff;
+}
+
+.ddpanel .ddpaneltab{ /*CSS for "toggle" tab DIV of Drop Down Panel*/
+margin-right: 20px;
+font: normal 12px Arial;
+}
+
+.ddpanel .ddpaneltab a{ /*"toggle" tab related CSS*/
+float: right;
+color: white;
+background: black url(images/toggleleft.gif) no-repeat left bottom; /*background of toggle tab*/
+text-decoration: none;
+letter-spacing: 1px;
+}
+
+.ddpanel .ddpaneltab a span{ /*"toggle" tab related CSS*/
+float: left;
+display: block;
+background-color:#c48320;
+padding: 1px 12px 4px 13px;
+cursor: pointer;
+}
+
+.ddpanel .ddpaneltab a span img.pointerimage{ /*CSS for pointer image within toggle tab*/
+margin-top: 2px;
+margin-left: 5px;
+}
+
+.ddpanel .ddpaneltab a:hover{ /*"toggle" tab related CSS*/
+background-color:#b37221; /*background of toggle tab onMouseover*/
+}
+
+.ddpanel .ddpaneltab a:active, .ddpanel .ddpaneltab a:focus{ /*"toggle" tab related CSS*/
+outline: 0;
+}
+
+.ddpanel .ddpaneltab a:hover span{ /*"toggle" tab related CSS*/
+background-color: transparent;
+}

@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Current_Liability" targetNamespace="http://tempuri.org/Current_Liability.xsd" xmlns:mstns="http://tempuri.org/Current_Liability.xsd" xmlns="http://tempuri.org/Current_Liability.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="Current_Liability" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="Current_Liability" msprop:Generator_UserDSName="Current_Liability">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Current_Liability" msprop:Generator_TableClassName="Current_LiabilityDataTable" msprop:Generator_TableVarName="tableCurrent_Liability" msprop:Generator_TablePropName="_Current_Liability" msprop:Generator_RowDeletingName="Current_LiabilityRowDeleting" msprop:Generator_RowChangingName="Current_LiabilityRowChanging" msprop:Generator_RowEvHandlerName="Current_LiabilityRowChangeEventHandler" msprop:Generator_RowDeletedName="Current_LiabilityRowDeleted" msprop:Generator_UserTableName="Current_Liability" msprop:Generator_RowChangedName="Current_LiabilityRowChanged" msprop:Generator_RowEvArgName="Current_LiabilityRowChangeEvent" msprop:Generator_RowClassName="Current_LiabilityRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Capital_Name" msprop:Generator_ColumnVarNameInTable="columnCapital_Name" msprop:Generator_ColumnPropNameInRow="Capital_Name" msprop:Generator_ColumnPropNameInTable="Capital_NameColumn" msprop:Generator_UserColumnName="Capital_Name" type="xs:string" minOccurs="0" />
+              <xs:element name="Pan_No" msprop:Generator_ColumnVarNameInTable="columnPan_No" msprop:Generator_ColumnPropNameInRow="Pan_No" msprop:Generator_ColumnPropNameInTable="Pan_NoColumn" msprop:Generator_UserColumnName="Pan_No" type="xs:string" minOccurs="0" />
+              <xs:element name="Address_1" msprop:Generator_ColumnVarNameInTable="columnAddress_1" msprop:Generator_ColumnPropNameInRow="Address_1" msprop:Generator_ColumnPropNameInTable="Address_1Column" msprop:Generator_UserColumnName="Address_1" type="xs:string" minOccurs="0" />
+              <xs:element name="Address_2" msprop:Generator_ColumnVarNameInTable="columnAddress_2" msprop:Generator_ColumnPropNameInRow="Address_2" msprop:Generator_ColumnPropNameInTable="Address_2Column" msprop:Generator_UserColumnName="Address_2" type="xs:string" minOccurs="0" />
+              <xs:element name="District" msprop:Generator_ColumnVarNameInTable="columnDistrict" msprop:Generator_ColumnPropNameInRow="District" msprop:Generator_ColumnPropNameInTable="DistrictColumn" msprop:Generator_UserColumnName="District" type="xs:string" minOccurs="0" />
+              <xs:element name="State_Code" msprop:Generator_ColumnVarNameInTable="columnState_Code" msprop:Generator_ColumnPropNameInRow="State_Code" msprop:Generator_ColumnPropNameInTable="State_CodeColumn" msprop:Generator_UserColumnName="State_Code" type="xs:string" minOccurs="0" />
+              <xs:element name="C_AMT" msprop:Generator_ColumnVarNameInTable="columnC_AMT" msprop:Generator_ColumnPropNameInRow="C_AMT" msprop:Generator_ColumnPropNameInTable="C_AMTColumn" msprop:Generator_UserColumnName="C_AMT" type="xs:string" minOccurs="0" />
+              <xs:element name="D_AMT" msprop:Generator_ColumnVarNameInTable="columnD_AMT" msprop:Generator_ColumnPropNameInRow="D_AMT" msprop:Generator_ColumnPropNameInTable="D_AMTColumn" msprop:Generator_UserColumnName="D_AMT" type="xs:string" minOccurs="0" />
+              <xs:element name="Group" msprop:Generator_ColumnVarNameInTable="columnGroup" msprop:Generator_ColumnPropNameInRow="Group" msprop:Generator_ColumnPropNameInTable="GroupColumn" msprop:Generator_UserColumnName="Group" type="xs:string" minOccurs="0" />
+              <xs:element name="Sub_Group" msprop:Generator_ColumnVarNameInTable="columnSub_Group" msprop:Generator_ColumnPropNameInRow="Sub_Group" msprop:Generator_ColumnPropNameInTable="Sub_GroupColumn" msprop:Generator_UserColumnName="Sub_Group" type="xs:string" minOccurs="0" />
+              <xs:element name="Ledger" msprop:Generator_ColumnVarNameInTable="columnLedger" msprop:Generator_ColumnPropNameInRow="Ledger" msprop:Generator_ColumnPropNameInTable="LedgerColumn" msprop:Generator_UserColumnName="Ledger" type="xs:string" minOccurs="0" />
+              <xs:element name="TOTAL_D_AMT" msprop:Generator_ColumnVarNameInTable="columnTOTAL_D_AMT" msprop:Generator_ColumnPropNameInRow="TOTAL_D_AMT" msprop:Generator_ColumnPropNameInTable="TOTAL_D_AMTColumn" msprop:Generator_UserColumnName="TOTAL_D_AMT" type="xs:string" minOccurs="0" />
+              <xs:element name="TOTAL_C_AMT" msprop:Generator_ColumnVarNameInTable="columnTOTAL_C_AMT" msprop:Generator_ColumnPropNameInRow="TOTAL_C_AMT" msprop:Generator_ColumnPropNameInTable="TOTAL_C_AMTColumn" msprop:Generator_UserColumnName="TOTAL_C_AMT" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

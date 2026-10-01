@@ -1,0 +1,453 @@
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Imp_Supporting_Doc_Copy.aspx.cs" Inherits="Imp_Supporting_Doc_Copy" %> 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>BE Supporting Doc. Copy </title>
+    <link href="../css/MainStyle.css" rel="stylesheet" media="screen, projection" type="text/css" />
+
+    <link href="../main.css" rel="stylesheet" media="screen, projection" type="text/css" />
+    <link href="../gridmain.css" rel="stylesheet" media="screen, projection" type="text/css" />
+    <link rel="stylesheet" href="../css/jquery-ui.css" />
+    <link rel="stylesheet" type="text/css" href="../css/dddropdownpanel.css" />
+    <link rel="stylesheet" href="../windowfiles/dhtmlwindow.css" type="text/css" />
+    <link rel="stylesheet" href="../modalfiles/modal.css" type="text/css" />
+
+    <link href="../tabs/tabs.css" rel="stylesheet" type="text/css" />
+
+    <link href="../AutoComplete_CSS/jquery-ui.css.css" rel="stylesheet" type="text/css" />
+    <!-- VALIDATION SCRIPT -->
+    <link rel="stylesheet" href="../Validation Files/validationEngine.css" type="text/css" />
+    <link rel="stylesheet" href="../Validation Files/template.css" type="text/css" />
+    <!-- VALIDATION SCRIPT -->
+    <script src="../MessageBox_js/jquery.js" type="text/javascript"></script>
+    <link href="../MessageBox_js/jquery.alerts.css" rel="stylesheet" type="text/css" />
+    <script src="../MessageBox_js/jquery.alerts.js" type="text/javascript"></script>
+  
+  <style type="text/css">
+         
+        .myGridStyle
+        {
+            border-collapse:collapse;
+             
+        }
+         
+        .myGridStyle tr th
+        {
+            /*color: black;*/
+            border: 0.5px solid black;
+            font-size:13px;
+        }
+       .myGridStyle tr:nth-child(even)
+        {
+            background-color: white;
+            font-size:12px;
+        } 
+         
+         .myGridStyle tr:nth-child(odd)
+        {
+            background-color: white;
+            font-size:12px;
+        } 
+         
+        .myGridStyle td
+        {
+            border:0.5px solid black;
+        }
+         
+    </style>
+    
+</head>
+<body style="overflow: hidden;">
+    <form id="form1" runat="server">
+   
+ <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="false"
+        LoadScriptsBeforeUI="false" EnablePageMethods="true">
+    </asp:ScriptManager>
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional" Visible="true">
+        <ContentTemplate>
+            <div class="loading" align="center" id="load" style="display: none;">
+                <img src="../Loading_Images/indicator_mozilla_blu.gif" alt="" />
+            </div>
+            <div id="innerbox_MidMain" style="height:32px;">
+                <div id="tag_srcinner1">
+                
+                    <div id="mainmastop2container_rght_tag2_txt1" style="width: 120px;">
+                      Supp. Doc. Copy
+                      </div>
+                    <div id="verslic">
+                    </div>
+                     <div id="txt_container_Transact_Main_l" style="width: 400px;">
+                                          <div id="tag_label_transaction_popup_gen" style="width: 100px;">
+                                          <span style="color: Blue; font-size: 12px; font-weight: bold;">Working Period </span>
+                                             </div>
+                                          <div id="txtcon-m_transaction_pop_gen1_srcic"  style="width:230px;">
+                                              <asp:DropDownList ID="ddlWorkingPeriod" runat="server" CssClass="txtbox_none" AutoPostBack="True"
+                                                  TabIndex="1" OnSelectedIndexChanged="ddlWorkingPeriod_SelectedIndexChanged">
+                    
+                                              </asp:DropDownList>
+                                          </div>
+                                      </div>
+                    <div id="txt_container_Transact_Main_l" style="width: 210px;">
+                        <div id="tag_label_transact_Src" style="width: 66px;">
+                            <span style="color: Blue; font-size: 12px; font-weight: bold;">WH Job No </span>
+                        </div>
+                        <div id="txtcon-m_Exchange" style="width: 140px;">
+                             <div id="m_transaction_pop_gen1_srcic" style="width:190px;">
+                                           <asp:DropDownList ID="ddlJobNo" runat="server" 
+                                            CssClass=" validate[required] txtbox_none" AutoPostBack="true" Width="180px"
+                                            onselectedindexchanged="ddlJobNo_SelectedIndexChanged" TabIndex="3">
+                                           </asp:DropDownList>
+                                        </div>
+                        </div>
+                    </div> 
+                    <%-- <div id="verslic"></div>
+                    <div id="txt_container_Transact_Main_l" style="width: 210px;">
+                        <div id="tag_label_transact_Src" style="width: 66px;">
+                            <span style="color: Blue; font-size: 12px; font-weight: bold;">WH Inv. No </span>
+                        </div>
+                        <div id="txtcon-m_Exchange" style="width: 140px;">
+                            <asp:DropDownList ID="ddl_WH_invno" CssClass="listtxt_transac_item_gen_notn" Width="140px"
+                                Font-Size="12px" runat="server" TabIndex="3" AutoPostBack="true" OnSelectedIndexChanged="ddl_WH_invno_SelectedIndexChanged">
+                            </asp:DropDownList>
+                        </div>
+                    </div>--%>
+
+                    <%--<div id="verslic">  </div>--%>
+
+                      <%--<div id="txt_container_Transact_Main_l" style="width: 220px;">
+                                <div id="tag_label_transact_Src" style="width: 86px;">
+                                    <span style="color:Blue; font-size:12px; font-weight:bold;">WH Item. Slno</span>
+                                    </div>
+                                <div id="txtcon-m_Exchange" style="width: 120px;">
+                                    <asp:DropDownList ID="ddl_WH_Item_Slno" Style="width: 120px;" CssClass="listtxt_transac_item_gen_notn"
+                                        AutoPostBack="true" Width="120px" Font-Size="12px" runat="server" 
+                                        onselectedindexchanged="ddl_WH_Item_Slno_SelectedIndexChanged">
+                                    </asp:DropDownList>
+                                    
+                                </div>
+                            </div>--%>
+
+                    <div id="popupwindow_closebut_right_new">
+                       <input type="close" value="Submit" class="clsicon_new" onclick="win_hide();parent.adcodewindow.hide();return false;" />
+                    </div>
+           
+
+                </div>
+               
+                
+            </div>
+           <%-- -------------------------------------Tab--------------------------------------------------------%>
+
+            <div id="innerbox_MidMain_Trans" style="width: 1104px; height: 5px; margin-top: -12px;">
+             </div>
+
+                <div class="content" id="page-1" style="margin-left:-30px; margin-top:-15px; width:1110px;">
+                <div id="open_item" runat="server">
+                <div class="content" id="page-6" >
+                
+                    <div id="pop_text_area_transac_popup_inn_container_export" style="height: 320px; width:930px; margin-top: -16px; overflow:hidden;">
+
+                    <div id="tag_transac_lft_Item_maindet_Grid_area" style="height: 25px; width: 932px; overflow:hidden;">
+                     
+                    <div id="txt_container_Transact_Main_l" style="width: 428px;">
+                        <div id="tag_label_transact_Src" style="width: 106px;">
+                        <span style="color: Blue; font-weight: bold;">Supporting Document </span>
+                        </div>
+                        <div id="txtcon-m_Exchange" style="width: 100px;">
+                           
+                        </div>
+                    </div>
+
+                    <div id="verslic"></div>
+                         <div id="txt_container_Transact_Main_l" style="width: 208px;">
+                        <div id="txtcon-m_Exchange" style="width: 140px;">
+                          <span style="color: Blue; font-weight: bold;">Statement </span>
+                        </div>
+                        
+                    </div>
+                    </div>
+
+
+                        <div id="tag_transac_lft_Item_maindet_Grid_area" style="overflow: auto; height: 250px; width: 926px;">
+                        
+                            <asp:GridView ID="gv_Item_Details" runat="server" EmptyDataText="No Record Found"
+                                DataKeyNames="ITEM_SLNO" AutoGenerateColumns="False" BackColor="White" BorderColor="#C8C8C8"
+                                BorderStyle="none" ShowFooter="True" BorderWidth="1px" CellPadding="1" CellSpacing="1"
+                                CssClass="grid-view" AllowPaging="false" HorizontalAlign="Left" ShowHeaderWhenEmpty="True"
+                                Width="40%" OnRowCreated="gv_Item_Details_RowCreated">
+                                <RowStyle BorderWidth="0.1em" BorderColor="black" />
+                                <PagerStyle ForeColor="Black" CssClass="pager" />
+                                <Columns>
+                                    <asp:TemplateField HeaderText="Chk " HeaderStyle-Font-Bold="true" HeaderStyle-Width="40px">
+                                        <HeaderTemplate>
+                                            <asp:CheckBox ID="chkAll" runat="server" />
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <asp:CheckBox ID="D_CHECK" runat="server" HeaderText="ch_inv" Width="40px" />
+                                        </ItemTemplate>
+                                        <ItemStyle Width="40px" />
+                                    </asp:TemplateField>
+                                     <asp:TemplateField HeaderText="Inv.Slno" HeaderStyle-Font-Bold="true" HeaderStyle-Width="50px" >
+                                        <ItemTemplate>
+                                            <asp:Literal ID="txt_Inv_Slno"  Text='<%# Bind("INVOICE_SLNO") %>' runat="server"></asp:Literal>
+                                        </ItemTemplate>
+                                        <ItemStyle Width="45px" HorizontalAlign="Center" />
+                                    </asp:TemplateField>
+                                     <asp:TemplateField HeaderText="Item.Slno" HeaderStyle-Font-Bold="true" HeaderStyle-Width="50px" >
+                                        <ItemTemplate>
+                                            <asp:Literal ID="txt_Item_Slno"  Text='<%# Bind("ITEM_SLNO") %>' runat="server"></asp:Literal>
+                                        </ItemTemplate>
+                                        <ItemStyle Width="45px" HorizontalAlign="Center" />
+                                    </asp:TemplateField>
+
+                                    <asp:BoundField DataField="SELECT_TYPE" HeaderText="Type" HeaderStyle-Width="55px">
+                                        <ItemStyle CssClass="column_style_left" Width="55px" />
+                                    </asp:BoundField>
+
+                                   <asp:TemplateField HeaderText="Img.Refno" HeaderStyle-Font-Bold="true" HeaderStyle-Width="55px" >
+                                        <ItemTemplate>
+                                            <asp:Literal ID="txt_img_ref_no"  Text='<%# Bind("IMAGE_REF_NUMBER") %>' runat="server"></asp:Literal>
+                                        </ItemTemplate>
+                                        <ItemStyle Width="55px" HorizontalAlign="Center" />
+                                    </asp:TemplateField>
+
+                                    <asp:BoundField DataField="DOC_TYPE_CODE" HeaderText="Doc. Code" HeaderStyle-Width="55px">
+                                        <ItemStyle CssClass="column_style_left" Width="55px" />
+                                    </asp:BoundField>
+                                </Columns>
+                            </asp:GridView>
+                            <asp:GridView ID="gv_Sup_Item_Details" runat="server" EmptyDataText="No Record Found"
+                                DataKeyNames="ITEM_SLNO" AutoGenerateColumns="False" ShowFooter="false" CellPadding="1"
+                                CellSpacing="1" AllowPaging="false" HorizontalAlign="Left" ShowHeaderWhenEmpty="True"
+                                Width="40%" CssClass="myGridStyle" BackColor="WhiteSmoke" BorderColor="#C8C8C8"
+                                BorderStyle="Solid" BorderWidth="1px">
+                                <RowStyle BorderWidth="0.1em" BorderColor="black" />
+                                <HeaderStyle CssClass="header" BackColor="#808080" Font-Bold="True" ForeColor="White" />
+                                <Columns>
+                                    <asp:TemplateField HeaderText="Chk " HeaderStyle-Font-Bold="true" HeaderStyle-Width="40px">
+                                        <HeaderTemplate>
+                                            <asp:CheckBox ID="chkAll" runat="server" />
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <asp:CheckBox ID="D_CHECK" runat="server" HeaderText="ch_inv" Width="40px" />
+                                        </ItemTemplate>
+                                        <ItemStyle Width="40px" />
+                                    </asp:TemplateField>
+                                  
+                                    <asp:TemplateField HeaderText="Inv.Slno" HeaderStyle-Font-Bold="true" HeaderStyle-Width="50px">
+                                        <ItemTemplate>
+                                            <asp:Literal ID="txt_Inv_Slno" Text='<%# Bind("INVOICE_SLNO") %>' runat="server"></asp:Literal>
+                                        </ItemTemplate>
+                                        <ItemStyle Width="45px" HorizontalAlign="Center" />
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Item.Slno" HeaderStyle-Font-Bold="true" HeaderStyle-Width="50px">
+                                        <ItemTemplate>
+                                            <asp:Literal ID="txt_Item_Slno" Text='<%# Bind("ITEM_SLNO") %>' runat="server"></asp:Literal>
+                                        </ItemTemplate>
+                                        <ItemStyle Width="45px" HorizontalAlign="Center" />
+                                    </asp:TemplateField>
+                                    <asp:BoundField DataField="STMT_TYPE" HeaderText="Type" HeaderStyle-Width="55px">
+                                        <ItemStyle CssClass="column_style_left" Width="55px" />
+                                    </asp:BoundField>
+
+                                   <%-- <asp:BoundField DataField="STMT_CODE" HeaderText="Code" HeaderStyle-Width="55px">
+                                        <ItemStyle CssClass="column_style_left" Width="55px" />
+                                    </asp:BoundField>--%>
+
+                                     <asp:TemplateField HeaderText="Stmt. Code" HeaderStyle-Font-Bold="true" HeaderStyle-Width="55px">
+                                        <ItemTemplate>
+                                            <asp:Literal ID="txt_Stmt_Code" Text='<%# Bind("STMT_CODE") %>' runat="server"></asp:Literal>
+                                        </ItemTemplate>
+                                        <ItemStyle Width="55px" HorizontalAlign="Center" />
+                                    </asp:TemplateField>
+
+                                </Columns>
+                            </asp:GridView>
+                        </div>
+                        <div id="tag_srcinner1">
+                      
+                        <div id="txt_container_Transact_Main_l" style="width: 250px;">
+                            <div id="tag_label_transact_Src" style="width: 106px;">
+                                <span style="color: Blue; font-size: 12px; font-weight: bold;">Ex-Bond Job No </span>
+                            </div>
+                            <div id="txtcon-m_Exchange" style="width: 140px;">
+                                <asp:DropDownList ID="ddl_Ex_Jobno" CssClass="listtxt_transac_item_gen_notn" Width="140px" Font-Size="12px" runat="server" >
+                                </asp:DropDownList>
+                            </div>
+                        </div>
+                        <div id="verslic">
+                        </div>
+                        <div id="txt_container_Transact_Main_l" style="width: 250px;">
+                            <div id="tag_label_transact_Src" style="width: 106px;">
+                                <span style="color: Blue; font-size: 12px; font-weight: bold;">Ex-Bond Inv. No </span>
+                            </div>
+                            <div id="txtcon-m_Exchange" style="width: 140px;">
+                                <asp:DropDownList ID="ddl_Ex_Jobno_Inv_Slno" 
+                                    CssClass="listtxt_transac_item_gen_notn" Width="140px"
+                                    Font-Size="12px" runat="server" TabIndex="3" AutoPostBack="true" 
+                                    onselectedindexchanged="ddl_Ex_Jobno_Inv_Slno_SelectedIndexChanged" >
+                                </asp:DropDownList>
+                            </div>
+                        </div>
+                        <div id="verslic">
+                        </div>
+                        <div id="txt_container_Transact_Main_l" style="width: 400px;">
+                            <div id="tag_label_transact_Src" style="width: 116px;">
+                                <span style="color: Blue; font-size: 12px; font-weight: bold;">Ex-Bond Item. Slno</span>
+                            </div>
+                            <div id="txtcon-m_Exchange" style="width: 120px;">
+                                <asp:DropDownList ID="ddl_Ex_Jobno_Item_Slno" Style="width: 120px;" CssClass="listtxt_transac_item_gen_notn"
+                                    Width="120px" Font-Size="12px" runat="server" >
+                                </asp:DropDownList>
+                             
+                            </div>
+                             <div id="editbu"  style="width: 110px;">
+                              <asp:Button ID="btnSave" runat="server" CssClass="save" OnClick="btnSave_Click"  />
+                              </div>
+                        </div>
+                       
+                    </div>
+                    </div>
+                </div>
+             
+
+                  <%-- --------------------Test Start----------------------------%>
+                
+
+                   </div>
+                 </div>
+              
+                <%-----------------------------------END----------------------------------------------------------------%>
+
+            <asp:HiddenField ID="hdinvslno" runat="server" ClientIDMode="Static"/>
+            <asp:HiddenField ID="hdnjobno" runat="server" ClientIDMode="Static"/>
+           </ContentTemplate>
+    </asp:UpdatePanel>
+    </form>
+  
+
+    <script type="text/javascript" src="../windowfiles/dhtmlwindow.js"></script>
+    <script type="text/javascript" src="../modalfiles/modal.js"></script>
+    <script type="text/javascript" src="../js/slide.js"></script>
+    <script type="text/javascript" src="../js/jscolor.js"></script>
+    <script type="text/javascript" src="../js/iframepopupwin.js"></script>
+    <script src="../js/checkboxJScript.js" type="text/javascript"></script>
+    <script src="../js/listpopup.js" type="text/javascript"></script>
+    <script src="../js/Validation.js" type="text/javascript"></script>
+
+
+    <script src="../AutoComplete_JS/jquery.min.js" type="text/javascript"></script>
+    <script src="../AutoComplete_JS/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="../Validation Files/jquery_002.js" type="text/javascript" charset="utf-8">
+    </script>
+    <script src="../Validation Files/jquery.js" type="text/javascript" charset="utf-8">
+    </script>
+    <script src="../Validation%20Files/Ascii.js" type="text/javascript"></script>
+   
+
+
+    <script type="text/javascript">
+        $(function () {
+            $("[id*=chkAll]").bind("click", function () {
+                var chkHeader = $(this);
+                var grid = $(this).closest("table");
+                $("td", grid).find("input[type=checkbox]").each(function () {
+
+                    if (chkHeader.is(":checked")) {
+                        $(this).attr("checked", "checked");
+                        var td = $("td", $(this).closest("tr"));
+                        td.css({ "background-color": "#FFF8DC" }); //white
+                        $("input[type=text]", td).removeAttr("disabled");
+                    } else {
+                        $(this).removeAttr("checked");
+                        var td = $("td", $(this).closest("tr"));
+                        td.css({ "background-color": "White" }); //white
+                        $("input[type=text]", td).attr("disabled", "disabled");
+                    }
+                });
+            });
+        });
+    </script>
+    <script type = "text/javascript">
+        $(function () {
+            $("[id*=D_CHECK]").bind("click", function () {
+                var grid = $(this).closest("table");
+                var chkHeader = $("[id*=chkAll]", grid);
+                if (!$(this).is(":checked")) {
+                    var td = $("td", $(this).closest("tr"));
+                    td.css({ "background-color": "White" }); //uncheck
+                    $("input[type=text]", td).attr("disabled", "disabled");
+                } else {
+                    var td = $("td", $(this).closest("tr"));
+                    td.css({ "background-color": "#FFF8DC" });
+                    $("input[type=text]", td).removeAttr("disabled");
+                }
+                if ($("[id*=D_CHECK]", grid).length == $("[id*=D_CHECK]:checked", grid).length) {
+                    chkHeader.attr("checked", "checked");
+                } else {
+                    chkHeader.removeAttr("checked");
+                }
+            });
+        });
+    </script>
+
+      <script type="text/javascript">
+          function Single_Window_link(lnk) {
+              var str = '';
+              var value = '1';
+
+              var gv = document.getElementById("gv_Item_Details");
+              for (var i = 0; i < gv.getElementsByTagName("input").length; i++) {
+                  var node = gv.getElementsByTagName("input")[i];
+                  if (node != null && node.type == "checkbox" && node.checked) {
+
+                      var Grid_Table = document.getElementById("gv_Item_Details");
+
+                      if (Grid_Table.rows[i].cells[1].textContent == 'Inv.Slno') { 
+
+                      }
+                      else {
+
+                          if (value == '1') {
+
+                              str = str + Grid_Table.rows[i].cells[1].textContent + '-' + Grid_Table.rows[i].cells[2].textContent;
+                              value = "2";
+                          }
+                          else {
+                              str = str + ',' + Grid_Table.rows[i].cells[1].textContent + '-' + Grid_Table.rows[i].cells[2].textContent;
+                              str = str;
+                          }
+
+                      }
+                  }
+              }
+              if (str != '') {
+                  document.getElementById("hdinvslno").value = str;
+
+                  PageMethods.Save_Product(document.getElementById("hdnjobno").value, str, OnSuccess);
+
+
+                 // open_IMP_Single_Window_Bulk_Entry(document.getElementById('hdinvslno').value, $('#ddlinvno').val(), $('#ddl_INV_Rict_no').val() );
+              }
+              else {
+                   alert('Select a Item');
+                   document.getElementById("hdinvslno").value = '';
+               }
+               function OnSuccess(response, userContext, methodName) {
+
+                   if (response == 'T') {
+                       open_IMP_Single_Window_Bulk_Entry(document.getElementById('hdinvslno').value, $('#ddlinvno').val(), $('#ddl_INV_Rict_no').val());
+                   }
+                   else {
+                       jAlert(response, 'Job Copy', function (r) { });
+                   }
+               }
+          }  
+          </script>
+
+    
+</body>
+</html>

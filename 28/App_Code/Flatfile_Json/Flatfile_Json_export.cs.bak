@@ -1,0 +1,1417 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Data;
+using System.Data.SqlClient;
+using Newtonsoft.Json;
+using System.IO;
+
+/// <summary>
+/// Summary description for Flatfile_Json_export
+/// </summary>
+public class Flatfile_Json_export
+{
+    private string _JOBNO;
+    public string COUNTRY_ORIGIN = null, COUNTRY_SHIPMENT = null, PORT_ORIGIN = null, PORT_SHIPMENT = null, PORT_DISCHARGE = null,
+        PORT_FINAL_DEST = null, COUNTRY_DISCHARGE = null, COUNTRY_FINAL_DEST=null;
+    public string STATE_OF_EXPORT;
+    public string CONSIGNEE_ADD5;
+    public string PORT_OF_LOADING;
+    public string sealType;
+    public string natureOfCargo;
+    public string grossWeight;
+    public string netWeight;
+    public string unitOfMeasurement;
+    public string totalNumberOfPackages;
+    public string marksNumbers;
+    public string numberOfLoosePackets;
+    public string numberOfContainers;
+    public string mawbnumber;
+    public string hawbnumber;
+    public DataSet ds = new DataSet();
+    private string _Ename;
+    public string _Inv_Slno;
+    public string JOBNo
+    {
+        get { return _JOBNO; }
+        set { _JOBNO = value; }
+    }
+    public string Ename
+    {
+        get { return _Ename; }
+        set { _Ename = value; }
+    }
+    public string Inv_Slno
+    {
+        get { return _Inv_Slno; }
+        set { _Inv_Slno = value; }
+    }
+    public DataSet Get_EXP_ChkList_All_New(string ICEGATE_ID, string logFileName, string errorFolder)
+    {
+        try
+        {
+            SqlParameter[] param = new SqlParameter[10];
+            param[2] = new SqlParameter("@Jobno", JOBNo);
+            param[4] = new SqlParameter("@Branch_Common", Connection.Current_Branch());
+            param[5] = new SqlParameter("@Company_Lic", Connection.COMPANYID());
+            param[6] = new SqlParameter("@flag", Ename);
+            ds = Connection.Get_Dataset("EXP_JSON_NEW", param);
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                JSON_FOR_EXP(ds, ICEGATE_ID, errorFolder + logFileName);
+            }
+        }
+        catch (Exception ex)
+        {
+            Connection.Error_Msg(ex.Message);
+        }
+        return ds;
+
+    }
+    public string Trim(string str)
+    {
+        if (str.Contains("."))
+        {
+            string[] s1 = str.Split(new string[] { "." }, StringSplitOptions.None);
+            string num = "123456789";
+            if (num.Contains(s1[1].ToString()))
+            {
+
+            }
+            else
+            {
+                str.Trim().Replace(".00", "").Replace(".0000", "");
+
+            }
+
+        }
+
+        return str.Trim().Replace("amp;", "").Replace("`", "").Replace("'", "").Replace("&nbsp;", "").Replace("&nbsp;", "");
+    }
+    public void Get_Admin_Master_Codes()
+    {
+        DataSet dss = new DataSet();
+        Date_Time dt = new Date_Time();
+        Export_FlatFile_Generation FlatFile = new Export_FlatFile_Generation();
+        Date_Time split = new Date_Time();
+
+        FlatFile.Ename = "IMPORT_SELECT";
+
+        dss = FlatFile.Search_Admin_Master();
+
+        DataView view1 = dss.Tables[0].DefaultView;
+
+        // STATE OF EXPORT
+        if (!string.IsNullOrWhiteSpace(STATE_OF_EXPORT))
+        {
+            view1.RowFilter = "STATE_NAME = '" + split.Split("-", STATE_OF_EXPORT) + "'";
+        }
+
+        DataSet dt_UserRights = new DataSet();
+        dt_UserRights.Tables.Add(view1.ToTable());
+
+        if (dt_UserRights.Tables[0].Rows.Count > 0)
+        {
+            STATE_OF_EXPORT = dt.Trim(dt_UserRights.Tables[0].Rows[0]["STATE_CODE"].ToString());
+        }
+
+        // CONSIGNEE COUNTRY CODE
+        view1 = dss.Tables[1].DefaultView;
+
+        if (!string.IsNullOrWhiteSpace(CONSIGNEE_ADD5))
+        {
+            view1.RowFilter = "COUNTRY_NAME = '" + split.Split("-", CONSIGNEE_ADD5) + "'";
+        }
+
+        DataSet dt_2 = new DataSet();
+        dt_2.Tables.Add(view1.ToTable());
+
+        if (dt_2.Tables[0].Rows.Count > 0)
+        {
+            CONSIGNEE_ADD5 = dt.Trim(dt_2.Tables[0].Rows[0]["COUNTRY_CODE"].ToString());
+        }
+
+        // COUNTRY DISCHARGE
+        view1 = dss.Tables[1].DefaultView;
+
+        if (!string.IsNullOrWhiteSpace(COUNTRY_DISCHARGE))
+        {
+            view1.RowFilter = "COUNTRY_NAME = '" + split.Split("-", COUNTRY_DISCHARGE) + "'";
+        }
+
+        DataSet dt_1 = new DataSet();
+        dt_1.Tables.Add(view1.ToTable());
+
+        if (dt_1.Tables[0].Rows.Count > 0)
+        {
+            COUNTRY_DISCHARGE = dt.Trim(dt_1.Tables[0].Rows[0]["COUNTRY_CODE"].ToString());
+        }
+
+        // COUNTRY FINAL DEST
+        view1 = dss.Tables[1].DefaultView;
+
+        if (!string.IsNullOrWhiteSpace(COUNTRY_FINAL_DEST))
+        {
+            view1.RowFilter = "COUNTRY_NAME = '" + split.Split("-", COUNTRY_FINAL_DEST) + "'";
+        }
+
+        DataSet ds1 = new DataSet();
+        ds1.Tables.Add(view1.ToTable());
+
+        if (ds1.Tables[0].Rows.Count > 0)
+        {
+            COUNTRY_FINAL_DEST = dt.Trim(ds1.Tables[0].Rows[0]["COUNTRY_CODE"].ToString());
+        }
+
+        // PORT DISCHARGE
+        if (!string.IsNullOrWhiteSpace(PORT_DISCHARGE) && PORT_DISCHARGE.Contains("-"))
+        {
+            PORT_DISCHARGE = split.Split_main("-", PORT_DISCHARGE);
+        }
+
+        // PORT FINAL DEST
+        if (!string.IsNullOrWhiteSpace(PORT_FINAL_DEST) && PORT_FINAL_DEST.Contains("-"))
+        {
+            PORT_FINAL_DEST = split.Split_main("-", PORT_FINAL_DEST);
+        }
+
+        // PORT OF LOADING
+        if (!string.IsNullOrWhiteSpace(PORT_OF_LOADING) && PORT_OF_LOADING.Contains("-"))
+        {
+            PORT_OF_LOADING = split.Split_main("-", PORT_OF_LOADING);
+        }
+    }
+
+    private void JSON_FOR_EXP(DataSet ds, string ICEGATE_ID, string filePath)
+    {
+        if (ds == null || ds.Tables.Count == 0 || ds.Tables[0].Rows.Count == 0)
+            return;
+
+   
+
+
+        DataRow masterRow = ds.Tables[0].Rows[0];
+
+      
+
+        if (ds.Tables.Count > 1 && ds.Tables[0].Rows.Count > 0)
+        {
+            COUNTRY_DISCHARGE = masterRow["COUNTRY_DISCHARGE"].ToString();
+            COUNTRY_FINAL_DEST = masterRow["COUNTRY_FINAL_DEST"].ToString();
+            PORT_DISCHARGE = masterRow["PORT_DISCHARGE"].ToString();
+            PORT_FINAL_DEST = masterRow["PORT_FINAL_DEST"].ToString();
+            Get_Admin_Master_Codes();
+        }
+
+
+        RootModelexp root = new RootModelexp();
+        root.master_Exp = new master_Exp();
+
+        // ================= HEADER =================
+
+        root.HeaderField_Exp = new HeaderField_Exp
+        {
+            senderID = ICEGATE_ID,
+            receiverID = PORT_DISCHARGE,
+            indicator = "T",
+            messageID = "CACHE01",
+            sequenceOrControlNumber = masterRow["JOBNO"].ToString(),
+            jobNumber = GetValue(masterRow, "JOBNO"),
+            jobDate = GetValue(masterRow, "JOBDATE"),
+            messageType = "F"
+        };
+
+        // ================= AR4 MODEL =================
+
+        root.master_Exp.AR4_model = new List<AR4Model>();
+
+        if (ds.Tables.Count > 6 && ds.Tables[6].Rows.Count > 0)
+        {
+            foreach (DataRow ar4 in ds.Tables[6].Rows)
+            {
+                AR4Model model = new AR4Model
+                {
+                    messageType = "F",
+                    jobNumber = GetValue(ar4, "AR4_JOBNO"),
+                    jobDate = GetValue(masterRow, "JOBDATE"),
+                    sbNumber = null,
+                    sbDate = null,
+                    invoiceSerialNumber = GetValue(ar4, "AR4_INVOICE_SLNO"),
+                    itemSerialNumberInvoice = GetValue(ar4, "AR4_ITEM_NO"),
+                    ar4Number = GetValue(ar4, "AR4_NO"),
+                    ar4Date = GetValue(ar4, "AR4_DATE"),
+                    commissionerate = GetValue(ar4, "AR4_COMMISSION_RATE"),
+                    division = GetValue(ar4, "AR4_DIVISION"),
+                    range = GetValue(ar4, "AR4_RANGE"),
+                    remarks = GetValue(ar4, "AR4_REMARKS")
+                };
+
+                root.master_Exp.AR4_model.Add(model);
+            }
+        }
+
+        // ================= CESS MODEL =================
+
+        root.master_Exp.CessModel = new List<CessModel>();
+
+        if (ds.Tables.Count > 12 && ds.Tables[12].Rows.Count > 0)
+        {
+            foreach (DataRow r in ds.Tables[12].Rows)
+            {
+                CessModel cess = new CessModel
+                {
+                    jobNumber = GetValue(r, "JOBNO"),
+                    invoiceSerialNumber = GetValue(r, "INVOICE_SLNO"),
+                    itemSerialNumberInvoice = GetValue(r, "ITEM_SLNO"),
+                    srno = GetValue(r, "CESS_SLNO"),
+                    quantity = GetValue(r, "CESS_ITEM_QTY"),
+                    itemCessValue = GetValue(r, "CESS_VALUE"),
+                    cessActCode = GetValue(r, "CESS_TARIFF_UNIT")
+                };
+
+                root.master_Exp.CessModel.Add(cess);
+            }
+        }
+
+        // ================= CONSTITUENT FINAL =================
+
+        root.master_Exp.ConstituentFinal = new List<ConstituentFinalModel>();
+
+        if (ds.Tables.Count > 16 && ds.Tables[16].Rows.Count > 0)
+        {
+            foreach (DataRow r in ds.Tables[16].Rows)
+            {
+                ConstituentFinalModel model = new ConstituentFinalModel
+                {
+                    jobNumber = GetValue(r, "JOBNO"),
+                    invoiceSerialNumber = GetValue(r, "INVOICE_SLNO"),
+                    itemSerialNumber = GetValue(r, "ITEM_SLNO"),
+                    constituentSerialNo = GetValue(r, "CONSTITUENT_SRNO"),
+                    constituentElementName = GetValue(r, "CONSTITUENT_ELEMENT_NAME"),
+                    constituentElementCode = GetValue(r, "CONSTITUENT_ELEMENT_CODE"),
+                    constituentPercentage = GetValue(r, "CONSTITUENT_PERCENTAGE"),
+                    constituentYieldPercentage = GetValue(r, "CONSTITUENT_YIELD_PERCENTAGE"),
+                    activeIngredient = GetValue(r, "ACTIVE_INGREDIENT")
+                };
+
+                root.master_Exp.ConstituentFinal.Add(model);
+            }
+        }
+        // ================= CONTAINER MODEL =================
+
+        root.master_Exp.ContainerModel = new List<ContainerModel_Exp>();
+
+        if (ds.Tables.Count > 3 && ds.Tables[3].Rows.Count > 0)
+        {
+            foreach (DataRow r in ds.Tables[3].Rows)
+            {
+                ContainerModel_Exp container = new ContainerModel_Exp
+                {
+                    jobNumber = GetValue(r, "ANNEX_SEA_CON_JOBNO"),
+                    containerNumber = GetValue(r, "ANNEX_SEA_CON_CONTAINERNO"),
+                    containerSize = GetValue(r, "ANNEX_SEA_CON_SIZE"),
+                    exciseSealNo = GetValue(r, "ANNEX_SEA_CON_EXCISE_SEALNO"),
+                    sealDate = GetValue(r, "ANNEX_SEA_CON_SEAL_DATE"),
+                    sealTypeIndicator = GetValue(r, "ANNEX_SEA_CON_SEALTYPE_INDICATOR"),
+                    sealDeviceID = GetValue(r, "ANNEX_SEA_CON_SEAL_DEVICEID"),
+                    movementDocumentType = GetValue(r, "ANNEX_SEA_CON_DOC_TYPE"),
+                    movementDocumentNumber = GetValue(r, "ANNEX_SEA_CON_DOC_NUMBER"),
+                    eqmntType = GetValue(r, "ANNEX_SEA_CON_TYPE")
+                };
+
+                root.master_Exp.ContainerModel.Add(container);
+            }
+        }
+        // ================= CONTROL MODEL =================
+
+        root.master_Exp.ControlType = new List<ControlModel_Exp>();
+
+        if (ds.Tables.Count > 18 && ds.Tables[18].Rows.Count > 0)
+        {
+            foreach (DataRow r in ds.Tables[18].Rows)
+            {
+                ControlModel_Exp control = new ControlModel_Exp
+                {
+                    jobNumber = GetValue(r, "JOBNO"),
+                    invoiceSerialNumber = GetValue(r, "INVOICE_SLNO"),
+                    itemSerialNumber = GetValue(r, "ITEM_SLNO"),
+                    controlSerialNo = GetValue(r, "SLNO"),
+                    controlTypeCode = GetValue(r, "CONTROL_TYPE_CODE"),
+                    controlLocation = GetValue(r, "CONTROL_LOCATION"),
+                    controlStartDate = GetValue(r, "CONTROL_START_DATE"),
+                    controlEndDate = GetValue(r, "CONTROL_END_DATE"),
+                    controlResultCode = GetValue(r, "CONTROL_RESULT_CODE"),
+                    controlResultRemarks = GetValue(r, "CONTROL_RESULT_TEXT")
+                };
+
+                root.master_Exp.ControlType.Add(control);
+            }
+        }
+        // ================= DFIA MODEL =================
+
+        root.master_Exp.DfiaModel = new List<DfiaModel>();
+
+        if (ds.Tables.Count > 14 && ds.Tables[14].Rows.Count > 0)
+        {
+            foreach (DataRow r in ds.Tables[14].Rows)
+            {
+                DfiaModel dfia = new DfiaModel
+                {
+                    jobNumber = GetValue(r, "JOB_NO"),
+                    invoiceSerialNumber = GetValue(r, "INVOICE_SLNO"),
+                    itemSerialNumberInvoice = GetValue(r, "ITEM_SLNO"),
+                    srno = GetValue(r, "LICENSE_E_SL_NO"),
+                    quantity = GetValue(r, "LICENSE_IMP_QTY"),
+                    unitOfMeasurement = GetValue(r, "LICENSE_IMP_UNIT"),
+                    itemDescription = GetValue(r, "LICENSE_IMP_DESC"),
+                    licenseNumber = GetValue(r, "LICENSE_NO")
+                };
+
+                root.master_Exp.DfiaModel.Add(dfia);
+            }
+        }
+        // ================= EOU MODEL =================
+
+        root.master_Exp.EOUModel = new List<EOUModel>();
+
+        if (ds.Tables.Count > 9 && ds.Tables[9].Rows.Count > 0)
+        {
+            foreach (DataRow r in ds.Tables[9].Rows)
+            {
+                EOUModel eou = new EOUModel
+                {
+                    jobNumber = GetValue(r, "ANNEX_JOBNO"),
+                    ieCodeOfTheEOU = GetValue(r, "ANNEX_IECCODE"),
+                    branchSrNumberOfIE = GetValue(r, "ANNEX_BR_SLNO"),
+                    examinationDate = GetValue(r, "ANNEX_EXAM_DATE"),
+                    examiningOfficerName = GetValue(r, "ANNEX_EXAM_OFFICER"),
+                    examiningOfficerDesignation = GetValue(r, "ANNEX_EXAM_DESIGN"),
+                    supervisingOfficerName = GetValue(r, "ANNEX_SUPER_NAME"),
+                    supervisingOfficerDesignation = GetValue(r, "ANNEX_SUPER_DESIGN"),
+                    commissionerate = GetValue(r, "ANNEX_COMMISSION_RATE"),
+                    division = GetValue(r, "ANNEX_DIVISION"),
+                    range = GetValue(r, "ANNEX_RANGE"),
+                    sealNo = GetValue(r, "ANNEX_SEAL_NO"),
+                    itemValuesVerifiedByExaminingOfficer = GetValue(r, "ANNEX_VERIFIED_EXAM_OFFICER"),
+                    sampleForwarded = GetValue(r, "ANNEX_SAMPLE_DRAWN")
+                };
+
+                root.master_Exp.EOUModel.Add(eou);
+            }
+        }
+        // ================= INFO TYPE =================
+
+        root.master_Exp.InfoType = new List<InfoTypeModel>();
+
+        if (ds.Tables.Count > 15 && ds.Tables[15].Rows.Count > 0)
+        {
+            foreach (DataRow r in ds.Tables[15].Rows)
+            {
+                InfoTypeModel info = new InfoTypeModel
+                {
+                    jobNumber = GetValue(r, "JOBNO"),
+                    invoiceSerialNumber = GetValue(r, "INVOICE_SLNO"),
+                    itemSerialNumber = GetValue(r, "ITEM_SLNO"),
+                    infoSrNo = GetValue(r, "SLNO"),
+                    infoType = GetValue(r, "INFO_TYPE"),
+                    infoQualifier = GetValue(r, "INFO_QUALIFIER"),
+                    infoCode = GetValue(r, "INFO_CODE"),
+                    infoText = GetValue(r, "INFO_TEXT"),
+                    infoMeasure = GetValue(r, "INFO_MSR"),
+                    infouqc = GetValue(r, "INFO_UQC")
+                };
+
+                root.master_Exp.InfoType.Add(info);
+            }
+        }
+
+        // ================= INVOICE MODEL =================
+
+        root.master_Exp.InvoiceModel = new List<InvoiceModel_Exp>();
+
+        if (ds.Tables.Count > 5 && ds.Tables[5].Rows.Count > 0)
+        {
+            foreach (DataRow r in ds.Tables[5].Rows)
+            {
+                InvoiceModel_Exp inv = new InvoiceModel_Exp
+                {
+                    invoiceSerialNumber = GetValue(r, "INVOICE_SLNO"),
+                    actualInvoiceNo = GetValue(r, "INVOICE_NO"),
+                    invoiceDate = GetValue(r, "INVOICE_DATE"),
+                    invoiceCurrency = GetValue(r, "INVOICE_CURRENCY"),
+                    natureOfContract = GetValue(r, "TERMS"),
+
+                    buyerName = GetValue(r, "BUYER_NAME"),
+                    buyerAddress1 = GetValue(r, "BUYER_ADDRESS1"),
+                    buyerAddress2 = GetValue(r, "BUYER_ADDRESS2"),
+                    buyerAddress3 = GetValue(r, "BUYER_ADDRESS3"),
+                    buyerAddress4 = GetValue(r, "BUYER_ADDRESS4"),
+
+                    freightCurrency = GetValue(r, "FREIGHT_CURRENCY"),
+                    freightAmount = GetValue(r, "FREIGHT_CHARGES"),
+
+                    insuranceRate = GetValue(r, "INSURANCE_RATE"),
+                    insuranceCurrency = GetValue(r, "INSURANCE_CURRENCY"),
+                    insuranceAmount = GetValue(r, "INSURANCE_CHARGES"),
+
+                    commissionRate = GetValue(r, "COMMISSION_RATE"),
+                    commissionCurrency = GetValue(r, "COMMISSION_CURRENCY"),
+                    commissionAmount = GetValue(r, "COMMISSION_CHARGES"),
+
+                    discountOnFOB = GetValue(r, "FOB_RATE"),
+                    discountCurrency = GetValue(r, "FOB_CURRENCY"),
+                    discountAmount = GetValue(r, "FOB_CHARGES"),
+
+                    otherDeductions = GetValue(r, "OTHER_DEDUCTION_RATE"),
+                    otherDeductionsCurrency = GetValue(r, "OTHER_DEDUCTION_CURRENCY"),
+                    otherDeductionsAmount = GetValue(r, "OTHER_DEDUCTION_CHARGES"),
+
+                    packingCharges = GetValue(r, "PACKMISC_CHARGES"),
+                    addFreight = GetValue(r, "PACKMISC_CHARGES"),
+                    exporterContractNumber = GetValue(r, "CONTRACT_NO"),
+                    natureOfPayment = GetValue(r, "PAYMENT_METHOD"),
+                    periodOfPayment = GetValue(r, "PERIOD_PAYMENT"),
+
+                    thirdPartyName = GetValue(r, "THIRDPARTY_NAME"),
+                    thirdPartyAddress1 = GetValue(r, "THIRDPARTY_ADD1"),
+                    thirdPartyAddress2 = GetValue(r, "THIRDPARTY_ADD2"),
+                    thirdPartyCity = GetValue(r, "THIRDPARTY_CITY"),
+                    thirdPartyCountrySubdivision = GetValue(r, "T_PARTY_COUNTRY_SUB_DIV"),
+                    thirdPartCountryCode = GetValue(r, "T_PARTY_COUNTRY_CODE"),
+                    thirdPartyPin = GetValue(r, "T_PARTY_PIN"),
+
+                    authorizedEconomicOperatorCode = GetValue(r, "AUTHORIZED_ECONOMIC_OPERATOR_CODE"),
+                    authorizedEconomicOperatorCountry = GetValue(r, "A_E_O_COUNTRY"),
+                    authorizedEconomicOperatorRole = GetValue(r, "AUTHORIZED_ECONOMIC_OPERATOR"),
+
+                    termsPlace = GetValue(r, "TERMS_PLACE")
+                };
+
+                root.master_Exp.InvoiceModel.Add(inv);
+            }
+        }
+
+        // ================= LICENSE MODEL =================
+
+        root.master_Exp.LicenseModel = new List<LicenseModel_Exp>();
+
+        if (ds.Tables.Count > 14 && ds.Tables[14].Rows.Count > 0)
+        {
+            foreach (DataRow r in ds.Tables[14].Rows)
+            {
+                LicenseModel_Exp lic = new LicenseModel_Exp
+                {
+                    jobNumber = GetValue(r, "JOB_NO"),
+                    invoiceSerialNumber = GetValue(r, "INVOICE_SLNO"),
+                    itemSerialNumberInvoice = GetValue(r, "ITEM_SLNO"),
+                    srno = GetValue(r, "LICENSE_REG_SLNO"),
+                    registrationNo = GetValue(r, "LICENSE_NO"),
+                    registrationDate = GetValue(r, "LICENSE_DATE"),
+                    itemSerialNoInPartE = GetValue(r, "LICENSE_E_SL_NO"),
+                    quantity = GetValue(r, "LICENSE_IMP_QTY"),
+                    exportQuantity = GetValue(r, "LICENSE_EXP_QTY"),
+                    whetherIndigenousImported = GetValue(r, "LICENSE_IMP_TYPE")
+                };
+
+                root.master_Exp.LicenseModel.Add(lic);
+            }
+        }
+        // ================= ITEM MODEL =================
+
+        root.master_Exp.ItemModel = new List<ItemModel_Exp>();
+
+        if (ds.Tables.Count > 7 && ds.Tables[7].Rows.Count > 0)
+        {
+            foreach (DataRow r in ds.Tables[7].Rows)
+            {
+                ItemModel_Exp item = new ItemModel_Exp
+                {
+                    jobNumber = GetValue(r, "JOBNO"),
+                    invoiceSerialNumber = GetValue(r, "INVOICE_SLNO"),
+                    itemSerialNumberInvoice = GetValue(r, "ITEM_SLNO"),
+
+                    schemeCode = GetValue(r, "ITEM_SCHEME_CODE"),
+                    ritcCode = GetValue(r, "RITCNO"),
+                    descOfGoods1 = GetValue(r, "ITEM_DESCRIPTION"),
+
+                    unitOfMeasurement = GetValue(r, "ITEM_QTY_CODE"),
+                    quantity = GetValue(r, "ITEM_QTY"),
+                    unitPrice = GetValue(r, "ITEM_UNIT_PRICE"),
+                    unitOfRate = GetValue(r, "ITEM_PER"),
+                    noOfUnit = GetValue(r, "ITEM_AMOUNT"),
+
+                    presentMarketValue = GetValue(r, "ITEM_PMVVALUE"),
+                    rewardItem = GetValue(r, "REWARD_POINTS"),
+
+                    itemManufacturerProducerGrowerCode = GetValue(r, "M_P_GROWER_CODE"),
+                    itemManufacturerProducerGrowerAddress1 = GetValue(r, "M_P_GROWER_ADD1"),
+                    itemManufacturerProducerGrowerAddress2 = GetValue(r, "M_P_GROWER_ADD2"),
+                    itemManufacturerProducerGrowerCity = GetValue(r, "M_P_GROWER_CITY"),
+                    itemManufacturerProducerGrowerCountrySubdivisiob = GetValue(r, "M_P_GROWER_COUNTRY_SUBDIV"),
+                    itemManufacturerProducerGrowerPin = GetValue(r, "M_P_GROWER_PIN"),
+                    itemManufacturerCountry = GetValue(r, "M_P_GROWER_COUNTRY"),
+
+                    sourceState = GetValue(r, "SOURCE_STATE"),
+                    transitCountry = GetValue(r, "TRANSIT_COUNTRY"),
+                    accessoryStatus = GetValue(r, "ACCESSORY_STATUS"),
+                    endUseOfItem = GetValue(r, "ENDUSE_ITEM"),
+
+                    hawbNo = GetValue(r, "HAWB_NO"),
+                    totalPackage = GetValue(r, "TOTAL_PKGS"),
+
+                    igstPaymentStatus = GetValue(r, "IGST_PAYMENT"),
+                    taxableValue = GetValue(r, "TAXABLE_VALUE"),
+                    igstAmount = GetValue(r, "IGST_AMT")
+                };
+
+                root.master_Exp.ItemModel.Add(item);
+            }
+        }
+
+        // ================= PACKING LIST MODEL =================
+
+        root.master_Exp.PackingListModel = new List<PackingListModel_Exp>();
+
+        if (ds.Tables.Count > 4 && ds.Tables[4].Rows.Count > 0)
+        {
+            foreach (DataRow r in ds.Tables[4].Rows)
+            {
+                PackingListModel_Exp pack = new PackingListModel_Exp
+                {
+                    jobNumber = GetValue(r, "ANNEX_SEA_PACK_JOBNO"),
+                    packingNumberFrom = GetValue(r, "ANNEX_SEA_PACK_FROM"),
+                    packingNumberTo = GetValue(r, "ANNEX_SEA_PACK_TO"),
+                    packingCode = GetValue(r, "ANNEX_SEA_PACK_PACKAGETYPE")
+                };
+
+                root.master_Exp.PackingListModel.Add(pack);
+            }
+        }
+        // ================= PRODUCTION =================
+
+        root.master_Exp.Production = new List<ProductionModel_Exp>();
+
+        if (ds.Tables.Count > 17 && ds.Tables[17].Rows.Count > 0)
+        {
+            foreach (DataRow r in ds.Tables[17].Rows)
+            {
+                ProductionModel_Exp prod = new ProductionModel_Exp
+                {
+                    jobNumber = GetValue(r, "JOBNO"),
+                    invoiceSerialNumber = GetValue(r, "INVOICE_SLNO"),
+                    itemSerialNumber = GetValue(r, "ITEM_SLNO"),
+                    productionSerialNo = GetValue(r, "SLNO"),
+                    productionBatchIdentifier = GetValue(r, "PRODUCTION_BATCH_IDENTIFIER"),
+                    productionBatchQuantity = GetValue(r, "PRODUCTION_BATCH_QUANTITY"),
+                    unitQuantityCode = GetValue(r, "UNIT_QTY_CODE"),
+                    dateOfManufacturing = GetValue(r, "DATE_OF_MANUFACTURING"),
+                    dateOfExpiry = GetValue(r, "DATE_OF_EXPIRY"),
+                    bestBefore = GetValue(r, "BEST_BEFORE")
+                };
+
+                root.master_Exp.Production.Add(prod);
+            }
+        }
+        // ================= REEXPORT =================
+
+        root.master_Exp.Reexport = new List<ReexportModel_Exp>();
+
+        if (ds.Tables.Count > 10 && ds.Tables[10].Rows.Count > 0)
+        {
+            foreach (DataRow r in ds.Tables[10].Rows)
+            {
+                ReexportModel_Exp re = new ReexportModel_Exp
+                {
+                    jobNumber = GetValue(r, "JOBNO"),
+                    sbNumber = GetValue(r, "SB_NO"),
+                    sbDate = GetValue(r, "SB_DATE"),
+
+                    invoiceSerialNumber = GetValue(r, "INVOICE_SLNO"),
+                    itemSerialNumber = GetValue(r, "ITEM_SLNO"),
+                    serialNo = GetValue(r, "SLNO"),
+
+                    beSite = GetValue(r, "BE_SITE"),
+                    beNo = GetValue(r, "BE_NO"),
+                    beDate = GetValue(r, "BE_DATE"),
+
+                    beInvoiceNo = GetValue(r, "BE_INVOICE_NO"),
+                    beItem = GetValue(r, "BE_INVOICE_ITEM_NO"),
+                    manualBe = GetValue(r, "MANUAL_BE_Y_N"),
+
+                    beQuantityUtilised = GetValue(r, "BE_QTY_UTILISED"),
+                    beItemDescription = GetValue(r, "BE_ITEM_DESC"),
+
+                    beQty = GetValue(r, "BE_QTY"),
+                    beUqc = GetValue(r, "BE_UQC"),
+
+                    beAssessedValue = GetValue(r, "BE_ASS_VALUE"),
+                    beDutyPaid = GetValue(r, "BE_DUTY_PAID"),
+                    beDutyPaymentDate = GetValue(r, "BE_DUTY_PAYMENT_DATE"),
+
+                    beOtherIdentifiableParameter = GetValue(r, "BE_OTH_IDENTIFIABLE_PARAMETER"),
+                    beAssessableValueClaimed = GetValue(r, "BE_ASS_VALUE_CLAIM"),
+
+                    beItemUsed = GetValue(r, "BE_ITEM_USED_Y_N"),
+                    commisionerPermission = GetValue(r, "COMMISIONER_PERMISSION_Y_N"),
+                    inputCredit = GetValue(r, "INPUT_CREDIT_Y_N"),
+                    personalUse = GetValue(r, "PERSONAL_USED_Y_N"),
+
+                    modvaAvailed = GetValue(r, "MODVAT_AVAILED_Y_N"),
+                    modvatRepaid = GetValue(r, "MODVAT_REPAID_Y_N")
+                };
+
+                root.master_Exp.Reexport.Add(re);
+            }
+        }
+
+        // ================= STATEMENT =================
+
+        root.master_Exp.Statement = new List<StatementModel_Exp>();
+
+        if (ds.Tables.Count > 19 && ds.Tables[19].Rows.Count > 0)
+        {
+            foreach (DataRow r in ds.Tables[19].Rows)
+            {
+                StatementModel_Exp stmt = new StatementModel_Exp
+                {
+                    jobNumber = GetValue(r, "JOBNO"),
+                    invoiceSerialNumber = GetValue(r, "INVOICE_SLNO"),
+                    itemSerialNumber = GetValue(r, "ITEM_SLNO"),
+                    statementSerialNo = GetValue(r, "SLNO"),
+                    statementType = GetValue(r, "STMT_TYPE"),
+                    statementCode = GetValue(r, "STMT_CODE"),
+                    statementText = GetValue(r, "STMT_TEXT")
+                };
+
+                root.master_Exp.Statement.Add(stmt);
+            }
+        }
+        // ================= SUPPORTING DOCS =================
+
+        root.master_Exp.SupportingDocs = new List<SupportingDocsModel_Exp>();
+
+        if (ds.Tables.Count > 20 && ds.Tables[20].Rows.Count > 0)
+        {
+            foreach (DataRow row in ds.Tables[20].Rows)
+            {
+                SupportingDocsModel_Exp doc = new SupportingDocsModel_Exp
+                {
+                    messageType = "F",
+
+                    jobNumber = GetValue(row, "JOBNO"),
+                    jobDate = GetValue(masterRow, "JOBDATE"),
+
+                    invoiceSerialNumber = GetValue(row, "INVOICE_SLNO"),
+                    itemSerialNumber = GetValue(row, "ITEM_SLNO"),
+                    serialNo = GetValue(row, "SLNO"),
+
+                    imageReferenceNumber = GetValue(row, "UNIQUE_DOC_NUMBER"),
+                    documentTypeCode = GetValue(row, "DOC_TYPE_CODE"),
+
+                    documentIssuingPartyCode = GetValue(row, "DOC_ISSUING_PARTY_CODE"),
+                    documentIssuingPartyName = GetValue(row, "DOC_ISSUING_PARTY_NAME"),
+                    documentIssuingPartyNameAddress1 = GetValue(row, "DOC_ISSUING_PARTY_NAME_ADD1"),
+                    documentIssuingPartyNameAddress2 = GetValue(row, "DOC_ISSUING_PARTY_NAME_ADD2"),
+                    documentIssuingPartyNameCity = GetValue(row, "DOC_ISSUING_PARTY_CITY"),
+                    documentIssuingPartyNamePin = GetValue(row, "DOC_ISSUING_PARTY_PIN"),
+
+                    documentReferenceNo = GetValue(row, "DOC_REF_NUMBER"),
+                    placeOfIssue = GetValue(row, "PLACE_OF_ISSUE"),
+                    documentIssueDate = GetValue(row, "DOC_ISSUE_DATE"),
+                    documentExpiryDate = GetValue(row, "DOC_EXPIRY_DATE"),
+
+                    documentBeneficiaryPartyCode = GetValue(row, "BENEFICIARY_PARTY_CODE"),
+                    documentBeneficiaryPartyName = GetValue(row, "BENEFICIARY_PARTY_NAME"),
+                    documentBeneficiaryPartyNameAddress1 = GetValue(row, "BENEFICIARY_PARTY_ADDRESS1"),
+                    documentBeneficiaryPartyNameAddress2 = GetValue(row, "BENEFICIARY_PARTY_ADDRESS2"),
+                    documentBeneficiaryPartyNameCity = GetValue(row, "BENEFICIARY_PARTY_CITY"),
+                    documentBeneficiaryPartyNamePin = GetValue(row, "BENEFICIARY_PARTY_PIN"),
+
+                    fileType = GetValue(row, "FILE_TYPE"),
+                    icegateId = GetValue(row, "ICEGATE_ID")
+                };
+
+                root.master_Exp.SupportingDocs.Add(doc);
+            }
+        }
+        // ================= THIRD PARTY MODEL =================
+
+        root.master_Exp.ThirdPartyModel = new List<ThirdPartyModel_Exp>();
+
+        if (ds.Tables.Count > 5 && ds.Tables[5].Rows.Count > 0)
+        {
+            foreach (DataRow row in ds.Tables[5].Rows)
+            {
+                ThirdPartyModel_Exp third = new ThirdPartyModel_Exp
+                {
+                    messageType = "F",
+
+                    jobNumber = GetValue(masterRow, "JOBNO"),
+                    jobDate = GetValue(masterRow, "JOBDATE"),
+
+                    invoiceSerialNumber = GetValue(row, "INVOICE_SLNO"),
+
+                    // Not available in table → set NULL (NOT empty string)
+                    itemSerialNumberInvoice = null,
+                    iec = null,
+                    branchSerialNo = null,
+
+                    exporterName = GetValue(row, "THIRDPARTY_NAME"),
+                    exporterAddress1 = GetValue(row, "THIRDPARTY_ADD1"),
+                    exporterAddress2 = GetValue(row, "THIRDPARTY_ADD2"),
+                    city = GetValue(row, "THIRDPARTY_CITY"),
+                    pin = GetValue(row, "T_PARTY_PIN"),
+
+                    amendmentType = null,
+                    amendmentNumber = null,
+                    amendmentDate = null,
+
+                    gstnType = GetValue(row, "AUTHORIZED_ECONOMIC_OPERATOR"),
+                    gstnId = GetValue(row, "AUTHORIZED_ECONOMIC_OPERATOR_CODE"),
+
+                    itemThirdPartyValue = GetValue(row, "BUYER")
+                };
+
+                root.master_Exp.ThirdPartyModel.Add(third);
+            }
+        }
+        // ================= DBKModel =================
+
+        root.master_Exp.DBKModel = new List<DBKModel_Exp>();
+
+        if (ds.Tables.Count > 8 && ds.Tables[8].Rows.Count > 0)
+        {
+            foreach (DataRow r in ds.Tables[8].Rows)
+            {
+                DBKModel_Exp DBK = new DBKModel_Exp
+                {
+                    invoiceSerialNumber = GetValue(r, "INVOICE_SLNO"),
+                    itemSerialNumberInvoice = GetValue(r, "ITEM_SLNO"),
+                    dbkScheduleNumber = GetValue(r, "DRAWBACK_SLNO"),
+                    drawbackQuantity = GetValue(r, "DRAWBACK_QTY"),
+                    drawbackAvailable = GetValue(r, "drawbackAvailable"),
+                };
+
+                root.master_Exp.DBKModel.Add(DBK);
+            }
+        }
+        // ================= ExchangeModel  =================
+
+        root.master_Exp.ExchangeModel = new List<ExchangeModel_Exp>();
+
+        if (ds.Tables.Count > 5 && ds.Tables[5].Rows.Count > 0)
+        {
+            foreach (DataRow r in ds.Tables[5].Rows)
+            {
+                ExchangeModel_Exp ex = new ExchangeModel_Exp
+                {
+                    invoiceCurrencyCode = GetValue(r, "INVOICE_CURRENCY"),
+                    unitInRs = GetValue(r, "EXCHANGE_RATE"),
+                    rate = GetValue(r, "EXCHANGE_RATE"),
+                    effectiveDate = GetValue(r, "effectiveDate"),
+                    whetherStandardCurrency = GetValue(r, "standardCurrency"),
+                };
+
+                root.master_Exp.ExchangeModel.Add(ex);
+            }
+        }
+        // ================= StuffModel=================
+
+        root.master_Exp.StuffModel = new List<StuffModel>();
+
+        if (ds.Tables.Count > 5 && ds.Tables[2].Rows.Count > 0)
+        {
+            foreach (DataRow st in ds.Tables[2].Rows)
+            {
+                StuffModel ex = new StuffModel
+                {
+                    factoryStuffed = GetValue(st, "ANNEX_SEA_FAC_STUFFED"),
+                    sampleAccompanied = GetValue(st, "ANNEX_SEA_SAMPLE_ACCOM"),
+                   
+                };
+
+                root.master_Exp.StuffModel.Add(ex);
+            }
+        }
+        // ================= StuffModel=================
+
+        root.master_Exp.StuffModel = new List<StuffModel>();
+
+        if (ds.Tables.Count > 5 && ds.Tables[2].Rows.Count > 0)
+        {
+            foreach (DataRow st in ds.Tables[2].Rows)
+            {
+                StuffModel ex = new StuffModel
+                {
+                    factoryStuffed = GetValue(st, "ANNEX_SEA_FAC_STUFFED"),
+                    sampleAccompanied = GetValue(st, "ANNEX_SEA_SAMPLE_ACCOM"),
+
+                };
+
+                root.master_Exp.StuffModel.Add(ex);
+            }
+        }
+        // ================= RotationModel=================
+
+        root.master_Exp.RotationModel = new List<RotationModel>();
+
+        if (ds.Tables.Count > 5 && ds.Tables[2].Rows.Count > 0)
+        {
+            foreach (DataRow rt in ds.Tables[2].Rows)
+            {
+                RotationModel rm = new RotationModel
+                {
+                    rotationNumber = GetValue(rt, "ANNEX_AIR_ROTATION_NO"),
+                    rotationDate = GetValue(rt, "ANNEX_AIR_ROTATION_DATE"),
+
+                };
+
+                root.master_Exp.RotationModel.Add(rm);
+            }
+        }
+        // ================= CARGO BACK =================
+
+        root.master_Exp.CargoBack = new List<CargoBackModel_Exp>();
+
+        if (ds.Tables.Count > 2 && ds.Tables[2].Rows.Count > 0)
+        {
+            foreach (DataRow row in ds.Tables[2].Rows)
+            {
+                CargoBackModel_Exp cargo = new CargoBackModel_Exp
+                {
+                    messageType = "R",
+
+                    sbNumber = GetValue(row, "ANNEX_AIR_JOBNO"),
+                    sbDate = null,   // not available
+
+                    natureOfCargo = GetValue(row, "NATURE_OF_CARGO"),
+                    loosePacketsLeft = null,  // not available
+
+                    totalPacketsLeft = GetValue(row, "ANNEX_AIR_TOTAL_PACKAGES"),
+                    noOfContainersLeft = GetValue(row, "ANNEX_AIR_TOTAL_PACKAGES_MAWB"),
+
+                    grossWeightLeft = GetValue(row, "ANNEX_AIR_GROSS_WEIGHT"),
+                    netWeightLeft = GetValue(row, "ANNEX_AIR_NET_WEIGHT"),
+
+                    uniqueQuantityCode = GetValue(row, "ANNEX_AIR_UNIT_CODE"),
+
+                    amendmentType = null,
+                    amendmentNumber = null,
+                    amendmentDate = null
+                };
+
+                root.master_Exp.CargoBack.Add(cargo);
+            }
+        }
+
+
+        
+        root.master_Exp.AR4_model = NullIfEmpty(root.master_Exp.AR4_model);
+        root.master_Exp.CessModel = NullIfEmpty(root.master_Exp.CessModel);
+        root.master_Exp.ConstituentFinal = NullIfEmpty(root.master_Exp.ConstituentFinal);
+        root.master_Exp.ContainerModel = NullIfEmpty(root.master_Exp.ContainerModel);
+        root.master_Exp.ControlType = NullIfEmpty(root.master_Exp.ControlType);
+        root.master_Exp.DfiaModel = NullIfEmpty(root.master_Exp.DfiaModel);
+        root.master_Exp.EOUModel = NullIfEmpty(root.master_Exp.EOUModel);
+        root.master_Exp.InfoType = NullIfEmpty(root.master_Exp.InfoType);
+        root.master_Exp.InvoiceModel = NullIfEmpty(root.master_Exp.InvoiceModel);
+        root.master_Exp.LicenseModel = NullIfEmpty(root.master_Exp.LicenseModel);
+        root.master_Exp.ItemModel = NullIfEmpty(root.master_Exp.ItemModel);
+        root.master_Exp.PackingListModel = NullIfEmpty(root.master_Exp.PackingListModel);
+        root.master_Exp.Production = NullIfEmpty(root.master_Exp.Production);
+        root.master_Exp.Reexport = NullIfEmpty(root.master_Exp.Reexport);
+        root.master_Exp.Statement = NullIfEmpty(root.master_Exp.Statement);
+        root.master_Exp.SupportingDocs = NullIfEmpty(root.master_Exp.SupportingDocs);
+        root.master_Exp.ThirdPartyModel = NullIfEmpty(root.master_Exp.ThirdPartyModel);
+        root.master_Exp.CargoBack = NullIfEmpty(root.master_Exp.CargoBack);
+
+
+
+        // ================= SERIALIZE =================
+
+        var settings = new JsonSerializerSettings
+        {
+            NullValueHandling = NullValueHandling.Ignore,
+            DefaultValueHandling = DefaultValueHandling.Ignore
+        };
+
+        string json = JsonConvert.SerializeObject(
+            root,
+            Formatting.Indented,
+            settings);
+
+        File.WriteAllText(filePath, json);
+
+    }
+    private string GetValue(DataRow row, string columnName)
+    {
+        if (row.Table.Columns.Contains(columnName) &&
+            row[columnName] != DBNull.Value)
+        {
+            string value = row[columnName].ToString().Trim();
+
+            return string.IsNullOrEmpty(value) ? null : value;
+        }
+
+        return null;
+    }
+    private List<T> NullIfEmpty<T>(List<T> list)
+    {
+        return (list == null || list.Count == 0) ? null : list;
+    }
+}
+
+
+public class RootModelexp
+{
+    public HeaderField_Exp HeaderField_Exp { get; set; }
+    public master_Exp master_Exp { get; set; }
+}
+
+public class HeaderField_Exp
+{
+    public string senderID { get; set; }
+    public string receiverID { get; set; }
+    public string indicator { get; set; }
+    public string messageID { get; set; }
+    public string sequenceOrControlNumber { get; set; }
+    public string jobNumber { get; set; }
+    public string jobDate { get; set; }
+    public string messageType { get; set; }
+}
+public class master_Exp
+{
+    public List<AR4Model> AR4_model { get; set; }
+    public List<CessModel> CessModel { get; set; }
+    public List<ConstituentFinalModel> ConstituentFinal { get; set; }
+    public List<ContainerModel_Exp> ContainerModel { get; set; }
+   
+    public List<DfiaModel> DfiaModel { get; set; }
+    public List<EOUModel> EOUModel { get; set; }
+    public List<InfoTypeModel> InfoType { get; set; }
+    public List<InvoiceModel_Exp> InvoiceModel { get; set; }
+    public List<LicenseModel_Exp> LicenseModel { get; set; }
+    public List<ItemModel_Exp> ItemModel { get; set; }
+    public List<PackingListModel_Exp> PackingListModel { get; set; }
+    public List<ProductionModel_Exp> Production { get; set; }
+    public List<ReexportModel_Exp> Reexport { get; set; }
+    public List<StatementModel_Exp> Statement { get; set; }
+    public List<SupportingDocsModel_Exp> SupportingDocs { get; set; }
+    public List<ThirdPartyModel_Exp> ThirdPartyModel { get; set; }
+    public List<CargoBackModel_Exp> CargoBack { get; set; }
+    public List<ControlModel_Exp> ControlType { get; set; }
+    public List<DBKModel_Exp> DBKModel { get; set; }
+    public List<ExchangeModel_Exp> ExchangeModel { get; set; }
+    public List<StuffModel> StuffModel { get; set; }
+    public List<RotationModel> RotationModel { get; set; }
+}
+public class AR4Model
+{
+    public string messageType { get; set; }
+    public string jobNumber { get; set; }
+    public string jobDate { get; set; }
+    public string sbNumber { get; set; }
+    public string sbDate { get; set; }
+    public string invoiceSerialNumber{ get; set; }
+    public string itemSerialNumberInvoice{ get; set; }
+    public string ar4Number { get; set; }
+    public string ar4Date { get; set; }
+    public string commissionerate { get; set; }
+    public string division { get; set; }
+    public string range { get; set; }
+    public string remarks { get; set; }
+}
+public class CessModel
+{
+    public string jobNumber { get; set; }
+    public string invoiceSerialNumber{ get; set; }
+    public string itemSerialNumberInvoice{ get; set; }
+    public string srno { get; set; }
+    public string quantity { get; set; }
+    public string itemCessValue { get; set; }
+    public string cessActCode { get; set; }
+}
+public class ConstituentFinalModel
+{
+    public string jobNumber { get; set; }
+    public string invoiceSerialNumber{ get; set; }
+    public string itemSerialNumber{ get; set; }
+    public string constituentSerialNo { get; set; }
+    public string constituentElementName { get; set; }
+    public string constituentElementCode { get; set; }
+    public string constituentPercentage { get; set; }
+    public string constituentYieldPercentage { get; set; }
+    public string activeIngredient { get; set; }
+}
+public class ContainerModel_Exp
+{
+    public string jobNumber { get; set; }
+    public string containerNumber { get; set; }
+    public string containerSize { get; set; }
+    public string exciseSealNo { get; set; }
+    public string sealDate { get; set; }
+    public string sealTypeIndicator { get; set; }
+    public string sealDeviceID { get; set; }
+    public string movementDocumentType { get; set; }
+    public string movementDocumentNumber { get; set; }
+    public string eqmntType { get; set; }
+}
+public class ControlModel_Exp
+{
+    public string jobNumber { get; set; }
+    public string invoiceSerialNumber{ get; set; }
+    public string itemSerialNumber{ get; set; }
+    public string controlSerialNo { get; set; }
+    public string controlTypeCode { get; set; }
+    public string controlLocation { get; set; }
+    public string controlStartDate { get; set; }
+    public string controlEndDate { get; set; }
+    public string controlResultCode { get; set; }
+    public string controlResultRemarks { get; set; }
+}
+
+public class DfiaModel
+{
+    public string jobNumber { get; set; }
+    public string invoiceSerialNumber{ get; set; }
+    public string itemSerialNumberInvoice{ get; set; }
+    public string srno { get; set; }
+    public string quantity { get; set; }
+    public string unitOfMeasurement { get; set; }
+    public string itemDescription { get; set; }
+    public string licenseNumber { get; set; }
+}
+public class EOUModel
+{
+    public string jobNumber { get; set; }
+    public string ieCodeOfTheEOU { get; set; }
+    public string branchSrNumberOfIE { get; set; }
+    public string examinationDate { get; set; }
+    public string examiningOfficerName { get; set; }
+    public string examiningOfficerDesignation { get; set; }
+    public string supervisingOfficerName { get; set; }
+    public string supervisingOfficerDesignation { get; set; }
+    public string commissionerate { get; set; }
+    public string division { get; set; }
+    public string range { get; set; }
+    public string sealNo { get; set; }
+    public string itemValuesVerifiedByExaminingOfficer { get; set; }
+    public string sampleForwarded { get; set; }
+}
+public class InfoTypeModel
+{
+    public string jobNumber { get; set; }
+    public string invoiceSerialNumber{ get; set; }
+    public string itemSerialNumber{ get; set; }
+    public string infoSrNo { get; set; }
+    public string infoType { get; set; }
+    public string infoQualifier { get; set; }
+    public string infoCode { get; set; }
+    public string infoText { get; set; }
+    public string infoMeasure { get; set; }
+    public string infouqc { get; set; }
+}
+public class InvoiceModel_Exp
+{
+    public string invoiceSerialNumber { get; set; }
+    public string actualInvoiceNo { get; set; }
+    public string invoiceDate { get; set; }
+    public string invoiceCurrency { get; set; }
+    public string natureOfContract { get; set; }
+
+    public string buyerName { get; set; }
+    public string buyerAddress1 { get; set; }
+    public string buyerAddress2 { get; set; }
+    public string buyerAddress3 { get; set; }
+    public string buyerAddress4 { get; set; }
+
+    public string freightCurrency { get; set; }
+    public string freightAmount { get; set; }
+
+    public string insuranceRate { get; set; }
+    public string insuranceCurrency { get; set; }
+    public string insuranceAmount { get; set; }
+
+    public string commissionRate { get; set; }
+    public string commissionCurrency { get; set; }
+    public string commissionAmount { get; set; }
+
+    public string discountOnFOB { get; set; }
+    public string discountCurrency { get; set; }
+    public string discountAmount { get; set; }
+
+    public string otherDeductions { get; set; }
+    public string otherDeductionsCurrency { get; set; }
+    public string otherDeductionsAmount { get; set; }
+
+    public string packingCharges { get; set; }
+    public string addFreight { get; set; }
+    public string exporterContractNumber { get; set; }
+    public string natureOfPayment { get; set; }
+    public string periodOfPayment { get; set; }
+
+    public string thirdPartyName { get; set; }
+    public string thirdPartyAddress1 { get; set; }
+    public string thirdPartyAddress2 { get; set; }
+    public string thirdPartyCity { get; set; }
+    public string thirdPartyCountrySubdivision { get; set; }
+    public string thirdPartCountryCode { get; set; }
+    public string thirdPartyPin { get; set; }
+    
+    public string authorizedEconomicOperatorCode { get; set; }
+    public string authorizedEconomicOperatorCountry { get; set; }
+    public string authorizedEconomicOperatorRole { get; set; }
+
+    public string termsPlace { get; set; }
+}
+public class LicenseModel_Exp
+{
+    public string jobNumber { get; set; }
+    public string invoiceSerialNumber{ get; set; }
+    public string itemSerialNumberInvoice{ get; set; }
+    public string srno { get; set; }
+
+    public string registrationNo { get; set; }
+    public string registrationDate { get; set; }
+
+    public string itemSerialNoInPartE { get; set; }
+
+    public string quantity { get; set; }
+    public string exportQuantity { get; set; }
+
+    public string whetherIndigenousImported { get; set; }
+}
+public class ItemModel_Exp
+{
+    public string jobNumber { get; set; }
+    public string invoiceSerialNumber{ get; set; }
+    public string itemSerialNumberInvoice{ get; set; }
+
+    public string schemeCode { get; set; }
+    public string ritcCode { get; set; }
+    public string descOfGoods1 { get; set; }
+
+    public string unitOfMeasurement { get; set; }
+    public string quantity { get; set; }
+    public string unitPrice { get; set; }
+    public string unitOfRate { get; set; }
+    public string noOfUnit { get; set; }
+
+    public string presentMarketValue { get; set; }
+    public string rewardItem { get; set; }
+
+    public string itemManufacturerProducerGrowerCode { get; set; }
+    public string itemManufacturerProducerGrowerAddress1 { get; set; }
+    public string itemManufacturerProducerGrowerAddress2 { get; set; }
+    public string itemManufacturerProducerGrowerCity { get; set; }
+    public string itemManufacturerProducerGrowerCountrySubdivisiob { get; set; }
+    public string itemManufacturerProducerGrowerPin { get; set; }
+    public string itemManufacturerCountry { get; set; }
+
+    public string sourceState { get; set; }
+    public string transitCountry { get; set; }
+    public string accessoryStatus { get; set; }
+    public string endUseOfItem { get; set; }
+
+    public string hawbNo { get; set; }
+    public string totalPackage { get; set; }
+
+    public string igstPaymentStatus { get; set; }
+    public string taxableValue { get; set; }
+    public string igstAmount { get; set; }
+}
+public class PackingListModel_Exp
+{
+    public string jobNumber { get; set; }
+    public string packingNumberFrom { get; set; }
+    public string packingNumberTo { get; set; }
+    public string packingCode { get; set; }
+}
+public class ProductionModel_Exp
+{
+    public string jobNumber { get; set; }
+    public string invoiceSerialNumber{ get; set; }
+    public string itemSerialNumber{ get; set; }
+
+    public string productionSerialNo { get; set; }
+    public string productionBatchIdentifier { get; set; }
+    public string productionBatchQuantity { get; set; }
+    public string unitQuantityCode { get; set; }
+
+    public string dateOfManufacturing { get; set; }
+    public string dateOfExpiry { get; set; }
+    public string bestBefore { get; set; }
+}
+public class ReexportModel_Exp
+{
+    public string jobNumber { get; set; }
+
+    public string sbNumber { get; set; }
+    public string sbDate { get; set; }
+
+    public string invoiceSerialNumber{ get; set; }
+    public string itemSerialNumber{ get; set; }
+    public string serialNo { get; set; }
+
+    public string beSite { get; set; }
+    public string beNo { get; set; }
+    public string beDate { get; set; }
+
+    public string beInvoiceNo { get; set; }
+    public string beItem { get; set; }
+    public string manualBe { get; set; }
+
+    public string beQuantityUtilised { get; set; }
+    public string beItemDescription { get; set; }
+
+    public string beQty { get; set; }
+    public string beUqc { get; set; }
+
+    public string beAssessedValue { get; set; }
+    public string beDutyPaid { get; set; }
+    public string beDutyPaymentDate { get; set; }
+
+    public string beOtherIdentifiableParameter { get; set; }
+    public string beAssessableValueClaimed { get; set; }
+
+    public string beItemUsed { get; set; }
+    public string commisionerPermission { get; set; }
+    public string inputCredit { get; set; }
+    public string personalUse { get; set; }
+
+    public string modvaAvailed { get; set; }
+    public string modvatRepaid { get; set; }
+}
+public class StatementModel_Exp
+{
+    public string jobNumber { get; set; }
+    public string invoiceSerialNumber{ get; set; }
+    public string itemSerialNumber{ get; set; }
+
+    public string statementSerialNo { get; set; }
+    public string statementType { get; set; }
+    public string statementCode { get; set; }
+    public string statementText { get; set; }
+}
+public class SupportingDocsModel_Exp
+{
+    public string messageType { get; set; }
+
+    public string jobNumber { get; set; }
+    public string jobDate { get; set; }
+
+    public string invoiceSerialNumber{ get; set; }
+    public string itemSerialNumber{ get; set; }
+    public string serialNo { get; set; }
+
+    public string imageReferenceNumber { get; set; }
+    public string documentTypeCode { get; set; }
+
+    public string documentIssuingPartyCode { get; set; }
+    public string documentIssuingPartyName { get; set; }
+    public string documentIssuingPartyNameAddress1 { get; set; }
+    public string documentIssuingPartyNameAddress2 { get; set; }
+    public string documentIssuingPartyNameCity { get; set; }
+    public string documentIssuingPartyNamePin { get; set; }
+
+    public string documentReferenceNo { get; set; }
+    public string placeOfIssue { get; set; }
+    public string documentIssueDate { get; set; }
+    public string documentExpiryDate { get; set; }
+
+    public string documentBeneficiaryPartyCode { get; set; }
+    public string documentBeneficiaryPartyName { get; set; }
+    public string documentBeneficiaryPartyNameAddress1 { get; set; }
+    public string documentBeneficiaryPartyNameAddress2 { get; set; }
+    public string documentBeneficiaryPartyNameCity { get; set; }
+    public string documentBeneficiaryPartyNamePin { get; set; }
+
+    public string fileType { get; set; }
+    public string icegateId { get; set; }
+}
+public class ThirdPartyModel_Exp
+{
+    public string messageType { get; set; }
+
+    public string jobNumber { get; set; }
+    public string jobDate { get; set; }
+
+    public string invoiceSerialNumber{ get; set; }
+    public string itemSerialNumberInvoice{ get; set; }
+
+    public string iec { get; set; }
+    public string branchSerialNo { get; set; }
+
+    public string exporterName { get; set; }
+    public string exporterAddress1 { get; set; }
+    public string exporterAddress2 { get; set; }
+    public string city { get; set; }
+    public string pin { get; set; }
+
+    public string amendmentType { get; set; }
+    public string amendmentNumber { get; set; }
+    public string amendmentDate { get; set; }
+
+    public string gstnType { get; set; }
+    public string gstnId { get; set; }
+
+    public string itemThirdPartyValue { get; set; }
+}
+public class CargoBackModel_Exp
+{
+    public string messageType { get; set; }
+
+    public string sbNumber { get; set; }
+    public string sbDate { get; set; }
+
+    public string natureOfCargo { get; set; }
+    public string loosePacketsLeft { get; set; }
+
+    public string totalPacketsLeft { get; set; }
+    public string noOfContainersLeft { get; set; }
+
+    public string grossWeightLeft { get; set; }
+    public string netWeightLeft { get; set; }
+
+    public string uniqueQuantityCode { get; set; }
+
+    public string amendmentType { get; set; }
+    public string amendmentNumber { get; set; }
+    public string amendmentDate { get; set; }
+}
+public class DBKModel_Exp
+{
+
+
+    public string invoiceSerialNumber { get; set; }
+    public string itemSerialNumberInvoice { get; set; }
+
+    public string dbkScheduleNumber { get; set; }
+    public string drawbackQuantity { get; set; }
+
+    public string drawbackAvailable { get; set; }
+}
+public class ExchangeModel_Exp
+{
+
+    public string invoiceCurrencyCode { get; set; }
+    public string currencyName { get; set; }
+    public string unitInRs { get; set; }
+    public string rate { get; set; }
+    public string effectiveDate { get; set; }
+    public string whetherStandardCurrency { get; set; }
+
+}
+
+public class StuffModel
+{
+    public string factoryStuffed { get; set; }
+    public string sampleAccompanied { get; set; }
+}
+
+public class RotationModel
+{
+    public string rotationDate { get; set; }
+    public string rotationNumber { get; set; }
+}

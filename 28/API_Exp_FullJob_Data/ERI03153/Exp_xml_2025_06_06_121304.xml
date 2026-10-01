@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+        $X_ML_DATA=$xml->createElement("X_ML_DATA");
+        $xml->appendChild($X_ML_DATA);
+        
+        $ZSDST_EROYAL_DATA=$xml->createElement("ZSDST_EROYAL_DATA");
+        $X_ML_DATA->appendChild($ZSDST_EROYAL_DATA);
+        
+        $ROYAL_REFNO=$xml->createElement("ROYAL_REFNO","1013100036");
+        $ZSDST_EROYAL_DATA->appendChild($ROYAL_REFNO);
+        
+        
+        
+        
+      

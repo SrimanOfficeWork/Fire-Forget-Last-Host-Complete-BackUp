@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="license" targetNamespace="http://tempuri.org/license.xsd" xmlns:mstns="http://tempuri.org/license.xsd" xmlns="http://tempuri.org/license.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="license" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="license" msprop:Generator_UserDSName="license">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="LICENSE_MASTER" msprop:Generator_TableClassName="LICENSE_MASTERDataTable" msprop:Generator_TableVarName="tableLICENSE_MASTER" msprop:Generator_TablePropName="LICENSE_MASTER" msprop:Generator_RowDeletingName="LICENSE_MASTERRowDeleting" msprop:Generator_RowChangingName="LICENSE_MASTERRowChanging" msprop:Generator_RowEvHandlerName="LICENSE_MASTERRowChangeEventHandler" msprop:Generator_RowDeletedName="LICENSE_MASTERRowDeleted" msprop:Generator_UserTableName="LICENSE_MASTER" msprop:Generator_RowChangedName="LICENSE_MASTERRowChanged" msprop:Generator_RowEvArgName="LICENSE_MASTERRowChangeEvent" msprop:Generator_RowClassName="LICENSE_MASTERRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="LICENSE_NO" msprop:Generator_ColumnVarNameInTable="columnLICENSE_NO" msprop:Generator_ColumnPropNameInRow="LICENSE_NO" msprop:Generator_ColumnPropNameInTable="LICENSE_NOColumn" msprop:Generator_UserColumnName="LICENSE_NO" type="xs:string" minOccurs="0" />
+              <xs:element name="LICENSE_DATE" msprop:Generator_ColumnVarNameInTable="columnLICENSE_DATE" msprop:Generator_ColumnPropNameInRow="LICENSE_DATE" msprop:Generator_ColumnPropNameInTable="LICENSE_DATEColumn" msprop:Generator_UserColumnName="LICENSE_DATE" type="xs:string" minOccurs="0" />
+              <xs:element name="REGISTRATION_NO" msprop:Generator_ColumnVarNameInTable="columnREGISTRATION_NO" msprop:Generator_ColumnPropNameInRow="REGISTRATION_NO" msprop:Generator_ColumnPropNameInTable="REGISTRATION_NOColumn" msprop:Generator_UserColumnName="REGISTRATION_NO" type="xs:string" minOccurs="0" />
+              <xs:element name="REGISTRATION_DATE" msprop:Generator_ColumnVarNameInTable="columnREGISTRATION_DATE" msprop:Generator_ColumnPropNameInRow="REGISTRATION_DATE" msprop:Generator_ColumnPropNameInTable="REGISTRATION_DATEColumn" msprop:Generator_UserColumnName="REGISTRATION_DATE" type="xs:string" minOccurs="0" />
+              <xs:element name="TOTAL_DEBIT_AMT" msprop:Generator_ColumnVarNameInTable="columnTOTAL_DEBIT_AMT" msprop:Generator_ColumnPropNameInRow="TOTAL_DEBIT_AMT" msprop:Generator_ColumnPropNameInTable="TOTAL_DEBIT_AMTColumn" msprop:Generator_UserColumnName="TOTAL_DEBIT_AMT" type="xs:string" minOccurs="0" />
+              <xs:element name="DEBIT_DUTY" msprop:Generator_ColumnVarNameInTable="columnDEBIT_DUTY" msprop:Generator_ColumnPropNameInRow="DEBIT_DUTY" msprop:Generator_ColumnPropNameInTable="DEBIT_DUTYColumn" msprop:Generator_UserColumnName="DEBIT_DUTY" type="xs:string" minOccurs="0" />
+              <xs:element name="LICENCE_BALANCE" msprop:Generator_ColumnVarNameInTable="columnLICENCE_BALANCE" msprop:Generator_ColumnPropNameInRow="LICENCE_BALANCE" msprop:Generator_ColumnPropNameInTable="LICENCE_BALANCEColumn" msprop:Generator_UserColumnName="LICENCE_BALANCE" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="License_Debit_Report" targetNamespace="http://tempuri.org/License_Debit_Report.xsd" xmlns:mstns="http://tempuri.org/License_Debit_Report.xsd" xmlns="http://tempuri.org/License_Debit_Report.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="License_Debit_Report" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="License_Debit_Report" msprop:Generator_UserDSName="License_Debit_Report">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="License_Master" msprop:Generator_TableClassName="License_MasterDataTable" msprop:Generator_TableVarName="tableLicense_Master" msprop:Generator_RowChangedName="License_MasterRowChanged" msprop:Generator_TablePropName="License_Master" msprop:Generator_RowDeletingName="License_MasterRowDeleting" msprop:Generator_RowChangingName="License_MasterRowChanging" msprop:Generator_RowEvHandlerName="License_MasterRowChangeEventHandler" msprop:Generator_RowDeletedName="License_MasterRowDeleted" msprop:Generator_RowClassName="License_MasterRow" msprop:Generator_UserTableName="License_Master" msprop:Generator_RowEvArgName="License_MasterRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="REGISTRATION_NO" msprop:Generator_ColumnVarNameInTable="columnREGISTRATION_NO" msprop:Generator_ColumnPropNameInRow="REGISTRATION_NO" msprop:Generator_ColumnPropNameInTable="REGISTRATION_NOColumn" msprop:Generator_UserColumnName="REGISTRATION_NO" type="xs:string" minOccurs="0" />
+              <xs:element name="REGISTRATION_DATE" msprop:Generator_ColumnVarNameInTable="columnREGISTRATION_DATE" msprop:Generator_ColumnPropNameInRow="REGISTRATION_DATE" msprop:Generator_ColumnPropNameInTable="REGISTRATION_DATEColumn" msprop:Generator_UserColumnName="REGISTRATION_DATE" type="xs:string" minOccurs="0" />
+              <xs:element name="LICENSE_NO" msprop:Generator_ColumnVarNameInTable="columnLICENSE_NO" msprop:Generator_ColumnPropNameInRow="LICENSE_NO" msprop:Generator_ColumnPropNameInTable="LICENSE_NOColumn" msprop:Generator_UserColumnName="LICENSE_NO" type="xs:string" minOccurs="0" />
+              <xs:element name="LICENSE_DATE" msprop:Generator_ColumnVarNameInTable="columnLICENSE_DATE" msprop:Generator_ColumnPropNameInRow="LICENSE_DATE" msprop:Generator_ColumnPropNameInTable="LICENSE_DATEColumn" msprop:Generator_UserColumnName="LICENSE_DATE" type="xs:string" minOccurs="0" />
+              <xs:element name="LICENSE_TYPE" msprop:Generator_ColumnVarNameInTable="columnLICENSE_TYPE" msprop:Generator_ColumnPropNameInRow="LICENSE_TYPE" msprop:Generator_ColumnPropNameInTable="LICENSE_TYPEColumn" msprop:Generator_UserColumnName="LICENSE_TYPE" type="xs:string" minOccurs="0" />
+              <xs:element name="PORT_OF_LICENSE" msprop:Generator_ColumnVarNameInTable="columnPORT_OF_LICENSE" msprop:Generator_ColumnPropNameInRow="PORT_OF_LICENSE" msprop:Generator_ColumnPropNameInTable="PORT_OF_LICENSEColumn" msprop:Generator_UserColumnName="PORT_OF_LICENSE" type="xs:string" minOccurs="0" />
+              <xs:element name="TOTAL_DEBIT_AMT" msprop:Generator_ColumnVarNameInTable="columnTOTAL_DEBIT_AMT" msprop:Generator_ColumnPropNameInRow="TOTAL_DEBIT_AMT" msprop:Generator_ColumnPropNameInTable="TOTAL_DEBIT_AMTColumn" msprop:Generator_UserColumnName="TOTAL_DEBIT_AMT" type="xs:string" minOccurs="0" />
+              <xs:element name="TOTAL_CIF_VALUE" msprop:Generator_ColumnVarNameInTable="columnTOTAL_CIF_VALUE" msprop:Generator_ColumnPropNameInRow="TOTAL_CIF_VALUE" msprop:Generator_ColumnPropNameInTable="TOTAL_CIF_VALUEColumn" msprop:Generator_UserColumnName="TOTAL_CIF_VALUE" type="xs:string" minOccurs="0" />
+              <xs:element name="TOTAL_DEBIT_QTY" msprop:Generator_ColumnVarNameInTable="columnTOTAL_DEBIT_QTY" msprop:Generator_ColumnPropNameInRow="TOTAL_DEBIT_QTY" msprop:Generator_ColumnPropNameInTable="TOTAL_DEBIT_QTYColumn" msprop:Generator_UserColumnName="TOTAL_DEBIT_QTY" type="xs:string" minOccurs="0" />
+              <xs:element name="LICENSE_BROKER_NAME" msprop:Generator_ColumnVarNameInTable="columnLICENSE_BROKER_NAME" msprop:Generator_ColumnPropNameInRow="LICENSE_BROKER_NAME" msprop:Generator_ColumnPropNameInTable="LICENSE_BROKER_NAMEColumn" msprop:Generator_UserColumnName="LICENSE_BROKER_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="LICENSE_TRANSFERED_TO" msprop:Generator_ColumnVarNameInTable="columnLICENSE_TRANSFERED_TO" msprop:Generator_ColumnPropNameInRow="LICENSE_TRANSFERED_TO" msprop:Generator_ColumnPropNameInTable="LICENSE_TRANSFERED_TOColumn" msprop:Generator_UserColumnName="LICENSE_TRANSFERED_TO" type="xs:string" minOccurs="0" />
+              <xs:element name="LICENSE_RECEIVED_DATE" msprop:Generator_ColumnVarNameInTable="columnLICENSE_RECEIVED_DATE" msprop:Generator_ColumnPropNameInRow="LICENSE_RECEIVED_DATE" msprop:Generator_ColumnPropNameInTable="LICENSE_RECEIVED_DATEColumn" msprop:Generator_UserColumnName="LICENSE_RECEIVED_DATE" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="License_Job_Details" msprop:Generator_TableClassName="License_Job_DetailsDataTable" msprop:Generator_TableVarName="tableLicense_Job_Details" msprop:Generator_RowChangedName="License_Job_DetailsRowChanged" msprop:Generator_TablePropName="License_Job_Details" msprop:Generator_RowDeletingName="License_Job_DetailsRowDeleting" msprop:Generator_RowChangingName="License_Job_DetailsRowChanging" msprop:Generator_RowEvHandlerName="License_Job_DetailsRowChangeEventHandler" msprop:Generator_RowDeletedName="License_Job_DetailsRowDeleted" msprop:Generator_RowClassName="License_Job_DetailsRow" msprop:Generator_UserTableName="License_Job_Details" msprop:Generator_RowEvArgName="License_Job_DetailsRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Sno" msprop:Generator_ColumnVarNameInTable="columnSno" msprop:Generator_ColumnPropNameInRow="Sno" msprop:Generator_ColumnPropNameInTable="SnoColumn" msprop:Generator_UserColumnName="Sno" type="xs:string" minOccurs="0" />
+              <xs:element name="JobDate" msprop:Generator_ColumnVarNameInTable="columnJobDate" msprop:Generator_ColumnPropNameInRow="JobDate" msprop:Generator_ColumnPropNameInTable="JobDateColumn" msprop:Generator_UserColumnName="JobDate" type="xs:string" minOccurs="0" />
+              <xs:element name="Jobno" msprop:Generator_ColumnVarNameInTable="columnJobno" msprop:Generator_ColumnPropNameInRow="Jobno" msprop:Generator_ColumnPropNameInTable="JobnoColumn" msprop:Generator_UserColumnName="Jobno" type="xs:string" minOccurs="0" />
+              <xs:element name="FileRefNo" msprop:Generator_ColumnVarNameInTable="columnFileRefNo" msprop:Generator_ColumnPropNameInRow="FileRefNo" msprop:Generator_ColumnPropNameInTable="FileRefNoColumn" msprop:Generator_UserColumnName="FileRefNo" type="xs:string" minOccurs="0" />
+              <xs:element name="BE_No" msprop:Generator_ColumnVarNameInTable="columnBE_No" msprop:Generator_ColumnPropNameInRow="BE_No" msprop:Generator_ColumnPropNameInTable="BE_NoColumn" msprop:Generator_UserColumnName="BE_No" type="xs:string" minOccurs="0" />
+              <xs:element name="BE_Date" msprop:Generator_ColumnVarNameInTable="columnBE_Date" msprop:Generator_ColumnPropNameInRow="BE_Date" msprop:Generator_ColumnPropNameInTable="BE_DateColumn" msprop:Generator_UserColumnName="BE_Date" type="xs:string" minOccurs="0" />
+              <xs:element name="License_ItemNo" msprop:Generator_ColumnVarNameInTable="columnLicense_ItemNo" msprop:Generator_ColumnPropNameInRow="License_ItemNo" msprop:Generator_ColumnPropNameInTable="License_ItemNoColumn" msprop:Generator_UserColumnName="License_ItemNo" type="xs:string" minOccurs="0" />
+              <xs:element name="Debit_Duty" msprop:Generator_ColumnVarNameInTable="columnDebit_Duty" msprop:Generator_ColumnPropNameInRow="Debit_Duty" msprop:Generator_ColumnPropNameInTable="Debit_DutyColumn" msprop:Generator_UserColumnName="Debit_Duty" type="xs:string" minOccurs="0" />
+              <xs:element name="Balance" msprop:Generator_ColumnVarNameInTable="columnBalance" msprop:Generator_ColumnPropNameInRow="Balance" msprop:Generator_ColumnPropNameInTable="BalanceColumn" msprop:Generator_UserColumnName="Balance" type="xs:string" minOccurs="0" />
+              <xs:element name="DEBIT_CIF" msprop:Generator_ColumnVarNameInTable="columnDEBIT_CIF" msprop:Generator_ColumnPropNameInRow="DEBIT_CIF" msprop:Generator_ColumnPropNameInTable="DEBIT_CIFColumn" msprop:Generator_UserColumnName="DEBIT_CIF" type="xs:string" minOccurs="0" />
+              <xs:element name="DEBIT_QTY" msprop:Generator_ColumnVarNameInTable="columnDEBIT_QTY" msprop:Generator_ColumnPropNameInRow="DEBIT_QTY" msprop:Generator_ColumnPropNameInTable="DEBIT_QTYColumn" msprop:Generator_UserColumnName="DEBIT_QTY" type="xs:string" minOccurs="0" />
+              <xs:element name="Inv_SlNo" msprop:Generator_ColumnVarNameInTable="columnInv_SlNo" msprop:Generator_ColumnPropNameInRow="Inv_SlNo" msprop:Generator_ColumnPropNameInTable="Inv_SlNoColumn" msprop:Generator_UserColumnName="Inv_SlNo" type="xs:string" minOccurs="0" />
+              <xs:element name="ItemSlNo" msprop:Generator_ColumnVarNameInTable="columnItemSlNo" msprop:Generator_ColumnPropNameInRow="ItemSlNo" msprop:Generator_ColumnPropNameInTable="ItemSlNoColumn" msprop:Generator_UserColumnName="ItemSlNo" type="xs:string" minOccurs="0" />
+              <xs:element name="Branch" msprop:Generator_ColumnVarNameInTable="columnBranch" msprop:Generator_ColumnPropNameInRow="Branch" msprop:Generator_ColumnPropNameInTable="BranchColumn" msprop:Generator_UserColumnName="Branch" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

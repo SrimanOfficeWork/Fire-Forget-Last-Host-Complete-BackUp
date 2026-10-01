@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="EXP_ANNEX_C_Air" targetNamespace="http://tempuri.org/EXP_ANNEX_C_Air.xsd" xmlns:mstns="http://tempuri.org/EXP_ANNEX_C_Air.xsd" xmlns="http://tempuri.org/EXP_ANNEX_C_Air.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="ERoyalimpex_Branchwise_JobConnectionString" IsAppSettingsProperty="true" Modifier="Assembly" Name="ERoyalimpex_Branchwise_JobConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.ERoyalimpex_Branchwise_JobConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="EXP_ANNEX_C_Air" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="EXP_ANNEX_C_Air" msprop:Generator_UserDSName="EXP_ANNEX_C_Air">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="EXP_ANNEX_C_Air" msprop:Generator_TableClassName="EXP_ANNEX_C_AirDataTable" msprop:Generator_TableVarName="tableEXP_ANNEX_C_Air" msprop:Generator_TablePropName="_EXP_ANNEX_C_Air" msprop:Generator_RowDeletingName="EXP_ANNEX_C_AirRowDeleting" msprop:Generator_RowChangingName="EXP_ANNEX_C_AirRowChanging" msprop:Generator_RowEvHandlerName="EXP_ANNEX_C_AirRowChangeEventHandler" msprop:Generator_RowDeletedName="EXP_ANNEX_C_AirRowDeleted" msprop:Generator_UserTableName="EXP_ANNEX_C_Air" msprop:Generator_RowChangedName="EXP_ANNEX_C_AirRowChanged" msprop:Generator_RowEvArgName="EXP_ANNEX_C_AirRowChangeEvent" msprop:Generator_RowClassName="EXP_ANNEX_C_AirRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="No_Date" msprop:Generator_ColumnVarNameInTable="columnNo_Date" msprop:Generator_ColumnPropNameInRow="No_Date" msprop:Generator_ColumnPropNameInTable="No_DateColumn" msprop:Generator_UserColumnName="No_Date" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EXP_ANNEX_C_Air2" msprop:Generator_TableClassName="EXP_ANNEX_C_Air2DataTable" msprop:Generator_TableVarName="tableEXP_ANNEX_C_Air2" msprop:Generator_TablePropName="EXP_ANNEX_C_Air2" msprop:Generator_RowDeletingName="EXP_ANNEX_C_Air2RowDeleting" msprop:Generator_RowChangingName="EXP_ANNEX_C_Air2RowChanging" msprop:Generator_RowEvHandlerName="EXP_ANNEX_C_Air2RowChangeEventHandler" msprop:Generator_RowDeletedName="EXP_ANNEX_C_Air2RowDeleted" msprop:Generator_UserTableName="EXP_ANNEX_C_Air2" msprop:Generator_RowChangedName="EXP_ANNEX_C_Air2RowChanged" msprop:Generator_RowEvArgName="EXP_ANNEX_C_Air2RowChangeEvent" msprop:Generator_RowClassName="EXP_ANNEX_C_Air2Row">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="AR4_NO" msprop:Generator_ColumnVarNameInTable="columnAR4_NO" msprop:Generator_ColumnPropNameInRow="AR4_NO" msprop:Generator_ColumnPropNameInTable="AR4_NOColumn" msprop:Generator_UserColumnName="AR4_NO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="17" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AR4_DATE" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnAR4_DATE" msprop:Generator_ColumnPropNameInRow="AR4_DATE" msprop:Generator_ColumnPropNameInTable="AR4_DATEColumn" msprop:Generator_UserColumnName="AR4_DATE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AR4_COMMISSION_RATE" msprop:Generator_ColumnVarNameInTable="columnAR4_COMMISSION_RATE" msprop:Generator_ColumnPropNameInRow="AR4_COMMISSION_RATE" msprop:Generator_ColumnPropNameInTable="AR4_COMMISSION_RATEColumn" msprop:Generator_UserColumnName="AR4_COMMISSION_RATE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AR4_DIVISION" msprop:Generator_ColumnVarNameInTable="columnAR4_DIVISION" msprop:Generator_ColumnPropNameInRow="AR4_DIVISION" msprop:Generator_ColumnPropNameInTable="AR4_DIVISIONColumn" msprop:Generator_UserColumnName="AR4_DIVISION" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AR4_RANGE" msprop:Generator_ColumnVarNameInTable="columnAR4_RANGE" msprop:Generator_ColumnPropNameInRow="AR4_RANGE" msprop:Generator_ColumnPropNameInTable="AR4_RANGEColumn" msprop:Generator_UserColumnName="AR4_RANGE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EXP_ANNEX_C_Air1" msprop:Generator_TableClassName="EXP_ANNEX_C_Air1DataTable" msprop:Generator_TableVarName="tableEXP_ANNEX_C_Air1" msprop:Generator_TablePropName="EXP_ANNEX_C_Air1" msprop:Generator_RowDeletingName="EXP_ANNEX_C_Air1RowDeleting" msprop:Generator_RowChangingName="EXP_ANNEX_C_Air1RowChanging" msprop:Generator_RowEvHandlerName="EXP_ANNEX_C_Air1RowChangeEventHandler" msprop:Generator_RowDeletedName="EXP_ANNEX_C_Air1RowDeleted" msprop:Generator_UserTableName="EXP_ANNEX_C_Air1" msprop:Generator_RowChangedName="EXP_ANNEX_C_Air1RowChanged" msprop:Generator_RowEvArgName="EXP_ANNEX_C_Air1RowChangeEvent" msprop:Generator_RowClassName="EXP_ANNEX_C_Air1Row">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Master_Airway_Bill_No" msprop:Generator_ColumnVarNameInTable="columnMaster_Airway_Bill_No" msprop:Generator_ColumnPropNameInRow="Master_Airway_Bill_No" msprop:Generator_ColumnPropNameInTable="Master_Airway_Bill_NoColumn" msprop:Generator_UserColumnName="Master_Airway_Bill_No" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="11" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Airway_Bill_No" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnAirway_Bill_No" msprop:Generator_ColumnPropNameInRow="Airway_Bill_No" msprop:Generator_ColumnPropNameInTable="Airway_Bill_NoColumn" msprop:Generator_UserColumnName="Airway_Bill_No" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Total_No_of_Pkgs_against_the_MAWB" msprop:Generator_ColumnVarNameInTable="columnTotal_No_of_Pkgs_against_the_MAWB" msprop:Generator_ColumnPropNameInRow="Total_No_of_Pkgs_against_the_MAWB" msprop:Generator_ColumnPropNameInTable="Total_No_of_Pkgs_against_the_MAWBColumn" msprop:Generator_UserColumnName="Total_No_of_Pkgs_against_the_MAWB" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="8" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="No_of_Pkgs_against_the_airway_bill" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNo_of_Pkgs_against_the_airway_bill" msprop:Generator_ColumnPropNameInRow="No_of_Pkgs_against_the_airway_bill" msprop:Generator_ColumnPropNameInTable="No_of_Pkgs_against_the_airway_billColumn" msprop:Generator_UserColumnName="No_of_Pkgs_against_the_airway_bill" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="House_Airway_Bill_No" msprop:Generator_ColumnVarNameInTable="columnHouse_Airway_Bill_No" msprop:Generator_ColumnPropNameInRow="House_Airway_Bill_No" msprop:Generator_ColumnPropNameInTable="House_Airway_Bill_NoColumn" msprop:Generator_UserColumnName="House_Airway_Bill_No" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="11" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Total_No_of_Packages" msprop:Generator_ColumnVarNameInTable="columnTotal_No_of_Packages" msprop:Generator_ColumnPropNameInRow="Total_No_of_Packages" msprop:Generator_ColumnPropNameInTable="Total_No_of_PackagesColumn" msprop:Generator_UserColumnName="Total_No_of_Packages" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Type_of_pkgs" msprop:Generator_ColumnVarNameInTable="columnType_of_pkgs" msprop:Generator_ColumnPropNameInRow="Type_of_pkgs" msprop:Generator_ColumnPropNameInTable="Type_of_pkgsColumn" msprop:Generator_UserColumnName="Type_of_pkgs" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Number_marked_on_the_pkgs" msprop:Generator_ColumnVarNameInTable="columnNumber_marked_on_the_pkgs" msprop:Generator_ColumnPropNameInRow="Number_marked_on_the_pkgs" msprop:Generator_ColumnPropNameInTable="Number_marked_on_the_pkgsColumn" msprop:Generator_UserColumnName="Number_marked_on_the_pkgs" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Gross_weight_in_Kgs" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnGross_weight_in_Kgs" msprop:Generator_ColumnPropNameInRow="Gross_weight_in_Kgs" msprop:Generator_ColumnPropNameInTable="Gross_weight_in_KgsColumn" msprop:Generator_UserColumnName="Gross_weight_in_Kgs" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="14" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Net_Weight_in_Kgs" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnNet_Weight_in_Kgs" msprop:Generator_ColumnPropNameInRow="Net_Weight_in_Kgs" msprop:Generator_ColumnPropNameInTable="Net_Weight_in_KgsColumn" msprop:Generator_UserColumnName="Net_Weight_in_Kgs" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="14" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Freight_Charges" msprop:Generator_ColumnVarNameInTable="columnFreight_Charges" msprop:Generator_ColumnPropNameInRow="Freight_Charges" msprop:Generator_ColumnPropNameInTable="Freight_ChargesColumn" msprop:Generator_UserColumnName="Freight_Charges" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Fr_Currency" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnFr_Currency" msprop:Generator_ColumnPropNameInRow="Fr_Currency" msprop:Generator_ColumnPropNameInTable="Fr_CurrencyColumn" msprop:Generator_UserColumnName="Fr_Currency" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Insurance_Charges" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnInsurance_Charges" msprop:Generator_ColumnPropNameInRow="Insurance_Charges" msprop:Generator_ColumnPropNameInTable="Insurance_ChargesColumn" msprop:Generator_UserColumnName="Insurance_Charges" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Ins_Currency" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnIns_Currency" msprop:Generator_ColumnPropNameInRow="Ins_Currency" msprop:Generator_ColumnPropNameInTable="Ins_CurrencyColumn" msprop:Generator_UserColumnName="Ins_Currency" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Seal_No_and_name_of_the_sealing_agency" msprop:Generator_ColumnVarNameInTable="columnSeal_No_and_name_of_the_sealing_agency" msprop:Generator_ColumnPropNameInRow="Seal_No_and_name_of_the_sealing_agency" msprop:Generator_ColumnPropNameInTable="Seal_No_and_name_of_the_sealing_agencyColumn" msprop:Generator_UserColumnName="Seal_No_and_name_of_the_sealing_agency" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Date" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnDate" msprop:Generator_ColumnPropNameInRow="Date" msprop:Generator_ColumnPropNameInTable="DateColumn" msprop:Generator_UserColumnName="Date" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ANNEX_AIR_ROTATION_NO" msprop:Generator_ColumnVarNameInTable="columnANNEX_AIR_ROTATION_NO" msprop:Generator_ColumnPropNameInRow="ANNEX_AIR_ROTATION_NO" msprop:Generator_ColumnPropNameInTable="ANNEX_AIR_ROTATION_NOColumn" msprop:Generator_UserColumnName="ANNEX_AIR_ROTATION_NO" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+	<soap:Body><Imp_Data xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <API_JOB_REF_NO>GAL/SIC/2526/05/00245</API_JOB_REF_NO>
+  <BRANCH_SL_NO>1</BRANCH_SL_NO>
+  <IMPORTER_NAME>TRUE POLYMERS</IMPORTER_NAME>
+  <ADCODE>0</ADCODE>
+  <TRANSPORT_MODE>Sea</TRANSPORT_MODE>
+  <PORT_OF_FILLING_CODE>INMUN1</PORT_OF_FILLING_CODE>
+  <PORT_OF_ORIGIN_CODE>USHKA</PORT_OF_ORIGIN_CODE>
+  <PORT_OF_SHIPMENT_CODE>USHKA</PORT_OF_SHIPMENT_CODE>
+  <STATE_CODE>24</STATE_CODE>
+  <GSTN_REGISTRATION_NO>24AAWFT6783B1ZP</GSTN_REGISTRATION_NO>
+  <COUNTRY_ORGIN>US</COUNTRY_ORGIN>
+  <COUNTRY_SHIPMENT>US</COUNTRY_SHIPMENT>
+  <FLAG>S</FLAG>
+  <API_USER_ID>royalsurways1</API_USER_ID>
+</Imp_Data>	</soap:Body>
+</soap:Envelope>

@@ -1,0 +1,296 @@
+﻿using System;
+using System.Data;
+using System.Configuration;
+using System.Collections;
+using System.Collections.Generic;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Diagnostics;
+using System.Web;
+//using System.Linq;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+using System.Data.SqlClient;
+using System.Data.OleDb;
+using System.IO;
+using Microsoft.ApplicationBlocks.Data;
+
+public partial class Transaction_Duplicate_Job_Generation : ThemeClass
+{
+    public string USER_RIGHTS_ID, SCREEN_ID, PAGE_READ, PAGE_WRITE, PAGE_MODIFY, PAGE_DELETE, Is_Master_Id;
+    public int Screen_Id;
+    User_Creation user_Create = new User_Creation();
+    public string working_period;
+
+
+    private string _Workingperiod;
+    DataSet ds = new DataSet();
+    public int i;
+
+    SqlCommand cmd;
+    //SqlConnection con = new SqlConnection(ConfigurationManager.AppSettings.Get("con"));
+    SqlConnection con;
+    SqlDataAdapter da;
+    SqlDataReader dr;
+    public string  DB_CONN, COMP_WORKING_PERIOD;
+    public string DB_NAME;
+
+    public string Workingperiod
+    {
+        get { return _Workingperiod; }
+        set { _Workingperiod = value; }
+    }
+
+    public int currentrow = 0, Selected_Row = 0, Cell_Row = 0, ColumnIndex = 0;
+
+    public string currentuser;
+    public string currentbranch;
+    public string currentcomp_name;
+    public string comp_ConnectionStr;
+    public string Working_Period;
+    public string LoginDate;
+    public string SELECT_TYPE, SELECT_BRANCH;
+
+    //Customer c = new Customer();
+    Date_Time dt = new Date_Time();
+    AppSession aps = new AppSession();
+    Transaction Transact = new Transaction();
+    CheckList chklist = new CheckList();
+
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        try
+        {
+            aps.checkSession_Subfolder();
+            currentuser = Session["currentuser"].ToString();
+            currentbranch = Session["currentbranch"].ToString();
+            currentcomp_name = Session["currentcomp_name"].ToString();
+            comp_ConnectionStr = Session["currentcomp_db"].ToString();
+
+            Working_Period = Session["WorkingPeriod"].ToString();
+            LoginDate = Session["LoginDate"].ToString();
+
+            if (Session["SELECT_TYPE"] != null)
+            {
+                SELECT_TYPE = Session["SELECT_TYPE"].ToString();
+
+                if (SELECT_TYPE == "Branchwise Job")
+                {
+                    SELECT_BRANCH = currentbranch;
+                }
+                else
+                {
+                    SELECT_BRANCH = "";
+                }
+            }
+            else
+            {
+                SELECT_BRANCH = "";
+            }
+            //mainmastopusernametxt.InnerText = "Welcome Mr." + currentuser;
+            con = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["con"]);
+
+            if (!IsPostBack)
+            {
+                //----------------SETTING SCREEN PERMISSION---------------//
+                Screen_Id = 9;
+                Page_Rights(Screen_Id);
+                //----------------SETTING SCREEN PERMISSION---------------//
+
+                //ddlJobNo.Attributes.Add("onchange", "javascript://CallServerside_Importer('" + ddlJobNo.ClientID + "', '" + txtCustomHouse.ClientID + "')");
+
+               // -------------------------------------
+                //chklist.JOBNo = "";
+                //chklist.Ename = "select_jobno";
+                //chklist.Workingperiod = SELECT_BRANCH;
+                //ddlJobNo.DataSource = chklist.RetrieveAll_General_Details();
+                //ddlJobNo.DataValueField = "JOBNO";
+                //ddlJobNo.DataTextField = "JOBNO";
+                //ddlJobNo.DataBind();
+                //ddlJobNo.Items.Remove("0");
+                //ddlJobNo.Items.Insert(0, "Select");
+                //--------------------------------------
+
+                txtCurrent_Job.Attributes.Add("readonly", "readonly");
+                LoadFinancialYear();
+                AUTO_JOBNO();
+
+                Load_JobNo();
+            }
+        }
+        catch (Exception ex)
+        {
+            ErrorLogs er = new ErrorLogs();
+
+            er.makeLog
+                (ex.Message);
+        }
+    }
+    public void Page_Rights(int i)
+    {
+        user_Create.RetrieveAll_User_Screen_Rights_Details(i);
+        PAGE_WRITE = user_Create.PAGE_WRITE;
+        PAGE_READ = user_Create.PAGE_READ;
+        PAGE_MODIFY = user_Create.PAGE_MODIFY;
+        PAGE_DELETE = user_Create.PAGE_DELETE;
+
+        //---------------READ ONLY------------------//
+
+        if (PAGE_READ == "False")
+        {
+            btnSearch.Enabled = false;
+
+
+            btnSearch.ToolTip = "You don't have permission to access";
+        }
+        else
+        {
+            btnSearch.Enabled = true;
+
+
+        }
+    }
+
+    #region FinancialYear
+
+    public void LoadFinancialYear()
+    {
+        try
+        {
+            con.Open();
+            ddlWorkingPeriod.Items.Clear();
+            //ddlWorkingPeriod.Items.Add("Select");
+            cmd = new SqlCommand("select * from FINANCIAL_YEAR order by WORKING_PERIOD desc", con);
+            dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                //branch_name = dr["WORKING_PERIOD"].ToString();
+                ddlWorkingPeriod.Items.Add(dr["WORKING_PERIOD"].ToString());
+            }
+            dr.Close();
+            con.Close();
+        }
+        catch (Exception ex)
+        {
+            //lblerror.Text = ex.Message.ToString();
+        }
+        finally
+        {
+            con.Close();
+        }
+
+
+    }
+
+    #endregion
+
+    public void AUTO_JOBNO()
+    {
+        Transact.BRANCH_CODE = SELECT_BRANCH;
+        Transact.WORKING_PERIOD = Working_Period;
+        txtCurrent_Job.Text = Convert.ToString(Transact.RetrieveID());
+        //Session.Remove("TRANSPORT_MODE");
+        //Session.Remove("IMPORT_JOBNO");
+        //Session.Remove("IMPORT_JOBDATE");
+        //Session.Remove("FILING_STATUS");
+    }
+
+    protected void btnSearch_Click(object sender, EventArgs e)
+    {
+        Transact.OLD_JOBNO = ddlJobNo.SelectedValue.ToString();
+        Transact.JOBNO = txtCurrent_Job.Text;
+        Transact.BRANCH_CODE = "";
+        Transact.USER_ID = currentuser;
+
+        Transact.Ename = "Duplicate_Job";
+        Transact.WORKING_PERIOD = SELECT_BRANCH;
+        Transact.DB_NAME = DB_NAME;
+
+        i = Transact.Generate_Duplicate_Job();
+
+        if (i == 1)
+        {
+            Alert_msg("Duplicate Job Created");
+            //ScriptManager.RegisterStartupScript(this, this.GetType(), "Hello", "<script language='javascript'>alert('Duplicate Job Created')</script>", false);
+        }
+        else if (i == 2)
+        {
+            AUTO_JOBNO();
+            btnSearch_Click(sender, e);
+            //Alert_msg("Job No already Created!.. Try New Jobno");
+
+        }
+
+    }
+    public void Alert_msg(string msg)
+    {
+        string prompt = "<script>$(document).ready(function(){{jAlert('" + msg + "', 'JOB DUPLICATE', function (r) {});}});</script>";
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", prompt, false);
+    }
+
+    public void Alert_msg(string msg, string focus)
+    {
+        string prompt = "<script>$(document).ready(function(){{jAlert('" + msg + "', 'JOB DUPLICATE', function (r) {document.getElementById('" + focus + "').focus();});}});</script>";
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", prompt, false);
+    }
+
+    public void Load_JobNo()
+    {
+        if (Session["COMPANY_DETAILS_DS"] != null)
+        {
+            ds = (DataSet)Session["COMPANY_DETAILS_DS"];
+
+            //foreach (DataRow dtrow in ds.Tables[2].Rows)
+            //{
+            DataTable ds3 = new DataTable();
+            ds3 = ds.Tables[2];
+            DataView view1 = ds3.DefaultView;
+            string a = ddlWorkingPeriod.SelectedValue.ToString();
+            view1.RowFilter = "WORKING_PERIOD = '" + a + "'";
+            DataTable table1 = view1.ToTable();
+            //-----------------------------------------------------------------//
+            COMP_WORKING_PERIOD = table1.Rows[0]["WORKING_PERIOD"].ToString();
+
+            //COMP_WORKING_PERIOD = dtrow["WORKING_PERIOD"].ToString();
+
+            if (ddlWorkingPeriod.SelectedValue == COMP_WORKING_PERIOD)
+            {
+                //DB_CONN = dtrow["SERVER_NAME"].ToString();
+                DB_CONN = table1.Rows[0]["SERVER_NAME"].ToString();
+                //SELECT_TYPE = table1.Rows[0]["SELECT_JOB"].ToString();
+                //Session.Remove("SELECT_TYPE");
+                //Session["SELECT_TYPE"] = SELECT_TYPE;
+
+
+                chklist.JOBNo = "";
+                chklist.Ename = "select_jobno";
+                chklist.Workingperiod = SELECT_BRANCH;
+                ddlJobNo.DataSource = chklist.RetrieveAll_General_Details(DB_CONN);
+                ddlJobNo.DataValueField = "JOBNO";
+                ddlJobNo.DataTextField = "JOBNO";
+                ddlJobNo.DataBind();
+                ddlJobNo.Items.Remove("0");
+                ddlJobNo.Items.Insert(0, "Select");
+
+
+                string[] s3,s4 = new string[] { };
+             
+                s3 = DB_CONN.Split(new string[] { ";" }, StringSplitOptions.None);
+                a = s3[1].ToString();
+                s4 = a.Split(new string[] { "=" }, StringSplitOptions.None);
+                DB_NAME = s4[1].ToString();
+            }
+        }
+    }
+
+
+    protected void ddlWorkingPeriod_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+        Load_JobNo();
+    }
+}

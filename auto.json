@@ -1,0 +1,112 @@
+{
+  "project": "AI_MAIL_SCHEDULER (ERoyal.OCRDailyReportAutomation)",
+  "path": "E:\\Fire&Forget\\Auto Mail",
+  "analyzedOn": "2026-09-29",
+  "method": "Static read of all source and config (Program.cs, appsettings.json, csproj, NLog.config, publish profile, internal-nlog.txt). Not built or run: needs the SQL servers and SMTP. Secrets found in the files are NOT copied here.",
+  "summary": "A .NET 8 console/WinExe job meant to be run on a schedule (daily). It connects to each configured SQL Server, reads which clients have AI OCR enabled and their per-company database connection strings from the admin database, runs a stored procedure in each company database three ways (daily job count, total job details, format count), writes everything into one 4-sheet Excel workbook, emails it to a distribution list via Gmail SMTP with an HTML body and inline logo, then deletes the file.",
+
+  "folderLayout": {
+    "sourceProject": "ERoyal.OCRDailyReportAutomation/ERoyal.OCRDailyReportAutomation/ (Program.cs, AI_MAIL_SCHEDULER.csproj, appsettings.json, NLog.config, Assets/Company_Logo.png)",
+    "solution": "ERoyal.OCRDailyReportAutomation/AI_MAIL_SCHEDULER.sln",
+    "publish": "publish/ holds a self-contained single-file win-x64 AI_MAIL_SCHEDULER.exe (about 89 MB), the .pdb and Assets. The listing shows no appsettings.json or NLog.config next to the exe (see findings).",
+    "chatBackups": ".claude-chat-backups/ = about 20 MB of exported earlier Claude Code conversations (8 markdown + 8 jsonl) plus a note pointing to markdownviewer.org. Not source; not analysed.",
+    "logs": "internal-nlog.txt (NLog internal log; last entries 2026-08-03 from a Debug run); runtime logs go to Logs/logfile-yyyy-MM-dd.log beside the exe."
+  },
+
+  "technology": {
+    "runtime": "net8.0, OutputType WinExe, ImplicitUsings + Nullable enabled",
+    "packages": ["ClosedXML 0.105.0 (Excel)", "Microsoft.Data.SqlClient 6.1.2", "System.Data.SqlClient 4.9.0 (referenced, unused)", "Microsoft.Extensions.Configuration(+Binder,+Json) 10.0.0", "NLog 6.0.6"],
+    "mail": "System.Net.Mail.SmtpClient (legacy API) with STARTTLS on port 587",
+    "publish": "FolderProfile: Release, win-x64, SelfContained, PublishSingleFile, no trimming, no ReadyToRun, output D:\\Auto Mail\\...\\publish"
+  },
+
+  "configuration": {
+    "file": "appsettings.json (loaded from AppContext.BaseDirectory, optional:false, reloadOnChange)",
+    "ReportSettings.ReportFolder": "D:\\AI_Ocr_Mail_Reports (created if missing)",
+    "SmtpSettings": {
+      "fields": "Mail_header (display name), Host smtp.gmail.com, username, password, SmtpPort 587, enableSsl true, FromEmail, ToEmails[4], CCEmails[5], Subject 'AI_Ocr Daily Report - {Date}', Body (full inline-styled HTML with cid:companylogo, company address/phone, list of the 4 sheets)",
+      "recipients": "4 To and 5 CC addresses, all @royaltechsystems.co.in",
+      "placeholders": "{Date} replaced by yesterday's date dd-MM-yyyy in subject and body"
+    },
+    "server_ip_list": "Dictionary name -> SQL Server host. Only 'Local': 'SERVER\\SQLEXPRESS' is active; eleven production servers (Live, Info, Pro, Co, Co_in, Trade, Org, Net, Capricorn, Sudharsan, Com) are commented out.",
+    "commandLine": "--dry-run builds and saves the workbook but skips email and does not delete the file."
+  },
+
+  "runFlow": [
+    "1. Main(): parse --dry-run; log start; build configuration; bind SmtpSettings, server_ip_list, ReportFolder; create ReportFolder.",
+    "2. Create XLWorkbook with 4 sheets: 'AI_OCR ENABLED CLIENT LIST', 'AI_OCR DAILY JOB COUNT DETAILS', 'AI_OCR TOTAL JOB DETAILS', 'AI_OCR TOTAL FORMAT DETAILS'; a RowPointers object tracks the next row per sheet.",
+    "3. For every server in server_ip_list (sequential): build admin connection string Server=<ip>;database=ADMIN_IMPEX with a hard-coded admin SQL login; call GetOcrDataList.",
+    "4. GetOcrDataList (wrapped in Task.Run but synchronous inside): GetAdminData runs stored proc OCR_AI_ENABLED_COUNT (@MFLAG='OCR_ENABLED_COUNT', @serverName, @ERRORMSG out, timeout 120s). Needs at least 2 result tables; otherwise the server is skipped. Table[0] = enabled client list (appended to sheet 1). Table[1] = company/database rows.",
+    "5. De-duplicate Table[1] by COMPANY_LICENSE (first row wins, case-insensitive). For each unique company read WORKING_PERIOD, COMPANY_LICENSE, COMPANY_NAME, CON_STRING, ENABLED_ON and DISABLED_ON (dd-MM-yyyy converted to yyyy-MM-dd).",
+    "6. For each company connect with its own CON_STRING and run stored proc OCR_AI_JOB_COUNT three times with @MFLAG = JOB_COUNT (sheet 2), TOTAL_JOB_DETAILS (sheet 3), FORMAT_COUNT (sheet 4); parameters @Server_name, @WORKING_PERIOD, @COMPANY_LICENSE, @COMPANY_NAME, @ENABLED_DATE, @DISABLED_DATE, @ERRORMSG out; timeout 180s. First result table is used. SQL errors are logged and that company/flag yields an empty table.",
+    "7. AppendDataTable: writes a bold white-on-dark-blue header row only when the sheet is empty, then rows with zebra shading (every even row light gray); all cell values written as strings.",
+    "8. StyleSheet: inserts a title row above, merges it across 7 / auto / 16 / 13 columns (sheet 1 / 2 / 3 / 4), navy fill, freezes 2 rows, thin borders, auto-fit columns.",
+    "9. Save as AI_OCR_Report_yyyyMMdd_HHmm.xlsx in ReportFolder.",
+    "10. SendEmailWithAttachment: build MailMessage (from, subject, HTML body, logo as LinkedResource cid 'companylogo' from Assets/Company_Logo.png if present), add To/CC, attach the workbook, send via SmtpClient with credentials; then delete the file.",
+    "11. All exceptions are caught and only logged; the process always ends normally."
+  ],
+
+  "databaseContract": {
+    "adminDatabase": "ADMIN_IMPEX on each server",
+    "adminProc": {
+      "name": "OCR_AI_ENABLED_COUNT",
+      "inputs": ["@MFLAG = 'OCR_ENABLED_COUNT'", "@serverName"],
+      "output": "@ERRORMSG nvarchar(max)",
+      "returns": ["Table 0: enabled client list (sheet 1, sheet 1 title assumes 7 columns)", "Table 1: COMPANY_LICENSE, COMPANY_NAME, WORKING_PERIOD, CON_STRING, ENABLED_ON, DISABLED_ON (dd-MM-yyyy)"]
+    },
+    "clientProc": {
+      "name": "OCR_AI_JOB_COUNT (in each company database)",
+      "flags": {
+        "JOB_COUNT": "daily breakdown (uses dynamic SQL EXEC(@sql) with SET NOCOUNT ON per a code comment) -> sheet 2",
+        "TOTAL_JOB_DETAILS": "overall summary, expected 16 columns -> sheet 3",
+        "FORMAT_COUNT": "format/page-count details, expected 13 columns -> sheet 4"
+      }
+    },
+    "note": "Procedure bodies and the PDF_AI_COUNT_DETAILS-style tables behind them are not in this folder."
+  },
+
+  "logging": {
+    "framework": "NLog: single file target Logs/logfile-${shortdate}.log, daily archive, 30 files kept, compressed, minlevel Info; internal log to internal-nlog.txt.",
+    "content": "Per server and per client progress with row counts, warnings from stored-proc @ERRORMSG, errors for unreachable servers / SQL failures / email failure. Emojis are used in some messages."
+  },
+
+  "findings": {
+    "security": [
+      {"id": "S1", "title": "Secrets committed in source and config", "detail": "Program.cs line 90 builds the admin connection string with a hard-coded SQL login (rtsadmin) and password, and a commented-out sa connection string; appsettings.json holds the Gmail account name and an app password in clear text. Both should be rotated and moved to environment variables, user-secrets or a vault."},
+      {"id": "S2", "title": "TrustServerCertificate=True", "detail": "Admin connection accepts any server certificate; combined with plain SQL logins over the internet-facing IPs in the commented list this allows interception."},
+      {"id": "S3", "title": "Connection strings come from a database column", "detail": "CON_STRING values (with credentials) are read from ADMIN_IMPEX and used directly; access to that table equals access to every client database."},
+      {"id": "S4", "title": "Report emailed with client data", "detail": "Client names, licenses and job counts go by Gmail SMTP to 9 recipients; the workbook is written to D:\\AI_Ocr_Mail_Reports before sending."}
+    ],
+    "correctness": [
+      {"id": "C1", "title": "Email failure is reported as success and the report is lost", "detail": "SendEmailWithAttachment catches its own exception, so Main always logs 'Email sent successfully' and then deletes the workbook (Program.cs lines 131-138). If the send fails the file is deleted anyway and nothing is retried."},
+      {"id": "C2", "title": "Process cannot signal failure", "detail": "Main returns void and swallows every exception; exit code is always 0, so Task Scheduler/monitoring cannot detect a failed or partial run."},
+      {"id": "C3", "title": "Shipped config only reports the local server", "detail": "Only 'Local': SERVER\\SQLEXPRESS is active in server_ip_list; all 11 production servers are commented out. A run with this file produces a report for the dev machine only."},
+      {"id": "C4", "title": "Publish folder looks incomplete", "detail": "publish/ contains only the exe, pdb and Assets; appsettings.json is loaded with optional:false from the exe's directory, so a run from that folder would fail at startup unless the config is copied manually. NLog.config is also absent, so file logging would not initialise. Based on the folder listing."},
+      {"id": "C5", "title": "Silent data loss per company/flag", "detail": "GetClientData returns an empty table on SQL error, so a failing company simply disappears from the sheets with only a log line; the email still goes out looking complete."},
+      {"id": "C6", "title": "De-duplication by COMPANY_LICENSE keeps one row", "detail": "If a company has several working periods or database rows the first one is used and the others are ignored."},
+      {"id": "C7", "title": "Header/column assumptions", "detail": "Header row comes from the first non-empty table on each sheet and later servers are appended by position; column sets that differ between servers misalign silently. Title merge widths (7, 16, 13) are hard-coded for sheets 1, 3 and 4."},
+      {"id": "C8", "title": "Date semantics", "detail": "Subject and body use yesterday's date but the workbook is stamped with the run time and the stored procedures decide the actual range, so the label may not match the data. ParseDateToYMD returns the raw text if the format is not dd-MM-yyyy."},
+      {"id": "C9", "title": "Values written as text", "detail": "Every cell value is converted to string, so numbers and dates in the workbook are text and cannot be summed or sorted numerically without conversion."},
+      {"id": "C10", "title": "Strictly sequential and long timeouts", "detail": "Servers and companies are processed one after another with 120s/180s command timeouts and three procedure calls per company; a slow server can make the run very long, and Task.Run adds no real parallelism."}
+    ],
+    "minor": [
+      "System.Data.SqlClient package is referenced but only Microsoft.Data.SqlClient is used.",
+      "SqlDataAdapter/SqlCommand for output parameter: fine, but connection strings are logged nowhere (good) while server IPs are.",
+      "Legacy SmtpClient is marked obsolete for new code; MailKit is the recommended replacement.",
+      "WinExe output type hides the console, so --dry-run output is only visible in log files.",
+      "appsettings.Development.json only sets ASP.NET-style logging levels and is unused.",
+      "chat backup folder adds about 20 MB of unrelated material to the repo folder."
+    ]
+  },
+
+  "howItRunsInProduction": "Not defined in the folder. The design (single run, exit when done, --dry-run switch) implies an external scheduler such as Windows Task Scheduler running the published exe once a day; the mail text says 'generated automatically by the OCR Daily Report Scheduler'.",
+
+  "suggestedFixOrder": [
+    "Rotate the exposed SQL and Gmail credentials and load them from environment variables / secrets.",
+    "Make SendEmailWithAttachment throw (or return a bool) so Main only deletes the report after a confirmed send, and keep the file on failure.",
+    "Return a non-zero exit code on any failure or when any server/company is skipped, and include a 'skipped clients' section in the email.",
+    "Restore the production server list (or make it environment-specific) and include appsettings.json and NLog.config in the publish output.",
+    "Write numeric/date cells with their real types and derive column counts from the data instead of hard-coding 7/16/13.",
+    "Replace SmtpClient with MailKit, and consider parallelising per server with a per-server timeout."
+  ]
+}

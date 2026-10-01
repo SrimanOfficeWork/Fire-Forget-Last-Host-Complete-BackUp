@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Acc_GST_Bill_Job_rpt_Paramount" targetNamespace="http://tempuri.org/Acc_GST_Bill_Job_rpt_Paramount.xsd" xmlns:mstns="http://tempuri.org/Acc_GST_Bill_Job_rpt_Paramount.xsd" xmlns="http://tempuri.org/Acc_GST_Bill_Job_rpt_Paramount.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="Acc_GST_Bill_Job_rpt_Paramount" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="Acc_GST_Bill_Job_rpt_Paramount" msprop:Generator_UserDSName="Acc_GST_Bill_Job_rpt_Paramount">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Home" msprop:Generator_TableClassName="HomeDataTable" msprop:Generator_TableVarName="tableHome" msprop:Generator_TablePropName="Home" msprop:Generator_RowDeletingName="HomeRowDeleting" msprop:Generator_RowChangingName="HomeRowChanging" msprop:Generator_RowEvHandlerName="HomeRowChangeEventHandler" msprop:Generator_RowDeletedName="HomeRowDeleted" msprop:Generator_UserTableName="Home" msprop:Generator_RowChangedName="HomeRowChanged" msprop:Generator_RowEvArgName="HomeRowChangeEvent" msprop:Generator_RowClassName="HomeRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="BILL_INV_NO" msprop:Generator_ColumnVarNameInTable="columnBILL_INV_NO" msprop:Generator_ColumnPropNameInRow="BILL_INV_NO" msprop:Generator_ColumnPropNameInTable="BILL_INV_NOColumn" msprop:Generator_UserColumnName="BILL_INV_NO" type="xs:string" minOccurs="0" />
+              <xs:element name="BILL_INV_DATE" msprop:Generator_ColumnVarNameInTable="columnBILL_INV_DATE" msprop:Generator_ColumnPropNameInRow="BILL_INV_DATE" msprop:Generator_ColumnPropNameInTable="BILL_INV_DATEColumn" msprop:Generator_UserColumnName="BILL_INV_DATE" type="xs:string" minOccurs="0" />
+              <xs:element name="JOBNO" msprop:Generator_ColumnVarNameInTable="columnJOBNO" msprop:Generator_ColumnPropNameInRow="JOBNO" msprop:Generator_ColumnPropNameInTable="JOBNOColumn" msprop:Generator_UserColumnName="JOBNO" type="xs:string" minOccurs="0" />
+              <xs:element name="PARTY_NAME" msprop:Generator_ColumnVarNameInTable="columnPARTY_NAME" msprop:Generator_ColumnPropNameInRow="PARTY_NAME" msprop:Generator_ColumnPropNameInTable="PARTY_NAMEColumn" msprop:Generator_UserColumnName="PARTY_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="PARTY_ADDRESS" msprop:Generator_ColumnVarNameInTable="columnPARTY_ADDRESS" msprop:Generator_ColumnPropNameInRow="PARTY_ADDRESS" msprop:Generator_ColumnPropNameInTable="PARTY_ADDRESSColumn" msprop:Generator_UserColumnName="PARTY_ADDRESS" type="xs:string" minOccurs="0" />
+              <xs:element name="ACC_HEAD" msprop:Generator_ColumnVarNameInTable="columnACC_HEAD" msprop:Generator_ColumnPropNameInRow="ACC_HEAD" msprop:Generator_ColumnPropNameInTable="ACC_HEADColumn" msprop:Generator_UserColumnName="ACC_HEAD" type="xs:string" minOccurs="0" />
+              <xs:element name="LOCAL_OTHER" msprop:Generator_ColumnVarNameInTable="columnLOCAL_OTHER" msprop:Generator_ColumnPropNameInRow="LOCAL_OTHER" msprop:Generator_ColumnPropNameInTable="LOCAL_OTHERColumn" msprop:Generator_UserColumnName="LOCAL_OTHER" type="xs:string" minOccurs="0" />
+              <xs:element name="Tax_Type" msprop:Generator_ColumnVarNameInTable="columnTax_Type" msprop:Generator_ColumnPropNameInRow="Tax_Type" msprop:Generator_ColumnPropNameInTable="Tax_TypeColumn" msprop:Generator_UserColumnName="Tax_Type" type="xs:string" minOccurs="0" />
+              <xs:element name="BANK_DETAILS" msprop:Generator_ColumnVarNameInTable="columnBANK_DETAILS" msprop:Generator_ColumnPropNameInRow="BANK_DETAILS" msprop:Generator_ColumnPropNameInTable="BANK_DETAILSColumn" msprop:Generator_UserColumnName="BANK_DETAILS" type="xs:string" minOccurs="0" />
+              <xs:element name="PO_NO" msprop:Generator_ColumnVarNameInTable="columnPO_NO" msprop:Generator_ColumnPropNameInRow="PO_NO" msprop:Generator_ColumnPropNameInTable="PO_NOColumn" msprop:Generator_UserColumnName="PO_NO" type="xs:string" minOccurs="0" />
+              <xs:element name="Createdby" msprop:Generator_ColumnVarNameInTable="columnCreatedby" msprop:Generator_ColumnPropNameInRow="Createdby" msprop:Generator_ColumnPropNameInTable="CreatedbyColumn" msprop:Generator_UserColumnName="Createdby" type="xs:string" minOccurs="0" />
+              <xs:element name="Remarks" msprop:Generator_ColumnVarNameInTable="columnRemarks" msprop:Generator_ColumnPropNameInRow="Remarks" msprop:Generator_ColumnPropNameInTable="RemarksColumn" msprop:Generator_UserColumnName="Remarks" type="xs:string" minOccurs="0" />
+              <xs:element name="HSS_CODE" msprop:Generator_ColumnVarNameInTable="columnHSS_CODE" msprop:Generator_ColumnPropNameInRow="HSS_CODE" msprop:Generator_ColumnPropNameInTable="HSS_CODEColumn" msprop:Generator_UserColumnName="HSS_CODE" type="xs:string" minOccurs="0" />
+              <xs:element name="PARMA_CODE" msprop:Generator_ColumnVarNameInTable="columnPARMA_CODE" msprop:Generator_ColumnPropNameInRow="PARMA_CODE" msprop:Generator_ColumnPropNameInTable="PARMA_CODEColumn" msprop:Generator_UserColumnName="PARMA_CODE" type="xs:string" minOccurs="0" />
+              <xs:element name="WORK_ID" msprop:Generator_ColumnVarNameInTable="columnWORK_ID" msprop:Generator_ColumnPropNameInRow="WORK_ID" msprop:Generator_ColumnPropNameInTable="WORK_IDColumn" msprop:Generator_UserColumnName="WORK_ID" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Gen" msprop:Generator_TableClassName="GenDataTable" msprop:Generator_TableVarName="tableGen" msprop:Generator_TablePropName="Gen" msprop:Generator_RowDeletingName="GenRowDeleting" msprop:Generator_RowChangingName="GenRowChanging" msprop:Generator_RowEvHandlerName="GenRowChangeEventHandler" msprop:Generator_RowDeletedName="GenRowDeleted" msprop:Generator_UserTableName="Gen" msprop:Generator_RowChangedName="GenRowChanged" msprop:Generator_RowEvArgName="GenRowChangeEvent" msprop:Generator_RowClassName="GenRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TR_MODE" msprop:Generator_ColumnVarNameInTable="columnTR_MODE" msprop:Generator_ColumnPropNameInRow="TR_MODE" msprop:Generator_ColumnPropNameInTable="TR_MODEColumn" msprop:Generator_UserColumnName="TR_MODE" type="xs:string" minOccurs="0" />
+              <xs:element name="PARTY_REF_NO" msprop:Generator_ColumnVarNameInTable="columnPARTY_REF_NO" msprop:Generator_ColumnPropNameInRow="PARTY_REF_NO" msprop:Generator_ColumnPropNameInTable="PARTY_REF_NOColumn" msprop:Generator_UserColumnName="PARTY_REF_NO" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="IGM" msprop:Generator_TableClassName="IGMDataTable" msprop:Generator_TableVarName="tableIGM" msprop:Generator_TablePropName="IGM" msprop:Generator_RowDeletingName="IGMRowDeleting" msprop:Generator_RowChangingName="IGMRowChanging" msprop:Generator_RowEvHandlerName="IGMRowChangeEventHandler" msprop:Generator_RowDeletedName="IGMRowDeleted" msprop:Generator_UserTableName="IGM" msprop:Generator_RowChangedName="IGMRowChanged" msprop:Generator_RowEvArgName="IGMRowChangeEvent" msprop:Generator_RowClassName="IGMRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="NO_OF_PKGS" msprop:Generator_ColumnVarNameInTable="columnNO_OF_PKGS" msprop:Generator_ColumnPropNameInRow="NO_OF_PKGS" msprop:Generator_ColumnPropNameInTable="NO_OF_PKGSColumn" msprop:Generator_UserColumnName="NO_OF_PKGS" type="xs:string" minOccurs="0" />
+              <xs:element name="GROSS_WGT" msprop:Generator_ColumnVarNameInTable="columnGROSS_WGT" msprop:Generator_ColumnPropNameInRow="GROSS_WGT" msprop:Generator_ColumnPropNameInTable="GROSS_WGTColumn" msprop:Generator_UserColumnName="GROSS_WGT" type="xs:string" minOccurs="0" />
+              <xs:element name="NET_WGT" msprop:Generator_ColumnVarNameInTable="columnNET_WGT" msprop:Generator_ColumnPropNameInRow="NET_WGT" msprop:Generator_ColumnPropNameInTable="NET_WGTColumn" msprop:Generator_UserColumnName="NET_WGT" type="xs:string" minOccurs="0" />
+              <xs:element name="MAWB_MBL_NO" msprop:Generator_ColumnVarNameInTable="columnMAWB_MBL_NO" msprop:Generator_ColumnPropNameInRow="MAWB_MBL_NO" msprop:Generator_ColumnPropNameInTable="MAWB_MBL_NOColumn" msprop:Generator_UserColumnName="MAWB_MBL_NO" type="xs:string" minOccurs="0" />
+              <xs:element name="HAWB_HBL_NO" msprop:Generator_ColumnVarNameInTable="columnHAWB_HBL_NO" msprop:Generator_ColumnPropNameInRow="HAWB_HBL_NO" msprop:Generator_ColumnPropNameInTable="HAWB_HBL_NOColumn" msprop:Generator_UserColumnName="HAWB_HBL_NO" type="xs:string" minOccurs="0" />
+              <xs:element name="FLT_VSL_NO" msprop:Generator_ColumnVarNameInTable="columnFLT_VSL_NO" msprop:Generator_ColumnPropNameInRow="FLT_VSL_NO" msprop:Generator_ColumnPropNameInTable="FLT_VSL_NOColumn" msprop:Generator_UserColumnName="FLT_VSL_NO" type="xs:string" minOccurs="0" />
+              <xs:element name="CONTAINER_COUNT" msprop:Generator_ColumnVarNameInTable="columnCONTAINER_COUNT" msprop:Generator_ColumnPropNameInRow="CONTAINER_COUNT" msprop:Generator_ColumnPropNameInTable="CONTAINER_COUNTColumn" msprop:Generator_UserColumnName="CONTAINER_COUNT" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Item" msprop:Generator_TableClassName="ItemDataTable" msprop:Generator_TableVarName="tableItem" msprop:Generator_TablePropName="Item" msprop:Generator_RowDeletingName="ItemRowDeleting" msprop:Generator_RowChangingName="ItemRowChanging" msprop:Generator_RowEvHandlerName="ItemRowChangeEventHandler" msprop:Generator_RowDeletedName="ItemRowDeleted" msprop:Generator_UserTableName="Item" msprop:Generator_RowChangedName="ItemRowChanged" msprop:Generator_RowEvArgName="ItemRowChangeEvent" msprop:Generator_RowClassName="ItemRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ITEM_DESCRIPTION" msprop:Generator_ColumnVarNameInTable="columnITEM_DESCRIPTION" msprop:Generator_ColumnPropNameInRow="ITEM_DESCRIPTION" msprop:Generator_ColumnPropNameInTable="ITEM_DESCRIPTIONColumn" msprop:Generator_UserColumnName="ITEM_DESCRIPTION" type="xs:string" minOccurs="0" />
+              <xs:element name="ASS_VALUE" msprop:Generator_ColumnVarNameInTable="columnASS_VALUE" msprop:Generator_ColumnPropNameInRow="ASS_VALUE" msprop:Generator_ColumnPropNameInTable="ASS_VALUEColumn" msprop:Generator_UserColumnName="ASS_VALUE" type="xs:string" minOccurs="0" />
+              <xs:element name="DUTY_VALUE" msprop:Generator_ColumnVarNameInTable="columnDUTY_VALUE" msprop:Generator_ColumnPropNameInRow="DUTY_VALUE" msprop:Generator_ColumnPropNameInTable="DUTY_VALUEColumn" msprop:Generator_UserColumnName="DUTY_VALUE" type="xs:string" minOccurs="0" />
+              <xs:element name="CIF_VALUE" msprop:Generator_ColumnVarNameInTable="columnCIF_VALUE" msprop:Generator_ColumnPropNameInRow="CIF_VALUE" msprop:Generator_ColumnPropNameInTable="CIF_VALUEColumn" msprop:Generator_UserColumnName="CIF_VALUE" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Invoice" msprop:Generator_TableClassName="InvoiceDataTable" msprop:Generator_TableVarName="tableInvoice" msprop:Generator_TablePropName="Invoice" msprop:Generator_RowDeletingName="InvoiceRowDeleting" msprop:Generator_RowChangingName="InvoiceRowChanging" msprop:Generator_RowEvHandlerName="InvoiceRowChangeEventHandler" msprop:Generator_RowDeletedName="InvoiceRowDeleted" msprop:Generator_UserTableName="Invoice" msprop:Generator_RowChangedName="InvoiceRowChanged" msprop:Generator_RowEvArgName="InvoiceRowChangeEvent" msprop:Generator_RowClassName="InvoiceRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="INV_NO" msprop:Generator_ColumnVarNameInTable="columnINV_NO" msprop:Generator_ColumnPropNameInRow="INV_NO" msprop:Generator_ColumnPropNameInTable="INV_NOColumn" msprop:Generator_UserColumnName="INV_NO" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="BE_SB_NO" msprop:Generator_TableClassName="BE_SB_NODataTable" msprop:Generator_TableVarName="tableBE_SB_NO" msprop:Generator_TablePropName="BE_SB_NO" msprop:Generator_RowDeletingName="BE_SB_NORowDeleting" msprop:Generator_RowChangingName="BE_SB_NORowChanging" msprop:Generator_RowEvHandlerName="BE_SB_NORowChangeEventHandler" msprop:Generator_RowDeletedName="BE_SB_NORowDeleted" msprop:Generator_UserTableName="BE_SB_NO" msprop:Generator_RowChangedName="BE_SB_NORowChanged" msprop:Generator_RowEvArgName="BE_SB_NORowChangeEvent" msprop:Generator_RowClassName="BE_SB_NORow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="BE_SB_NO" msprop:Generator_ColumnVarNameInTable="columnBE_SB_NO" msprop:Generator_ColumnPropNameInRow="BE_SB_NO" msprop:Generator_ColumnPropNameInTable="BE_SB_NOColumn" msprop:Generator_UserColumnName="BE_SB_NO" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Charge" msprop:Generator_TableClassName="ChargeDataTable" msprop:Generator_TableVarName="tableCharge" msprop:Generator_TablePropName="Charge" msprop:Generator_RowDeletingName="ChargeRowDeleting" msprop:Generator_RowChangingName="ChargeRowChanging" msprop:Generator_RowEvHandlerName="ChargeRowChangeEventHandler" msprop:Generator_RowDeletedName="ChargeRowDeleted" msprop:Generator_UserTableName="Charge" msprop:Generator_RowChangedName="ChargeRowChanged" msprop:Generator_RowEvArgName="ChargeRowChangeEvent" msprop:Generator_RowClassName="ChargeRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Id" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:string" minOccurs="0" />
+              <xs:element name="Charge_Name" msprop:Generator_ColumnVarNameInTable="columnCharge_Name" msprop:Generator_ColumnPropNameInRow="Charge_Name" msprop:Generator_ColumnPropNameInTable="Charge_NameColumn" msprop:Generator_UserColumnName="Charge_Name" type="xs:string" minOccurs="0" />
+              <xs:element name="HSN_Code" msprop:Generator_ColumnVarNameInTable="columnHSN_Code" msprop:Generator_ColumnPropNameInRow="HSN_Code" msprop:Generator_ColumnPropNameInTable="HSN_CodeColumn" msprop:Generator_UserColumnName="HSN_Code" type="xs:string" minOccurs="0" />
+              <xs:element name="SA_CODE" msprop:Generator_ColumnVarNameInTable="columnSA_CODE" msprop:Generator_ColumnPropNameInRow="SA_CODE" msprop:Generator_ColumnPropNameInTable="SA_CODEColumn" msprop:Generator_UserColumnName="SA_CODE" type="xs:string" minOccurs="0" />
+              <xs:element name="Non_tax" msprop:Generator_ColumnVarNameInTable="columnNon_tax" msprop:Generator_ColumnPropNameInRow="Non_tax" msprop:Generator_ColumnPropNameInTable="Non_taxColumn" msprop:Generator_UserColumnName="Non_tax" type="xs:string" minOccurs="0" />
+              <xs:element name="Tax_12" msprop:Generator_ColumnVarNameInTable="columnTax_12" msprop:Generator_ColumnPropNameInRow="Tax_12" msprop:Generator_ColumnPropNameInTable="Tax_12Column" msprop:Generator_UserColumnName="Tax_12" type="xs:string" minOccurs="0" />
+              <xs:element name="Tax_18" msprop:Generator_ColumnVarNameInTable="columnTax_18" msprop:Generator_ColumnPropNameInRow="Tax_18" msprop:Generator_ColumnPropNameInTable="Tax_18Column" msprop:Generator_UserColumnName="Tax_18" type="xs:string" minOccurs="0" />
+              <xs:element name="AMOUNT" msprop:Generator_ColumnVarNameInTable="columnAMOUNT" msprop:Generator_ColumnPropNameInRow="AMOUNT" msprop:Generator_ColumnPropNameInTable="AMOUNTColumn" msprop:Generator_UserColumnName="AMOUNT" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Amt_Words" msprop:Generator_TableClassName="Amt_WordsDataTable" msprop:Generator_TableVarName="tableAmt_Words" msprop:Generator_TablePropName="Amt_Words" msprop:Generator_RowDeletingName="Amt_WordsRowDeleting" msprop:Generator_RowChangingName="Amt_WordsRowChanging" msprop:Generator_RowEvHandlerName="Amt_WordsRowChangeEventHandler" msprop:Generator_RowDeletedName="Amt_WordsRowDeleted" msprop:Generator_UserTableName="Amt_Words" msprop:Generator_RowChangedName="Amt_WordsRowChanged" msprop:Generator_RowEvArgName="Amt_WordsRowChangeEvent" msprop:Generator_RowClassName="Amt_WordsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Re_Imp" msprop:Generator_ColumnVarNameInTable="columnRe_Imp" msprop:Generator_ColumnPropNameInRow="Re_Imp" msprop:Generator_ColumnPropNameInTable="Re_ImpColumn" msprop:Generator_UserColumnName="Re_Imp" type="xs:string" minOccurs="0" />
+              <xs:element name="Total_12" msprop:Generator_ColumnVarNameInTable="columnTotal_12" msprop:Generator_ColumnPropNameInRow="Total_12" msprop:Generator_ColumnPropNameInTable="Total_12Column" msprop:Generator_UserColumnName="Total_12" type="xs:string" minOccurs="0" />
+              <xs:element name="Total_18" msprop:Generator_ColumnVarNameInTable="columnTotal_18" msprop:Generator_ColumnPropNameInRow="Total_18" msprop:Generator_ColumnPropNameInTable="Total_18Column" msprop:Generator_UserColumnName="Total_18" type="xs:string" minOccurs="0" />
+              <xs:element name="Amt" msprop:Generator_ColumnVarNameInTable="columnAmt" msprop:Generator_ColumnPropNameInRow="Amt" msprop:Generator_ColumnPropNameInTable="AmtColumn" msprop:Generator_UserColumnName="Amt" type="xs:string" minOccurs="0" />
+              <xs:element name="AMT_Word" msprop:Generator_ColumnVarNameInTable="columnAMT_Word" msprop:Generator_ColumnPropNameInRow="AMT_Word" msprop:Generator_ColumnPropNameInTable="AMT_WordColumn" msprop:Generator_UserColumnName="AMT_Word" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="HSN_Tax_Rate_L" msprop:Generator_TableClassName="HSN_Tax_Rate_LDataTable" msprop:Generator_TableVarName="tableHSN_Tax_Rate_L" msprop:Generator_TablePropName="HSN_Tax_Rate_L" msprop:Generator_RowDeletingName="HSN_Tax_Rate_LRowDeleting" msprop:Generator_RowChangingName="HSN_Tax_Rate_LRowChanging" msprop:Generator_RowEvHandlerName="HSN_Tax_Rate_LRowChangeEventHandler" msprop:Generator_RowDeletedName="HSN_Tax_Rate_LRowDeleted" msprop:Generator_UserTableName="HSN_Tax_Rate_L" msprop:Generator_RowChangedName="HSN_Tax_Rate_LRowChanged" msprop:Generator_RowEvArgName="HSN_Tax_Rate_LRowChangeEvent" msprop:Generator_RowClassName="HSN_Tax_Rate_LRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="HSN_Code" msprop:Generator_ColumnVarNameInTable="columnHSN_Code" msprop:Generator_ColumnPropNameInRow="HSN_Code" msprop:Generator_ColumnPropNameInTable="HSN_CodeColumn" msprop:Generator_UserColumnName="HSN_Code" type="xs:string" minOccurs="0" />
+              <xs:element name="SA_CODE" msprop:Generator_ColumnVarNameInTable="columnSA_CODE" msprop:Generator_ColumnPropNameInRow="SA_CODE" msprop:Generator_ColumnPropNameInTable="SA_CODEColumn" msprop:Generator_UserColumnName="SA_CODE" type="xs:string" minOccurs="0" />
+              <xs:element name="Tax_Amt" msprop:Generator_ColumnVarNameInTable="columnTax_Amt" msprop:Generator_ColumnPropNameInRow="Tax_Amt" msprop:Generator_ColumnPropNameInTable="Tax_AmtColumn" msprop:Generator_UserColumnName="Tax_Amt" type="xs:string" minOccurs="0" />
+              <xs:element name="CGST_Rate" msprop:Generator_ColumnVarNameInTable="columnCGST_Rate" msprop:Generator_ColumnPropNameInRow="CGST_Rate" msprop:Generator_ColumnPropNameInTable="CGST_RateColumn" msprop:Generator_UserColumnName="CGST_Rate" type="xs:string" minOccurs="0" />
+              <xs:element name="CGST_AMT" msprop:Generator_ColumnVarNameInTable="columnCGST_AMT" msprop:Generator_ColumnPropNameInRow="CGST_AMT" msprop:Generator_ColumnPropNameInTable="CGST_AMTColumn" msprop:Generator_UserColumnName="CGST_AMT" type="xs:string" minOccurs="0" />
+              <xs:element name="SGST_Rate" msprop:Generator_ColumnVarNameInTable="columnSGST_Rate" msprop:Generator_ColumnPropNameInRow="SGST_Rate" msprop:Generator_ColumnPropNameInTable="SGST_RateColumn" msprop:Generator_UserColumnName="SGST_Rate" type="xs:string" minOccurs="0" />
+              <xs:element name="SGST_AMT" msprop:Generator_ColumnVarNameInTable="columnSGST_AMT" msprop:Generator_ColumnPropNameInRow="SGST_AMT" msprop:Generator_ColumnPropNameInTable="SGST_AMTColumn" msprop:Generator_UserColumnName="SGST_AMT" type="xs:string" minOccurs="0" />
+              <xs:element name="Row_Total" msprop:Generator_ColumnVarNameInTable="columnRow_Total" msprop:Generator_ColumnPropNameInRow="Row_Total" msprop:Generator_ColumnPropNameInTable="Row_TotalColumn" msprop:Generator_UserColumnName="Row_Total" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="HSN_Tax_Total_L" msprop:Generator_TableClassName="HSN_Tax_Total_LDataTable" msprop:Generator_TableVarName="tableHSN_Tax_Total_L" msprop:Generator_TablePropName="HSN_Tax_Total_L" msprop:Generator_RowDeletingName="HSN_Tax_Total_LRowDeleting" msprop:Generator_RowChangingName="HSN_Tax_Total_LRowChanging" msprop:Generator_RowEvHandlerName="HSN_Tax_Total_LRowChangeEventHandler" msprop:Generator_RowDeletedName="HSN_Tax_Total_LRowDeleted" msprop:Generator_UserTableName="HSN_Tax_Total_L" msprop:Generator_RowChangedName="HSN_Tax_Total_LRowChanged" msprop:Generator_RowEvArgName="HSN_Tax_Total_LRowChangeEvent" msprop:Generator_RowClassName="HSN_Tax_Total_LRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Tax_Amt" msprop:Generator_ColumnVarNameInTable="columnTax_Amt" msprop:Generator_ColumnPropNameInRow="Tax_Amt" msprop:Generator_ColumnPropNameInTable="Tax_AmtColumn" msprop:Generator_UserColumnName="Tax_Amt" type="xs:string" minOccurs="0" />
+              <xs:element name="CGST_AMT" msprop:Generator_ColumnVarNameInTable="columnCGST_AMT" msprop:Generator_ColumnPropNameInRow="CGST_AMT" msprop:Generator_ColumnPropNameInTable="CGST_AMTColumn" msprop:Generator_UserColumnName="CGST_AMT" type="xs:string" minOccurs="0" />
+              <xs:element name="SGST_AMT" msprop:Generator_ColumnVarNameInTable="columnSGST_AMT" msprop:Generator_ColumnPropNameInRow="SGST_AMT" msprop:Generator_ColumnPropNameInTable="SGST_AMTColumn" msprop:Generator_UserColumnName="SGST_AMT" type="xs:string" minOccurs="0" />
+              <xs:element name="Row_Total" msprop:Generator_ColumnVarNameInTable="columnRow_Total" msprop:Generator_ColumnPropNameInRow="Row_Total" msprop:Generator_ColumnPropNameInTable="Row_TotalColumn" msprop:Generator_UserColumnName="Row_Total" type="xs:string" minOccurs="0" />
+              <xs:element name="Tax_Amt_Words" msprop:Generator_ColumnVarNameInTable="columnTax_Amt_Words" msprop:Generator_ColumnPropNameInRow="Tax_Amt_Words" msprop:Generator_ColumnPropNameInTable="Tax_Amt_WordsColumn" msprop:Generator_UserColumnName="Tax_Amt_Words" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="HSN_Tax_Rate_O" msprop:Generator_TableClassName="HSN_Tax_Rate_ODataTable" msprop:Generator_TableVarName="tableHSN_Tax_Rate_O" msprop:Generator_TablePropName="HSN_Tax_Rate_O" msprop:Generator_RowDeletingName="HSN_Tax_Rate_ORowDeleting" msprop:Generator_RowChangingName="HSN_Tax_Rate_ORowChanging" msprop:Generator_RowEvHandlerName="HSN_Tax_Rate_ORowChangeEventHandler" msprop:Generator_RowDeletedName="HSN_Tax_Rate_ORowDeleted" msprop:Generator_UserTableName="HSN_Tax_Rate_O" msprop:Generator_RowChangedName="HSN_Tax_Rate_ORowChanged" msprop:Generator_RowEvArgName="HSN_Tax_Rate_ORowChangeEvent" msprop:Generator_RowClassName="HSN_Tax_Rate_ORow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="HSN_Code" msprop:Generator_ColumnVarNameInTable="columnHSN_Code" msprop:Generator_ColumnPropNameInRow="HSN_Code" msprop:Generator_ColumnPropNameInTable="HSN_CodeColumn" msprop:Generator_UserColumnName="HSN_Code" type="xs:string" minOccurs="0" />
+              <xs:element name="SA_CODE" msprop:Generator_ColumnVarNameInTable="columnSA_CODE" msprop:Generator_ColumnPropNameInRow="SA_CODE" msprop:Generator_ColumnPropNameInTable="SA_CODEColumn" msprop:Generator_UserColumnName="SA_CODE" type="xs:string" minOccurs="0" />
+              <xs:element name="Tax_Amt" msprop:Generator_ColumnVarNameInTable="columnTax_Amt" msprop:Generator_ColumnPropNameInRow="Tax_Amt" msprop:Generator_ColumnPropNameInTable="Tax_AmtColumn" msprop:Generator_UserColumnName="Tax_Amt" type="xs:string" minOccurs="0" />
+              <xs:element name="IGST_Rate" msprop:Generator_ColumnVarNameInTable="columnIGST_Rate" msprop:Generator_ColumnPropNameInRow="IGST_Rate" msprop:Generator_ColumnPropNameInTable="IGST_RateColumn" msprop:Generator_UserColumnName="IGST_Rate" type="xs:string" minOccurs="0" />
+              <xs:element name="IGST_AMT" msprop:Generator_ColumnVarNameInTable="columnIGST_AMT" msprop:Generator_ColumnPropNameInRow="IGST_AMT" msprop:Generator_ColumnPropNameInTable="IGST_AMTColumn" msprop:Generator_UserColumnName="IGST_AMT" type="xs:string" minOccurs="0" />
+              <xs:element name="Row_Total" msprop:Generator_ColumnVarNameInTable="columnRow_Total" msprop:Generator_ColumnPropNameInRow="Row_Total" msprop:Generator_ColumnPropNameInTable="Row_TotalColumn" msprop:Generator_UserColumnName="Row_Total" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="HSN_Tax_Total_O" msprop:Generator_TableClassName="HSN_Tax_Total_ODataTable" msprop:Generator_TableVarName="tableHSN_Tax_Total_O" msprop:Generator_TablePropName="HSN_Tax_Total_O" msprop:Generator_RowDeletingName="HSN_Tax_Total_ORowDeleting" msprop:Generator_RowChangingName="HSN_Tax_Total_ORowChanging" msprop:Generator_RowEvHandlerName="HSN_Tax_Total_ORowChangeEventHandler" msprop:Generator_RowDeletedName="HSN_Tax_Total_ORowDeleted" msprop:Generator_UserTableName="HSN_Tax_Total_O" msprop:Generator_RowChangedName="HSN_Tax_Total_ORowChanged" msprop:Generator_RowEvArgName="HSN_Tax_Total_ORowChangeEvent" msprop:Generator_RowClassName="HSN_Tax_Total_ORow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Tax_Amt" msprop:Generator_ColumnVarNameInTable="columnTax_Amt" msprop:Generator_ColumnPropNameInRow="Tax_Amt" msprop:Generator_ColumnPropNameInTable="Tax_AmtColumn" msprop:Generator_UserColumnName="Tax_Amt" type="xs:string" minOccurs="0" />
+              <xs:element name="IGST_AMT" msprop:Generator_ColumnVarNameInTable="columnIGST_AMT" msprop:Generator_ColumnPropNameInRow="IGST_AMT" msprop:Generator_ColumnPropNameInTable="IGST_AMTColumn" msprop:Generator_UserColumnName="IGST_AMT" type="xs:string" minOccurs="0" />
+              <xs:element name="Row_Total" msprop:Generator_ColumnVarNameInTable="columnRow_Total" msprop:Generator_ColumnPropNameInRow="Row_Total" msprop:Generator_ColumnPropNameInTable="Row_TotalColumn" msprop:Generator_UserColumnName="Row_Total" type="xs:string" minOccurs="0" />
+              <xs:element name="Tax_Amt_Words" msprop:Generator_ColumnVarNameInTable="columnTax_Amt_Words" msprop:Generator_ColumnPropNameInRow="Tax_Amt_Words" msprop:Generator_ColumnPropNameInTable="Tax_Amt_WordsColumn" msprop:Generator_UserColumnName="Tax_Amt_Words" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Non_Tax_Total" msprop:Generator_TableClassName="Non_Tax_TotalDataTable" msprop:Generator_TableVarName="tableNon_Tax_Total" msprop:Generator_TablePropName="Non_Tax_Total" msprop:Generator_RowDeletingName="Non_Tax_TotalRowDeleting" msprop:Generator_RowChangingName="Non_Tax_TotalRowChanging" msprop:Generator_RowEvHandlerName="Non_Tax_TotalRowChangeEventHandler" msprop:Generator_RowDeletedName="Non_Tax_TotalRowDeleted" msprop:Generator_UserTableName="Non_Tax_Total" msprop:Generator_RowChangedName="Non_Tax_TotalRowChanged" msprop:Generator_RowEvArgName="Non_Tax_TotalRowChangeEvent" msprop:Generator_RowClassName="Non_Tax_TotalRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Amt" msprop:Generator_ColumnVarNameInTable="columnAmt" msprop:Generator_ColumnPropNameInRow="Amt" msprop:Generator_ColumnPropNameInTable="AmtColumn" msprop:Generator_UserColumnName="Amt" type="xs:string" minOccurs="0" />
+              <xs:element name="AMT_Word" msprop:Generator_ColumnVarNameInTable="columnAMT_Word" msprop:Generator_ColumnPropNameInRow="AMT_Word" msprop:Generator_ColumnPropNameInTable="AMT_WordColumn" msprop:Generator_UserColumnName="AMT_Word" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="HSN_Tax_Total_NR" msprop:Generator_TableClassName="HSN_Tax_Total_NRDataTable" msprop:Generator_TableVarName="tableHSN_Tax_Total_NR" msprop:Generator_TablePropName="HSN_Tax_Total_NR" msprop:Generator_RowDeletingName="HSN_Tax_Total_NRRowDeleting" msprop:Generator_RowChangingName="HSN_Tax_Total_NRRowChanging" msprop:Generator_RowEvHandlerName="HSN_Tax_Total_NRRowChangeEventHandler" msprop:Generator_RowDeletedName="HSN_Tax_Total_NRRowDeleted" msprop:Generator_UserTableName="HSN_Tax_Total_NR" msprop:Generator_RowChangedName="HSN_Tax_Total_NRRowChanged" msprop:Generator_RowEvArgName="HSN_Tax_Total_NRRowChangeEvent" msprop:Generator_RowClassName="HSN_Tax_Total_NRRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="HSN_Code" msprop:Generator_ColumnVarNameInTable="columnHSN_Code" msprop:Generator_ColumnPropNameInRow="HSN_Code" msprop:Generator_ColumnPropNameInTable="HSN_CodeColumn" msprop:Generator_UserColumnName="HSN_Code" type="xs:string" minOccurs="0" />
+              <xs:element name="SA_CODE" msprop:Generator_ColumnVarNameInTable="columnSA_CODE" msprop:Generator_ColumnPropNameInRow="SA_CODE" msprop:Generator_ColumnPropNameInTable="SA_CODEColumn" msprop:Generator_UserColumnName="SA_CODE" type="xs:string" minOccurs="0" />
+              <xs:element name="Tax_Amt" msprop:Generator_ColumnVarNameInTable="columnTax_Amt" msprop:Generator_ColumnPropNameInRow="Tax_Amt" msprop:Generator_ColumnPropNameInTable="Tax_AmtColumn" msprop:Generator_UserColumnName="Tax_Amt" type="xs:string" minOccurs="0" />
+              <xs:element name="IGST_Rate" msprop:Generator_ColumnVarNameInTable="columnIGST_Rate" msprop:Generator_ColumnPropNameInRow="IGST_Rate" msprop:Generator_ColumnPropNameInTable="IGST_RateColumn" msprop:Generator_UserColumnName="IGST_Rate" type="xs:string" minOccurs="0" />
+              <xs:element name="IGST_AMT" msprop:Generator_ColumnVarNameInTable="columnIGST_AMT" msprop:Generator_ColumnPropNameInRow="IGST_AMT" msprop:Generator_ColumnPropNameInTable="IGST_AMTColumn" msprop:Generator_UserColumnName="IGST_AMT" type="xs:string" minOccurs="0" />
+              <xs:element name="Row_Total" msprop:Generator_ColumnVarNameInTable="columnRow_Total" msprop:Generator_ColumnPropNameInRow="Row_Total" msprop:Generator_ColumnPropNameInTable="Row_TotalColumn" msprop:Generator_UserColumnName="Row_Total" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

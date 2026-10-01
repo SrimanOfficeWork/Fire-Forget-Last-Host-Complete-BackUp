@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+	<soap:Body><Imp_Data xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <API_JOB_REF_NO>MUN/AIRIMP/24/12/00003</API_JOB_REF_NO>
+  <IECNO>8903890882</IECNO>
+  <BRANCH_SL_NO>1</BRANCH_SL_NO>
+  <IMPORTER_NAME>ROYAL IMPEX TEST</IMPORTER_NAME>
+  <ADCODE>0</ADCODE>
+  <TRANSPORT_MODE>Air</TRANSPORT_MODE>
+  <PORT_OF_FILLING_CODE>INMAA4</PORT_OF_FILLING_CODE>
+  <PORT_OF_ORIGIN_CODE>IDR</PORT_OF_ORIGIN_CODE>
+  <PORT_OF_SHIPMENT_CODE>IDR</PORT_OF_SHIPMENT_CODE>
+  <STATE_CODE>27</STATE_CODE>
+  <GSTN_REGISTRATION_NO>27UUCCD8990Y3ZK</GSTN_REGISTRATION_NO>
+  <COUNTRY_ORGIN>IN</COUNTRY_ORGIN>
+  <COUNTRY_SHIPMENT>IN</COUNTRY_SHIPMENT>
+  <FLAG>S</FLAG>
+  <API_USER_ID>ADMIN</API_USER_ID>
+</Imp_Data>	</soap:Body>
+</soap:Envelope>

@@ -1,0 +1,142 @@
+/* CSS Document */
+#tag_innerGRDstyl{
+width:790px;
+height:44px;
+float:left;
+margin-left:10px;
+}
+
+.txtheader
+{
+background-color: #B3E1FD;
+    background-image: url("images/grid_Row_title_bit.gif");
+    background-position: center top;
+    background-repeat: repeat-x;
+    color: #232323;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    height: 20px;
+    line-height: 2em;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.grid-view
+{
+	padding: 0;
+	margin: 0;
+	text-align:center;
+	font-family:Arial, Helvetica, sans-serif;
+    font-size:12px;
+    font-weight:normal;
+    color:#232323;
+	margin-left:0px;
+}
+
+.grid-view tr.header
+{
+	background-image:url(images_BlueFancy/grid_Row_title_bit.gif);
+    background-repeat:repeat-x;
+    background-position:top;
+    background-color:#004d85;
+   	height: 20px;
+	vertical-align: middle;
+	text-align:center;
+	font-family:Arial, Helvetica, sans-serif;
+    font-size:12px;
+    font-weight:normal;
+    color:#ffffff;
+	line-height:2.0em;
+}
+
+.grid-view tr.normal
+{
+   	background-color: #FFFFFF;
+	height: 20px;
+	vertical-align: middle;
+	background-image:url(images_BlueFancy/grid_Row_1_bit.gif);
+background-repeat:repeat-x;
+background-position:top;
+border-left:#b0d8f1 solid thin;
+border-right:#b0d8f1 solid thin;
+border-bottom:#b0d8f1 solid thin;
+font-family:Arial, Helvetica, sans-serif;
+font-size:12px;
+font-weight:normal;
+text-align:center;
+color:#232323;
+line-height:1.5em;
+    }
+   .grid-view tr.normal_2
+{
+   	background-color: #FFFFFF;
+	height: 20px;
+	vertical-align: middle;
+	/*background-image:url(images_BlueFancy/grid_Row_1_bit.gif);*/
+background-repeat:repeat-x;
+background-position:top;
+border-left:#5E5E5E solid thin;
+border-right:#5E5E5E solid thin;
+border-bottom:#5E5E5E solid thin;
+font-family:Arial, Helvetica, sans-serif;
+font-size:12px;
+font-weight:normal;
+text-align:center;
+color:#232323;
+line-height:1.5em;
+    } 
+    
+    
+    
+.grid-view tr.alternate
+{
+background-color: #FFFFFF;
+height: 20px;
+vertical-align: middle;
+background-image:url(images_BlueFancy/grid_Row_2_bit.gif);
+background-repeat:repeat-x;
+background-position:top;
+border-left:#b0d8f1 solid thin;
+border-right:#b0d8f1 solid thin;
+border-bottom:#b0d8f1 solid thin;
+font-family:Arial, Helvetica, sans-serif;
+font-size:12px;
+font-weight:normal;
+color:#232323;
+text-align:center;
+line-height:1.5em;
+}
+
+.grid-view tr.normal:hover, .grid-view tr.alternate:hover
+{
+	color: #232323;
+	text-align: center;
+	font-family:Arial, Helvetica, sans-serif;
+    font-size:12px;
+    font-weight:bold;
+    text-align:center;
+}
+
+ td.column_style_left
+        {
+            line-height:1.5em;
+            border-left: #b0d8f1 solid thin; 
+            text-align:left;
+            padding-left:18px;
+            padding-right:18px;
+           
+        }
+              
+        
+        .print_btn
+        {
+            border-style: none;
+            border-color: inherit;
+            border-width: medium;
+            background: url(images_BlueFancy/print_Butt.png) no-repeat;
+            text-indent: -9999px;
+            overflow: hidden;
+            text-transform: uppercase;
+            cursor: pointer;
+        }

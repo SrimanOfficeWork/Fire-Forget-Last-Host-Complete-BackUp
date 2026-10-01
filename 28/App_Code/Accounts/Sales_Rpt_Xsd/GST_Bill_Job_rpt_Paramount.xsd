@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="GST_Bill_Job_rpt_Paramount" targetNamespace="http://tempuri.org/GST_Bill_Job_rpt_Paramount.xsd" xmlns:mstns="http://tempuri.org/GST_Bill_Job_rpt_Paramount.xsd" xmlns="http://tempuri.org/GST_Bill_Job_rpt_Paramount.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="GST_Bill_Job_rpt_Paramount" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="HOME">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IMP_EXP" type="xs:string" minOccurs="0" />
+              <xs:element name="BILL_INV_NO" type="xs:string" minOccurs="0" />
+              <xs:element name="BILL_INV_DATE" type="xs:string" minOccurs="0" />
+              <xs:element name="PARTY_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="PARTY_ADDRESS" type="xs:string" minOccurs="0" />
+              <xs:element name="GSTN_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="STATE_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="REMARKS" type="xs:string" minOccurs="0" />
+              <xs:element name="ACKNO" type="xs:string" minOccurs="0" />
+              <xs:element name="IRN_NO" type="xs:string" minOccurs="0" />
+              <xs:element name="ACKDT" type="xs:string" minOccurs="0" />
+              <xs:element name="HSS_CODE" type="xs:string" minOccurs="0" />
+              <xs:element name="ACC_HEAD" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="GENERAL">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="JOBNO_PS" type="xs:string" minOccurs="0" />
+              <xs:element name="FILE_REF_NO" type="xs:string" minOccurs="0" />
+              <xs:element name="TR_MODE" type="xs:string" minOccurs="0" />
+              <xs:element name="CONTAINER_TYPE" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="IGM">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IGM_HBL_NO_DATE" type="xs:string" minOccurs="0" />
+              <xs:element name="IGM_MBL_NO_DATE" type="xs:string" minOccurs="0" />
+              <xs:element name="IGM_NOOFPACKAGE" type="xs:string" minOccurs="0" />
+              <xs:element name="IGM_GROSSWEIGHT" type="xs:string" minOccurs="0" />
+              <xs:element name="IGM_NETWEIGHT" type="xs:string" minOccurs="0" />
+              <xs:element name="IGM_FLIGHTNO_VESSELNO" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ITEM">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CIF_PMV_VALUE" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="INVOICE">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="INVOICE_NO_DATE" msdata:Caption="INVOICE_NO" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="BE_SB">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="BE_SB_DATE" msdata:Caption="BE_SB_NO" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="CHARGE">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Id" type="xs:string" minOccurs="0" />
+              <xs:element name="Charge_Name" type="xs:string" minOccurs="0" />
+              <xs:element name="HSN_Code" type="xs:string" minOccurs="0" />
+              <xs:element name="Non_tax" type="xs:string" minOccurs="0" />
+              <xs:element name="Tax_12" type="xs:string" minOccurs="0" />
+              <xs:element name="Tax_18" type="xs:string" minOccurs="0" />
+              <xs:element name="AMOUNT" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="CHARGE_TOTAL">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Re_Imp" type="xs:string" minOccurs="0" />
+              <xs:element name="Total_12" type="xs:string" minOccurs="0" />
+              <xs:element name="Total_18" type="xs:string" minOccurs="0" />
+              <xs:element name="Amt" type="xs:string" minOccurs="0" />
+              <xs:element name="AMT_Word" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TAX_DETAIL">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="HSN_CODE" type="xs:string" minOccurs="0" />
+              <xs:element name="Tax_Amt" type="xs:string" minOccurs="0" />
+              <xs:element name="CGST_Rate" type="xs:string" minOccurs="0" />
+              <xs:element name="CGST_AMT" type="xs:string" minOccurs="0" />
+              <xs:element name="SGST_Rate" type="xs:string" minOccurs="0" />
+              <xs:element name="SGST_AMT" type="xs:string" minOccurs="0" />
+              <xs:element name="Row_Total" type="xs:string" minOccurs="0" />
+              <xs:element name="IGST_RATE" type="xs:string" minOccurs="0" />
+              <xs:element name="IGST_AMT" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TAX_TOTAL">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Tax_Amt" type="xs:string" minOccurs="0" />
+              <xs:element name="CGST_AMT" type="xs:string" minOccurs="0" />
+              <xs:element name="SGST_AMT" type="xs:string" minOccurs="0" />
+              <xs:element name="Row_Total" type="xs:string" minOccurs="0" />
+              <xs:element name="Tax_Amt_Words" type="xs:string" minOccurs="0" />
+              <xs:element name="IGST_AMT" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ITME_DESC">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CHARGE_DESC" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

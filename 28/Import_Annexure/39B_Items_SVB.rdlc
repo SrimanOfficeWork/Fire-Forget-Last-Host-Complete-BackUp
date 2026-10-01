@@ -1,0 +1,1778 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition">
+  <DataSources>
+    <DataSource Name="DataSet1">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>acab471e-20b4-4bd9-ba48-9bdccb882a3a</rd:DataSourceID>
+    </DataSource>
+    <DataSource Name="Import_Annexure_Rpt">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>eb2af9e9-4b51-4526-bbc1-e8b54411d56b</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="ITEM">
+      <Fields>
+        <Field Name="INVOICE_ID">
+          <DataField>INVOICE_ID</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+        <Field Name="JOBNO">
+          <DataField>JOBNO</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+        <Field Name="INVOICE_SLNO">
+          <DataField>INVOICE_SLNO</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+        <Field Name="INVOICE_NO">
+          <DataField>INVOICE_NO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="INVOICE_DATE">
+          <DataField>INVOICE_DATE</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="TERMS">
+          <DataField>TERMS</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="INVOICE_CURRENCY">
+          <DataField>INVOICE_CURRENCY</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="INVOICE_VALUE">
+          <DataField>INVOICE_VALUE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SUPPLIER_NAME">
+          <DataField>SUPPLIER_NAME</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SUPPLIER_ADDRESS">
+          <DataField>SUPPLIER_ADDRESS</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SUPPLIER_ADDRESS1">
+          <DataField>SUPPLIER_ADDRESS1</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SUPPLIER_ADDRESS2">
+          <DataField>SUPPLIER_ADDRESS2</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SUPPLIER_COUNTRY_NAME">
+          <DataField>SUPPLIER_COUNTRY_NAME</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SUPPLIER_COUNTRY_CODE">
+          <DataField>SUPPLIER_COUNTRY_CODE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SUPPLIER_COUNTRY_PINCODE">
+          <DataField>SUPPLIER_COUNTRY_PINCODE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SELLER_NAME">
+          <DataField>SELLER_NAME</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SELLER_ADDRESS">
+          <DataField>SELLER_ADDRESS</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SELLER_ADDRESS1">
+          <DataField>SELLER_ADDRESS1</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SELLER_ADDRESS2">
+          <DataField>SELLER_ADDRESS2</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SELLER_COUNTRY_NAME">
+          <DataField>SELLER_COUNTRY_NAME</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SELLER_COUNTRY_CODE">
+          <DataField>SELLER_COUNTRY_CODE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SELLERCOUNTRY_PINCODE">
+          <DataField>SELLERCOUNTRY_PINCODE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BROKER_NAME">
+          <DataField>BROKER_NAME</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BROKER_ADDRESS">
+          <DataField>BROKER_ADDRESS</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BROKER_ADDRESS1">
+          <DataField>BROKER_ADDRESS1</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BROKER_ADDRESS2">
+          <DataField>BROKER_ADDRESS2</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BROKER_COUNTRY_NAME">
+          <DataField>BROKER_COUNTRY_NAME</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BROKER_COUNTRY_CODE">
+          <DataField>BROKER_COUNTRY_CODE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BROKER_COUNTRY_PINCODE">
+          <DataField>BROKER_COUNTRY_PINCODE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MIS_CHARGES">
+          <DataField>MIS_CHARGES</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MIS_RATE">
+          <DataField>MIS_RATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MIS_CURRENCY">
+          <DataField>MIS_CURRENCY</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MIS_EXRATE">
+          <DataField>MIS_EXRATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MIS_AGENCY_CHARGES">
+          <DataField>MIS_AGENCY_CHARGES</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MIS_AGENCY_RATE">
+          <DataField>MIS_AGENCY_RATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MIS_AGENCY_CURRENCY">
+          <DataField>MIS_AGENCY_CURRENCY</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MIS_AGENCY_EXRATE">
+          <DataField>MIS_AGENCY_EXRATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MIS_DISCOUNT_CHARGES">
+          <DataField>MIS_DISCOUNT_CHARGES</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MIS_DISCOUNT_RATE">
+          <DataField>MIS_DISCOUNT_RATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MIS_DISCOUNT_CURRENCY">
+          <DataField>MIS_DISCOUNT_CURRENCY</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MIS_DISCOUNT_EXRATE">
+          <DataField>MIS_DISCOUNT_EXRATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MIS_DISCOUNT_REASON">
+          <DataField>MIS_DISCOUNT_REASON</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MIS_LOADING_CHARGES">
+          <DataField>MIS_LOADING_CHARGES</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MIS_LOADING_RATE">
+          <DataField>MIS_LOADING_RATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MIS_LOADING_CURRENCY">
+          <DataField>MIS_LOADING_CURRENCY</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MIS_LOADING_EXRATE">
+          <DataField>MIS_LOADING_EXRATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MIS_FREIGHT_CHARGES">
+          <DataField>MIS_FREIGHT_CHARGES</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MIS_FREIGHT_RATE">
+          <DataField>MIS_FREIGHT_RATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MIS_FREIGHT_CURRENCY">
+          <DataField>MIS_FREIGHT_CURRENCY</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MIS_FREIGHT_EXRATE">
+          <DataField>MIS_FREIGHT_EXRATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MIS_INSURANCE_CHARGES">
+          <DataField>MIS_INSURANCE_CHARGES</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MIS_INSURANCE_RATE">
+          <DataField>MIS_INSURANCE_RATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MIS_INSURANCE_CURRENCY">
+          <DataField>MIS_INSURANCE_CURRENCY</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MIS_INSURANCE_EXRATE">
+          <DataField>MIS_INSURANCE_EXRATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MIS_HIGHSEASALE_CHARGES">
+          <DataField>MIS_HIGHSEASALE_CHARGES</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MIS_HIGHSEASALE_RATE">
+          <DataField>MIS_HIGHSEASALE_RATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MIS_HIGHSEASALE_CURRENCY">
+          <DataField>MIS_HIGHSEASALE_CURRENCY</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MIS_HIGHSEASALE_EXRATE">
+          <DataField>MIS_HIGHSEASALE_EXRATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MIS_SINGLE_OR_MULITIPLE">
+          <DataField>MIS_SINGLE_OR_MULITIPLE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SVB_RELATION">
+          <DataField>SVB_RELATION</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SVB_REF_NO">
+          <DataField>SVB_REF_NO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SVB_REF_DATE">
+          <DataField>SVB_REF_DATE</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="SVB_CUSTOM_HOUSE">
+          <DataField>SVB_CUSTOM_HOUSE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SVB_LOADING_ON">
+          <DataField>SVB_LOADING_ON</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SVB_ASSESABLE_RATE">
+          <DataField>SVB_ASSESABLE_RATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SVB_DUTY_RATE">
+          <DataField>SVB_DUTY_RATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SVB_ASSESABLE_STATUS">
+          <DataField>SVB_ASSESABLE_STATUS</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SVB_DUTY_STATUS">
+          <DataField>SVB_DUTY_STATUS</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Invoice_Details">
+          <DataField>Invoice_Details</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="GREEN_CHANNEL">
+          <DataField>GREEN_CHANNEL</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SECTION48">
+          <DataField>SECTION48</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="KACHHA_BE">
+          <DataField>KACHHA_BE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FIRSTCHECK">
+          <DataField>FIRSTCHECK</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ITEM_ID">
+          <DataField>ITEM_ID</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+        <Field Name="JOBNO1">
+          <DataField>JOBNO1</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+        <Field Name="INVOICE_SLNO1">
+          <DataField>INVOICE_SLNO1</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+        <Field Name="INVOICE_NO1">
+          <DataField>INVOICE_NO1</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ITEM_SLNO">
+          <DataField>ITEM_SLNO</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+        <Field Name="ITEM_DESCRIPTION">
+          <DataField>ITEM_DESCRIPTION</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ITEM_QTY">
+          <DataField>ITEM_QTY</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ITEM_QTY_CODE">
+          <DataField>ITEM_QTY_CODE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ITEM_UNIT_PRICE">
+          <DataField>ITEM_UNIT_PRICE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ITEM_UNIT_CODE">
+          <DataField>ITEM_UNIT_CODE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ITEM_TOTAL_AMOUNT">
+          <DataField>ITEM_TOTAL_AMOUNT</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ITEM_AMOUNT_CODE">
+          <DataField>ITEM_AMOUNT_CODE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CTH_NO">
+          <DataField>CTH_NO</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+        <Field Name="SCHEME_CODE">
+          <DataField>SCHEME_CODE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SCHEME_NOTN">
+          <DataField>SCHEME_NOTN</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SCHEME_NOTN_SLNO">
+          <DataField>SCHEME_NOTN_SLNO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CTH_QTY1">
+          <DataField>CTH_QTY1</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CTH_QTY2">
+          <DataField>CTH_QTY2</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="GENEARL_DESCRIPTION">
+          <DataField>GENEARL_DESCRIPTION</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MANUFACTURER">
+          <DataField>MANUFACTURER</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BRAND">
+          <DataField>BRAND</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MODEL">
+          <DataField>MODEL</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="END_USE_OF_ITEM">
+          <DataField>END_USE_OF_ITEM</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="COUNTRY_OF_ORIGIN">
+          <DataField>COUNTRY_OF_ORIGIN</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ACCESSORIES">
+          <DataField>ACCESSORIES</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PREVIOUS_BE_NO">
+          <DataField>PREVIOUS_BE_NO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PREVIOUS_BE_DATE">
+          <DataField>PREVIOUS_BE_DATE</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="UNIT_PRICE">
+          <DataField>UNIT_PRICE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="UNIT_CODE">
+          <DataField>UNIT_CODE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CUSTOMS_HOUSE1">
+          <DataField>CUSTOMS_HOUSE1</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_RITC">
+          <DataField>PRODUCT_RITC</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_CTH">
+          <DataField>PRODUCT_CTH</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_BCD_NOTN">
+          <DataField>PRODUCT_BCD_NOTN</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_BCD_SLNO">
+          <DataField>PRODUCT_BCD_SLNO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_BCD_RATE">
+          <DataField>PRODUCT_BCD_RATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_BCD_SPL">
+          <DataField>PRODUCT_BCD_SPL</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_BCD_UNIT">
+          <DataField>PRODUCT_BCD_UNIT</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_BCD_SPL_TYPE">
+          <DataField>PRODUCT_BCD_SPL_TYPE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_ADDL_DUTY_NOTN">
+          <DataField>PRODUCT_ADDL_DUTY_NOTN</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_ADDL_DUTY_NOTN_SL">
+          <DataField>PRODUCT_ADDL_DUTY_NOTN_SL</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_EDU_CESS_NOTN">
+          <DataField>PRODUCT_EDU_CESS_NOTN</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_EDU_CESS_NOTN_SL">
+          <DataField>PRODUCT_EDU_CESS_NOTN_SL</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_EDU_CESS_RATE">
+          <DataField>PRODUCT_EDU_CESS_RATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_SEC_EDU_CESS_NOTN">
+          <DataField>PRODUCT_SEC_EDU_CESS_NOTN</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_SEC_EDU_CESS_NOTN_SL">
+          <DataField>PRODUCT_SEC_EDU_CESS_NOTN_SL</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_SEC_EDU_CESS_RATE">
+          <DataField>PRODUCT_SEC_EDU_CESS_RATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_NCD_NOTN">
+          <DataField>PRODUCT_NCD_NOTN</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_NCD_SLNO">
+          <DataField>PRODUCT_NCD_SLNO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_NCD_RATE">
+          <DataField>PRODUCT_NCD_RATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_NCD_SPL">
+          <DataField>PRODUCT_NCD_SPL</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_NCD_UNIT">
+          <DataField>PRODUCT_NCD_UNIT</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_NCD_SPL_TYPE">
+          <DataField>PRODUCT_NCD_SPL_TYPE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_AGGREGATE_DUTY_NOTN">
+          <DataField>PRODUCT_AGGREGATE_DUTY_NOTN</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_AGGREGATE_DUTY_NOTN_SL">
+          <DataField>PRODUCT_AGGREGATE_DUTY_NOTN_SL</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_AGGREGATE_DUTY_NOTN_RATE">
+          <DataField>PRODUCT_AGGREGATE_DUTY_NOTN_RATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_SAFEGUARD_NOTN">
+          <DataField>PRODUCT_SAFEGUARD_NOTN</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_SAFEGUARD_SLNO">
+          <DataField>PRODUCT_SAFEGUARD_SLNO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_SAFEGUARD_RATE">
+          <DataField>PRODUCT_SAFEGUARD_RATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_SAFEGUARD_SPL">
+          <DataField>PRODUCT_SAFEGUARD_SPL</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_SAFEGUARD_UNIT">
+          <DataField>PRODUCT_SAFEGUARD_UNIT</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_SAFEGUARD_SPL_TYPE">
+          <DataField>PRODUCT_SAFEGUARD_SPL_TYPE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_CETH">
+          <DataField>PRODUCT_CETH</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_MRP_YN">
+          <DataField>PRODUCT_MRP_YN</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_MRP_SL_NO">
+          <DataField>PRODUCT_MRP_SL_NO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_MRP_AMOUNT">
+          <DataField>PRODUCT_MRP_AMOUNT</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_MRP_ABT_RATE">
+          <DataField>PRODUCT_MRP_ABT_RATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_CVD_NOTN">
+          <DataField>PRODUCT_CVD_NOTN</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_CVD_SLNO">
+          <DataField>PRODUCT_CVD_SLNO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_CVD_RATE">
+          <DataField>PRODUCT_CVD_RATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_CVD_SPL">
+          <DataField>PRODUCT_CVD_SPL</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_CVD_UNIT">
+          <DataField>PRODUCT_CVD_UNIT</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_CVD_SPL_TYPE">
+          <DataField>PRODUCT_CVD_SPL_TYPE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_CVD_EDU_CESS_RATE">
+          <DataField>PRODUCT_CVD_EDU_CESS_RATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_CVD_SEC_EDU_CESS_RATE">
+          <DataField>PRODUCT_CVD_SEC_EDU_CESS_RATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_ADDL5_SIA_NOTN">
+          <DataField>PRODUCT_ADDL5_SIA_NOTN</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_ADDL5_SIA_NOTN_SL">
+          <DataField>PRODUCT_ADDL5_SIA_NOTN_SL</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_ADDL5_SIA_RATE">
+          <DataField>PRODUCT_ADDL5_SIA_RATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_ADDL_GSI_NOTN">
+          <DataField>PRODUCT_ADDL_GSI_NOTN</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_ADDL_GSI_SLNO">
+          <DataField>PRODUCT_ADDL_GSI_SLNO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_ADDL_GSI_RATE">
+          <DataField>PRODUCT_ADDL_GSI_RATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_ADDL_GSI_SPL">
+          <DataField>PRODUCT_ADDL_GSI_SPL</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_ADDL_GSI_UNIT">
+          <DataField>PRODUCT_ADDL_GSI_UNIT</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_ADDL_GSI_SPL_TYPE">
+          <DataField>PRODUCT_ADDL_GSI_SPL_TYPE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_ADDL_SHEII_NOTN">
+          <DataField>PRODUCT_ADDL_SHEII_NOTN</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_ADDL_SHEII_SLNO">
+          <DataField>PRODUCT_ADDL_SHEII_SLNO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_ADDL_SHEII_RATE">
+          <DataField>PRODUCT_ADDL_SHEII_RATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_ADDL_SHEII_SPL">
+          <DataField>PRODUCT_ADDL_SHEII_SPL</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_ADDL_SHEII_UNIT">
+          <DataField>PRODUCT_ADDL_SHEII_UNIT</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_ADDL_SHEII_TYPE">
+          <DataField>PRODUCT_ADDL_SHEII_TYPE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_ADDL_TTA_NOTN">
+          <DataField>PRODUCT_ADDL_TTA_NOTN</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_ADDL_TTA_SLNO">
+          <DataField>PRODUCT_ADDL_TTA_SLNO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_ADDL_TTA_RATE">
+          <DataField>PRODUCT_ADDL_TTA_RATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_ADDL_TTA_SPL">
+          <DataField>PRODUCT_ADDL_TTA_SPL</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_ADDL_TTA_UNIT">
+          <DataField>PRODUCT_ADDL_TTA_UNIT</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_ADDL_TTA_TYPE">
+          <DataField>PRODUCT_ADDL_TTA_TYPE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_ADDL_HEALTH_CESS_NOTN">
+          <DataField>PRODUCT_ADDL_HEALTH_CESS_NOTN</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_ADDL_HEALTH_CESS_SLNO">
+          <DataField>PRODUCT_ADDL_HEALTH_CESS_SLNO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_ADDL_HEALTH_CESS_RATE">
+          <DataField>PRODUCT_ADDL_HEALTH_CESS_RATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_ADDL_HEALTH_CESS_SPL">
+          <DataField>PRODUCT_ADDL_HEALTH_CESS_SPL</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_ADDL_HEALTH_CESS_UNIT">
+          <DataField>PRODUCT_ADDL_HEALTH_CESS_UNIT</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_ADDL_HEALTH_CESS_TYPE">
+          <DataField>PRODUCT_ADDL_HEALTH_CESS_TYPE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_CESS_NOTN">
+          <DataField>PRODUCT_CESS_NOTN</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_CESS_SLNO">
+          <DataField>PRODUCT_CESS_SLNO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_CESS_RATE">
+          <DataField>PRODUCT_CESS_RATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_CESS_SPL">
+          <DataField>PRODUCT_CESS_SPL</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_CESS_UNIT">
+          <DataField>PRODUCT_CESS_UNIT</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_CESS_TYPE">
+          <DataField>PRODUCT_CESS_TYPE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ANTI_DUMPING_NOTN">
+          <DataField>ANTI_DUMPING_NOTN</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ANTI_DUMPING_NOTN_SLNO">
+          <DataField>ANTI_DUMPING_NOTN_SLNO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CTH_SLNO">
+          <DataField>CTH_SLNO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CTH_SUPPLIER_SLNO">
+          <DataField>CTH_SUPPLIER_SLNO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CTH_QTY">
+          <DataField>CTH_QTY</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="IGM_WORKING_PERIOD">
+          <DataField>IGM_WORKING_PERIOD</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="MIS_CHARGES_">
+          <DataField>MIS_CHARGES_</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="INVOICE_EXRATE">
+          <DataField>INVOICE_EXRATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ASSESABLE_VALUE">
+          <DataField>ASSESABLE_VALUE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ADDTIONAL_DUTY">
+          <DataField>ADDTIONAL_DUTY</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CVD_TOTAL">
+          <DataField>CVD_TOTAL</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CEC_TOTAL">
+          <DataField>CEC_TOTAL</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CHEC_TOTAL">
+          <DataField>CHEC_TOTAL</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ADDLTIONAL_DUTY_TOTAL">
+          <DataField>ADDLTIONAL_DUTY_TOTAL</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TOTAL_ITEM_DUTY">
+          <DataField>TOTAL_ITEM_DUTY</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="BASIC_DUTY_TOTAL">
+          <DataField>BASIC_DUTY_TOTAL</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NUMBERTOWORDS">
+          <DataField>NUMBERTOWORDS</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ASSESSABLE_TOTAL">
+          <DataField>ASSESSABLE_TOTAL</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ITEM_TOTAL">
+          <DataField>ITEM_TOTAL</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="mytotal">
+          <DataField>mytotal</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SCHEME">
+          <DataField>SCHEME</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="OTHER_PURCHASE_ORDER">
+          <DataField>OTHER_PURCHASE_ORDER</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="OTHER_PURCHASE_ORDER_DATE">
+          <DataField>OTHER_PURCHASE_ORDER_DATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="OTHER_CONTRACT_NO">
+          <DataField>OTHER_CONTRACT_NO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="OTHER_CONTRACT_DATE">
+          <DataField>OTHER_CONTRACT_DATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="OTHER_LOC_NO">
+          <DataField>OTHER_LOC_NO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="OTHER_LOC_DATE">
+          <DataField>OTHER_LOC_DATE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="OTHER_NATURE_OF_TRANSACTION">
+          <DataField>OTHER_NATURE_OF_TRANSACTION</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="OTHER_TERMS_OF_PAYMENT">
+          <DataField>OTHER_TERMS_OF_PAYMENT</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="OTHER_CONDITIONS">
+          <DataField>OTHER_CONDITIONS</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="OTHER_VALUATION_METHOD">
+          <DataField>OTHER_VALUATION_METHOD</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TICK_SALE">
+          <DataField>TICK_SALE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TICK_COSIGNMENT">
+          <DataField>TICK_COSIGNMENT</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TICK_HIRE">
+          <DataField>TICK_HIRE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TICK_RENT">
+          <DataField>TICK_RENT</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TICK_REPLACEMENT">
+          <DataField>TICK_REPLACEMENT</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TICK_GIFT">
+          <DataField>TICK_GIFT</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TICK_SAMPLE">
+          <DataField>TICK_SAMPLE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TICK_OTHER_FREECOST">
+          <DataField>TICK_OTHER_FREECOST</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TICK_LC">
+          <DataField>TICK_LC</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TICK_FOC">
+          <DataField>TICK_FOC</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TICK_SD">
+          <DataField>TICK_SD</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TICK_DP">
+          <DataField>TICK_DP</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TICK_OTHER">
+          <DataField>TICK_OTHER</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TICK_FOB">
+          <DataField>TICK_FOB</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TICK_CI">
+          <DataField>TICK_CI</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TICK_CF">
+          <DataField>TICK_CF</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TICK_CIF">
+          <DataField>TICK_CIF</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TICK_SVBLOAD_ASSESSABLE">
+          <DataField>TICK_SVBLOAD_ASSESSABLE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TICK_SVBLOAD_DUTY">
+          <DataField>TICK_SVBLOAD_DUTY</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TICK_SVBLOAD_BOTH">
+          <DataField>TICK_SVBLOAD_BOTH</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_TARIFF_NOTN">
+          <DataField>PRODUCT_TARIFF_NOTN</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_TARIFF_SLNO">
+          <DataField>PRODUCT_TARIFF_SLNO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_TARIFF_QTY">
+          <DataField>PRODUCT_TARIFF_QTY</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_SAPTA_NOTN">
+          <DataField>PRODUCT_SAPTA_NOTN</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_SAPTA_SLNO">
+          <DataField>PRODUCT_SAPTA_SLNO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="WHETHER_REIMPORT">
+          <DataField>WHETHER_REIMPORT</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PRODUCT_TARIFF_AMOUNT">
+          <DataField>PRODUCT_TARIFF_AMOUNT</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>Import_Annexure_Rpt</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <rd:DataSetInfo>
+        <rd:DataSetName>Import_Annexure_Rpt</rd:DataSetName>
+        <rd:SchemaPath>E:\Projects\E_RoyalImpex\MARKS_NOS_e_RoyalImpex\ERoyalimpex_Branchwise_Job\App_Code\Report\Import\Import_Annexure_Rpt.xsd</rd:SchemaPath>
+        <rd:TableName>INVOICE_DETAILS1</rd:TableName>
+        <rd:TableAdapterFillMethod />
+        <rd:TableAdapterGetDataMethod />
+        <rd:TableAdapterName />
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
+  <Body>
+    <ReportItems>
+      <Rectangle Name="Rectangle1">
+        <ReportItems>
+          <Tablix Name="Tablix2">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>0.49318in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.0352in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.08559in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.15927in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.2012in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.36006in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.73021in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.09479in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.12604in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.67813in</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.3734in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox5">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontFamily>Verdana</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox5</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>DimGray</Color>
+                              <Style>None</Style>
+                            </Border>
+                            <LeftBorder>
+                              <Style>Solid</Style>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Style>Solid</Style>
+                            </RightBorder>
+                            <VerticalAlign>Top</VerticalAlign>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="SVB_REF_NO">
+                          <CanGrow>true</CanGrow>
+                          <CanShrink>true</CanShrink>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!SVB_REF_NO.Value</Value>
+                                  <Style>
+                                    <FontFamily>Verdana</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>SVB_REF_NO</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>DimGray</Color>
+                              <Style>None</Style>
+                            </Border>
+                            <RightBorder>
+                              <Style>Solid</Style>
+                            </RightBorder>
+                            <VerticalAlign>Top</VerticalAlign>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="SVB_REF_DATE">
+                          <CanGrow>true</CanGrow>
+                          <CanShrink>true</CanShrink>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!SVB_REF_DATE.Value</Value>
+                                  <Style>
+                                    <FontFamily>Verdana</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>SVB_REF_DATE</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>DimGray</Color>
+                              <Style>None</Style>
+                            </Border>
+                            <RightBorder>
+                              <Style>Solid</Style>
+                            </RightBorder>
+                            <VerticalAlign>Top</VerticalAlign>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="SVB_CUSTOM_HOUSE">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!SVB_CUSTOM_HOUSE.Value</Value>
+                                  <Style>
+                                    <FontStyle>Normal</FontStyle>
+                                    <FontFamily>Verdana</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Normal</FontWeight>
+                                    <TextDecoration>None</TextDecoration>
+                                    <Color>#000000</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>SVB_CUSTOM_HOUSE</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>DimGray</Color>
+                              <Style>None</Style>
+                            </Border>
+                            <RightBorder>
+                              <Style>Solid</Style>
+                            </RightBorder>
+                            <VerticalAlign>Top</VerticalAlign>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="SVB_ASSESABLE_RATE">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!SVB_ASSESABLE_RATE.Value</Value>
+                                  <Style>
+                                    <FontFamily>Verdana</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>SVB_ASSESABLE_RATE</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>DimGray</Color>
+                              <Style>None</Style>
+                            </Border>
+                            <RightBorder>
+                              <Style>Solid</Style>
+                            </RightBorder>
+                            <VerticalAlign>Top</VerticalAlign>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="SVB_DUTY_RATE">
+                          <CanGrow>true</CanGrow>
+                          <CanShrink>true</CanShrink>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!SVB_DUTY_RATE.Value</Value>
+                                  <Style>
+                                    <FontFamily>Verdana</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>SVB_DUTY_RATE</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>DimGray</Color>
+                              <Style>None</Style>
+                            </Border>
+                            <RightBorder>
+                              <Style>Solid</Style>
+                            </RightBorder>
+                            <VerticalAlign>Top</VerticalAlign>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox16">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!SVB_ASSESABLE_STATUS.Value +System.Environment.NewLine+Fields!SVB_DUTY_STATUS.Value</Value>
+                                  <Style>
+                                    <FontFamily>Verdana</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox16</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>DimGray</Color>
+                              <Style>None</Style>
+                            </Border>
+                            <RightBorder>
+                              <Style>Solid</Style>
+                            </RightBorder>
+                            <VerticalAlign>Top</VerticalAlign>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontStyle>Normal</FontStyle>
+                                    <FontFamily>Verdana</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Normal</FontWeight>
+                                    <TextDecoration>None</TextDecoration>
+                                    <Color>#000000</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox1</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>DimGray</Color>
+                              <Style>None</Style>
+                            </Border>
+                            <RightBorder>
+                              <Style>Solid</Style>
+                            </RightBorder>
+                            <VerticalAlign>Top</VerticalAlign>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox2">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontStyle>Normal</FontStyle>
+                                    <FontFamily>Verdana</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Normal</FontWeight>
+                                    <TextDecoration>None</TextDecoration>
+                                    <Color>#000000</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox2</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>DimGray</Color>
+                              <Style>None</Style>
+                            </Border>
+                            <RightBorder>
+                              <Style>Solid</Style>
+                            </RightBorder>
+                            <VerticalAlign>Top</VerticalAlign>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox3">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontStyle>Normal</FontStyle>
+                                    <FontFamily>Verdana</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Normal</FontWeight>
+                                    <TextDecoration>None</TextDecoration>
+                                    <Color>#000000</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox3</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>DimGray</Color>
+                              <Style>None</Style>
+                            </Border>
+                            <RightBorder>
+                              <Style>Solid</Style>
+                            </RightBorder>
+                            <VerticalAlign>Top</VerticalAlign>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <Group Name="Details1" />
+                  <TablixMembers>
+                    <TablixMember>
+                      <Visibility>
+                        <Hidden>=IIF(First(Fields!INVOICE_NO.Value, "ITEM") Is Nothing, True, False)</Hidden>
+                      </Visibility>
+                    </TablixMember>
+                  </TablixMembers>
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>ITEM</DataSetName>
+            <Filters>
+              <Filter>
+                <FilterExpression>=CStr(Fields!INVOICE_SLNO.Value)</FilterExpression>
+                <Operator>Equal</Operator>
+                <FilterValues>
+                  <FilterValue>=CStr(Parameters!INVOICE_SLNO.Value)</FilterValue>
+                </FilterValues>
+              </Filter>
+            </Filters>
+            <Height>0.3734in</Height>
+            <Width>10.96367in</Width>
+            <Visibility>
+              <Hidden>=IIF(First(CStr(Fields!SVB_REF_NO.Value), "ITEM") Is Nothing, True, False)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <FontFamily>Courier New</FontFamily>
+              <VerticalAlign>Top</VerticalAlign>
+            </Style>
+          </Tablix>
+        </ReportItems>
+        <Height>0.4359in</Height>
+        <Width>10.96367in</Width>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Rectangle>
+    </ReportItems>
+    <Height>0.4359in</Height>
+    <Style />
+  </Body>
+  <ReportParameters>
+    <ReportParameter Name="INVOICE_SLNO">
+      <DataType>Integer</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+  <Code>Public Function ConvertNumberToWord(nNumber As Long) As String
+
+	Dim CurrentNumber As Long = nNumber
+
+	Dim sReturn As String = ""
+
+	If CurrentNumber &gt;= 1000000000 Then
+
+		sReturn = sReturn &amp; " " &amp; GetWord(CurrentNumber \ 1000000000, "Billion")
+
+
+		CurrentNumber = CurrentNumber Mod 1000000000
+	End If
+
+	If CurrentNumber &gt;= 10000000 Then
+
+		sReturn = sReturn &amp; " " &amp; GetWord(CurrentNumber \ 10000000, "Crore")
+
+
+		CurrentNumber = CurrentNumber Mod 10000000
+	End If
+	If CurrentNumber &gt;= 100000 Then
+
+		sReturn = sReturn &amp; " " &amp; GetWord(CurrentNumber \ 100000, "Lakhs")
+
+
+		CurrentNumber = CurrentNumber Mod 100000
+	End If
+
+	If CurrentNumber &gt;= 1000 Then
+
+		sReturn = sReturn &amp; " " &amp; GetWord(CurrentNumber \ 1000, "Thousand")
+
+
+		CurrentNumber = CurrentNumber Mod 1000
+	End If
+
+	If CurrentNumber &gt;= 100 Then
+
+		sReturn = sReturn &amp; " " &amp; GetWord(CurrentNumber \ 100, "Hundred")
+
+
+		CurrentNumber = CurrentNumber Mod 100
+	End If
+
+	If CurrentNumber &gt;= 20 Then
+
+		sReturn = sReturn &amp; " " &amp; GetWord(CurrentNumber, "")
+
+
+		CurrentNumber = CurrentNumber Mod 10
+
+	ElseIf CurrentNumber &gt; 0 Then
+
+		sReturn = sReturn &amp; " " &amp; GetWord(CurrentNumber, "")
+
+
+		CurrentNumber = 0
+	End If
+If sReturn= "" Then
+
+		sReturn ="Zero"
+
+Else
+	sReturn=sReturn.Replace(" ", " ").Trim()&amp; " Only"
+
+End If
+Return sReturn
+
+End Function
+
+Private Function GetWord(nNumber As Long, sPrefix As String) As String
+
+	Dim nCurrentNumber As Long = nNumber
+
+	Dim sReturn As String = ""
+
+	While nCurrentNumber &gt; 0
+
+		If nCurrentNumber &gt; 100 Then
+
+			sReturn = sReturn &amp; " " &amp; GetWord(nCurrentNumber \ 100, "Hundred")
+
+
+			nCurrentNumber = nCurrentNumber Mod 100
+
+		ElseIf nCurrentNumber &gt; 20 Then
+
+			sReturn = sReturn &amp; " " &amp; GetTwentyWord(nCurrentNumber \ 10)
+
+
+			nCurrentNumber = nCurrentNumber Mod 10
+		Else
+
+
+			sReturn = sReturn &amp; " " &amp; GetLessThanTwentyWord(nCurrentNumber)
+
+
+			nCurrentNumber = 0
+
+		End If
+	End While
+
+	sReturn = sReturn &amp; " " &amp; sPrefix
+
+	Return sReturn
+
+End Function
+
+Private Function GetTwentyWord(nNumber As Long) As String
+
+	Dim sReturn As String = ""
+
+	Select Case nNumber
+
+		Case 2
+
+			sReturn = "Twenty"
+
+			Exit Select
+
+		Case 3
+
+			sReturn = "Thirty"
+
+			Exit Select
+
+		Case 4
+
+			sReturn = "Forty"
+
+			Exit Select
+
+		Case 5
+
+			sReturn = "Fifty"
+
+			Exit Select
+
+		Case 6
+
+			sReturn = "Sixty"
+
+			Exit Select
+
+		Case 7
+
+			sReturn = "Seventy"
+
+			Exit Select
+
+		Case 8
+
+			sReturn = "Eighty"
+
+			Exit Select
+
+		Case 9
+
+			sReturn = "Ninety"
+
+			Exit Select
+
+	End Select
+
+	Return sReturn
+
+End Function
+
+Private Function GetLessThanTwentyWord(nNumber As Long) As String
+
+	Dim sReturn As String = "and"
+
+	Select Case nNumber
+
+		Case 1
+
+			sReturn = "One"
+
+			Exit Select
+
+		Case 2
+
+			sReturn = "Two"
+
+			Exit Select
+
+		Case 3
+
+			sReturn = "Three"
+
+			Exit Select
+
+		Case 4
+
+			sReturn = "Four"
+
+			Exit Select
+
+		Case 5
+
+			sReturn = "Five"
+
+			Exit Select
+
+		Case 6
+
+			sReturn = "Six"
+
+			Exit Select
+
+		Case 7
+
+			sReturn = "Seven"
+
+			Exit Select
+
+		Case 8
+
+			sReturn = "Eight"
+
+			Exit Select
+
+		Case 9
+
+			sReturn = "Nine"
+
+			Exit Select
+
+		Case 10
+
+			sReturn = "Ten"
+
+			Exit Select
+
+		Case 11
+
+			sReturn = "Eleven"
+
+			Exit Select
+
+		Case 12
+
+			sReturn = "Twelve"
+
+			Exit Select
+
+		Case 13
+
+			sReturn = "Thirteen"
+
+			Exit Select
+
+		Case 14
+
+			sReturn = "Forteen"
+
+			Exit Select
+
+		Case 15
+
+			sReturn = "Fifteen"
+
+			Exit Select
+
+		Case 16
+
+			sReturn = "Sixteen"
+
+			Exit Select
+
+		Case 17
+
+			sReturn = "Seventeen"
+
+			Exit Select
+
+		Case 18
+
+			sReturn = "Eighteen"
+
+			Exit Select
+
+		Case 19
+
+			sReturn = "Nineteen"
+
+			Exit Select
+
+	End Select
+
+	Return sReturn
+
+End Function
+
+
+	
+</Code>
+  <Width>10.96367in</Width>
+  <Page>
+    <PageHeight>11.69in</PageHeight>
+    <PageWidth>8.27in</PageWidth>
+    <InteractiveHeight>0in</InteractiveHeight>
+    <InteractiveWidth>8.27in</InteractiveWidth>
+    <Style>
+      <Border>
+        <Color>Gray</Color>
+        <Style>None</Style>
+      </Border>
+    </Style>
+  </Page>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportID>0acf321c-e140-487a-87f8-37f97d6dca47</rd:ReportID>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+</Report>

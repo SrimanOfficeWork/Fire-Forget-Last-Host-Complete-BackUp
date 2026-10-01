@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+	<soap:Body><Exp_Data xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <API_JOB_REF_NO>MUN/FCLIMP/24/12/00003</API_JOB_REF_NO>
+  <IECNO>8930387</IECNO>
+  <BRANCH_SL_NO>0</BRANCH_SL_NO>
+  <ADCODE>0</ADCODE>
+  <TRANSPORT_MODE>FCL</TRANSPORT_MODE>
+  <PORT_OF_FILLING_CODE />
+  <STATE_CODE>24</STATE_CODE>
+  <GSTN_REGISTRATION_NO />
+  <FLAG>S</FLAG>
+  <API_USER_ID>ADMIN</API_USER_ID>
+  <PORT_OF_ORIGIN_CODE>INMUN</PORT_OF_ORIGIN_CODE>
+  <PORT_OF_SHIPMENT_CODE>INMUN</PORT_OF_SHIPMENT_CODE>
+  <COUNTRY_ORGIN>INDIA</COUNTRY_ORGIN>
+  <COUNTRY_SHIPMENT>INDIA</COUNTRY_SHIPMENT>
+</Exp_Data>	</soap:Body>
+</soap:Envelope>

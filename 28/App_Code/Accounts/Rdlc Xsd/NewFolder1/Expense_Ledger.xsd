@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Expense_Ledger" targetNamespace="http://tempuri.org/Expense_Ledger.xsd" xmlns:mstns="http://tempuri.org/Expense_Ledger.xsd" xmlns="http://tempuri.org/Expense_Ledger.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="Expense_Ledger" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="Expense_Ledger" msprop:Generator_DataSetName="Expense_Ledger">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Expense_Ledger" msprop:Generator_TableClassName="Expense_LedgerDataTable" msprop:Generator_TableVarName="tableExpense_Ledger" msprop:Generator_TablePropName="_Expense_Ledger" msprop:Generator_RowDeletingName="Expense_LedgerRowDeleting" msprop:Generator_RowChangingName="Expense_LedgerRowChanging" msprop:Generator_RowEvHandlerName="Expense_LedgerRowChangeEventHandler" msprop:Generator_RowDeletedName="Expense_LedgerRowDeleted" msprop:Generator_UserTableName="Expense_Ledger" msprop:Generator_RowChangedName="Expense_LedgerRowChanged" msprop:Generator_RowEvArgName="Expense_LedgerRowChangeEvent" msprop:Generator_RowClassName="Expense_LedgerRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Id" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:string" minOccurs="0" />
+              <xs:element name="VOUCHER_NUMBER" msprop:Generator_ColumnVarNameInTable="columnVOUCHER_NUMBER" msprop:Generator_ColumnPropNameInRow="VOUCHER_NUMBER" msprop:Generator_ColumnPropNameInTable="VOUCHER_NUMBERColumn" msprop:Generator_UserColumnName="VOUCHER_NUMBER" type="xs:string" minOccurs="0" />
+              <xs:element name="PARTY_NAME" msprop:Generator_ColumnVarNameInTable="columnPARTY_NAME" msprop:Generator_ColumnPropNameInRow="PARTY_NAME" msprop:Generator_ColumnPropNameInTable="PARTY_NAMEColumn" msprop:Generator_UserColumnName="PARTY_NAME" type="xs:string" minOccurs="0" />
+              <xs:element name="JOB_NUMBER" msprop:Generator_ColumnVarNameInTable="columnJOB_NUMBER" msprop:Generator_ColumnPropNameInRow="JOB_NUMBER" msprop:Generator_ColumnPropNameInTable="JOB_NUMBERColumn" msprop:Generator_UserColumnName="JOB_NUMBER" type="xs:string" minOccurs="0" />
+              <xs:element name="LINE_NUMBER" msprop:Generator_ColumnVarNameInTable="columnLINE_NUMBER" msprop:Generator_ColumnPropNameInRow="LINE_NUMBER" msprop:Generator_ColumnPropNameInTable="LINE_NUMBERColumn" msprop:Generator_UserColumnName="LINE_NUMBER" type="xs:string" minOccurs="0" />
+              <xs:element name="EXPENSE_FOR" msprop:Generator_ColumnVarNameInTable="columnEXPENSE_FOR" msprop:Generator_ColumnPropNameInRow="EXPENSE_FOR" msprop:Generator_ColumnPropNameInTable="EXPENSE_FORColumn" msprop:Generator_UserColumnName="EXPENSE_FOR" type="xs:string" minOccurs="0" />
+              <xs:element name="AMOUNT" msprop:Generator_ColumnVarNameInTable="columnAMOUNT" msprop:Generator_ColumnPropNameInRow="AMOUNT" msprop:Generator_ColumnPropNameInTable="AMOUNTColumn" msprop:Generator_UserColumnName="AMOUNT" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

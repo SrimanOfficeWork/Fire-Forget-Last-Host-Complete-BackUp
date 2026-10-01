@@ -1,0 +1,345 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Export_Goods_Registration" targetNamespace="http://tempuri.org/Export_Goods_Registration.xsd" xmlns:mstns="http://tempuri.org/Export_Goods_Registration.xsd" xmlns="http://tempuri.org/Export_Goods_Registration.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="ERoyalImpexConnectionString1" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ERoyalImpexConnectionString1 (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.ERoyalImpexConnectionString1.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="Export_Goods_Registration" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="Export_Goods_Registration" msprop:Generator_UserDSName="Export_Goods_Registration">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="EXPORT_GOODS_REG_AIR" msprop:Generator_TableClassName="EXPORT_GOODS_REG_AIRDataTable" msprop:Generator_TableVarName="tableEXPORT_GOODS_REG_AIR" msprop:Generator_RowChangedName="EXPORT_GOODS_REG_AIRRowChanged" msprop:Generator_TablePropName="EXPORT_GOODS_REG_AIR" msprop:Generator_RowDeletingName="EXPORT_GOODS_REG_AIRRowDeleting" msprop:Generator_RowChangingName="EXPORT_GOODS_REG_AIRRowChanging" msprop:Generator_RowEvHandlerName="EXPORT_GOODS_REG_AIRRowChangeEventHandler" msprop:Generator_RowDeletedName="EXPORT_GOODS_REG_AIRRowDeleted" msprop:Generator_RowClassName="EXPORT_GOODS_REG_AIRRow" msprop:Generator_UserTableName="EXPORT_GOODS_REG_AIR" msprop:Generator_RowEvArgName="EXPORT_GOODS_REG_AIRRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="GOODS_SB_NO" msprop:Generator_ColumnVarNameInTable="columnGOODS_SB_NO" msprop:Generator_ColumnPropNameInRow="GOODS_SB_NO" msprop:Generator_ColumnPropNameInTable="GOODS_SB_NOColumn" msprop:Generator_UserColumnName="GOODS_SB_NO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="7" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GOODS_SB_DATE" msprop:Generator_ColumnVarNameInTable="columnGOODS_SB_DATE" msprop:Generator_ColumnPropNameInRow="GOODS_SB_DATE" msprop:Generator_ColumnPropNameInTable="GOODS_SB_DATEColumn" msprop:Generator_UserColumnName="GOODS_SB_DATE" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="GOODS_SEAL_TYPE" msprop:Generator_ColumnVarNameInTable="columnGOODS_SEAL_TYPE" msprop:Generator_ColumnPropNameInRow="GOODS_SEAL_TYPE" msprop:Generator_ColumnPropNameInTable="GOODS_SEAL_TYPEColumn" msprop:Generator_UserColumnName="GOODS_SEAL_TYPE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="40" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GOODS_NATURE_OF_CARGO" msprop:Generator_ColumnVarNameInTable="columnGOODS_NATURE_OF_CARGO" msprop:Generator_ColumnPropNameInRow="GOODS_NATURE_OF_CARGO" msprop:Generator_ColumnPropNameInTable="GOODS_NATURE_OF_CARGOColumn" msprop:Generator_UserColumnName="GOODS_NATURE_OF_CARGO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GOODS_GROSS_WEIGHT" msprop:Generator_ColumnVarNameInTable="columnGOODS_GROSS_WEIGHT" msprop:Generator_ColumnPropNameInRow="GOODS_GROSS_WEIGHT" msprop:Generator_ColumnPropNameInTable="GOODS_GROSS_WEIGHTColumn" msprop:Generator_UserColumnName="GOODS_GROSS_WEIGHT" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GOODS_NET_WEIGHT" msprop:Generator_ColumnVarNameInTable="columnGOODS_NET_WEIGHT" msprop:Generator_ColumnPropNameInRow="GOODS_NET_WEIGHT" msprop:Generator_ColumnPropNameInTable="GOODS_NET_WEIGHTColumn" msprop:Generator_UserColumnName="GOODS_NET_WEIGHT" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GOODS_UNIT_MESUR" msprop:Generator_ColumnVarNameInTable="columnGOODS_UNIT_MESUR" msprop:Generator_ColumnPropNameInRow="GOODS_UNIT_MESUR" msprop:Generator_ColumnPropNameInTable="GOODS_UNIT_MESURColumn" msprop:Generator_UserColumnName="GOODS_UNIT_MESUR" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GOODS_TOTAL_PACKAGES" msprop:Generator_ColumnVarNameInTable="columnGOODS_TOTAL_PACKAGES" msprop:Generator_ColumnPropNameInRow="GOODS_TOTAL_PACKAGES" msprop:Generator_ColumnPropNameInTable="GOODS_TOTAL_PACKAGESColumn" msprop:Generator_UserColumnName="GOODS_TOTAL_PACKAGES" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GOODS_MARKS_NOS" msprop:Generator_ColumnVarNameInTable="columnGOODS_MARKS_NOS" msprop:Generator_ColumnPropNameInRow="GOODS_MARKS_NOS" msprop:Generator_ColumnPropNameInTable="GOODS_MARKS_NOSColumn" msprop:Generator_UserColumnName="GOODS_MARKS_NOS" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="300" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GOODS_MAWB_NO" msprop:Generator_ColumnVarNameInTable="columnGOODS_MAWB_NO" msprop:Generator_ColumnPropNameInRow="GOODS_MAWB_NO" msprop:Generator_ColumnPropNameInTable="GOODS_MAWB_NOColumn" msprop:Generator_UserColumnName="GOODS_MAWB_NO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="11" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GOODS_MAWB_DATE" msprop:Generator_ColumnVarNameInTable="columnGOODS_MAWB_DATE" msprop:Generator_ColumnPropNameInRow="GOODS_MAWB_DATE" msprop:Generator_ColumnPropNameInTable="GOODS_MAWB_DATEColumn" msprop:Generator_UserColumnName="GOODS_MAWB_DATE" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="GOODS_HAWB_NO" msprop:Generator_ColumnVarNameInTable="columnGOODS_HAWB_NO" msprop:Generator_ColumnPropNameInRow="GOODS_HAWB_NO" msprop:Generator_ColumnPropNameInTable="GOODS_HAWB_NOColumn" msprop:Generator_UserColumnName="GOODS_HAWB_NO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="11" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GOODS_HAWB_DATE" msprop:Generator_ColumnVarNameInTable="columnGOODS_HAWB_DATE" msprop:Generator_ColumnPropNameInRow="GOODS_HAWB_DATE" msprop:Generator_ColumnPropNameInTable="GOODS_HAWB_DATEColumn" msprop:Generator_UserColumnName="GOODS_HAWB_DATE" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="GOODS_CUSTOM_HOUSE" msprop:Generator_ColumnVarNameInTable="columnGOODS_CUSTOM_HOUSE" msprop:Generator_ColumnPropNameInRow="GOODS_CUSTOM_HOUSE" msprop:Generator_ColumnPropNameInTable="GOODS_CUSTOM_HOUSEColumn" msprop:Generator_UserColumnName="GOODS_CUSTOM_HOUSE" type="xs:string" minOccurs="0" />
+              <xs:element name="GOODS_LOOSE_PACKETS" msprop:Generator_ColumnVarNameInTable="columnGOODS_LOOSE_PACKETS" msprop:Generator_ColumnPropNameInRow="GOODS_LOOSE_PACKETS" msprop:Generator_ColumnPropNameInTable="GOODS_LOOSE_PACKETSColumn" msprop:Generator_UserColumnName="GOODS_LOOSE_PACKETS" type="xs:string" minOccurs="0" />
+              <xs:element name="GOODS_ROTATION_NO" msprop:Generator_ColumnVarNameInTable="columnGOODS_ROTATION_NO" msprop:Generator_ColumnPropNameInRow="GOODS_ROTATION_NO" msprop:Generator_ColumnPropNameInTable="GOODS_ROTATION_NOColumn" msprop:Generator_UserColumnName="GOODS_ROTATION_NO" type="xs:string" minOccurs="0" />
+              <xs:element name="GOODS_ROTATION_DATE" msprop:Generator_ColumnVarNameInTable="columnGOODS_ROTATION_DATE" msprop:Generator_ColumnPropNameInRow="GOODS_ROTATION_DATE" msprop:Generator_ColumnPropNameInTable="GOODS_ROTATION_DATEColumn" msprop:Generator_UserColumnName="GOODS_ROTATION_DATE" type="xs:string" minOccurs="0" />
+              <xs:element name="GOODS_NO_OF_CONTAINERS" msprop:Generator_ColumnVarNameInTable="columnGOODS_NO_OF_CONTAINERS" msprop:Generator_ColumnPropNameInRow="GOODS_NO_OF_CONTAINERS" msprop:Generator_ColumnPropNameInTable="GOODS_NO_OF_CONTAINERSColumn" msprop:Generator_UserColumnName="GOODS_NO_OF_CONTAINERS" type="xs:string" minOccurs="0" />
+              <xs:element name="GOODS_TRANSHIPPER_CODE" msprop:Generator_ColumnVarNameInTable="columnGOODS_TRANSHIPPER_CODE" msprop:Generator_ColumnPropNameInRow="GOODS_TRANSHIPPER_CODE" msprop:Generator_ColumnPropNameInTable="GOODS_TRANSHIPPER_CODEColumn" msprop:Generator_UserColumnName="GOODS_TRANSHIPPER_CODE" type="xs:string" minOccurs="0" />
+              <xs:element name="GOODS_GATEWAY_PORT" msprop:Generator_ColumnVarNameInTable="columnGOODS_GATEWAY_PORT" msprop:Generator_ColumnPropNameInRow="GOODS_GATEWAY_PORT" msprop:Generator_ColumnPropNameInTable="GOODS_GATEWAY_PORTColumn" msprop:Generator_UserColumnName="GOODS_GATEWAY_PORT" type="xs:string" minOccurs="0" />
+              <xs:element name="GOODS_WAREHOUSECODE" msprop:Generator_ColumnVarNameInTable="columnGOODS_WAREHOUSECODE" msprop:Generator_ColumnPropNameInRow="GOODS_WAREHOUSECODE" msprop:Generator_ColumnPropNameInTable="GOODS_WAREHOUSECODEColumn" msprop:Generator_UserColumnName="GOODS_WAREHOUSECODE" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EXPORT_GOODS_REG_EOU" msprop:Generator_TableClassName="EXPORT_GOODS_REG_EOUDataTable" msprop:Generator_TableVarName="tableEXPORT_GOODS_REG_EOU" msprop:Generator_RowChangedName="EXPORT_GOODS_REG_EOURowChanged" msprop:Generator_TablePropName="EXPORT_GOODS_REG_EOU" msprop:Generator_RowDeletingName="EXPORT_GOODS_REG_EOURowDeleting" msprop:Generator_RowChangingName="EXPORT_GOODS_REG_EOURowChanging" msprop:Generator_RowEvHandlerName="EXPORT_GOODS_REG_EOURowChangeEventHandler" msprop:Generator_RowDeletedName="EXPORT_GOODS_REG_EOURowDeleted" msprop:Generator_RowClassName="EXPORT_GOODS_REG_EOURow" msprop:Generator_UserTableName="EXPORT_GOODS_REG_EOU" msprop:Generator_RowEvArgName="EXPORT_GOODS_REG_EOURowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="GOODS_EOU_EXAM_DATE" msprop:Generator_ColumnVarNameInTable="columnGOODS_EOU_EXAM_DATE" msprop:Generator_ColumnPropNameInRow="GOODS_EOU_EXAM_DATE" msprop:Generator_ColumnPropNameInTable="GOODS_EOU_EXAM_DATEColumn" msprop:Generator_UserColumnName="GOODS_EOU_EXAM_DATE" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="GOODS_EOU_EXAM_OFFICER" msprop:Generator_ColumnVarNameInTable="columnGOODS_EOU_EXAM_OFFICER" msprop:Generator_ColumnPropNameInRow="GOODS_EOU_EXAM_OFFICER" msprop:Generator_ColumnPropNameInTable="GOODS_EOU_EXAM_OFFICERColumn" msprop:Generator_UserColumnName="GOODS_EOU_EXAM_OFFICER" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GOODS_EOU_EXAM_DESIGN" msprop:Generator_ColumnVarNameInTable="columnGOODS_EOU_EXAM_DESIGN" msprop:Generator_ColumnPropNameInRow="GOODS_EOU_EXAM_DESIGN" msprop:Generator_ColumnPropNameInTable="GOODS_EOU_EXAM_DESIGNColumn" msprop:Generator_UserColumnName="GOODS_EOU_EXAM_DESIGN" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GOODS_EOU_SUPER_NAME" msprop:Generator_ColumnVarNameInTable="columnGOODS_EOU_SUPER_NAME" msprop:Generator_ColumnPropNameInRow="GOODS_EOU_SUPER_NAME" msprop:Generator_ColumnPropNameInTable="GOODS_EOU_SUPER_NAMEColumn" msprop:Generator_UserColumnName="GOODS_EOU_SUPER_NAME" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GOODS_EOU_SUPER_DESIGN" msprop:Generator_ColumnVarNameInTable="columnGOODS_EOU_SUPER_DESIGN" msprop:Generator_ColumnPropNameInRow="GOODS_EOU_SUPER_DESIGN" msprop:Generator_ColumnPropNameInTable="GOODS_EOU_SUPER_DESIGNColumn" msprop:Generator_UserColumnName="GOODS_EOU_SUPER_DESIGN" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GOODS_EOU_COMMISSION_RATE" msprop:Generator_ColumnVarNameInTable="columnGOODS_EOU_COMMISSION_RATE" msprop:Generator_ColumnPropNameInRow="GOODS_EOU_COMMISSION_RATE" msprop:Generator_ColumnPropNameInTable="GOODS_EOU_COMMISSION_RATEColumn" msprop:Generator_UserColumnName="GOODS_EOU_COMMISSION_RATE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GOODS_EOU_DIVISION" msprop:Generator_ColumnVarNameInTable="columnGOODS_EOU_DIVISION" msprop:Generator_ColumnPropNameInRow="GOODS_EOU_DIVISION" msprop:Generator_ColumnPropNameInTable="GOODS_EOU_DIVISIONColumn" msprop:Generator_UserColumnName="GOODS_EOU_DIVISION" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GOODS_EOU_DRAWN" msprop:Generator_ColumnVarNameInTable="columnGOODS_EOU_DRAWN" msprop:Generator_ColumnPropNameInRow="GOODS_EOU_DRAWN" msprop:Generator_ColumnPropNameInTable="GOODS_EOU_DRAWNColumn" msprop:Generator_UserColumnName="GOODS_EOU_DRAWN" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GOODS_EOU_RANGE" msprop:Generator_ColumnVarNameInTable="columnGOODS_EOU_RANGE" msprop:Generator_ColumnPropNameInRow="GOODS_EOU_RANGE" msprop:Generator_ColumnPropNameInTable="GOODS_EOU_RANGEColumn" msprop:Generator_UserColumnName="GOODS_EOU_RANGE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GOODS_EOU_SEAL_NO" msprop:Generator_ColumnVarNameInTable="columnGOODS_EOU_SEAL_NO" msprop:Generator_ColumnPropNameInRow="GOODS_EOU_SEAL_NO" msprop:Generator_ColumnPropNameInTable="GOODS_EOU_SEAL_NOColumn" msprop:Generator_UserColumnName="GOODS_EOU_SEAL_NO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="80" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GOODS_EOU_DECLARED_VALUE_VERI" msprop:Generator_ColumnVarNameInTable="columnGOODS_EOU_DECLARED_VALUE_VERI" msprop:Generator_ColumnPropNameInRow="GOODS_EOU_DECLARED_VALUE_VERI" msprop:Generator_ColumnPropNameInTable="GOODS_EOU_DECLARED_VALUE_VERIColumn" msprop:Generator_UserColumnName="GOODS_EOU_DECLARED_VALUE_VERI" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EXPORT_GOODS_REG_PACKAGE" msprop:Generator_TableClassName="EXPORT_GOODS_REG_PACKAGEDataTable" msprop:Generator_TableVarName="tableEXPORT_GOODS_REG_PACKAGE" msprop:Generator_RowChangedName="EXPORT_GOODS_REG_PACKAGERowChanged" msprop:Generator_TablePropName="EXPORT_GOODS_REG_PACKAGE" msprop:Generator_RowDeletingName="EXPORT_GOODS_REG_PACKAGERowDeleting" msprop:Generator_RowChangingName="EXPORT_GOODS_REG_PACKAGERowChanging" msprop:Generator_RowEvHandlerName="EXPORT_GOODS_REG_PACKAGERowChangeEventHandler" msprop:Generator_RowDeletedName="EXPORT_GOODS_REG_PACKAGERowDeleted" msprop:Generator_RowClassName="EXPORT_GOODS_REG_PACKAGERow" msprop:Generator_UserTableName="EXPORT_GOODS_REG_PACKAGE" msprop:Generator_RowEvArgName="EXPORT_GOODS_REG_PACKAGERowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="GOODS_PACK_GROUP" msprop:Generator_ColumnVarNameInTable="columnGOODS_PACK_GROUP" msprop:Generator_ColumnPropNameInRow="GOODS_PACK_GROUP" msprop:Generator_ColumnPropNameInTable="GOODS_PACK_GROUPColumn" msprop:Generator_UserColumnName="GOODS_PACK_GROUP" type="xs:long" minOccurs="0" />
+              <xs:element name="GOODS_PACK_FROM" msprop:Generator_ColumnVarNameInTable="columnGOODS_PACK_FROM" msprop:Generator_ColumnPropNameInRow="GOODS_PACK_FROM" msprop:Generator_ColumnPropNameInTable="GOODS_PACK_FROMColumn" msprop:Generator_UserColumnName="GOODS_PACK_FROM" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GOODS_PACK_TO" msprop:Generator_ColumnVarNameInTable="columnGOODS_PACK_TO" msprop:Generator_ColumnPropNameInRow="GOODS_PACK_TO" msprop:Generator_ColumnPropNameInTable="GOODS_PACK_TOColumn" msprop:Generator_UserColumnName="GOODS_PACK_TO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GOODS_PACK_PACKAGETYPE" msprop:Generator_ColumnVarNameInTable="columnGOODS_PACK_PACKAGETYPE" msprop:Generator_ColumnPropNameInRow="GOODS_PACK_PACKAGETYPE" msprop:Generator_ColumnPropNameInTable="GOODS_PACK_PACKAGETYPEColumn" msprop:Generator_UserColumnName="GOODS_PACK_PACKAGETYPE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GOODS_PACK_MODE" msprop:Generator_ColumnVarNameInTable="columnGOODS_PACK_MODE" msprop:Generator_ColumnPropNameInRow="GOODS_PACK_MODE" msprop:Generator_ColumnPropNameInTable="GOODS_PACK_MODEColumn" msprop:Generator_UserColumnName="GOODS_PACK_MODE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GOODS_PACK_FROM_DESC" msprop:Generator_ColumnVarNameInTable="columnGOODS_PACK_FROM_DESC" msprop:Generator_ColumnPropNameInRow="GOODS_PACK_FROM_DESC" msprop:Generator_ColumnPropNameInTable="GOODS_PACK_FROM_DESCColumn" msprop:Generator_UserColumnName="GOODS_PACK_FROM_DESC" type="xs:string" minOccurs="0" />
+              <xs:element name="GOODS_PACK_TO_DESC" msprop:Generator_ColumnVarNameInTable="columnGOODS_PACK_TO_DESC" msprop:Generator_ColumnPropNameInRow="GOODS_PACK_TO_DESC" msprop:Generator_ColumnPropNameInTable="GOODS_PACK_TO_DESCColumn" msprop:Generator_UserColumnName="GOODS_PACK_TO_DESC" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EXPORT_GOODS_REG_SEA_CONTAINER" msprop:Generator_TableClassName="EXPORT_GOODS_REG_SEA_CONTAINERDataTable" msprop:Generator_TableVarName="tableEXPORT_GOODS_REG_SEA_CONTAINER" msprop:Generator_RowChangedName="EXPORT_GOODS_REG_SEA_CONTAINERRowChanged" msprop:Generator_TablePropName="EXPORT_GOODS_REG_SEA_CONTAINER" msprop:Generator_RowDeletingName="EXPORT_GOODS_REG_SEA_CONTAINERRowDeleting" msprop:Generator_RowChangingName="EXPORT_GOODS_REG_SEA_CONTAINERRowChanging" msprop:Generator_RowEvHandlerName="EXPORT_GOODS_REG_SEA_CONTAINERRowChangeEventHandler" msprop:Generator_RowDeletedName="EXPORT_GOODS_REG_SEA_CONTAINERRowDeleted" msprop:Generator_RowClassName="EXPORT_GOODS_REG_SEA_CONTAINERRow" msprop:Generator_UserTableName="EXPORT_GOODS_REG_SEA_CONTAINER" msprop:Generator_RowEvArgName="EXPORT_GOODS_REG_SEA_CONTAINERRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="GOODS_SEA_CON_CONTAINERNO" msprop:Generator_ColumnVarNameInTable="columnGOODS_SEA_CON_CONTAINERNO" msprop:Generator_ColumnPropNameInRow="GOODS_SEA_CON_CONTAINERNO" msprop:Generator_ColumnPropNameInTable="GOODS_SEA_CON_CONTAINERNOColumn" msprop:Generator_UserColumnName="GOODS_SEA_CON_CONTAINERNO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="11" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GOODS_SEA_CON_SIZE" msprop:Generator_ColumnVarNameInTable="columnGOODS_SEA_CON_SIZE" msprop:Generator_ColumnPropNameInRow="GOODS_SEA_CON_SIZE" msprop:Generator_ColumnPropNameInTable="GOODS_SEA_CON_SIZEColumn" msprop:Generator_UserColumnName="GOODS_SEA_CON_SIZE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GOODS_SEA_CON_TYPE" msprop:Generator_ColumnVarNameInTable="columnGOODS_SEA_CON_TYPE" msprop:Generator_ColumnPropNameInRow="GOODS_SEA_CON_TYPE" msprop:Generator_ColumnPropNameInTable="GOODS_SEA_CON_TYPEColumn" msprop:Generator_UserColumnName="GOODS_SEA_CON_TYPE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GOODS_SEA_CON_EXCISE_SEALNO" msprop:Generator_ColumnVarNameInTable="columnGOODS_SEA_CON_EXCISE_SEALNO" msprop:Generator_ColumnPropNameInRow="GOODS_SEA_CON_EXCISE_SEALNO" msprop:Generator_ColumnPropNameInTable="GOODS_SEA_CON_EXCISE_SEALNOColumn" msprop:Generator_UserColumnName="GOODS_SEA_CON_EXCISE_SEALNO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GOODS_SEA_CON_SEAL_DATE" msprop:Generator_ColumnVarNameInTable="columnGOODS_SEA_CON_SEAL_DATE" msprop:Generator_ColumnPropNameInRow="GOODS_SEA_CON_SEAL_DATE" msprop:Generator_ColumnPropNameInTable="GOODS_SEA_CON_SEAL_DATEColumn" msprop:Generator_UserColumnName="GOODS_SEA_CON_SEAL_DATE" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="GOODS_SEA_CON_SEALTYPE_INDICATOR" msprop:Generator_ColumnVarNameInTable="columnGOODS_SEA_CON_SEALTYPE_INDICATOR" msprop:Generator_ColumnPropNameInRow="GOODS_SEA_CON_SEALTYPE_INDICATOR" msprop:Generator_ColumnPropNameInTable="GOODS_SEA_CON_SEALTYPE_INDICATORColumn" msprop:Generator_UserColumnName="GOODS_SEA_CON_SEALTYPE_INDICATOR" type="xs:string" minOccurs="0" />
+              <xs:element name="GOODS_SEA_CON_SEAL_DEVICEID" msprop:Generator_ColumnVarNameInTable="columnGOODS_SEA_CON_SEAL_DEVICEID" msprop:Generator_ColumnPropNameInRow="GOODS_SEA_CON_SEAL_DEVICEID" msprop:Generator_ColumnPropNameInTable="GOODS_SEA_CON_SEAL_DEVICEIDColumn" msprop:Generator_UserColumnName="GOODS_SEA_CON_SEAL_DEVICEID" type="xs:string" minOccurs="0" />
+              <xs:element name="GOODS_SEA_CON_DOC_TYPE" msprop:Generator_ColumnVarNameInTable="columnGOODS_SEA_CON_DOC_TYPE" msprop:Generator_ColumnPropNameInRow="GOODS_SEA_CON_DOC_TYPE" msprop:Generator_ColumnPropNameInTable="GOODS_SEA_CON_DOC_TYPEColumn" msprop:Generator_UserColumnName="GOODS_SEA_CON_DOC_TYPE" type="xs:string" minOccurs="0" />
+              <xs:element name="GOODS_SEA_CON_DOC_NUMBER" msprop:Generator_ColumnVarNameInTable="columnGOODS_SEA_CON_DOC_NUMBER" msprop:Generator_ColumnPropNameInRow="GOODS_SEA_CON_DOC_NUMBER" msprop:Generator_ColumnPropNameInTable="GOODS_SEA_CON_DOC_NUMBERColumn" msprop:Generator_UserColumnName="GOODS_SEA_CON_DOC_NUMBER" type="xs:string" minOccurs="0" />
+              <xs:element name="GOODS_SEA_CON_EQMT_TYPE" msprop:Generator_ColumnVarNameInTable="columnGOODS_SEA_CON_EQMT_TYPE" msprop:Generator_ColumnPropNameInRow="GOODS_SEA_CON_EQMT_TYPE" msprop:Generator_ColumnPropNameInTable="GOODS_SEA_CON_EQMT_TYPEColumn" msprop:Generator_UserColumnName="GOODS_SEA_CON_EQMT_TYPE" type="xs:string" minOccurs="0" />
+              <xs:element name="GOODS_SEA_CON_EQMT_QTY" msprop:Generator_ColumnVarNameInTable="columnGOODS_SEA_CON_EQMT_QTY" msprop:Generator_ColumnPropNameInRow="GOODS_SEA_CON_EQMT_QTY" msprop:Generator_ColumnPropNameInTable="GOODS_SEA_CON_EQMT_QTYColumn" msprop:Generator_UserColumnName="GOODS_SEA_CON_EQMT_QTY" type="xs:string" minOccurs="0" />
+              <xs:element name="GOODS_SEA_CON_EQMT_QTY_CODE" msprop:Generator_ColumnVarNameInTable="columnGOODS_SEA_CON_EQMT_QTY_CODE" msprop:Generator_ColumnPropNameInRow="GOODS_SEA_CON_EQMT_QTY_CODE" msprop:Generator_ColumnPropNameInTable="GOODS_SEA_CON_EQMT_QTY_CODEColumn" msprop:Generator_UserColumnName="GOODS_SEA_CON_EQMT_QTY_CODE" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EXPORT_GOODS_REG_AR4" msprop:Generator_TableClassName="EXPORT_GOODS_REG_AR4DataTable" msprop:Generator_TableVarName="tableEXPORT_GOODS_REG_AR4" msprop:Generator_RowChangedName="EXPORT_GOODS_REG_AR4RowChanged" msprop:Generator_TablePropName="EXPORT_GOODS_REG_AR4" msprop:Generator_RowDeletingName="EXPORT_GOODS_REG_AR4RowDeleting" msprop:Generator_RowChangingName="EXPORT_GOODS_REG_AR4RowChanging" msprop:Generator_RowEvHandlerName="EXPORT_GOODS_REG_AR4RowChangeEventHandler" msprop:Generator_RowDeletedName="EXPORT_GOODS_REG_AR4RowDeleted" msprop:Generator_RowClassName="EXPORT_GOODS_REG_AR4Row" msprop:Generator_UserTableName="EXPORT_GOODS_REG_AR4" msprop:Generator_RowEvArgName="EXPORT_GOODS_REG_AR4RowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="GOODS_AR4_NO" msprop:Generator_ColumnVarNameInTable="columnGOODS_AR4_NO" msprop:Generator_ColumnPropNameInRow="GOODS_AR4_NO" msprop:Generator_ColumnPropNameInTable="GOODS_AR4_NOColumn" msprop:Generator_UserColumnName="GOODS_AR4_NO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="17" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GOODS_AR4_DATE" msprop:Generator_ColumnVarNameInTable="columnGOODS_AR4_DATE" msprop:Generator_ColumnPropNameInRow="GOODS_AR4_DATE" msprop:Generator_ColumnPropNameInTable="GOODS_AR4_DATEColumn" msprop:Generator_UserColumnName="GOODS_AR4_DATE" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="GOODS_AR4_COMMISSION_RATE" msprop:Generator_ColumnVarNameInTable="columnGOODS_AR4_COMMISSION_RATE" msprop:Generator_ColumnPropNameInRow="GOODS_AR4_COMMISSION_RATE" msprop:Generator_ColumnPropNameInTable="GOODS_AR4_COMMISSION_RATEColumn" msprop:Generator_UserColumnName="GOODS_AR4_COMMISSION_RATE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GOODS_AR4_DIVISION" msprop:Generator_ColumnVarNameInTable="columnGOODS_AR4_DIVISION" msprop:Generator_ColumnPropNameInRow="GOODS_AR4_DIVISION" msprop:Generator_ColumnPropNameInTable="GOODS_AR4_DIVISIONColumn" msprop:Generator_UserColumnName="GOODS_AR4_DIVISION" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GOODS_AR4_RANGE" msprop:Generator_ColumnVarNameInTable="columnGOODS_AR4_RANGE" msprop:Generator_ColumnPropNameInRow="GOODS_AR4_RANGE" msprop:Generator_ColumnPropNameInTable="GOODS_AR4_RANGEColumn" msprop:Generator_UserColumnName="GOODS_AR4_RANGE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GOODS_AR4_REMARKS" msprop:Generator_ColumnVarNameInTable="columnGOODS_AR4_REMARKS" msprop:Generator_ColumnPropNameInRow="GOODS_AR4_REMARKS" msprop:Generator_ColumnPropNameInTable="GOODS_AR4_REMARKSColumn" msprop:Generator_UserColumnName="GOODS_AR4_REMARKS" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ITEM_SLNO" msprop:Generator_ColumnVarNameInTable="columnITEM_SLNO" msprop:Generator_ColumnPropNameInRow="ITEM_SLNO" msprop:Generator_ColumnPropNameInTable="ITEM_SLNOColumn" msprop:Generator_UserColumnName="ITEM_SLNO" type="xs:string" minOccurs="0" />
+              <xs:element name="INVOICE_SLNO" msprop:Generator_ColumnVarNameInTable="columnINVOICE_SLNO" msprop:Generator_ColumnPropNameInRow="INVOICE_SLNO" msprop:Generator_ColumnPropNameInTable="INVOICE_SLNOColumn" msprop:Generator_UserColumnName="INVOICE_SLNO" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EXPORT_GOODS_REG_INVOICE" msprop:Generator_TableClassName="EXPORT_GOODS_REG_INVOICEDataTable" msprop:Generator_TableVarName="tableEXPORT_GOODS_REG_INVOICE" msprop:Generator_RowChangedName="EXPORT_GOODS_REG_INVOICERowChanged" msprop:Generator_TablePropName="EXPORT_GOODS_REG_INVOICE" msprop:Generator_RowDeletingName="EXPORT_GOODS_REG_INVOICERowDeleting" msprop:Generator_RowChangingName="EXPORT_GOODS_REG_INVOICERowChanging" msprop:Generator_RowEvHandlerName="EXPORT_GOODS_REG_INVOICERowChangeEventHandler" msprop:Generator_RowDeletedName="EXPORT_GOODS_REG_INVOICERowDeleted" msprop:Generator_RowClassName="EXPORT_GOODS_REG_INVOICERow" msprop:Generator_UserTableName="EXPORT_GOODS_REG_INVOICE" msprop:Generator_RowEvArgName="EXPORT_GOODS_REG_INVOICERowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TERMS" msprop:Generator_ColumnVarNameInTable="columnTERMS" msprop:Generator_ColumnPropNameInRow="TERMS" msprop:Generator_ColumnPropNameInTable="TERMSColumn" msprop:Generator_UserColumnName="TERMS" type="xs:string" minOccurs="0" />
+              <xs:element name="WHEATHER_UNIT_PRICE" msprop:Generator_ColumnVarNameInTable="columnWHEATHER_UNIT_PRICE" msprop:Generator_ColumnPropNameInRow="WHEATHER_UNIT_PRICE" msprop:Generator_ColumnPropNameInTable="WHEATHER_UNIT_PRICEColumn" msprop:Generator_UserColumnName="WHEATHER_UNIT_PRICE" type="xs:string" minOccurs="0" />
+              <xs:element name="INVOICE_SLNO" msprop:Generator_ColumnVarNameInTable="columnINVOICE_SLNO" msprop:Generator_ColumnPropNameInRow="INVOICE_SLNO" msprop:Generator_ColumnPropNameInTable="INVOICE_SLNOColumn" msprop:Generator_UserColumnName="INVOICE_SLNO" type="xs:string" minOccurs="0" />
+              <xs:element name="INVOICE_NO" msprop:Generator_ColumnVarNameInTable="columnINVOICE_NO" msprop:Generator_ColumnPropNameInRow="INVOICE_NO" msprop:Generator_ColumnPropNameInTable="INVOICE_NOColumn" msprop:Generator_UserColumnName="INVOICE_NO" type="xs:string" minOccurs="0" />
+              <xs:element name="INVOICE_DATE" msprop:Generator_ColumnVarNameInTable="columnINVOICE_DATE" msprop:Generator_ColumnPropNameInRow="INVOICE_DATE" msprop:Generator_ColumnPropNameInTable="INVOICE_DATEColumn" msprop:Generator_UserColumnName="INVOICE_DATE" type="xs:string" minOccurs="0" />
+              <xs:element name="FREIGHT_CHARGES" msprop:Generator_ColumnVarNameInTable="columnFREIGHT_CHARGES" msprop:Generator_ColumnPropNameInRow="FREIGHT_CHARGES" msprop:Generator_ColumnPropNameInTable="FREIGHT_CHARGESColumn" msprop:Generator_UserColumnName="FREIGHT_CHARGES" type="xs:string" minOccurs="0" />
+              <xs:element name="FREIGHT_CURRENCY" msprop:Generator_ColumnVarNameInTable="columnFREIGHT_CURRENCY" msprop:Generator_ColumnPropNameInRow="FREIGHT_CURRENCY" msprop:Generator_ColumnPropNameInTable="FREIGHT_CURRENCYColumn" msprop:Generator_UserColumnName="FREIGHT_CURRENCY" type="xs:string" minOccurs="0" />
+              <xs:element name="INSURANCE_CHARGES" msprop:Generator_ColumnVarNameInTable="columnINSURANCE_CHARGES" msprop:Generator_ColumnPropNameInRow="INSURANCE_CHARGES" msprop:Generator_ColumnPropNameInTable="INSURANCE_CHARGESColumn" msprop:Generator_UserColumnName="INSURANCE_CHARGES" type="xs:string" minOccurs="0" />
+              <xs:element name="INSURANCE_CURRENCY" msprop:Generator_ColumnVarNameInTable="columnINSURANCE_CURRENCY" msprop:Generator_ColumnPropNameInRow="INSURANCE_CURRENCY" msprop:Generator_ColumnPropNameInTable="INSURANCE_CURRENCYColumn" msprop:Generator_UserColumnName="INSURANCE_CURRENCY" type="xs:string" minOccurs="0" />
+              <xs:element name="INSURANCE_RATE" msprop:Generator_ColumnVarNameInTable="columnINSURANCE_RATE" msprop:Generator_ColumnPropNameInRow="INSURANCE_RATE" msprop:Generator_ColumnPropNameInTable="INSURANCE_RATEColumn" msprop:Generator_UserColumnName="INSURANCE_RATE" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EXPORT_GOODS_DOCS" msprop:Generator_TableClassName="EXPORT_GOODS_DOCSDataTable" msprop:Generator_TableVarName="tableEXPORT_GOODS_DOCS" msprop:Generator_TablePropName="EXPORT_GOODS_DOCS" msprop:Generator_RowDeletingName="EXPORT_GOODS_DOCSRowDeleting" msprop:Generator_RowChangingName="EXPORT_GOODS_DOCSRowChanging" msprop:Generator_RowEvHandlerName="EXPORT_GOODS_DOCSRowChangeEventHandler" msprop:Generator_RowDeletedName="EXPORT_GOODS_DOCSRowDeleted" msprop:Generator_UserTableName="EXPORT_GOODS_DOCS" msprop:Generator_RowChangedName="EXPORT_GOODS_DOCSRowChanged" msprop:Generator_RowEvArgName="EXPORT_GOODS_DOCSRowChangeEvent" msprop:Generator_RowClassName="EXPORT_GOODS_DOCSRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="GOODS_DOCS_SERIAL_NO" msprop:Generator_ColumnVarNameInTable="columnGOODS_DOCS_SERIAL_NO" msprop:Generator_ColumnPropNameInRow="GOODS_DOCS_SERIAL_NO" msprop:Generator_ColumnPropNameInTable="GOODS_DOCS_SERIAL_NOColumn" msprop:Generator_UserColumnName="GOODS_DOCS_SERIAL_NO" type="xs:string" minOccurs="0" />
+              <xs:element name="GOODS_DOCS_NAME" msprop:Generator_ColumnVarNameInTable="columnGOODS_DOCS_NAME" msprop:Generator_ColumnPropNameInRow="GOODS_DOCS_NAME" msprop:Generator_ColumnPropNameInTable="GOODS_DOCS_NAMEColumn" msprop:Generator_UserColumnName="GOODS_DOCS_NAME" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EXPORT_GOODS_CONTAINER_PACKAGE" msprop:Generator_TableClassName="EXPORT_GOODS_CONTAINER_PACKAGEDataTable" msprop:Generator_TableVarName="tableEXPORT_GOODS_CONTAINER_PACKAGE" msprop:Generator_TablePropName="EXPORT_GOODS_CONTAINER_PACKAGE" msprop:Generator_RowDeletingName="EXPORT_GOODS_CONTAINER_PACKAGERowDeleting" msprop:Generator_RowChangingName="EXPORT_GOODS_CONTAINER_PACKAGERowChanging" msprop:Generator_RowEvHandlerName="EXPORT_GOODS_CONTAINER_PACKAGERowChangeEventHandler" msprop:Generator_RowDeletedName="EXPORT_GOODS_CONTAINER_PACKAGERowDeleted" msprop:Generator_UserTableName="EXPORT_GOODS_CONTAINER_PACKAGE" msprop:Generator_RowChangedName="EXPORT_GOODS_CONTAINER_PACKAGERowChanged" msprop:Generator_RowEvArgName="EXPORT_GOODS_CONTAINER_PACKAGERowChangeEvent" msprop:Generator_RowClassName="EXPORT_GOODS_CONTAINER_PACKAGERow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="GOODS_SEA_CON_EQMT_SERIAL_NO" msprop:Generator_ColumnVarNameInTable="columnGOODS_SEA_CON_EQMT_SERIAL_NO" msprop:Generator_ColumnPropNameInRow="GOODS_SEA_CON_EQMT_SERIAL_NO" msprop:Generator_ColumnPropNameInTable="GOODS_SEA_CON_EQMT_SERIAL_NOColumn" msprop:Generator_UserColumnName="GOODS_SEA_CON_EQMT_SERIAL_NO" type="xs:string" minOccurs="0" />
+              <xs:element name="GOODS_SEA_CON_EQMT_TYPE" msdata:Caption="DataColumn1" msprop:Generator_ColumnVarNameInTable="columnGOODS_SEA_CON_EQMT_TYPE" msprop:Generator_ColumnPropNameInRow="GOODS_SEA_CON_EQMT_TYPE" msprop:Generator_ColumnPropNameInTable="GOODS_SEA_CON_EQMT_TYPEColumn" msprop:Generator_UserColumnName="GOODS_SEA_CON_EQMT_TYPE" type="xs:string" minOccurs="0" />
+              <xs:element name="GOODS_SEA_CON_EQMT_ID" msdata:Caption="DataColumn2" msprop:Generator_ColumnVarNameInTable="columnGOODS_SEA_CON_EQMT_ID" msprop:Generator_ColumnPropNameInRow="GOODS_SEA_CON_EQMT_ID" msprop:Generator_ColumnPropNameInTable="GOODS_SEA_CON_EQMT_IDColumn" msprop:Generator_UserColumnName="GOODS_SEA_CON_EQMT_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="GOODS_SEA_CON_EQMT_LOC" msdata:Caption="DataColumn1" msprop:Generator_ColumnVarNameInTable="columnGOODS_SEA_CON_EQMT_LOC" msprop:Generator_ColumnPropNameInRow="GOODS_SEA_CON_EQMT_LOC" msprop:Generator_ColumnPropNameInTable="GOODS_SEA_CON_EQMT_LOCColumn" msprop:Generator_UserColumnName="GOODS_SEA_CON_EQMT_LOC" type="xs:string" minOccurs="0" />
+              <xs:element name="GOODS_SEA_CON_PCKG_FROM" msdata:Caption="DataColumn2" msprop:Generator_ColumnVarNameInTable="columnGOODS_SEA_CON_PCKG_FROM" msprop:Generator_ColumnPropNameInRow="GOODS_SEA_CON_PCKG_FROM" msprop:Generator_ColumnPropNameInTable="GOODS_SEA_CON_PCKG_FROMColumn" msprop:Generator_UserColumnName="GOODS_SEA_CON_PCKG_FROM" type="xs:string" minOccurs="0" />
+              <xs:element name="GOODS_SEA_CON_PCKG_TO" msdata:Caption="DataColumn1" msprop:Generator_ColumnVarNameInTable="columnGOODS_SEA_CON_PCKG_TO" msprop:Generator_ColumnPropNameInRow="GOODS_SEA_CON_PCKG_TO" msprop:Generator_ColumnPropNameInTable="GOODS_SEA_CON_PCKG_TOColumn" msprop:Generator_UserColumnName="GOODS_SEA_CON_PCKG_TO" type="xs:string" minOccurs="0" />
+              <xs:element name="GOODS_SEA_CON_PCKG_COUNT" msdata:Caption="DataColumn2" msprop:Generator_ColumnVarNameInTable="columnGOODS_SEA_CON_PCKG_COUNT" msprop:Generator_ColumnPropNameInRow="GOODS_SEA_CON_PCKG_COUNT" msprop:Generator_ColumnPropNameInTable="GOODS_SEA_CON_PCKG_COUNTColumn" msprop:Generator_UserColumnName="GOODS_SEA_CON_PCKG_COUNT" type="xs:string" minOccurs="0" />
+              <xs:element name="GOODS_SEA_CON_PCKG_UQC" msprop:Generator_ColumnVarNameInTable="columnGOODS_SEA_CON_PCKG_UQC" msprop:Generator_ColumnPropNameInRow="GOODS_SEA_CON_PCKG_UQC" msprop:Generator_ColumnPropNameInTable="GOODS_SEA_CON_PCKG_UQCColumn" msprop:Generator_UserColumnName="GOODS_SEA_CON_PCKG_UQC" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

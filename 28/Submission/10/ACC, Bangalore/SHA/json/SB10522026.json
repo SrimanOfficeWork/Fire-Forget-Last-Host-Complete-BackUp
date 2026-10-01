@@ -1,0 +1,293 @@
+{
+  "headerField": {
+    "senderID": "RETRE",
+    "receiverID": "INCOK1",
+    "indicator": "P",
+    "messageID": "CACHE01",
+    "sequenceOrControlNumber": "0105226",
+    "jobNumber": "1052",
+    "jobDate": "20260630",
+    "messageType": "F"
+  },
+  "master": {
+    "exchangeModel": [
+      {
+        "invoiceCurrencyCode": "INR",
+        "unitInRs": "1",
+        "rate": "1",
+        "whetherStandardCurrency": "Y"
+      },
+      {
+        "invoiceCurrencyCode": "120",
+        "unitInRs": "1",
+        "rate": "",
+        "whetherStandardCurrency": "Y"
+      }
+    ],
+    "infoType": [
+      {
+        "invoiceSerialNumber": "1",
+        "itemSerialNumber": "1",
+        "infoSrNo": "1",
+        "infoType": "CHR",
+        "infoQualifier": "GST"
+      },
+      {
+        "invoiceSerialNumber": "1",
+        "itemSerialNumber": "2",
+        "infoSrNo": "2",
+        "infoType": "CHR",
+        "infoQualifier": "GST"
+      },
+      {
+        "invoiceSerialNumber": "1",
+        "itemSerialNumber": "2",
+        "infoSrNo": "3",
+        "infoType": "CHR",
+        "infoQualifier": "STC",
+        "infoCode": "STC"
+      },
+      {
+        "invoiceSerialNumber": "1",
+        "itemSerialNumber": "2",
+        "infoSrNo": "4",
+        "infoType": "PNM",
+        "infoQualifier": "MPX",
+        "infoCode": "AAR"
+      }
+    ],
+    "invoiceModel": [
+      {
+        "invoiceSerialNumber": "1",
+        "actualInvoiceNo": "12DC78",
+        "invoiceDate": "20260412",
+        "invoiceCurrency": "INR",
+        "natureOfContract": "FOB",
+        "buyerName": "BUYER",
+        "buyerAddress1": "ADD1",
+        "buyerAddress2": "ADD2",
+        "buyerAddress3": "ADD3",
+        "buyerAddress4": "ADD4",
+        "commissionCurrency": "INR",
+        "discountCurrency": "120",
+        "otherDeductionsCurrency": "INR",
+        "packingCharges": "INR",
+        "exporterContractNumber": "12097",
+        "natureOfPayment": "AP",
+        "periodOfPayment": "12"
+      }
+    ],
+    "itemModel": [
+      {
+        "invoiceSerialNumber": "1",
+        "itemSerialNumberInvoice": "1",
+        "schemeCode": "03",
+        "ritcCode": "19011010",
+        "descOfGoods1": "TEST",
+        "unitOfMeasurement": "KGS",
+        "quantity": "10",
+        "unitPrice": "10",
+        "unitOfRate": "KGS",
+        "noOfUnit": "1",
+        "presentMarketValue": "11.00",
+        "thirdParty": "N",
+        "rewardItem": "Y",
+        "endUseOfItem": "GNX100",
+        "igstPaymentStatus": "NA"
+      },
+      {
+        "invoiceSerialNumber": "1",
+        "itemSerialNumberInvoice": "2",
+        "schemeCode": "00",
+        "descOfGoods1": "TEST",
+        "unitOfMeasurement": "KGS",
+        "quantity": "10",
+        "unitPrice": "10",
+        "unitOfRate": "KGS",
+        "noOfUnit": "1",
+        "presentMarketValue": "11.00",
+        "thirdParty": "N",
+        "rewardItem": "Y",
+        "endUseOfItem": "GNX100",
+        "igstPaymentStatus": "NA"
+      }
+    ],
+    "licenceModel": [
+      {
+        "invoiceSerialNumber": "1",
+        "itemSerialNumberInvoice": "1",
+        "srno": "1",
+        "registrationNo": "6757890567",
+        "registrationDate": "20251211",
+        "itemSerialNoInPartE": "1",
+        "itemSerialNoInPartC": "1",
+        "quantity": "1",
+        "exportQuantity": "1",
+        "whetherIndigenousImported": "N"
+      }
+    ],
+    "packingListModel": [
+      {
+        "packingNumberFrom": "1",
+        "packingNumberTo": "10",
+        "packingCode": "BOX"
+      }
+    ],
+    "sbModel": [
+      {
+        "chaLicenseNumber": "ERTERT",
+        "importerExporterCode": "7845894580",
+        "branchSrNoOfExporter": "1",
+        "impExpName": "ABC LOGISTICS",
+        "impExpAddress1": "CHENNAI 1",
+        "impExpAddress2": "CHENNAI 2",
+        "impExpCity": "CHENNAI 3",
+        "impExpState": "33 - TAMILNADU",
+        "impExpPin": "600032",
+        "typeOfExporter": "F",
+        "stateOfOriginExporter": "33",
+        "authorizedDealerCode": "9785678",
+        "consigneeName": "TO ORDER",
+        "consigneeAddress1": "CONSIGNEE1",
+        "consigneeAddress2": "CONSIGNEE2",
+        "consigneeAddress3": "CONSIGNEE3",
+        "consigneeAddress4": "CONSIGNEE4",
+        "consigneeCountry": "SG",
+        "portOfLoading": "INCOK1",
+        "portOfFinalDestination": "ADALV",
+        "countryOfFinalDestination": "SG",
+        "countryOfDischarge": "SG",
+        "portOfDischarge": "ADALV",
+        "natureOfCargo": "P",
+        "grossWeight": "100",
+        "netWeight": "100",
+        "totalNumberOfPackages": "10",
+        "marksNumbers": "NA",
+        "gstnType": "GSN",
+        "gstnId": "32ABVFT675JB456"
+      }
+    ],
+    "supportingDocs": [
+      {
+        "invoiceSerialNumber": "1",
+        "itemSerialNumber": "1",
+        "serialNo": "1",
+        "imageReferenceNumber": "1267569876456780",
+        "documentTypeCode": "955000",
+        "documentIssuingPartyName": "TEST",
+        "documentIssuingPartyNameAddress1": "CHENNAI",
+        "documentIssuingPartyNameAddress2": "CHENNAI",
+        "documentIssuingPartyNameCity": "CHENNAI",
+        "documentReferenceNo": "TEST123",
+        "placeOfIssue": "CHENNAI",
+        "documentIssueDate": "20251111",
+        "documentExpiryDate": "20251112",
+        "documentBeneficiaryPartyName": "TEST",
+        "documentBeneficiaryPartyNameAddress1": "TEST",
+        "documentBeneficiaryPartyNameAddress2": "CHENNAI",
+        "documentBeneficiaryPartyNameCity": "CHENNAI",
+        "icegateId": "ICEGATEID"
+      },
+      {
+        "invoiceSerialNumber": "1",
+        "itemSerialNumber": "1",
+        "serialNo": "6",
+        "imageReferenceNumber": "1267569876456780",
+        "documentTypeCode": "430000",
+        "documentIssuingPartyName": "TEST",
+        "documentIssuingPartyNameAddress1": "CHENNAI",
+        "documentIssuingPartyNameAddress2": "CHENNAI",
+        "documentIssuingPartyNameCity": "CHENNAI",
+        "documentReferenceNo": "TEST123",
+        "placeOfIssue": "CHENNAI",
+        "documentIssueDate": "20251111",
+        "documentExpiryDate": "20251112",
+        "documentBeneficiaryPartyName": "TEST",
+        "documentBeneficiaryPartyNameAddress1": "TEST",
+        "documentBeneficiaryPartyNameAddress2": "CHENNAI",
+        "documentBeneficiaryPartyNameCity": "CHENNAI",
+        "icegateId": "ICEGATEID"
+      },
+      {
+        "invoiceSerialNumber": "1",
+        "itemSerialNumber": "2",
+        "serialNo": "2",
+        "imageReferenceNumber": "1267569876456780",
+        "documentTypeCode": "705000",
+        "documentIssuingPartyName": "TEST",
+        "documentIssuingPartyNameAddress1": "CHENNAI",
+        "documentIssuingPartyNameAddress2": "CHENNAI",
+        "documentIssuingPartyNameCity": "CHENNAI",
+        "documentReferenceNo": "TEST123",
+        "placeOfIssue": "CHENNAI",
+        "documentIssueDate": "20251111",
+        "documentExpiryDate": "20251112",
+        "documentBeneficiaryPartyName": "TEST",
+        "documentBeneficiaryPartyNameAddress1": "TEST",
+        "documentBeneficiaryPartyNameAddress2": "CHENNAI",
+        "documentBeneficiaryPartyNameCity": "CHENNAI",
+        "icegateId": "ICEGATEID"
+      },
+      {
+        "invoiceSerialNumber": "1",
+        "itemSerialNumber": "2",
+        "serialNo": "3",
+        "imageReferenceNumber": "1267569876456780",
+        "documentTypeCode": "001003",
+        "documentIssuingPartyName": "TEST",
+        "documentIssuingPartyNameAddress1": "CHENNAI",
+        "documentIssuingPartyNameAddress2": "CHENNAI",
+        "documentIssuingPartyNameCity": "CHENNAI",
+        "documentReferenceNo": "TEST123",
+        "placeOfIssue": "CHENNAI",
+        "documentIssueDate": "20251111",
+        "documentExpiryDate": "20251112",
+        "documentBeneficiaryPartyName": "TEST",
+        "documentBeneficiaryPartyNameAddress1": "TEST",
+        "documentBeneficiaryPartyNameAddress2": "CHENNAI",
+        "documentBeneficiaryPartyNameCity": "CHENNAI",
+        "icegateId": "ICEGATEID"
+      },
+      {
+        "invoiceSerialNumber": "1",
+        "itemSerialNumber": "2",
+        "serialNo": "4",
+        "imageReferenceNumber": "1267569876456780",
+        "documentTypeCode": "0110FS",
+        "documentIssuingPartyName": "TEST",
+        "documentIssuingPartyNameAddress1": "CHENNAI",
+        "documentIssuingPartyNameAddress2": "CHENNAI",
+        "documentIssuingPartyNameCity": "CHENNAI",
+        "documentReferenceNo": "TEST123",
+        "placeOfIssue": "CHENNAI",
+        "documentIssueDate": "20251111",
+        "documentExpiryDate": "20251112",
+        "documentBeneficiaryPartyName": "TEST",
+        "documentBeneficiaryPartyNameAddress1": "TEST",
+        "documentBeneficiaryPartyNameAddress2": "CHENNAI",
+        "documentBeneficiaryPartyNameCity": "CHENNAI",
+        "icegateId": "ICEGATEID"
+      },
+      {
+        "invoiceSerialNumber": "1",
+        "itemSerialNumber": "2",
+        "serialNo": "5",
+        "imageReferenceNumber": "1267569876456780",
+        "documentTypeCode": "001003",
+        "documentIssuingPartyName": "TEST",
+        "documentIssuingPartyNameAddress1": "CHENNAI",
+        "documentIssuingPartyNameAddress2": "CHENNAI",
+        "documentIssuingPartyNameCity": "CHENNAI",
+        "documentReferenceNo": "TEST123",
+        "placeOfIssue": "CHENNAI",
+        "documentIssueDate": "20251111",
+        "documentExpiryDate": "20251112",
+        "documentBeneficiaryPartyName": "TEST",
+        "documentBeneficiaryPartyNameAddress1": "TEST",
+        "documentBeneficiaryPartyNameAddress2": "CHENNAI",
+        "documentBeneficiaryPartyNameCity": "CHENNAI",
+        "icegateId": "ICEGATEID"
+      }
+    ]
+  }
+}

@@ -1,0 +1,113 @@
+{
+    "Header": [
+        {
+            "Branch": "(1001)",
+            "BranchCode": "Acc, Chennai",
+            "BuyerName": "Rts Impex PTE Ltd",
+            "BuyerOrderNo": null,
+            "CartonNo": "1",
+            "Client": "Royal Tech Limited",
+            "CommonItem": "SWITCHGEAR PRODUCT",
+            "CompanyID": null,
+            "ConsigneeAdd1": "49 Kakrail, Dhaka 1000",
+            "ConsigneeAdd2": null,
+            "ConsigneeAdd3": null,
+            "ConsigneeAdd4": "India 0000",
+            "ConsigneeName": "Rts Constructions Ltd.",
+            "CountryOfDischarge": "BANGLADESH",
+            "Currency": "USD",
+            "Discount": "0.13",
+            "ExporterName": "Royal Tech System",
+            "FileName": null,
+            "GarmentsIGSTPercentage": null,
+            "HangerIGSTPercentage": null,
+            "IEC": "1245789630",
+            "InvoiceDate": "13.05.2024",
+            "InvoiceNo": "1234567890",
+            "InvoiceResponseTime": "13/02/2025 13:41:34",
+            "InvoiceStartTime": "29-07-2024",
+            "InvoiceValue": "13,247.87",
+            "JobNo": null,
+            "JobStatus": "N",
+            "JobType": "exp",
+            "KimballNo": null,
+            "NotifyAddress1": "Golden Wall Flatted Factory, Unit\n02-02, 2 Jalan Rajah,",
+            "NotifyAddress2": null,
+            "NotifyAddress3": "Singapore 329134",
+            "NotifyPartyName": "NA",
+            "OrderNo": null,
+            "OtherReference": null,
+            "PageCount": 2,
+            "PaymentPeriod": null,
+            "PdfClientName": "havells",
+            "PdfCount": 1,
+            "PortOfDischarge": "CHITTAGONG",
+            "QtyCode": "NOS",
+            "SchemeCode": null,
+            "Status": "Success",
+            "Terms": "FOB",
+            "TermsOfPayment": "LC",
+            "TotalCBM": null,
+            "TotalCarton": null,
+            "TotalGrossWeight": "323.000",
+            "TotalNetWeight": "207.000",
+            "UserID": "c",
+            "WorkingPeriod": null
+        }
+    ],
+    "ItemsDetails": [
+        {
+            "Amount": "2,880.00",
+            "HSNCode": "85362040",
+            "InfoQty": "N/A",
+            "InfoUnitPrice": null,
+            "ItemDesc": "DORMCMDF030032 030mA/032A DP RCCB Tog. Type\nAC",
+            "ItemQTYCode": "NOS",
+            "Itemslno": 1,
+            "Quantity": "240.000",
+            "Rate": "12.00"
+        },
+        {
+            "Amount": "4,608.00",
+            "HSNCode": "85362040",
+            "InfoQty": "N/A",
+            "InfoUnitPrice": null,
+            "ItemDesc": "DORMCMDF030063 030mA/063A DP RCCB Tog. Type\nAC",
+            "ItemQTYCode": "NOS",
+            "Itemslno": 2,
+            "Quantity": "384.000",
+            "Rate": "12.00"
+        },
+        {
+            "Amount": "2,880.00",
+            "HSNCode": "85362040",
+            "InfoQty": "N/A",
+            "InfoUnitPrice": null,
+            "ItemDesc": "DORMCMDF100032 100mA/032A DP RCCB Tog. Type\nAC",
+            "ItemQTYCode": "NOS",
+            "Itemslno": 3,
+            "Quantity": "240.000",
+            "Rate": "12.00"
+        },
+        {
+            "Amount": "2,880.00",
+            "HSNCode": "85362040",
+            "InfoQty": "N/A",
+            "InfoUnitPrice": null,
+            "ItemDesc": "DORMCMDF100063 100mA/063A DP RCCB Tog. Type\nAC",
+            "ItemQTYCode": "NOS",
+            "Itemslno": 4,
+            "Quantity": "240.000",
+            "Rate": "12.00"
+        }
+    ],
+"ShipmentContainerDetails": [
+        {
+            "ContainerNo": null,
+            "ContainerSealDate": null,
+            "ContainerSealNo": null,
+            "ContainerSize": null,
+            "Containerslno": null
+        }
+    ]
+}

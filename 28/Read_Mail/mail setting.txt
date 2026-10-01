@@ -1,0 +1,45 @@
+﻿gmail
+
+Incoming-Mailserver:imap.gmail.com
+Incoming-port:993
+
+yahoo
+
+Incoming Server: imap.mail.yahoo.com 
+Port 993 with SSL
+Outgoing Server: smtp.bizmail.yahoo.com 
+Port 465 with SSL (requires Authentication to be enabled)
+
+
+sify
+
+Outgoing Mail Server : asmtp.sifybroadband.com
+Outgoing Mail Server Port : Port 587
+//Incoming Mail Server : imap.sify.com
+//Incoming Mail Server Port : Port 110
+Incoming-Mailserver:imap.gmail.com
+Incoming-port:993
+
+webmail
+
+Incoming-imap.mailhostbox.com
+Incoming-port:993
+string email = "balajir@royaltechsystems.co.in";
+string password = "rtsbalaji123";
+
+mail2web
+
+ex7.mail2web.com
+993
+
+
+edi@bwclogistics.com
+ed7665
+
+
+-----------------------------
+Fame Shipping
+
+User Name : fameshippingagency@gmail.com
+
+Pwd       : L&111983

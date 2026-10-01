@@ -1,0 +1,221 @@
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ESanchitMailTrack.aspx.cs" Inherits="ESanchitMailTrack" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>Esanchit Master Listpopup</title>
+  
+    <link href="../mainpopup.css" rel="stylesheet" media="screen, projection" type="text/css" />
+
+    <link href="../gridmain.css" rel="stylesheet" type="text/css" />
+    <script src="../js/Validation.js" type="text/javascript"></script>
+
+    <script language="javascript" type="text/javascript">
+
+        function GetRowValue(IRN_no, DRN_no, filetype, Icegate, IceFile, Doctype) {
+            window.opener.document.getElementById("txt_Image_RefNO").value = IRN_no;
+            window.opener.document.getElementById("txt_Doc_Iss_Party_Ref_No").value = DRN_no;
+            window.opener.document.getElementById("txt_File_type").value = filetype;
+            window.opener.document.getElementById("txt_IcegateID").value = Icegate;
+            window.opener.document.getElementById("txt_IcegateFileName").value = IceFile;
+            window.opener.document.getElementById("txt_Doc_Type_Code").value = Doctype;
+            
+            
+            window.close();
+        }
+        
+</script>
+    <style type="text/css">
+        .hideGridColumn
+        {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+     <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="false">
+    </asp:ScriptManager>
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional" Visible="true">
+        <ContentTemplate>
+    <div class="loading" align="center" id="load" style="display:none;">
+   
+    <img src="../Loading_Images/indicator_mozilla_blu.gif" alt="" />
+     
+</div>
+   <div id="innerbox_MidMain_popup_currency">
+        <div id="innerbox_MidMain_top_currency">
+            Esanchit Mail Track
+        </div>
+        <div id="innerbox_MidMain_Mid_country_pop">
+            <div id="innerbox_MidMain_popup_country_master">
+                <div id="tag_label_country_pop">
+                    IRN # 
+                </div>
+                <div id="txtcon-l_src_popup">
+                </div>
+                <div id="txtcon_mid_size_popup">
+                  <asp:TextBox ID="txtIRNNo" runat="server" CssClass="txtbox_none_mid_size_popup" MaxLength="50"></asp:TextBox>
+                 
+                  </div>
+                <div id="txtcon-r_src_popup">
+                </div>
+                <div id="tag_label_currency_pop_empty">
+                </div>
+                <div id="tag_label_country_pop">
+                    DRN # 
+                </div>
+                <div id="txtcon-l_src_popup">
+                </div>
+                <div id="txtcon_mid_size_popup">
+                <asp:TextBox ID="txtDRNNo" runat="server" CssClass="txtbox_none_mid_size_popup" MaxLength="3"></asp:TextBox>
+                    </div>
+                <div id="txtcon-r_src_popup">
+                </div>
+            </div>
+            <div id="tag_srcinner_rght2_country">
+                <div id="small-butt-left">
+                   <a href="#" class="srcbu" runat="server" id="btnSearch" onserverclick="btnSearchAll_Click">
+                        </a>
+                </div>
+                <div id="small-butt-rght">
+                    <a href="#" class="cancelButt" onclick="window.close();"></a>
+                </div>
+            </div>
+        </div>
+        <div id="innerbox_MidMain_Grid_currency_pop">
+            
+            <div id="tag_srcinner1grid_innerpopup">
+                <asp:GridView runat="server" ID="gvdetails" EmptyDataText="NO RECORD FOUND"
+                    AutoGenerateColumns="False" BackColor="WhiteSmoke" GridLines="Both" CssClass="grid-view"
+                    OnRowCreated="gvdetails_RowCreated" Width="100%" ShowHeaderWhenEmpty="True" PageSize="10"
+                    AllowPaging="True" OnRowDataBound="gvdetails_RowDataBound" AllowSorting="True"
+                    BorderColor="#C8C8C8" BorderStyle="Solid" BorderWidth="1px" CellPadding="1" CellSpacing="1"
+                    OnSelectedIndexChanged="gvdetails_SelectedIndexChanged">
+                    <AlternatingRowStyle BackColor="White" BorderColor="#C8C8C8" BorderStyle="Solid"
+                        BorderWidth="1px" />
+                    <Columns>
+                      <asp:CommandField ShowSelectButton="True">
+    
+<HeaderStyle CssClass="hideGridColumn" />
+
+    
+
+<ItemStyle CssClass="hideGridColumn" />
+    
+</asp:CommandField>
+                        
+                                <asp:BoundField DataField="IRN_No" HeaderText="IRN #" >
+                                        
+                                        <ItemStyle CssClass="column_style_left" />
+                                        </asp:BoundField>
+                                <asp:BoundField DataField="DRN_No" HeaderText="DRN #" >
+                                        
+                                        <ItemStyle CssClass="column_style_left" />
+                                        </asp:BoundField>
+
+                                          <asp:BoundField DataField="Icegate_ID" HeaderText="Icegate ID" >
+                                        
+                                        <ItemStyle CssClass="column_style_left" />
+                                        </asp:BoundField>
+
+                                        <asp:BoundField DataField="Doc_Type" HeaderText="Doc Type" >
+                                        
+                                        <ItemStyle CssClass="column_style_left" />
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="Doc_Name" HeaderText="Doc Name" >
+                                        
+                                        <ItemStyle CssClass="column_style_left" />
+                                        </asp:BoundField>
+
+                                        <asp:BoundField DataField="filetype" HeaderText="FileType" >
+                                        
+                                        <ItemStyle CssClass="column_style_left" />
+                                        </asp:BoundField>
+
+                    </Columns>
+                    <PagerSettings Visible="False" />
+                </asp:GridView>
+                 <asp:HiddenField ID="HiddenField1" runat="server" />
+                     <asp:HiddenField ID="hdn_invno" runat="server" />
+            <asp:HiddenField ID="hdn_invdate" runat="server" />
+            <asp:HiddenField ID="hdn_mbl_no" runat="server" />
+            <asp:HiddenField ID="hdn_mbldate" runat="server" />
+            <asp:HiddenField ID="hdn_hblno" runat="server" />
+            <asp:HiddenField ID="hdn_hbldate" runat="server" />
+             <asp:HiddenField ID="hdn_JobType" runat="server" />
+            </div>
+        </div>
+        <div class="pagination" id="Div_Pagination" runat="server">
+            <div id="tag_label_transaction_popup_IGM_Container">
+                Page No.</div>
+            
+            <div id="txtcon-m_transaction_list1_fcl">
+                <asp:DropDownList ID="ddlSelectPageno" runat="server" AutoPostBack="true" CssClass="listtxt_transac_FCL"
+                    OnSelectedIndexChanged="ddlSelectPageno_SelectedIndexChanged">
+                </asp:DropDownList>
+            </div>
+           
+            <span class="disabled">
+                <asp:LinkButton CommandName="First" ID="btnFirst" runat="server" OnCommand="ChangePage">« First</asp:LinkButton></span>
+            <span class="disabled">
+                <asp:LinkButton CommandName="Previous" ID="btnPrev" runat="server" OnCommand="ChangePage">« Previous</asp:LinkButton></span>
+            <span class="selected">Record
+                <asp:Label ID="lblCurrentPage" runat="server"></asp:Label>
+                -
+                <asp:Label ID="lblTotalPages" runat="server"></asp:Label></span> <span class="disabled">
+                    <asp:LinkButton CommandName="Next" ID="btnNext" runat="server" OnCommand="ChangePage">Next</asp:LinkButton></span>
+            <span class="disabled">
+                <asp:LinkButton CommandName="Last" ID="btnLast" runat="server" OnCommand="ChangePage">Last</asp:LinkButton>
+            </span>
+        </div>
+    </div>
+    
+            <asp:HiddenField ID="Hdn_GetValue" runat="server" />
+    </ContentTemplate>
+    </asp:UpdatePanel>
+     
+
+     <script type="text/javascript">
+
+         $(function () {
+             $("#txtDescription").autocomplete({
+
+                 source: function (request, response) {
+                     
+                     $.ajax({
+                         url: "../AutoComplete_Pages/Auto_Complete_Searching.asmx/ESanchitMailTrack",
+                         data: "{ 'mail': '" + request.term + "' }",
+                         dataType: "json",
+                         type: "POST",
+                         contentType: "application/json; charset=utf-8",
+                         dataFilter: function (data) { return data; },
+                         async: true,
+                         success: function (data) {
+                             response(data.d);
+                             if (data.d == '') {
+                                 //                                jQuery('#txtRITCNo').validationEngine('showPrompt', 'Invalid RITC', 'error', 'topRight', true);
+                             }
+                             else {
+                                 jQuery('#txtDescription').validationEngine('hidePrompt', '', 'error', 'topRight', true);
+                             }
+                         },
+                         error: function (XMLHttpRequest, textStatus, errorThrown) {
+                         }
+                     });
+                 },
+                 minLength: 1
+
+             });
+             return false;
+             scroll: true;
+         });
+
+    </script>
+
+    </form>
+</body>
+</html>

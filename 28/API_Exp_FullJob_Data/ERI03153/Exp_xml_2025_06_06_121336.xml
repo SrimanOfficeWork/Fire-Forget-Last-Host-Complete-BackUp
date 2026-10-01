@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+        $X_ML_DATA=$xml->createElement("X_ML_DATA");
+        $xml->appendChild($X_ML_DATA);
+        
+        $ZSDST_EROYAL_DATA=$xml->createElement("ZSDST_EROYAL_DATA");
+        $X_ML_DATA->appendChild($ZSDST_EROYAL_DATA);
+        
+        $ROYAL_REFNO=$xml->createElement("ROYAL_REFNO","1013100036");
+        $ZSDST_EROYAL_DATA->appendChild($ROYAL_REFNO);
+        
+        $IECNO=$xml->createElement("IECNO",);
+        $ZSDST_EROYAL_DATA->appendChild($IECNO);
+        $BRANCH_SL_NO=$xml->createElement("BRANCH_SL_NO","0");
+        $ZSDST_EROYAL_DATA->appendChild($BRANCH_SL_NO);
+        $EXPORTER_NAME=$xml->createElement("EXPORTER_NAME",);
+        $ZSDST_EROYAL_DATA->appendChild($EXPORTER_NAME);
+        $ADCODE=$xml->createElement("ADCODE",);
+        $ZSDST_EROYAL_DATA->appendChild($ADCODE);
+        $TRANSPORT_MODE=$xml->createElement("TRANSPORT_MODE",);
+        $ZSDST_EROYAL_DATA->appendChild($TRANSPORT_MODE);
+        $PORT_OF_FILLING_CODE=$xml->createElement("PORT_OF_FILLING_CODE",);
+        $ZSDST_EROYAL_DATA->appendChild($PORT_OF_FILLING_CODE);
+        $COUNTRY_DISCHARGE_CODE=$xml->createElement("COUNTRY_DISCHARGE_CODE","KE");
+        $ZSDST_EROYAL_DATA->appendChild($COUNTRY_DISCHARGE_CODE);
+        $PORT_OF_DISCHARGE_CODE=$xml->createElement("PORT_OF_DISCHARGE_CODE",);
+        $ZSDST_EROYAL_DATA->appendChild($PORT_OF_DISCHARGE_CODE);
+        $COUNTRY_FINAL_DESTINATION=$xml->createElement("COUNTRY_FINAL_DESTINATION",);
+        $ZSDST_EROYAL_DATA->appendChild($COUNTRY_FINAL_DESTINATION);
+        $PORT_OF_FINAL_DESTINATION_CODE=$xml->createElement("PORT_OF_FINAL_DESTINATION_CODE",);
+        $ZSDST_EROYAL_DATA->appendChild($PORT_OF_FINAL_DESTINATION_CODE);
+        $STATE_CODE=$xml->createElement("STATE_CODE",);
+        $ZSDST_EROYAL_DATA->appendChild($STATE_CODE);
+        $CONSIGNEE_NAME=$xml->createElement("CONSIGNEE_NAME",);
+        $ZSDST_EROYAL_DATA->appendChild($CONSIGNEE_NAME);
+        $CONSIGNEE_ADD1=$xml->createElement("CONSIGNEE_ADD1",);
+        $ZSDST_EROYAL_DATA->appendChild($CONSIGNEE_ADD1);
+        $CONSIGNEE_ADD2=$xml->createElement("CONSIGNEE_ADD2","");
+        $ZSDST_EROYAL_DATA->appendChild($CONSIGNEE_ADD2);
+        $CONSIGNEE_ADD3=$xml->createElement("CONSIGNEE_ADD3","");
+        $ZSDST_EROYAL_DATA->appendChild($CONSIGNEE_ADD3);
+        $CONSIGNEE_ADD4=$xml->createElement("CONSIGNEE_ADD4","");
+        $ZSDST_EROYAL_DATA->appendChild($CONSIGNEE_ADD4);
+        $CONSIGNEE_COUNTRY_CODE=$xml->createElement("CONSIGNEE_COUNTRY_CODE",);
+        $ZSDST_EROYAL_DATA->appendChild($CONSIGNEE_COUNTRY_CODE);
+        $GSTN_REGISTRATION_NO=$xml->createElement("GSTN_REGISTRATION_NO",);
+        $ZSDST_EROYAL_DATA->appendChild($CONSIGNEE_COUNTRY_CODE);
+        $FLAG=$xml->createElement("FLAG","S");
+        $ZSDST_EROYAL_DATA->appendChild($FLAG);
+        $ROYAL_USER_ID=$xml->createElement("ROYAL_USER_ID","DEMO_USER");
+        $ZSDST_EROYAL_DATA->appendChild($ROYAL_USER_ID);
+        $INVOICE_DATA=$xml->createElement("INVOICE_DATA");
+        $ZSDST_EROYAL_DATA->appendChild($INVOICE_DATA);
+
+        
+        
+        
+        
+      

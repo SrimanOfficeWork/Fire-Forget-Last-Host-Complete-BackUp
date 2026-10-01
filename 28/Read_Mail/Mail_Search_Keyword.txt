@@ -1,0 +1,127 @@
+﻿
+//https:///imapx.codeplex.com/wikipage?title=Sample%20code%20for%20get%20messages%20from%20your%20inbox
+        //http:///phpcode16.appspot.com/question/5080f8104f1eba38a4d4813b
+        //http:///www.zachhunter.com/2012/06/imap-attachments-with-ae-net-mail/
+        //imap_search new messages returned in asp.net
+The imap_search function has a CRITERIA attribute you can use to limit the messages in a number of ways:
+
+ALL - return all messages matching the rest of the criteria
+ANSWERED - match messages with the \ANSWERED flag set
+BCC "string" - match messages with "string" in the Bcc: field
+BEFORE "date" - match messages with Date: before "date"
+BODY "string" - match messages with "string" in the body of the message
+CC "string" - match messages with "string" in the Cc: field
+DELETED - match deleted messages
+FLAGGED - match messages with the \FLAGGED (sometimes referred to as Important or Urgent) flag set
+FROM "string" - match messages with "string" in the From: field
+KEYWORD "string" - match messages with "string" as a keyword
+NEW - match new messages
+OLD - match old messages
+ON "date" - match messages with Date: matching "date"
+RECENT - match messages with the \RECENT flag set
+SEEN - match messages that have been read (the \SEEN flag is set)
+SINCE "date" - match messages with Date: after "date"
+SUBJECT "string" - match messages with "string" in the Subject:
+TEXT "string" - match messages with text "string"
+TO "string" - match messages with "string" in the To : UNANSWERED - match messages that have not been answered
+UNDELETED - match messages that are not deleted
+UNFLAGGED - match messages that are not flagged
+UNKEYWORD "string" - match messages that do not have the keyword "string"
+UNSEEN - match messages which have not been read yet
+
+
+<html>
+<head>
+<title>ASP Script Showing IMAP Search Examples</title>
+</head>
+<body>
+<%
+' ASP Script Showing IMAP Search Examples
+set imap = Server.CreateObject("Chilkat.Imap")
+
+' Any value passed to UnlockComponent begins the 30-day trial.
+unlocked = imap.UnlockComponent("30-day trial")
+if unlocked then
+
+    ' Connect to the IMAP server and login
+    ' Returns 0 if failed, but for the example we are not handling it.
+    ' Extended error information is available in the
+    ' imap.LastErrorHtml property
+    success = imap.Connect("localhost")
+    success = imap.Login("chilkat","chilkat")
+    
+    ' Select a mailbox for reading.
+    success = imap.SelectMailbox("Inbox")
+    
+    ' Get all the messages
+    Set msgSet = imap.Search("ALL", 1)
+    
+    ' Search since a specific date
+    'Set msgSet = imap.Search("SINCE 1-Aug-2004", 1)
+    
+    ' Search for messages from "yahoo.com" or "hotmail.com"
+    'Set msgSet = imap.Search("OR (FROM yahoo.com) (FROM hotmail.com)", 1)
+    
+    ' Search for messages from "yahoo.com" AND since a specific date
+    'Set msgSet = imap.Search("SINCE 12-Dec-2002 FROM yahoo.com", 1)
+    
+    ' Emails with "scott" found anywhere in the FROM header field.
+    'Set msgSet = imap.Search("FROM scott", 1)
+    
+    ' Emails larger than 10K
+    'Set msgSet = imap.Search("LARGER 10000", 1)
+    
+    ' Emails smaller than 10K
+    'Set msgSet = imap.Search("SMALLER 10000", 1)
+    
+    ' Emails sent on a specific day.
+    ' Date format is day-month-year
+    ' Month can be: Jan, Feb, Mar, Apr, May, Jun,
+    ' Jul, Aug, Sep, Oct, Nov, Dec
+    'Set msgSet = imap.Search("SENTON 27-Aug-2003", 1)
+    
+    ' Emails sent after a specific day.
+    'Set msgSet = imap.Search("SENTSINCE 27-Aug-2003", 1)
+
+    ' Emails sent before a specific day.
+    'Set msgSet = imap.Search("SENTBEFORE 27-Aug-2003", 1)
+
+    ' Emails having V1agra anywhere in the subject.
+    'Set msgSet = imap.Search("SUBJECT V1agra", 1)
+    
+    ' Emails having V1agra anywhere in the header or body.
+    'Set msgSet = imap.Search("TEXT V1agra", 1)
+    
+    ' Emails having "support" in the TO header field.
+    'Set msgSet = imap.Search("TO support", 1)
+    
+    ' Emails that are unanswered
+    'Set msgSet = imap.Search("UNANSWERED", 1)
+    
+    ' Fetch all the mail into a bundle object.
+    Set bundle = imap.FetchHeaders(msgSet)
+    
+    ' Loop over the bundle and display the From and Subject.
+    Response.write "<table>"
+    For i = 0 To bundle.MessageCount - 1
+        Set email = bundle.GetEmail(i)
+        
+        Response.write "<tr>"
+        Response.write "<td>" & Left(email.FromName,40) & "</td>"
+        Response.write "<td>" & email.FromAddress & "</td>"
+        Response.write "<td>" & email.LocalDate & "</td>"
+        Response.write "<td>" & Left(email.Subject, 40) & "</td>"
+        Response.write "<td>" & email.NumAttachments & "</td>"
+        
+        Response.write "</tr>"
+    Next
+    Response.write "</table>"
+	
+    imap.Logout
+    imap.Disconnect
+	
+end if
+
+%>
+</body>
+</html>
