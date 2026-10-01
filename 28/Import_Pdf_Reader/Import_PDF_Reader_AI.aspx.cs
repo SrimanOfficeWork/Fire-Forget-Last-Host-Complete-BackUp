@@ -517,8 +517,16 @@ public partial class Import_PDF_Reader_AI : ThemeClass
                 return;
             }
 
-            ds_API = DockerVisionQueueClient.ConvertStoredJsonToDataSet(storedJson);
-            if (ds_API.Tables.Count < 3
+            // Confirmed against a real Docker Vision response (TIMKEN US sample, 2026-09-30): the stored
+            // JSON is a single flat object with top-level Header / InvoiceDetails / ItemsDetails /
+            // ItemsIGMContainerDetails arrays — the exact same shape UploadPdfExtraction/UploadPdfWithParameters
+            // already deserialize for the synchronous Royal/Docker_Vision vendors, and the same shape
+            // Get_AccessToken_Invoice's local-test reader expects. No custom conversion is needed here.
+            try { ds_API = JsonConvert.DeserializeObject<DataSet>(storedJson); }
+            catch (Exception) { ds_API = null; }
+
+            if (ds_API == null
+                || ds_API.Tables.Count < 3
                 || ds_API.Tables[0].Rows.Count == 0
                 || ds_API.Tables[1].Rows.Count == 0
                 || ds_API.Tables[2].Rows.Count == 0)
@@ -1621,20 +1629,24 @@ public partial class Import_PDF_Reader_AI : ThemeClass
                     // Fire-and-forget queue path (distinct from the synchronous "Docker_Vision" branch above):
                     // submit and return immediately — the extraction result comes back later via the
                     // FireForget callback API and is picked up in Page_Load when the user reopens with ?pid=.
-                    List<string> dvFilePaths = new List<string> { strImagePath };
-                    List<string> dvFileNames = new List<string> { uploadedFile.FileName };
-
+                    // Same multipart contract UploadPdfWithParameters already uses successfully (see
+                    // DockerVisionQueueClient remarks) — only ProcessId/CallbackUrl are new.
                     WriteJobLog("API Hitting", "Vendor:DOCKER_VISION | File:" + uploadedFile.FileName);
                     var dvStart = DateTime.Now;
 
                     string processIdDV;
                     string dvError;
                     bool submitted = DockerVisionQueueClient.SubmitAndForget(
-                        dvFilePaths, dvFileNames,
-                        eriId: Connection.Company_License(),
-                        workingPeriod: Working_Period,
+                        filePath: strImagePath,
+                        fileName: uploadedFile.FileName,
+                        companyId: Connection.Company_License(),
+                        userId: Connection.Current_User(),
+                        branchCode: Connection.Current_Branch(),
+                        jobNo: txtjobPS.Text.Trim(),
                         jobType: "IMP",
+                        workingPeriod: Working_Period,
                         pdfClientName: PdfClient_Name,
+                        eriId: Connection.Company_License(),
                         processId: out processIdDV,
                         errorMessage: out dvError);
 

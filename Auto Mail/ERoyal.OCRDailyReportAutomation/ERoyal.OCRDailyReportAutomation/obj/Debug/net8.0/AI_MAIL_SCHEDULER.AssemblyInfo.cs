@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AI_MAIL_SCHEDULER")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d2bc0ade7ea535a85dafc6f8567e0417dcd24276")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b6b3c5839692bb77caf844317e3a58530b0bf9d2")]
 [assembly: System.Reflection.AssemblyProductAttribute("AI_MAIL_SCHEDULER")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AI_MAIL_SCHEDULER")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

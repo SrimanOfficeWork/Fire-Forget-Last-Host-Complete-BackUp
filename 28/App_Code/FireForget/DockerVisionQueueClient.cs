@@ -1,13 +1,9 @@
 using System;
+using System.Collections.Specialized;
 using System.IO;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Web;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Data;
-using System.Collections.Generic;
 
 /// <summary>
 /// Fire-and-forget submitter for the Docker Vision ASYNC queue flow (VENDOR_TYPE "DOCKER_VISION_QUEUE").
@@ -16,19 +12,23 @@ using System.Collections.Generic;
 /// result inline; this one submits, does not wait, and the result comes back later via the FireForget
 /// callback API -> FireForget.Worker -> PDF_AI_QUEUE_INSERT_UPDATE_SELECT (UPDATE_STATUS).
 ///
-/// TODO before go-live: DOCKER_VISION_SUBMIT_URL, CALLBACK_BASE_URL and CALLBACK_API_KEY below are
-/// placeholders — fill them in from configuration once Docker Vision confirms the submit endpoint and
-/// once FireForget.Api is deployed somewhere reachable from this server.
+/// IMPORTANT: the submit call below deliberately mirrors UploadPdfWithParameters's EXISTING, proven
+/// multipart/form-data contract (same URL, same "ApiKey" header, same field names, single "File" field)
+/// instead of inventing a new one — a prior version of this class sent custom HTTP headers for ProcessId/
+/// EriId/CallbackUrl that the Cochin cloud function was never coded to read, which would have silently
+/// never worked. ProcessId and CallbackUrl are now sent as two EXTRA form fields in that same body instead.
+///
+/// TODO before go-live: CALLBACK_BASE_URL/CALLBACK_API_KEY are placeholders, and the exact field names
+/// "ProcessId" / "CallbackUrl" / "CallbackApiKey" below are NOT yet confirmed with the Docker Vision
+/// (Cochin) team — confirm the exact names (and that extra form fields are even accepted) before go-live.
+/// Also NOTE this only supports ONE file per submission, matching the proven contract; Export's multi-file
+/// batching must loop one submission per file until/unless Docker Vision confirms multi-file support.
 /// </summary>
 public static class DockerVisionQueueClient
 {
     public const string VENDOR_TYPE = "DOCKER_VISION_QUEUE";
 
     // ── Configuration placeholders — move to Web.config appSettings before go-live ──────────────
-    private static string DOCKER_VISION_SUBMIT_URL
-    {
-        get { return ConfigOrDefault("DockerVision.SubmitUrl", "https://REPLACE_ME.dockervision.example.com/api/submit"); }
-    }
     private static string CALLBACK_BASE_URL
     {
         get { return ConfigOrDefault("FireForget.CallbackBaseUrl", "https://REPLACE_ME.fireforget.example.com"); }
@@ -75,14 +75,16 @@ public static class DockerVisionQueueClient
     }
 
     /// <summary>
-    /// Posts the file(s) + routing headers to Docker Vision and returns immediately — this method does NOT
-    /// wait for extraction to finish. It only waits long enough to confirm Docker Vision accepted the job.
+    /// Posts ONE file to Docker Vision using the SAME multipart contract UploadPdfWithParameters already
+    /// uses successfully, plus two extra form fields (ProcessId, CallbackUrl) so Docker Vision knows where
+    /// to send the result later. Does NOT wait for extraction — only for Docker Vision to accept the job.
     /// Returns true + processId on a successful submit; false + error message otherwise (caller should NOT
     /// insert a queue row in that case, since nothing was actually queued on the vendor's side).
     /// </summary>
     public static bool SubmitAndForget(
-        List<string> filePaths, List<string> fileNames,
-        string eriId, string workingPeriod, string jobType, string pdfClientName,
+        string filePath, string fileName,
+        string companyId, string userId, string branchCode, string jobNo,
+        string jobType, string workingPeriod, string pdfClientName, string eriId,
         out string processId, out string errorMessage)
     {
         processId = BuildProcessId(eriId, workingPeriod);
@@ -94,44 +96,65 @@ public static class DockerVisionQueueClient
             byte[] boundaryBytes = Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\n");
             byte[] trailer = Encoding.ASCII.GetBytes("\r\n--" + boundary + "--\r\n");
 
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(DOCKER_VISION_SUBMIT_URL);
+            // Same endpoint + same "ApiKey" header UploadPdfWithParameters uses for the general case.
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(
+                "https://asia-south1-serene-essence-419307.cloudfunctions.net/royal-invoice");
+            request.Headers.Add("ApiKey", "12345");
+
             request.Method = "POST";
             request.ContentType = "multipart/form-data; boundary=" + boundary;
             request.KeepAlive = false;
             request.AllowWriteStreamBuffering = false;
             request.SendChunked = true;
-            // Short timeouts: we only need Docker Vision to ACCEPT the job, not to finish it.
+            // Short timeout: we only need Docker Vision to ACCEPT the job, not to finish it.
             request.Timeout = 60 * 1000;
             request.ReadWriteTimeout = 60 * 1000;
 
-            // Routing headers — Docker Vision echoes ProcessId back on the callback; everything else
-            // (server / ERI / working period) is already encoded inside ProcessId, so if they can only
-            // return the ProcessId, routing still works.
-            request.Headers.Add("X-Process-Id", processId);
-            request.Headers.Add("X-Eri-Id", eriId ?? "");
-            request.Headers.Add("X-Job-Type", jobType ?? "");
-            request.Headers.Add("X-Pdf-Client-Name", pdfClientName ?? "");
-            request.Headers.Add("X-Callback-Url", CALLBACK_BASE_URL.TrimEnd('/') + "/api/v1/callback/docker-vision");
-            request.Headers.Add("X-Callback-Api-Key", CALLBACK_API_KEY);
+            NameValueCollection formFields = new NameValueCollection
+            {
+                // Exactly the same field names/values UploadPdfWithParameters sends today.
+                { "CompanyID", companyId ?? "" },
+                { "UserID", userId ?? "" },
+                { "BranchCode", branchCode ?? "" },
+                { "JobNo", jobNo ?? "" },
+                { "JobType", jobType ?? "" },
+                { "WorkingPeriod", workingPeriod ?? "" },
+                { "PageCount", "0" },
+                { "PdfCount", "0" },
+                { "JobStatus", "N" },
+                { "FileName", "1" },
+                { "InvoiceStartTime", DateTime.Now.ToString() },
+                { "PdfClientName", pdfClientName ?? "" },
+                // NEW fields for the async queue path — names unconfirmed, see class remarks above.
+                { "ProcessId", processId },
+                { "CallbackUrl", CALLBACK_BASE_URL.TrimEnd('/') + "/api/v1/callback/docker-vision" },
+                { "CallbackApiKey", CALLBACK_API_KEY }
+            };
 
             using (Stream requestStream = request.GetRequestStream())
             {
-                for (int i = 0; i < filePaths.Count; i++)
+                foreach (string key in formFields)
                 {
                     requestStream.Write(boundaryBytes, 0, boundaryBytes.Length);
-                    string header = "Content-Disposition: form-data; name=\"File" + i + "\"; filename=\""
-                        + Path.GetFileName(fileNames[i]) + "\"\r\nContent-Type: application/pdf\r\n\r\n";
-                    byte[] headerBytes = Encoding.UTF8.GetBytes(header);
-                    requestStream.Write(headerBytes, 0, headerBytes.Length);
-
-                    using (FileStream fs = new FileStream(filePaths[i], FileMode.Open, FileAccess.Read, FileShare.Read))
-                    {
-                        byte[] buffer = new byte[131072];
-                        int bytesRead;
-                        while ((bytesRead = fs.Read(buffer, 0, buffer.Length)) > 0)
-                            requestStream.Write(buffer, 0, bytesRead);
-                    }
+                    string fieldData = "Content-Disposition: form-data; name=\"" + key + "\"\r\n\r\n" + formFields[key];
+                    byte[] fieldBytes = Encoding.UTF8.GetBytes(fieldData);
+                    requestStream.Write(fieldBytes, 0, fieldBytes.Length);
                 }
+
+                requestStream.Write(boundaryBytes, 0, boundaryBytes.Length);
+                string fileHeader = "Content-Disposition: form-data; name=\"File\"; filename=\""
+                    + Path.GetFileName(fileName) + "\"\r\nContent-Type: application/pdf\r\n\r\n";
+                byte[] fileHeaderBytes = Encoding.UTF8.GetBytes(fileHeader);
+                requestStream.Write(fileHeaderBytes, 0, fileHeaderBytes.Length);
+
+                using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read))
+                {
+                    byte[] buffer = new byte[131072];
+                    int bytesRead;
+                    while ((bytesRead = fs.Read(buffer, 0, buffer.Length)) > 0)
+                        requestStream.Write(buffer, 0, bytesRead);
+                }
+
                 requestStream.Write(trailer, 0, trailer.Length);
             }
 
@@ -167,69 +190,12 @@ public static class DockerVisionQueueClient
         }
     }
 
-    /// <summary>
-    /// Converts a stored Docker Vision result (JSON_RESPONSE column, already a JSON array of invoices —
-    /// same shape produced by the synchronous vendor call) into the DataSet shape the Import/Export AI
-    /// pages already expect: Header(0), InvoiceDetails/ItemsDetails(1,2 for Import) — mirrors the parsing
-    /// Gen_AI_PDF.Get_AccessToken_Invoice and Export_PDF_Reader_New_AI.ConvertJsonToDataSet already do.
-    /// </summary>
-    public static DataSet ConvertStoredJsonToDataSet(string json)
-    {
-        DataSet ds = new DataSet();
-        if (string.IsNullOrWhiteSpace(json)) return ds;
-
-        DataTable dtHeader = new DataTable("Header");
-        DataTable dtInvoice = new DataTable("InvoiceDetails");
-        DataTable dtItems = new DataTable("ItemsDetails");
-        DataTable dtContainer = new DataTable("ShipmentContainerDetails");
-
-        try
-        {
-            JToken root = JToken.Parse(json);
-            JArray invoices = root.Type == JTokenType.Array ? (JArray)root : new JArray(root);
-
-            foreach (JObject inv in invoices)
-            {
-                MergeTable(dtHeader, inv["Header"]);
-                MergeTable(dtInvoice, inv["InvoiceDetails"]);
-                MergeTable(dtItems, inv["ItemsDetails"]);
-                MergeTable(dtContainer, inv["ShipmentContainerDetails"]);
-            }
-        }
-        catch (Exception)
-        {
-            return new DataSet(); // caller checks Tables[n].Rows.Count == 0 and shows "please retry"
-        }
-
-        if (dtHeader.Rows.Count > 0) ds.Tables.Add(dtHeader);
-        if (dtInvoice.Rows.Count > 0) ds.Tables.Add(dtInvoice);
-        if (dtItems.Rows.Count > 0) ds.Tables.Add(dtItems);
-        if (dtContainer.Rows.Count > 0) ds.Tables.Add(dtContainer);
-        return ds;
-    }
-
-    private static void MergeTable(DataTable target, JToken section)
-    {
-        if (section == null || section.Type == JTokenType.Null) return;
-
-        JArray arr = section.Type == JTokenType.Array ? (JArray)section : new JArray(section);
-        if (arr.Count == 0) return;
-
-        DataTable temp = JsonConvert.DeserializeObject<DataTable>(arr.ToString());
-        if (temp == null) return;
-
-        if (target.Columns.Count == 0)
-        {
-            foreach (DataColumn c in temp.Columns)
-                if (!target.Columns.Contains(c.ColumnName)) target.Columns.Add(c.ColumnName, c.DataType);
-        }
-
-        foreach (DataRow r in temp.Rows)
-        {
-            DataRow newRow = target.NewRow();
-            foreach (DataColumn c in temp.Columns)
-                if (target.Columns.Contains(c.ColumnName)) newRow[c.ColumnName] = r[c.ColumnName];
-            target.Rows.Add(newRow);
-        }
-    }
+    // NOTE: an earlier version of this class had a ConvertStoredJsonToDataSet() here that assumed the
+    // callback JSON was an array of invoices (the EROYAL/PMDG ocrResult shape). A real Docker Vision
+    // response (TIMKEN US sample, 2026-09-30) proved that assumption wrong: Docker Vision's own JSON is
+    // a single flat object — Header/InvoiceDetails/ItemsDetails/ItemsIGMContainerDetails (Import) or
+    // Header/ItemsDetails/ShipmentContainerDetails (Export) — the exact same shape the EXISTING synchronous
+    // vendors (UploadPdfExtraction, UploadPdfWithParameters) already pass straight to
+    // JsonConvert.DeserializeObject<DataSet>(...). Both Import_PDF_Reader_AI and Export_PDF_Reader_New_AI
+    // now do exactly that with the stored JSON too, so no extra conversion is needed here.
 }

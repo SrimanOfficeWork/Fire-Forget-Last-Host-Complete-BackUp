@@ -186,8 +186,15 @@ public partial class Export_PDF_Reader_New_AI : ThemeClass
                         string storedJson = ds_Ven_API.Tables[0].Rows[0]["JSON_RESPONSE"].ToString();
                         if (!string.IsNullOrEmpty(storedJson))
                         {
-                            ds_API = DockerVisionQueueClient.ConvertStoredJsonToDataSet(storedJson);
-                            if (ds_API.Tables.Count > 0)
+                            // Confirmed against a real Docker Vision response (TIMKEN US sample, Import side,
+                            // 2026-09-30): the stored JSON is a flat object (Header/ItemsDetails/... arrays),
+                            // the same shape UploadPdfWithParameters already deserializes for the synchronous
+                            // Docker_Vision vendor a few hundred lines below — so just deserialize it directly,
+                            // same as that path does, instead of the EROYAL-style array-of-invoices conversion.
+                            try { ds_API = JsonConvert.DeserializeObject<DataSet>(storedJson); }
+                            catch (Exception) { ds_API = null; }
+
+                            if (ds_API != null && ds_API.Tables.Count > 0)
                                 Getting_Mater_Details(PDF_Master_Mode, exp_name, branch_slno);
                             else
                                 Alert_msg("Could not read the stored Docker Vision result. Please re-upload.");
@@ -924,11 +931,16 @@ public partial class Export_PDF_Reader_New_AI : ThemeClass
                     {
                         // Fire-and-forget Docker Vision queue path — mirrors the PMDG block above but posts
                         // to Docker Vision instead of EROYAL, and does not wait for the extraction result.
+                        //
+                        // IMPORTANT: unlike PMDG/EROYAL (which accepts several files batched into one JSON
+                        // call), Docker Vision's proven contract (UploadPdfWithParameters, confirmed against
+                        // the real royal-invoice endpoint) is ONE FILE PER SUBMISSION. So — unlike the PMDG
+                        // block above — this does NOT re-collect every Request.Files entry into one call;
+                        // it submits each uploaded file separately, each with its own ProcessId and its own
+                        // PDF_AI_QUEUE row, so each can be tracked (and come back READY/FAILED) independently.
                         string PDF_CLIENT_NAME_DV = HttpContext.Current.Session["EXP_PdfClientName"] as string;
-
-                        int totalPageCountDV = 0;
-                        List<string> filePathsDV = new List<string>();
-                        List<string> fileNamesDV = new List<string>();
+                        int submittedCountDV = 0;
+                        var failedFilesDV = new List<string>();
 
                         for (int fileIndex = 0; fileIndex < Request.Files.Count; fileIndex++)
                         {
@@ -939,51 +951,67 @@ public partial class Export_PDF_Reader_New_AI : ThemeClass
                             string filePath = Path.Combine(folderPath, file.FileName);
                             if (!File.Exists(filePath)) file.SaveAs(filePath);
 
+                            int pageCountDV = 0;
                             PdfReader reader = new PdfReader(filePath);
-                            totalPageCountDV += reader.NumberOfPages;
+                            pageCountDV = reader.NumberOfPages;
                             reader.Close();
-                            filePathsDV.Add(filePath);
-                            fileNamesDV.Add(file.FileName);
+
+                            WriteJobLog("API Hitting", "Vendor:DOCKER_VISION | File:" + file.FileName);
+                            var dvStart = DateTime.Now;
+
+                            string processIdDV;
+                            string dvError;
+                            bool submitted = DockerVisionQueueClient.SubmitAndForget(
+                                filePath: filePath,
+                                fileName: file.FileName,
+                                companyId: Connection.Company_License(),
+                                userId: Connection.Current_User(),
+                                branchCode: Connection.Current_Branch(),
+                                jobNo: txtjobPS.Text.Trim(),
+                                jobType: "EXP",
+                                workingPeriod: Working_Period,
+                                pdfClientName: PDF_CLIENT_NAME_DV,
+                                eriId: Connection.Company_License(),
+                                processId: out processIdDV,
+                                errorMessage: out dvError);
+
+                            WriteJobLog("API Response Received", "Vendor:DOCKER_VISION | File:" + file.FileName
+                                + " | ProcessId:" + processIdDV + " | Submitted:" + submitted
+                                + " | TimeTaken:" + (DateTime.Now - dvStart).TotalSeconds.ToString("0.00") + "s");
+
+                            if (submitted)
+                            {
+                                int pdfId = 0;
+                                ViewState["Pdf_Id"] = "0";
+                                pdfId = PageCount_log(PdfStatus.PREVIEW_INITIATED, pageCountDV.ToString());
+                                ViewState["Pdf_Id"] = pdfId.ToString();
+                                Insert_Queue_Record(processIdDV, file.FileName, exp_name,
+                                    DockerVisionQueueClient.VENDOR_TYPE, branch_slno, PDF_CLIENT_NAME_DV, pdfId.ToString());
+
+                                WriteJobLog("Job Queued", "Vendor:DOCKER_VISION | ProcessId:" + processIdDV
+                                    + " | Pages:" + pageCountDV);
+                                submittedCountDV++;
+                            }
+                            else
+                            {
+                                WriteJobLog("Preview Failed", "Vendor:DOCKER_VISION | File:" + file.FileName + " | " + dvError);
+                                failedFilesDV.Add(file.FileName);
+                            }
                         }
 
-                        WriteJobLog("API Hitting", "Vendor:DOCKER_VISION | Files:" + string.Join(", ", fileNamesDV));
-                        var dvStart = DateTime.Now;
-
-                        string processIdDV;
-                        string dvError;
-                        bool submitted = DockerVisionQueueClient.SubmitAndForget(
-                            filePathsDV, fileNamesDV,
-                            eriId: Connection.Company_License(),
-                            workingPeriod: Working_Period,
-                            jobType: "EXP",
-                            pdfClientName: PDF_CLIENT_NAME_DV,
-                            processId: out processIdDV,
-                            errorMessage: out dvError);
-
-                        WriteJobLog("API Response Received", "Vendor:DOCKER_VISION | ProcessId:" + processIdDV
-                            + " | Submitted:" + submitted
-                            + " | TimeTaken:" + (DateTime.Now - dvStart).TotalSeconds.ToString("0.00") + "s");
-
-                        if (submitted)
+                        if (submittedCountDV > 0)
                         {
-                            int pdfId = 0;
-                            ViewState["Pdf_Id"] = "0";
-                            pdfId = PageCount_log(PdfStatus.PREVIEW_INITIATED, totalPageCountDV.ToString());
-                            ViewState["Pdf_Id"] = pdfId.ToString();
-                            Insert_Queue_Record(processIdDV, string.Join(", ", fileNamesDV), exp_name,
-                                DockerVisionQueueClient.VENDOR_TYPE, branch_slno, PDF_CLIENT_NAME_DV, pdfId.ToString());
-
-                            WriteJobLog("Job Queued", "Vendor:DOCKER_VISION | ProcessId:" + processIdDV
-                                + " | Pages:" + totalPageCountDV);
-
-                            Alert_And_Redirect_Queue("Extraction is in progress. Your job has been queued. Click OK to view Queue Status.");
+                            string msg = "Extraction is in progress. " + submittedCountDV + " file(s) have been queued.";
+                            if (failedFilesDV.Count > 0)
+                                msg += " Failed to submit: " + string.Join(", ", failedFilesDV) + ".";
+                            msg += " Click OK to view Queue Status.";
+                            Alert_And_Redirect_Queue(msg);
                         }
                         else
                         {
-                            WriteJobLog("Preview Failed", "Vendor:DOCKER_VISION | " + dvError);
                             Alert_msg("Failed to submit job to Docker Vision. Please try again.");
                         }
-                        return;  // exit Get_Upload_File early — no queue row when the submit itself failed
+                        return;  // exit Get_Upload_File early — queue rows only exist for files that were actually accepted
                     }
 
                     else if (vendor == "Docker_Vision" || vendor == "" || vendor == null)
