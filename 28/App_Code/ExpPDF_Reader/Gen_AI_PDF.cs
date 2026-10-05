@@ -167,6 +167,67 @@ public class Gen_AI_PDF
         return response;
     }
 
+    // Docker Vision request for the queue path (DockerVision_Queue.FireAndForget). Same endpoint, ApiKey,
+    // PdfClientName and form fields as Get_AccessToken_Invoice_Upload above — only the packaging differs.
+    public DockerVision_Queue.DockerVisionRequest Build_DockerVision_Request(string FilePath, string JobNo)
+    {
+        string exp_name = HttpContext.Current.Session["exp_name"] as string;
+        string AI_branch_slno = HttpContext.Current.Session["AI_branch_slno"] as string;
+        string PDF_CLIENT_NAME = HttpContext.Current.Session["EXP_PdfClientName"] as string;
+        string PdfClientName_Exp;
+
+        if (!string.IsNullOrWhiteSpace(exp_name) && string.IsNullOrWhiteSpace(PDF_CLIENT_NAME))
+        {
+            if (exp_name == "TOP SYRINGE MFG CO PVT LTD" || exp_name == "TRIO TREND EXPORTS PVT. LTD."
+                || ((AI_branch_slno == "35" || AI_branch_slno == "24") && exp_name == "JOHN DEERE INDIA PRIVATE LIMITED") || exp_name == "JCB INDIA LIMITED NEW" || exp_name == "EATON INDUSTRIAL PRODUCTS PRIVATE LIMITED NEW")
+                PdfClientName_Exp = exp_name.Split(' ')[0] + " " + exp_name.Split(' ')[1];
+            else if (exp_name == "SIEMENS HEALTHCARE PVT LTD" || exp_name == "SIEMENS HEALTHCARE PRIVATE LIMITED" || exp_name == "SIEMENS LIMITED" || exp_name == "ELEGANT COLLECTION" || (AI_branch_slno == "8" && exp_name == "JOHN DEERE INDIA PRIVATE LIMITED"))
+                PdfClientName_Exp = exp_name;
+            else if (exp_name.Contains("ZENSTAR JEWELLERY LLP"))
+                PdfClientName_Exp = "JEWELEX";
+            else if (exp_name == "SCHNEIDER ELECTRIC INDIA PRIVATE LIMITED")
+                PdfClientName_Exp = "LARSEN";
+            else if (exp_name == "INDIA YAMAHA MOTOR PRIVATE LIMITED")
+                PdfClientName_Exp = "YAMAHA";
+            else
+                PdfClientName_Exp = exp_name.Split(' ')[0];
+        }
+        else
+        {
+            PdfClientName_Exp = PDF_CLIENT_NAME;
+        }
+
+        DockerVision_Queue.DockerVisionRequest req = new DockerVision_Queue.DockerVisionRequest();
+        req.FilePath = FilePath;
+        if (PdfClientName_Exp == "SCM" || (AI_branch_slno == "1" && PdfClientName_Exp == "MAF") || PdfClientName_Exp == "AMALA" || PdfClientName_Exp == "PRABHU")
+        {
+            req.ApiUrl = "http://www.ocrapiservice.royaltechsystems.co.in/api/invoice/royaltechocr";
+            req.ApiKey = "Royal";
+        }
+        else
+        {
+            req.ApiUrl = "https://asia-south1-serene-essence-419307.cloudfunctions.net/royal-invoice";
+            req.ApiKey = "12345";
+        }
+
+        req.FormFields = new System.Collections.Specialized.NameValueCollection
+        {
+            { "CompanyID", Connection.Company_License() },
+            { "UserID", Connection.Current_User() },
+            { "BranchCode", Connection.Current_Branch() },
+            { "JobNo", JobNo },
+            { "JobType", "EXP" },
+            { "WorkingPeriod", Connection.WorkingPeriod() },
+            { "PageCount", "0" },
+            { "PdfCount", "0" },
+            { "JobStatus", "N" },
+            { "FileName", "1" },
+            { "InvoiceStartTime", DateTime.Now.ToString() },
+            { "PdfClientName", PdfClientName_Exp }
+        };
+        return req;
+    }
+
     public DataSet Get_AccessToken_Invoice(DataSet GetLocalAPIData, string LocalFile)
     {
         // JSON string containing your data

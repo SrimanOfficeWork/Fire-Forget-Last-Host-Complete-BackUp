@@ -83,10 +83,7 @@ public partial class AI_Extraction_Queue_Status : ThemeClass
                 string vendorType = row["VENDOR_TYPE"].ToString();
                 if (string.IsNullOrEmpty(processId)) continue;
 
-                // Docker Vision rows are written only by FireForget.Worker — this loop must only READ
-                // their status (via CheckStatus_DockerVisionQueue above), never write it back.
-                if (vendorType == DockerVisionQueueClient.VENDOR_TYPE)
-                    continue;
+                string newStatus = CheckJobStatus(processId, vendorType);
 
                 if (newStatus == "FAILED")
                 {
@@ -94,7 +91,7 @@ public partial class AI_Extraction_Queue_Status : ThemeClass
                     U.A4 = processId; U.A6 = "FAILED"; U.A7 = "";
                     QueueBO.Queue_Update_Status(U);
                 }
-                else if (newStatus == "READY" && vendorType != "EROYAL")
+                else if (newStatus == "READY" && vendorType != "EROYAL" && !DockerVision_Queue.IsDockerVision(vendorType))
                 {
                     Global_variables U = new Global_variables();
                     U.A4 = processId; U.A6 = "READY"; U.A7 = "";
@@ -298,15 +295,9 @@ public partial class AI_Extraction_Queue_Status : ThemeClass
             {
                 string newStatus = CheckJobStatus(processId, vendorType);
 
-                // Docker Vision rows are only ever written by the FireForget.Worker callback consumer.
-                // Check Status here just re-reads what is already in PDF_AI_QUEUE (CheckStatus_DockerVisionQueue
-                // below); writing it back would be redundant and bump UPDATED_DATE for no reason.
-                if (vendorType != DockerVisionQueueClient.VENDOR_TYPE)
-                {
-                    Global_variables U = new Global_variables();
-                    U.A4 = processId; U.A6 = newStatus; U.A7 = "";
-                    QueueBO.Queue_Update_Status(U);
-                }
+                Global_variables U = new Global_variables();
+                U.A4 = processId; U.A6 = newStatus; U.A7 = "";
+                QueueBO.Queue_Update_Status(U);
 
                 if (newStatus == "READY") Alert_msg("Extraction complete! Status updated to READY.");
                 else if (newStatus == "FAILED") Alert_msg("Extraction failed. Please re-upload.");
@@ -345,29 +336,14 @@ public partial class AI_Extraction_Queue_Status : ThemeClass
     {
         try
         {
-            if (vendorType == "EROYAL") return CheckStatus_Eroyal(processId);
-            if (vendorType == DockerVisionQueueClient.VENDOR_TYPE) return CheckStatus_DockerVisionQueue(processId);
-            return CheckStatus_Royal(processId);
+            if (DockerVision_Queue.IsDockerVision(vendorType))
+                return CheckStatus_DockerVision(processId);
+
+            return vendorType == "EROYAL"
+                ? CheckStatus_Eroyal(processId)
+                : CheckStatus_Royal(processId);
         }
         catch { return "FAILED"; }
-    }
-
-    // ── Docker Vision Status Check ──────────────────────────────────────
-    // No outbound call at all: FireForget.Worker is the only thing that ever changes this row's status
-    // once it is queued, so Check Status (manual click or auto-refresh) just reads PDF_AI_QUEUE.
-    private string CheckStatus_DockerVisionQueue(string processId)
-    {
-        try
-        {
-            Global_variables QObj = new Global_variables();
-            QObj.A4 = processId;
-            DataSet ds = new AI_Queue().Queue_Get_By_ProcessId(QObj);
-            if (ds == null || ds.Tables.Count == 0 || ds.Tables[0].Rows.Count == 0) return "IN PROGRESS";
-
-            string status = ds.Tables[0].Rows[0]["STATUS"].ToString();
-            return string.IsNullOrEmpty(status) ? "IN PROGRESS" : status;
-        }
-        catch { return "IN PROGRESS"; } // read failure here should not flip a real job to FAILED
     }
 
     // ── Eroyal Status Check ───────────────────────────────────────────
@@ -415,6 +391,24 @@ public partial class AI_Extraction_Queue_Status : ThemeClass
                 }
                 return "FAILED";
             }
+        }
+        catch { return "FAILED"; }
+    }
+
+    // ── Docker Vision Status Check (JSON stored in OCR_AI_Extraction_Responses) ──
+    private string CheckStatus_DockerVision(string processId)
+    {
+        try
+        {
+            string json;
+            string status = DockerVision_Queue.Get_Status(processId, out json);
+            if (status == "READY")
+            {
+                Global_variables U = new Global_variables();
+                U.A4 = processId; U.A6 = "READY"; U.A7 = json;
+                QueueBO.Queue_Update_Status(U);
+            }
+            return status;
         }
         catch { return "FAILED"; }
     }

@@ -115,6 +115,16 @@ public partial class Export_PDF_Reader_New_AI : ThemeClass
         string exp_name = Request.QueryString["Imp_exp_name"];
         string PDF_Master_Mode = Request.QueryString["PDF_Master_Mode"];
 
+        // Docker Vision job: everything is picked from DB for this ProcessID (not from the URL / session)
+        DockerVision_Queue.DockerVisionJob dvJob = null;
+        string dvJobError = "";
+        if (!IsPostBack && !string.IsNullOrEmpty(pid) && DockerVision_Queue.IsDockerVision(vendor))
+        {
+            dvJob = DockerVision_Queue.Get_Ready_Job(pid, "EXP", out dvJobError);
+            exp_name = dvJob != null ? dvJob.PartyName : "";
+            branch_slno = dvJob != null ? dvJob.SlNo : "";
+        }
+
         SB_TYPE = "Free Duty";
         COMPANY_IDD = Session["COMPANY_ID"].ToString();
         COMPANY_LICENSE = Connection.Company_License();
@@ -173,31 +183,24 @@ public partial class Export_PDF_Reader_New_AI : ThemeClass
                         }
                     }
                 }
-                else if (vendor == DockerVisionQueueClient.VENDOR_TYPE)
-                {
-                    // Same idea as EROYAL above, but Docker Vision's stored JSON is already in the
-                    // Header/ItemsDetails/ShipmentContainerDetails shape, so no format conversion is needed —
-                    // fill ds_API directly and skip the ConvertJsonToDataSet(API_Output) step below.
-                    Global_variables QObj = new Global_variables();
-                    QObj.A4 = pid;
-                    DataSet ds_Ven_API = QueueBO.Queue_Get_By_ProcessId(QObj);
-                    if (ds_Ven_API != null && ds_Ven_API.Tables.Count > 0 && ds_Ven_API.Tables[0].Rows.Count > 0)
-                    {
-                        string storedJson = ds_Ven_API.Tables[0].Rows[0]["JSON_RESPONSE"].ToString();
-                        if (!string.IsNullOrEmpty(storedJson))
-                        {
-                            // Confirmed against a real Docker Vision response (TIMKEN US sample, Import side,
-                            // 2026-09-30): the stored JSON is a flat object (Header/ItemsDetails/... arrays),
-                            // the same shape UploadPdfWithParameters already deserializes for the synchronous
-                            // Docker_Vision vendor a few hundred lines below — so just deserialize it directly,
-                            // same as that path does, instead of the EROYAL-style array-of-invoices conversion.
-                            try { ds_API = JsonConvert.DeserializeObject<DataSet>(storedJson); }
-                            catch (Exception) { ds_API = null; }
 
-                            if (ds_API != null && ds_API.Tables.Count > 0)
-                                Getting_Mater_Details(PDF_Master_Mode, exp_name, branch_slno);
-                            else
-                                Alert_msg("Could not read the stored Docker Vision result. Please re-upload.");
+                else if (DockerVision_Queue.IsDockerVision(vendor))
+                {
+                    if (dvJob == null)
+                    {
+                        WriteJobLog("Queue Result Load Failed", "ProcessId:" + pid + " | " + dvJobError);
+                        Alert_msg(dvJobError);
+                    }
+                    else
+                    {
+                        ViewState["Pdf_Id"] = dvJob.PdfId;
+                        hd_PageCount.Value = dvJob.PageCount;
+
+                        // Stored Docker Vision JSON (one response per PDF) → existing extraction process
+                        foreach (string dvJson in dvJob.JsonList())
+                        {
+                            ds_API = JsonConvert.DeserializeObject<DataSet>(dvJson);
+                            Getting_Mater_Details(PDF_Master_Mode, exp_name, branch_slno);
                         }
                     }
                 }
@@ -856,7 +859,7 @@ public partial class Export_PDF_Reader_New_AI : ThemeClass
                         Session["EXP_PdfClientName"] = EXP_PdfClientName;
                     }
                     checkvendor();
-                   
+                    vendor = "Docker_Vision";
                    
                     if (vendor == "Local")
                     {
@@ -927,104 +930,65 @@ public partial class Export_PDF_Reader_New_AI : ThemeClass
                         }
                         return;  // exit Get_Upload_File early
                     }
-                    else if (vendor == DockerVisionQueueClient.VENDOR_TYPE)
+
+                    else if (vendor == "Docker_Vision" || vendor == "" || vendor == null)
                     {
-                        // Fire-and-forget Docker Vision queue path — mirrors the PMDG block above but posts
-                        // to Docker Vision instead of EROYAL, and does not wait for the extraction result.
-                        //
-                        // IMPORTANT: unlike PMDG/EROYAL (which accepts several files batched into one JSON
-                        // call), Docker Vision's proven contract (UploadPdfWithParameters, confirmed against
-                        // the real royal-invoice endpoint) is ONE FILE PER SUBMISSION. So — unlike the PMDG
-                        // block above — this does NOT re-collect every Request.Files entry into one call;
-                        // it submits each uploaded file separately, each with its own ProcessId and its own
-                        // PDF_AI_QUEUE row, so each can be tracked (and come back READY/FAILED) independently.
-                        string PDF_CLIENT_NAME_DV = HttpContext.Current.Session["EXP_PdfClientName"] as string;
-                        int submittedCountDV = 0;
-                        var failedFilesDV = new List<string>();
+                        // Same flow as PMDG: ProcessID → Fire-and-Forget → Queue (IN PROGRESS)
+                        string PDF_CLIENT_NAME =
+                           HttpContext.Current.Session["EXP_PdfClientName"] as string;
+
+                        int totalPageCount = 0;
+                        List<string> fileNames = new List<string>();
+                        List<DockerVision_Queue.DockerVisionRequest> dvRequests = new List<DockerVision_Queue.DockerVisionRequest>();
 
                         for (int fileIndex = 0; fileIndex < Request.Files.Count; fileIndex++)
                         {
                             HttpPostedFile file = Request.Files[fileIndex];
-                            if (file == null || file.ContentLength <= 0) continue;
 
+                            if (file == null || file.ContentLength <= 0)
+                                continue;
                             string folderPath = Path.Combine(Request.PhysicalApplicationPath, savePath);
-                            string filePath = Path.Combine(folderPath, file.FileName);
-                            if (!File.Exists(filePath)) file.SaveAs(filePath);
-
-                            int pageCountDV = 0;
+                            string filePath = Path.Combine(
+                                folderPath,
+                                file.FileName);
+                            if (!File.Exists(filePath))
+                            {
+                                file.SaveAs(filePath);
+                            }
                             PdfReader reader = new PdfReader(filePath);
-                            pageCountDV = reader.NumberOfPages;
+                            int filePages = reader.NumberOfPages;
+                            totalPageCount += filePages;
                             reader.Close();
-
-                            WriteJobLog("API Hitting", "Vendor:DOCKER_VISION | File:" + file.FileName);
-                            var dvStart = DateTime.Now;
-
-                            string processIdDV;
-                            string dvError;
-                            bool submitted = DockerVisionQueueClient.SubmitAndForget(
-                                filePath: filePath,
-                                fileName: file.FileName,
-                                companyId: Connection.Company_License(),
-                                userId: Connection.Current_User(),
-                                branchCode: Connection.Current_Branch(),
-                                jobNo: txtjobPS.Text.Trim(),
-                                jobType: "EXP",
-                                workingPeriod: Working_Period,
-                                pdfClientName: PDF_CLIENT_NAME_DV,
-                                eriId: Connection.Company_License(),
-                                processId: out processIdDV,
-                                errorMessage: out dvError);
-
-                            WriteJobLog("API Response Received", "Vendor:DOCKER_VISION | File:" + file.FileName
-                                + " | ProcessId:" + processIdDV + " | Submitted:" + submitted
-                                + " | TimeTaken:" + (DateTime.Now - dvStart).TotalSeconds.ToString("0.00") + "s");
-
-                            if (submitted)
-                            {
-                                int pdfId = 0;
-                                ViewState["Pdf_Id"] = "0";
-                                pdfId = PageCount_log(PdfStatus.PREVIEW_INITIATED, pageCountDV.ToString());
-                                ViewState["Pdf_Id"] = pdfId.ToString();
-                                Insert_Queue_Record(processIdDV, file.FileName, exp_name,
-                                    DockerVisionQueueClient.VENDOR_TYPE, branch_slno, PDF_CLIENT_NAME_DV, pdfId.ToString());
-
-                                WriteJobLog("Job Queued", "Vendor:DOCKER_VISION | ProcessId:" + processIdDV
-                                    + " | Pages:" + pageCountDV);
-                                submittedCountDV++;
-                            }
-                            else
-                            {
-                                WriteJobLog("Preview Failed", "Vendor:DOCKER_VISION | File:" + file.FileName + " | " + dvError);
-                                failedFilesDV.Add(file.FileName);
-                            }
+                            fileNames.Add(file.FileName);
+                            DockerVision_Queue.DockerVisionRequest dvReq = API.Build_DockerVision_Request(filePath, txtjobPS.Text);
+                            dvReq.FormFields["PageCount"] = filePages.ToString();
+                            dvRequests.Add(dvReq);
                         }
+                        WriteJobLog("API Hitting", "Vendor:Docker_Vision | Files:" + string.Join(", ", fileNames));
+                        string dvError;
+                        string processId = DockerVision_Queue.FireAndForget(dvRequests, "EXP", out dvError);
+                        WriteJobLog("API Response Received", "Vendor:Docker_Vision | ProcessId:" + processId);
 
-                        if (submittedCountDV > 0)
+                        if (!string.IsNullOrEmpty(processId))
                         {
-                            string msg = "Extraction is in progress. " + submittedCountDV + " file(s) have been queued.";
-                            if (failedFilesDV.Count > 0)
-                                msg += " Failed to submit: " + string.Join(", ", failedFilesDV) + ".";
-                            msg += " Click OK to view Queue Status.";
-                            Alert_And_Redirect_Queue(msg);
+                            // Insert into queue table
+                            int pdfId = 0;
+                            ViewState["Pdf_Id"] = "0";
+                            pdfId = PageCount_log(PdfStatus.PREVIEW_INITIATED, totalPageCount.ToString());
+                            ViewState["Pdf_Id"] = pdfId.ToString();
+                            //Insert_Queue_Record(processId, uploadedFile.FileName, exp_name, DockerVision_Queue.VENDOR_TYPE, branch_slno, PDF_CLIENT_NAME, pdfId.ToString());
+                            Insert_Queue_Record(processId, uploadedFile.FileName, exp_name, "DOCKER_VISION", branch_slno, PDF_CLIENT_NAME, pdfId.ToString());
+
+                            WriteJobLog("Job Queued", "Vendor:Docker_Vision | ProcessId:" + processId + " | Pages:" + totalPageCount);
+
+                            Alert_And_Redirect_Queue("Extraction is in progress. Your job has been queued. Click OK to view Queue Status.");
                         }
                         else
                         {
-                            Alert_msg("Failed to submit job to Docker Vision. Please try again.");
+                            WriteJobLog("Preview Failed", "Vendor:Docker_Vision | Failed to submit job: " + dvError);
+                            Alert_msg("Failed to submit job to Docker Vision. " + dvError);
                         }
-                        return;  // exit Get_Upload_File early — queue rows only exist for files that were actually accepted
-                    }
-
-                    else if (vendor == "Docker_Vision" || vendor == "" || vendor == null)
-                    {
-                        string vendorName = string.IsNullOrEmpty(vendor) ? "Docker_Vision" : vendor;
-                        WriteJobLog("API Hitting", "Vendor:" + vendorName + " | File:" + uploadedFile.FileName);
-                        var apiStart = DateTime.Now;
-                        API_Output = API.Get_AccessToken_Invoice_Upload(strImagePath, txtjobPS.Text);
-                        WriteJobLog("API Response Received", "Vendor:" + vendorName + " | File:" + uploadedFile.FileName
-                            + " | TimeTaken:" + (DateTime.Now - apiStart).TotalSeconds.ToString("0.00") + "s");
-                        int pdfId = PageCount_log(PdfStatus.PREVIEW_INITIATED, hd_PageCount.Value);
-                        ViewState["Pdf_Id"] = pdfId.ToString();
-                        ds_API = JsonConvert.DeserializeObject<DataSet>(API_Output);
+                        return;  // exit early — same as PMDG
                     }
 
                     Getting_Mater_Details(PDF_Master_Mode, exp_name, branch_slno);
@@ -4768,6 +4732,7 @@ public partial class Export_PDF_Reader_New_AI : ThemeClass
             QueueObj.A4 = processId;
             QueueObj.A5 = importerName;
             QueueObj.A16 = brsl;
+            QueueObj.A18 = System.Configuration.ConfigurationManager.AppSettings["FireForget.ServerName"] ?? "Local"; // SERVER_NAME
             QueueObj.A17 = pdfname;
             QueueObj.A10 = "Exp";
             QueueBO.Queue_Insert(QueueObj);

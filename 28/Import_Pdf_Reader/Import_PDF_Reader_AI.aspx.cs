@@ -33,6 +33,7 @@ public partial class Import_PDF_Reader_AI : ThemeClass
     adminmaster adm = new adminmaster();
     eroyalmaster erm = new eroyalmaster();
     Global_variables QueueObj = new Global_variables();
+    AI_Queue QueueBO = new AI_Queue();
     OCR_Pdf_Port_Master OPM = new OCR_Pdf_Port_Master();
     PDFReaderLog pdflog = new PDFReaderLog();
 
@@ -139,25 +140,15 @@ public partial class Import_PDF_Reader_AI : ThemeClass
         ddlTransportMode.Items.Remove(ddlTransportMode.Items.FindByValue(TRANSPORT_MODE));
         ddlTransportMode.Items.Insert(0, new ListItem(TRANSPORT_MODE, TRANSPORT_MODE));
 
-        // ── Docker Vision queue: opened from the AI Extraction Queue screen with ?pid=... ─────────
-        // Export_PDF_Reader_New_AI already reads pid/vendor/slno/Imp_exp_name this way for EROYAL;
-        // this is the same idea for the DOCKER_VISION_QUEUE vendor, added here since Import never had it.
-        string pid = Request.QueryString["Pid"];
-        string dvVendor = Request.QueryString["vendor"];
-        string dvBranchSlno = Request.QueryString["slno"];
-        string dvImpExpName = Request.QueryString["Imp_exp_name"];
-        string dvPdfMasterMode = Request.QueryString["PDF_Master_Mode"];
-
         if (!IsPostBack)
         {
             Bind_Clients();
             AUTO_JOBNO();
             WriteJobLog("UI Opened", "Import PDF Reader AI popup opened");
 
-            if (!string.IsNullOrEmpty(pid) && dvVendor == DockerVisionQueueClient.VENDOR_TYPE)
-            {
-                LoadDockerVisionResultFromQueue(pid, dvBranchSlno, dvImpExpName, dvPdfMasterMode);
-            }
+            string pid = Request.QueryString["pid"];
+            if (!string.IsNullOrEmpty(pid) && DockerVision_Queue.IsDockerVision(Request.QueryString["vendor"]))
+                Load_DockerVision_Result(pid);
         }
 
         con = new SqlConnection(HttpContext.Current.Session["currentcomp_db"].ToString());
@@ -481,105 +472,6 @@ public partial class Import_PDF_Reader_AI : ThemeClass
             + @"', 'Import PDF Upload', function (r) { if (r) { "
             + "parent.window.location.replace('../Transaction/General_Search.aspx'); } });";
         ScriptManager.RegisterStartupScript(this, this.GetType(), "alertredirect", script, true);
-    }
-
-    // ── Docker Vision queue: alert then send the popup opener back to the Import queue screen ──────
-    // Mirrors Export_PDF_Reader_New_AI.Alert_And_Redirect_Queue.
-    public void Alert_And_Redirect_Queue_Import(string msg)
-    {
-        msg = msg.Replace("'", "\\'");
-        string script = "jAlert('" + msg + "', 'PDF AI Queue', function(r) {" +
-                        "  if(r) { parent.openAistatuscheck('IMP'); }" +
-                        "});";
-        ScriptManager.RegisterStartupScript(this, this.GetType(), "alertqueue", script, true);
-    }
-
-    // ── Docker Vision queue: reload a queued job's stored result when opened with ?pid=... ─────────
-    // Mirrors the EROYAL branch in Export_PDF_Reader_New_AI.Page_Load, adapted to how Import AI fills
-    // its own grid (FillHeaderFields / FillInvoiceRows / FillIGMAndContainerRows / ProcessItemsBatch).
-    private void LoadDockerVisionResultFromQueue(string pid, string branch_slno, string imp_name, string pdfMasterMode)
-    {
-        try
-        {
-            Global_variables QObj = new Global_variables();
-            QObj.A4 = pid;
-            DataSet ds_Ven_API = new AI_Queue().Queue_Get_By_ProcessId(QObj);
-            if (ds_Ven_API == null || ds_Ven_API.Tables.Count == 0 || ds_Ven_API.Tables[0].Rows.Count == 0)
-            {
-                Alert_msg("Could not find this job in the queue. Please try again from the Queue screen.");
-                return;
-            }
-
-            string storedJson = ds_Ven_API.Tables[0].Rows[0]["JSON_RESPONSE"].ToString();
-            if (string.IsNullOrEmpty(storedJson))
-            {
-                Alert_msg("No result is stored yet for this job. Please check again shortly.");
-                return;
-            }
-
-            // Confirmed against a real Docker Vision response (TIMKEN US sample, 2026-09-30): the stored
-            // JSON is a single flat object with top-level Header / InvoiceDetails / ItemsDetails /
-            // ItemsIGMContainerDetails arrays — the exact same shape UploadPdfExtraction/UploadPdfWithParameters
-            // already deserialize for the synchronous Royal/Docker_Vision vendors, and the same shape
-            // Get_AccessToken_Invoice's local-test reader expects. No custom conversion is needed here.
-            try { ds_API = JsonConvert.DeserializeObject<DataSet>(storedJson); }
-            catch (Exception) { ds_API = null; }
-
-            if (ds_API == null
-                || ds_API.Tables.Count < 3
-                || ds_API.Tables[0].Rows.Count == 0
-                || ds_API.Tables[1].Rows.Count == 0
-                || ds_API.Tables[2].Rows.Count == 0)
-            {
-                Alert_msg("Could not read the stored Docker Vision result. Please re-upload.");
-                return;
-            }
-
-            // Lock the importer dropdown to the one this job was queued under (same "slno--name" format
-            // used everywhere else on this page), same idea as Export's Bind_Clients(exp_name, branch_slno).
-            if (!string.IsNullOrEmpty(imp_name))
-            {
-                string exporter_key = branch_slno + "--" + imp_name;
-                ddl_ImporterName.Items.Clear();
-                ddl_ImporterName.Items.Add(new ListItem(exporter_key, exporter_key));
-                ddl_ImporterName.SelectedIndex = 0;
-                ViewState["branch_slno"] = branch_slno;
-                ViewState["imp_name"] = imp_name;
-            }
-
-            var countryCache = BuildCountryCache();
-            InitDataTables();
-
-            string pdfClientName = Get_PdfClient_Name(imp_name, branch_slno);
-            bool isEuropeanNumberFormat =
-                imp_name == "Atlas Copco (India) Private limited" || imp_name == "SIEMENS LTD" || imp_name == "Royal Tech"
-                || imp_name == "RELIANCE CONSUMER PRODUCTS LTD" || imp_name == "SIEMENS HEALTHCARE PRIVATE LIMITED"
-                || pdfClientName == "GODREJ & BOYCE MFG. CO. LTD." || pdfClientName == "LIFETECH" || pdfClientName == "PPG"
-                || pdfClientName == "ALFA LAVAL" || pdfClientName == "VEGA" || pdfClientName == "BOSCH ALFATEC" || pdfClientName == "MAHR";
-
-            FillHeaderFields(ds_API, imp_name, branch_slno, countryCache);
-            INVOICE_SLNO++;
-            FillInvoiceRows(ds_API, 1, imp_name, pdfClientName, isEuropeanNumberFormat);
-            FillIGMAndContainerRows(ds_API);
-            ProcessItemsBatch(ds_API, 1, imp_name, pdfClientName, isEuropeanNumberFormat, pdfMasterMode, countryCache);
-
-            ViewState["ItemDetails"] = Dt_Item;
-            ViewState["GridViewData"] = Dt_Item;
-            BindGridPaged(1);
-
-            if (gv_ItemPDF.Rows.Count > 0) { Select_ItemRITC(); Get_AdCode(); }
-
-            lbl_loading.Text = "<span style='color: green; font-weight: bold;'>✅ Loaded from queue. Review and click Upload.</span>";
-            btnupload.Visible = true;
-            btnDeleteSelected.Visible = true;
-
-            WriteJobLog("Queue Result Loaded", "Vendor:DOCKER_VISION | ProcessId:" + pid);
-        }
-        catch (Exception ex)
-        {
-            LogException("Docker Vision Queue Load Failed", ex);
-            Alert_msg("Error loading queued result: " + ex.Message);
-        }
     }
 
     public void Call_Server_Side_Method()
@@ -1561,9 +1453,7 @@ public partial class Import_PDF_Reader_AI : ThemeClass
 
             var countryCache = BuildCountryCache();
 
-            bool isEuropeanNumberFormat =
-                imp_name == "Atlas Copco (India) Private limited" || imp_name == "SIEMENS LTD" || imp_name == "Royal Tech" || imp_name == "RELIANCE CONSUMER PRODUCTS LTD" || imp_name == "SIEMENS HEALTHCARE PRIVATE LIMITED" || PdfClient_Name == "GODREJ & BOYCE MFG. CO. LTD."
-                || PdfClient_Name == "LIFETECH" || PdfClient_Name == "PPG" || PdfClient_Name == "ALFA LAVAL" || PdfClient_Name == "VEGA" || PdfClient_Name == "BOSCH ALFATEC" || PdfClient_Name == "MAHR";
+            bool isEuropeanNumberFormat = Is_European_Number_Format(imp_name, PdfClient_Name);
 
             InitDataTables();
 
@@ -1612,143 +1502,60 @@ public partial class Import_PDF_Reader_AI : ThemeClass
                     ViewState["Pdf_Id"] = pdfId.ToString();
                     ds_API = JsonConvert.DeserializeObject<DataSet>(API_Output);
                 }
-                 else if (vendor == "Docker_Vision" || vendor == "" || vendor == null)
+                else if (vendor == "Docker_Vision" || vendor == "" || vendor == null)
                 {
-                    string vendorName = string.IsNullOrEmpty(vendor) ? "Docker_Vision" : vendor;
-                    WriteJobLog("API Hitting", "Vendor:" + vendorName + " | File:" + uploadedFile.FileName);
-                    var apiStart = DateTime.Now;
-                    API_Output = UploadPdfWithParameters(strImagePath);
-                    WriteJobLog("API Response Received", "Vendor:" + vendorName + " | File:" + uploadedFile.FileName
-                        + " | TimeTaken:" + (DateTime.Now - apiStart).TotalSeconds.ToString("0.00") + "s");
-                    int pdfId = PageCount_log(PdfStatus.PREVIEW_INITIATED, hd_PageCount.Value);
-                    ViewState["Pdf_Id"] = pdfId.ToString();
-                    ds_API = JsonConvert.DeserializeObject<DataSet>(API_Output);
-                }
-                else if (vendor == DockerVisionQueueClient.VENDOR_TYPE)
-                {
-                    // Fire-and-forget queue path (distinct from the synchronous "Docker_Vision" branch above):
-                    // submit and return immediately — the extraction result comes back later via the
-                    // FireForget callback API and is picked up in Page_Load when the user reopens with ?pid=.
-                    // Same multipart contract UploadPdfWithParameters already uses successfully (see
-                    // DockerVisionQueueClient remarks) — only ProcessId/CallbackUrl are new.
-                    WriteJobLog("API Hitting", "Vendor:DOCKER_VISION | File:" + uploadedFile.FileName);
-                    var dvStart = DateTime.Now;
+                    // Same flow as PMDG: ProcessID -> Fire-and-Forget -> Queue (IN PROGRESS)
+                    int totalPageCount = 0;
+                    List<string> fileNames = new List<string>();
+                    List<DockerVision_Queue.DockerVisionRequest> dvRequests = new List<DockerVision_Queue.DockerVisionRequest>();
 
-                    string processIdDV;
-                    string dvError;
-                    bool submitted = DockerVisionQueueClient.SubmitAndForget(
-                        filePath: strImagePath,
-                        fileName: uploadedFile.FileName,
-                        companyId: Connection.Company_License(),
-                        userId: Connection.Current_User(),
-                        branchCode: Connection.Current_Branch(),
-                        jobNo: txtjobPS.Text.Trim(),
-                        jobType: "IMP",
-                        workingPeriod: Working_Period,
-                        pdfClientName: PdfClient_Name,
-                        eriId: Connection.Company_License(),
-                        processId: out processIdDV,
-                        errorMessage: out dvError);
-
-                    WriteJobLog("API Response Received", "Vendor:DOCKER_VISION | ProcessId:" + processIdDV
-                        + " | Submitted:" + submitted
-                        + " | TimeTaken:" + (DateTime.Now - dvStart).TotalSeconds.ToString("0.00") + "s");
-
-                    if (submitted)
+                    for (int fileIndex = 0; fileIndex < fileCount; fileIndex++)
                     {
-                        int pdfId = PageCount_log(PdfStatus.PREVIEW_INITIATED, hd_PageCount.Value);
+                        HttpPostedFile file = Request.Files[fileIndex];
+                        if (file == null || file.ContentLength <= 0) continue;
+
+                        string filePath = Path.Combine(strFolderPath, file.FileName);
+                        if (!File.Exists(filePath)) file.SaveAs(filePath);
+
+                        int filePages = 0;
+                        if (Path.GetExtension(filePath).Equals(".pdf", StringComparison.OrdinalIgnoreCase))
+                        {
+                            PdfReader pdfReader = new PdfReader(filePath);
+                            filePages = pdfReader.NumberOfPages;
+                            totalPageCount += filePages;
+                            pdfReader.Close();
+                        }
+                        fileNames.Add(file.FileName);
+                        DockerVision_Queue.DockerVisionRequest dvReq = Build_DockerVision_Request(filePath);
+                        dvReq.FormFields["PageCount"] = filePages.ToString();
+                        dvRequests.Add(dvReq);
+                    }
+                    WriteJobLog("API Hitting", "Vendor:Docker_Vision | Files:" + string.Join(", ", fileNames));
+                    string dvError;
+                    string processId = DockerVision_Queue.FireAndForget(dvRequests, "IMP", out dvError);
+                    WriteJobLog("API Response Received", "Vendor:Docker_Vision | ProcessId:" + processId);
+
+                    if (!string.IsNullOrEmpty(processId))
+                    {
+                        ViewState["Pdf_Id"] = "0";
+                        int pdfId = PageCount_log(PdfStatus.PREVIEW_INITIATED, totalPageCount.ToString());
                         ViewState["Pdf_Id"] = pdfId.ToString();
+                        Insert_Queue_Record(processId, uploadedFile.FileName, imp_name, DockerVision_Queue.VENDOR_TYPE, branch_slno, PdfClient_Name, pdfId.ToString());
 
-                        Global_variables QueueInsertObj = new Global_variables();
-                        QueueInsertObj.A2 = uploadedFile.FileName;         // FILE_NAME
-                        // "-<pdfId>" suffix: PDF_AI_QUEUE_INSERT_UPDATE_SELECT splits VENDOR_TYPE on the
-                        // first '-' into VENDOR_TYPE + PDF_ID (same convention Export's Insert_Queue_Record
-                        // uses for PMDG), so UPDATE_JOBNO can later link this row to PDF_AI_COUNT_DETAILS.
-                        QueueInsertObj.A3 = DockerVisionQueueClient.VENDOR_TYPE + "-" + pdfId; // VENDOR_TYPE
-                        QueueInsertObj.A4 = processIdDV;                   // PROCESS_ID
-                        QueueInsertObj.A5 = imp_name;                      // IMPORTER_NAME
-                        QueueInsertObj.A10 = "IMP";                        // JOB_TYPE
-                        QueueInsertObj.A16 = branch_slno;                  // SL_NO
-                        QueueInsertObj.A17 = PdfClient_Name;               // PDF_CLIENT_NAME
-                        new AI_Queue().Queue_Insert(QueueInsertObj);
+                        WriteJobLog("Job Queued", "Vendor:Docker_Vision | ProcessId:" + processId + " | Pages:" + totalPageCount);
 
-                        WriteJobLog("Job Queued", "Vendor:DOCKER_VISION | ProcessId:" + processIdDV);
-                        Alert_And_Redirect_Queue_Import(
-                            "Extraction is in progress. Your job has been queued. Click OK to view Queue Status.");
+                        Alert_And_Redirect_Queue("Extraction is in progress. Your job has been queued. Click OK to view Queue Status.");
                     }
                     else
                     {
-                        WriteJobLog("Preview Failed", "Vendor:DOCKER_VISION | " + dvError);
-                        Alert_msg("Failed to submit job to Docker Vision. Please try again.");
+                        WriteJobLog("Preview Failed", "Vendor:Docker_Vision | Failed to submit job: " + dvError);
+                        Alert_msg("Failed to submit job to Docker Vision. " + dvError);
                     }
-                    return; // exit Get_Upload_File early — no queue row when the submit itself failed
+                    return response;  // exit early - same as PMDG
                 }
 
-
-                if (ds_API.Tables[0].Rows.Count == 0
-                    || ds_API.Tables[1].Rows.Count == 0
-                    || ds_API.Tables[2].Rows.Count == 0) continue;
-
-                FillHeaderFields(ds_API, imp_name, branch_slno, countryCache);
-                INVOICE_SLNO++;
-                FillInvoiceRows(ds_API, fileCount, imp_name, PdfClient_Name, isEuropeanNumberFormat);
-                FillIGMAndContainerRows(ds_API);
-                ProcessItemsBatch(ds_API, fileCount, imp_name, PdfClient_Name,
-                    isEuropeanNumberFormat, PDF_Master_Mode, countryCache);
-
-                ViewState["ItemDetails"] = Dt_Item;
-                ViewState["GridViewData"] = Dt_Item;
-
-                BindGridPaged(1);
-                TimeSpan extractionDuration = DateTime.Now - extractionStartTime;
- 
- 
- 
-                lbl_LiveExtractionTimer.Text = string.Format("End Time- {0:mm\\:ss}", extractionDuration);
-
-                lbl_loading.Text = "<span style='color: green; font-weight: bold;'>✅ File converted successfully... Click Upload.</span>";
-                btnupload.Visible = true;
-                btnDeleteSelected.Visible = true;
-
-                if (gv_ItemPDF.Rows.Count > 0)
-                {
-                    hdn_missed_Desc.Value = "0";
-
-                    var hsList = new List<string>();
-                    if (ds_get_data != null && ds_get_data.Tables.Count > 0 && ds_get_data.Tables[0].Rows.Count > 0)
-                    {
-                        foreach (DataRow dr in ds_get_data.Tables[0].Rows)
-                        {
-                            string code = dr["PRODUCT_RITC"].ToString();
-                            if (!string.IsNullOrEmpty(code)) hsList.Add(code);
-                        }
-                    }
-                    HSCodeJson = _jss.Serialize(hsList);
-
-                    DataTable dtListBox = Dt_Item.Rows.Count > 1000
-                        ? Dt_Item.AsEnumerable().Take(1000).CopyToDataTable() : Dt_Item;
-
-                    ListBox_ItemSlno.DataSource = dtListBox;
-                    ListBox_ItemSlno.DataTextField = "ItemSlNo";
-                    ListBox_ItemSlno.DataValueField = "ItemSlNo";
-                    ListBox_ItemSlno.DataBind();
-                }
-
-                if (gv_ItemPDF.Rows.Count > 0) { Select_ItemRITC(); Get_AdCode(); }
-
-                lblmsg.Text = "";
-
-                if (gv_ItemPDF.HeaderRow != null)
-                {
-                    gv_ItemPDF.UseAccessibleHeader = true;
-                    gv_ItemPDF.HeaderRow.TableSection = TableRowSection.TableHeader;
-                }
-
-                Upload_Count = "0";
-                Upload_page_Count = "0";
-                PageCount_log(PdfStatus.PREVIEW_SUCCESS, hd_PageCount.Value);
-                WriteJobLog("Preview Success", "File:" + uploadedFile.FileName + " | Pages:" + GetPageCountForLog());
-                Session["ImportPdfAI_PreviewSuccess"] = "1";
+                Bind_Extracted_Result(fileCount, imp_name, branch_slno, PdfClient_Name,
+                    isEuropeanNumberFormat, PDF_Master_Mode, countryCache, uploadedFile.FileName);
             }
         }
         catch (WebException webEx)
@@ -1771,6 +1578,169 @@ public partial class Import_PDF_Reader_AI : ThemeClass
         }
 
         return response;
+    }
+
+    // ─── BIND EXTRACTED RESULT (ds_API -> grid) — used by Preview and Queue (pid) load ───
+    private void Bind_Extracted_Result(int fileCount, string imp_name, string branch_slno, string PdfClient_Name,
+        bool isEuropeanNumberFormat, string PDF_Master_Mode, Dictionary<string, string> countryCache, string fileName)
+    {
+        if (ds_API.Tables[0].Rows.Count == 0
+            || ds_API.Tables[1].Rows.Count == 0
+            || ds_API.Tables[2].Rows.Count == 0) return;
+
+        FillHeaderFields(ds_API, imp_name, branch_slno, countryCache);
+        INVOICE_SLNO++;
+        FillInvoiceRows(ds_API, fileCount, imp_name, PdfClient_Name, isEuropeanNumberFormat);
+        FillIGMAndContainerRows(ds_API);
+        ProcessItemsBatch(ds_API, fileCount, imp_name, PdfClient_Name,
+            isEuropeanNumberFormat, PDF_Master_Mode, countryCache);
+
+        ViewState["ItemDetails"] = Dt_Item;
+        ViewState["GridViewData"] = Dt_Item;
+
+        BindGridPaged(1);
+        TimeSpan extractionDuration = DateTime.Now - extractionStartTime;
+ 
+ 
+ 
+        lbl_LiveExtractionTimer.Text = string.Format("End Time- {0:mm\\:ss}", extractionDuration);
+
+        lbl_loading.Text = "<span style='color: green; font-weight: bold;'>✅ File converted successfully... Click Upload.</span>";
+        btnupload.Visible = true;
+        btnDeleteSelected.Visible = true;
+
+        if (gv_ItemPDF.Rows.Count > 0)
+        {
+            hdn_missed_Desc.Value = "0";
+
+            var hsList = new List<string>();
+            if (ds_get_data != null && ds_get_data.Tables.Count > 0 && ds_get_data.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds_get_data.Tables[0].Rows)
+                {
+                    string code = dr["PRODUCT_RITC"].ToString();
+                    if (!string.IsNullOrEmpty(code)) hsList.Add(code);
+                }
+            }
+            HSCodeJson = _jss.Serialize(hsList);
+
+            DataTable dtListBox = Dt_Item.Rows.Count > 1000
+                ? Dt_Item.AsEnumerable().Take(1000).CopyToDataTable() : Dt_Item;
+
+            ListBox_ItemSlno.DataSource = dtListBox;
+            ListBox_ItemSlno.DataTextField = "ItemSlNo";
+            ListBox_ItemSlno.DataValueField = "ItemSlNo";
+            ListBox_ItemSlno.DataBind();
+        }
+
+        if (gv_ItemPDF.Rows.Count > 0) { Select_ItemRITC(); Get_AdCode(); }
+
+        lblmsg.Text = "";
+
+        if (gv_ItemPDF.HeaderRow != null)
+        {
+            gv_ItemPDF.UseAccessibleHeader = true;
+            gv_ItemPDF.HeaderRow.TableSection = TableRowSection.TableHeader;
+        }
+
+        Upload_Count = "0";
+        Upload_page_Count = "0";
+        PageCount_log(PdfStatus.PREVIEW_SUCCESS, hd_PageCount.Value);
+        WriteJobLog("Preview Success", "File:" + fileName + " | Pages:" + GetPageCountForLog());
+        Session["ImportPdfAI_PreviewSuccess"] = "1";
+    }
+
+    private bool Is_European_Number_Format(string imp_name, string PdfClient_Name)
+    {
+        return imp_name == "Atlas Copco (India) Private limited" || imp_name == "SIEMENS LTD" || imp_name == "Royal Tech" || imp_name == "RELIANCE CONSUMER PRODUCTS LTD" || imp_name == "SIEMENS HEALTHCARE PRIVATE LIMITED" || PdfClient_Name == "GODREJ & BOYCE MFG. CO. LTD."
+            || PdfClient_Name == "LIFETECH" || PdfClient_Name == "PPG" || PdfClient_Name == "ALFA LAVAL" || PdfClient_Name == "VEGA" || PdfClient_Name == "BOSCH ALFATEC" || PdfClient_Name == "MAHR";
+    }
+
+    // ─── LOAD STORED DOCKER VISION JOB BY PROCESS ID (Queue Status -> View) ───
+    // Everything is picked from DB for this ProcessID: importer, branch sl.no, PdfClientName, Pdf Id, page count, JSON.
+    private void Load_DockerVision_Result(string pid)
+    {
+        try
+        {
+            string jobError;
+            DockerVision_Queue.DockerVisionJob job = DockerVision_Queue.Get_Ready_Job(pid, "IMP", out jobError);
+            if (job == null)
+            {
+                WriteJobLog("Queue Result Load Failed", "ProcessId:" + pid + " | " + jobError);
+                Alert_msg(jobError);
+                return;
+            }
+
+            string imp_name = job.PartyName;
+            string branch_slno = job.SlNo;
+            string PdfClient_Name = job.MasterPdfClientName;
+
+            ViewState["branch_slno"] = branch_slno;
+            ViewState["imp_name"] = imp_name;
+            ViewState["PdfClient_Name"] = string.IsNullOrWhiteSpace(PdfClient_Name) ? null : PdfClient_Name;
+            PdfClientName = job.PdfClientName;
+            ViewState["PdfClientName"] = PdfClientName;
+            ViewState["Pdf_Id"] = job.PdfId;
+            hd_PageCount.Value = job.PageCount;
+
+            ListItem li = ddl_ImporterName.Items.FindByValue(branch_slno + "--" + imp_name);
+            if (li != null) { ddl_ImporterName.ClearSelection(); li.Selected = true; }
+
+            List<string> jsonList = job.JsonList();
+            ViewState["FileUploadCount"] = jsonList.Count;
+            var countryCache = BuildCountryCache();
+            bool isEuropeanNumberFormat = Is_European_Number_Format(imp_name, PdfClient_Name);
+            InitDataTables();
+            extractionStartTime = DateTime.Now;
+
+            foreach (string dvJson in jsonList)
+            {
+                ds_API = JsonConvert.DeserializeObject<DataSet>(dvJson);
+                Bind_Extracted_Result(jsonList.Count, imp_name, branch_slno, PdfClient_Name,
+                    isEuropeanNumberFormat, hdn_PDF_Master.Value, countryCache, job.FileName);
+            }
+            Get_AdCode();
+        }
+        catch (Exception ex)
+        {
+            LogException("Queue Result Load Failed", ex);
+        }
+    }
+
+    // ── Insert Queue Record (same as Export / PMDG) ───────────────────
+    public void Insert_Queue_Record(string processId, string fileName, string importerName, string vendorType, string brsl, string pdfname, string Pdf_Id)
+    {
+        try
+        {
+            if (!string.IsNullOrEmpty(vendorType))
+            {
+                vendorType = vendorType + "-" + Pdf_Id;
+            }
+            QueueObj.A1 = Session["JOBNO"] != null ? "temp" + Session["JOBNO"].ToString() : "";
+            QueueObj.A2 = fileName;
+            QueueObj.A3 = vendorType;
+            QueueObj.A4 = processId;
+            QueueObj.A5 = importerName;
+            QueueObj.A16 = brsl;
+            QueueObj.A18 = System.Configuration.ConfigurationManager.AppSettings["FireForget.ServerName"] ?? "Local"; // SERVER_NAME
+            QueueObj.A17 = pdfname;
+            QueueObj.A10 = "Imp";
+            QueueBO.Queue_Insert(QueueObj);
+        }
+        catch (Exception ex)
+        {
+            log.makeLog("Queue Insert Error: " + ex.Message);
+        }
+    }
+
+    // ── Alert and Redirect to Queue Status Screen ─────────────────────
+    public void Alert_And_Redirect_Queue(string msg)
+    {
+        msg = msg.Replace("'", "\\'");
+        string script = "jAlert('" + msg + "', 'PDF AI Queue', function(r) {" +
+                        "  if(r) { parent.openAistatuscheck('IMP'); }" +
+                        "});";
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "alertqueue", script, true);
     }
 
     // ─── BUILD COUNTRY CACHE ──────
@@ -1959,9 +1929,8 @@ public partial class Import_PDF_Reader_AI : ThemeClass
     }
 
     // ─── UPLOAD PDF WITH PARAMETERS ─────────────────────────────────────────
-    public string UploadPdfWithParameters(string FilePath)
+    public DockerVision_Queue.DockerVisionRequest Build_DockerVision_Request(string FilePath)
     {
-        string result = "";
         string imp_name = ViewState["imp_name"].ToString().Trim();
         string PdfClient_Name = "";
 
@@ -1994,33 +1963,20 @@ public partial class Import_PDF_Reader_AI : ThemeClass
 
         ViewState["PdfClientName"] = PdfClientName;
 
-        string boundary = "---------------------------" + DateTime.Now.Ticks.ToString("x");
-        byte[] boundaryBytes = Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\n");
-        byte[] trailer = Encoding.ASCII.GetBytes("\r\n--" + boundary + "--\r\n");
-
-        HttpWebRequest request;
+        DockerVision_Queue.DockerVisionRequest req = new DockerVision_Queue.DockerVisionRequest();
+        req.FilePath = FilePath;
         if (PdfClientName.Equals("Nordex", StringComparison.OrdinalIgnoreCase))
         {
-            request = (HttpWebRequest)WebRequest.Create("http://www.ocrapiservice.royaltechsystems.co.in/api/invoice/royaltechocr");
-            request.Headers.Add("ApiKey", "Royal");
+            req.ApiUrl = "http://www.ocrapiservice.royaltechsystems.co.in/api/invoice/royaltechocr";
+            req.ApiKey = "Royal";
         }
         else
         {
-            request = (HttpWebRequest)WebRequest.Create("https://asia-south1-serene-essence-419307.cloudfunctions.net/royal-invoice");
-            request.Headers.Add("ApiKey", "12345");
+            req.ApiUrl = "https://asia-south1-serene-essence-419307.cloudfunctions.net/royal-invoice";
+            req.ApiKey = "12345";
         }
 
-        request.Method = "POST";
-        request.ContentType = "multipart/form-data; boundary=" + boundary;
-        request.KeepAlive = true;
-        request.AllowWriteStreamBuffering = false;
-        request.SendChunked = true;
-        request.Timeout = 10 * 60 * 1000;
-        request.ReadWriteTimeout = 10 * 60 * 1000;
-
-        Stream requestStream = request.GetRequestStream();
-
-        NameValueCollection formFields = new NameValueCollection
+        req.FormFields = new NameValueCollection
         {
             { "CompanyID", Connection.Company_License() },
             { "UserID", Connection.Current_User() },
@@ -2035,38 +1991,12 @@ public partial class Import_PDF_Reader_AI : ThemeClass
             { "InvoiceStartTime", DateTime.Now.ToString() },
             { "PdfClientName", PdfClientName }
         };
+        return req;
+    }
 
-        foreach (string key in formFields)
-        {
-            requestStream.Write(boundaryBytes, 0, boundaryBytes.Length);
-            string fieldData = "Content-Disposition: form-data; name=\"" + key + "\"\r\n\r\n" + formFields[key];
-            byte[] fieldBytes = Encoding.UTF8.GetBytes(fieldData);
-            requestStream.Write(fieldBytes, 0, fieldBytes.Length);
-        }
-
-        requestStream.Write(boundaryBytes, 0, boundaryBytes.Length);
-        string header = "Content-Disposition: form-data; name=\"File\"; filename=\""
-            + Path.GetFileName(FilePath) + "\"\r\nContent-Type: application/pdf\r\n\r\n";
-        byte[] headerBytes = Encoding.UTF8.GetBytes(header);
-        requestStream.Write(headerBytes, 0, headerBytes.Length);
-
-        using (var fileStream = new FileStream(FilePath, FileMode.Open, FileAccess.Read, FileShare.Read, 131072))
-        {
-            byte[] buffer = new byte[131072];
-            int bytesRead;
-            while ((bytesRead = fileStream.Read(buffer, 0, buffer.Length)) > 0)
-                requestStream.Write(buffer, 0, bytesRead);
-        }
-
-        requestStream.Write(trailer, 0, trailer.Length);
-        requestStream.Close();
-
-        using (WebResponse webResp = request.GetResponse())
-        using (StreamReader reader = new StreamReader(webResp.GetResponseStream()))
-        {
-            result = reader.ReadToEnd();
-        }
-        return result;
+    public string UploadPdfWithParameters(string FilePath)
+    {
+        return DockerVision_Queue.Post_Multipart(Build_DockerVision_Request(FilePath));
     }
 
     // ─── BIND GRID VIEW DATA ───────
@@ -2244,18 +2174,6 @@ public partial class Import_PDF_Reader_AI : ThemeClass
                     i = insert_update("", "S");
                     if (i == 1)
                     {
-                        // If this job was loaded from the AI Extraction Queue (?pid=...), link the queue
-                        // row to the real job number now, mirroring Export_PDF_Reader_New_AI.btnupload_Click.
-                        // Must happen before AUTO_JOBNO() resets txtjobPS.Text below.
-                        string dvPid = Request.QueryString["Pid"];
-                        if (!string.IsNullOrEmpty(dvPid))
-                        {
-                            Global_variables QObj = new Global_variables();
-                            QObj.A1 = txtjobPS.Text.Trim();
-                            QObj.A2 = dvPid;
-                            new AI_Queue().Job_No_Update(QObj);
-                        }
-
                         AUTO_JOBNO();
                         lbl_loading.Text = "<span style='color: green; font-weight: bold;'>✅ Job Created Successfully...</span>";
 

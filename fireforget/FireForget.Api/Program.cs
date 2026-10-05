@@ -175,6 +175,170 @@ app.MapPost("/api/v1/callback/{vendor}", async (
     return op;
 });
 
+// ── Docker Vision async callback (GUID ProcessId) ─────────────────────────────────────────────
+// Cochin POSTs form-data to this fixed URL. The routing and job key are form fields, not part of the URL:
+//   ServerName = key under Routing:Servers (admin DB connection), e.g. Live / Info / Pro / Local
+//   CompanyID  = ERI ID (COMPANY_ID in PDF_AI_QUEUE)
+//   ProcessId  = GUID that 4.0 generated and stored in PDF_AI_QUEUE.PROCESS_ID
+//   JSON       = a file part named JsonResponse, or a text field named JsonResponse / JsonData / Result
+app.MapPost("/api/v1/callback/docker-vision/", async (
+    HttpRequest req, IConfiguration cfg, ILogger<Program> logger) =>
+{
+    var apiKey = cfg["Callback:ApiKey"];
+    if (string.IsNullOrEmpty(apiKey)) return Results.StatusCode(StatusCodes.Status503ServiceUnavailable);
+    if (!KeysMatch(req.Headers["X-Api-Key"].ToString(), apiKey)) return Results.Unauthorized();
+
+    if (!req.HasFormContentType) return Results.BadRequest(new { Message = "Callback must be sent as form-data" });
+    var form = await req.ReadFormAsync();
+
+    var serverName = form["ServerName"].ToString().Trim();
+    var eri = form["CompanyID"].ToString().Trim();
+    var processId = form["ProcessId"].ToString().Trim();
+
+    var missing = new List<string>();
+    foreach (var required in new[] { "ServerName", "CompanyID", "ProcessId", "JobNo", "FileName", "UserID",
+        "BranchCode", "WorkingPeriod", "JobType", "PdfClientName" })
+    {
+        if (string.IsNullOrWhiteSpace(form[required].ToString())) missing.Add(required);
+    }
+    if (missing.Count > 0)
+        return Results.BadRequest(new { Message = "Required form-data fields missing: " + string.Join(", ", missing) });
+
+    if (!Guid.TryParse(processId, out _)) return Results.BadRequest(new { Message = "ProcessId must be a GUID" });
+
+    var adminConn = cfg["Routing:Servers:" + serverName];
+    if (string.IsNullOrEmpty(adminConn)) return Results.NotFound(new { Message = "Unknown server name: " + serverName });
+
+    // The JSON is a file part named JsonResponse (or any file part), or a text field named JsonResponse / JsonData / Result.
+    string body;
+    var file = form.Files["JsonResponse"] ?? form.Files.FirstOrDefault();
+    if (file != null)
+    {
+        using var fr = new StreamReader(file.OpenReadStream(), Encoding.UTF8);
+        body = await fr.ReadToEndAsync();
+    }
+    else
+    {
+        body = form["JsonResponse"].ToString();
+        if (string.IsNullOrWhiteSpace(body)) body = form["JsonData"].ToString();
+        if (string.IsNullOrWhiteSpace(body)) body = form["Result"].ToString();
+    }
+
+    // 0) The JSON must belong to the company in the form: Header[0].CompanyID == CompanyID (case-insensitive).
+    //    A result for another company is rejected and nothing is stored.
+    string? jsonCompany = null;
+    try
+    {
+        var root = System.Text.Json.Nodes.JsonNode.Parse(body);
+        var first = root is System.Text.Json.Nodes.JsonArray arr ? arr.FirstOrDefault() : root;
+        jsonCompany = first?["Header"] is System.Text.Json.Nodes.JsonArray hdr && hdr.Count > 0
+            ? hdr[0]?["CompanyID"]?.GetValue<string>()
+            : first?["Header"]?["CompanyID"]?.GetValue<string>();
+    }
+    catch { /* not JSON → handled below */ }
+
+    if (string.IsNullOrWhiteSpace(jsonCompany))
+        return Results.BadRequest(new { Message = "Response JSON has no Header CompanyID" });
+    if (!string.Equals(jsonCompany.Trim(), eri, StringComparison.OrdinalIgnoreCase))
+    {
+        logger.LogWarning("Rejected callback ProcessId={Pid}: JSON CompanyID {Json} does not match CompanyID {Eri}", processId, jsonCompany, eri);
+        return Results.UnprocessableEntity(new { Message = "CompanyID in the JSON (" + jsonCompany + ") does not match CompanyID " + eri });
+    }
+
+    // 1) ERI → company database (latest working period row in the admin DB)
+    string? companyConn = null;
+    using (var admin = new Microsoft.Data.SqlClient.SqlConnection(adminConn))
+    {
+        await admin.OpenAsync();
+        using var cmd = new Microsoft.Data.SqlClient.SqlCommand(
+            "SELECT TOP 1 SERVER_NAME, DATABASE_NAME, LOGIN_NAME, PWD FROM dbo.DATABASE_DETAILS " +
+            "WHERE COMPANY_LICENSE = @lic ORDER BY DATABASE_ID DESC", admin);
+        cmd.Parameters.AddWithValue("@lic", eri);
+        using var rd = await cmd.ExecuteReaderAsync();
+        if (await rd.ReadAsync())
+        {
+            companyConn = new Microsoft.Data.SqlClient.SqlConnectionStringBuilder
+            {
+                DataSource = rd.GetString(0),
+                InitialCatalog = rd.GetString(1),
+                UserID = rd.GetString(2),
+                Password = rd.GetString(3),
+                TrustServerCertificate = true,
+                ConnectTimeout = 15
+            }.ConnectionString;
+        }
+    }
+    if (companyConn == null) return Results.NotFound(new { Message = "No company database for CompanyID " + eri });
+
+    // 2) classify READY / FAILED from the body (same rules as the worker)
+    var (status, reason) = CallbackClassifier.Classify(Get(req, "Status"), body);
+
+    // 3) store through the EXISTING procedure flags
+    using (var company = new Microsoft.Data.SqlClient.SqlConnection(companyConn))
+    {
+        await company.OpenAsync();
+
+        // GET_BY_PROCESS_ID: row must exist; ignore a repeat of a real response
+        string? currentStatus = null; string? currentJson = null; bool found = false;
+        using (var get = new Microsoft.Data.SqlClient.SqlCommand("dbo.PDF_AI_QUEUE_INSERT_UPDATE_SELECT", company) { CommandType = System.Data.CommandType.StoredProcedure })
+        {
+            get.Parameters.AddWithValue("@MFLAG", "GET_BY_PROCESS_ID");
+            get.Parameters.AddWithValue("@PROCESS_ID", processId);
+            using var rd = await get.ExecuteReaderAsync();
+            if (await rd.ReadAsync()) { found = true; currentStatus = rd["STATUS"] as string; currentJson = rd["JSON_RESPONSE"] as string; }
+        }
+        if (!found) return Results.NotFound(new { Message = "No queue row for ProcessId " + processId });
+        if (!string.IsNullOrWhiteSpace(currentJson) && (currentStatus == "READY" || currentStatus == "FAILED"))
+            return Results.Ok(new { processId, Message = "Duplicate callback ignored" });
+
+        using (var upd = new Microsoft.Data.SqlClient.SqlCommand("dbo.PDF_AI_QUEUE_INSERT_UPDATE_SELECT", company) { CommandType = System.Data.CommandType.StoredProcedure })
+        {
+            upd.Parameters.AddWithValue("@MFLAG", "UPDATE_STATUS");
+            upd.Parameters.AddWithValue("@PROCESS_ID", processId);
+            upd.Parameters.AddWithValue("@STATUS", status);
+            upd.Parameters.Add(new Microsoft.Data.SqlClient.SqlParameter("@JSON_RESPONSE", System.Data.SqlDbType.NVarChar, -1) { Value = string.IsNullOrWhiteSpace(body) ? "{\"Status\":\"Failed\",\"Reason\":\"Empty body\"}" : body });
+            var err = new Microsoft.Data.SqlClient.SqlParameter("@ErrorMsg", System.Data.SqlDbType.NVarChar, 1000) { Direction = System.Data.ParameterDirection.Output };
+            upd.Parameters.Add(err);
+            await upd.ExecuteNonQueryAsync();
+            if ((err.Value as string) != "SUCCESS") return Results.StatusCode(StatusCodes.Status500InternalServerError);
+        }
+
+        // Submit fields that come back in the callback form-data and have a PDF_AI_QUEUE column.
+        // The procedure has no parameters for them, so they are written on the same row here.
+        // Empty fields are left unchanged.
+        var columns = new Dictionary<string, string>
+        {
+            ["JOB_NO"] = form["JobNo"].ToString().Trim(),
+            ["FILE_NAME"] = form["FileName"].ToString().Trim(),
+            ["COMPANY_ID"] = form["CompanyID"].ToString().Trim(),
+            ["USER_ID"] = form["UserID"].ToString().Trim(),
+            ["BRANCH_CODE"] = form["BranchCode"].ToString().Trim(),
+            ["WORKING_PERIOD"] = form["WorkingPeriod"].ToString().Trim(),
+            ["JOB_TYPE"] = form["JobType"].ToString().Trim(),
+            ["PDF_CLIENT_NAME"] = form["PdfClientName"].ToString().Trim()
+        };
+        var setParts = new List<string>();
+        using var fieldCmd = new Microsoft.Data.SqlClient.SqlCommand { Connection = company };
+        foreach (var col in columns)
+        {
+            if (string.IsNullOrEmpty(col.Value)) continue;
+            setParts.Add(col.Key + " = @" + col.Key);
+            fieldCmd.Parameters.AddWithValue("@" + col.Key, col.Value);
+        }
+        if (setParts.Count > 0)
+        {
+            fieldCmd.CommandText = "UPDATE PDF_AI_QUEUE SET " + string.Join(", ", setParts) +
+                ", UPDATED_DATE = GETDATE() WHERE PROCESS_ID = @pid";
+            fieldCmd.Parameters.AddWithValue("@pid", processId);
+            await fieldCmd.ExecuteNonQueryAsync();
+        }
+
+        logger.LogInformation("Stored {Status} ProcessId={Pid} ERI={Eri} Server={Server}{Reason}", status, processId, eri, serverName, reason == null ? "" : " (" + reason + ")");
+    }
+
+    return Results.Accepted(value: new { processId, status, Message = "Result stored" });
+});
+
 app.Run();
 
 static string? Get(HttpRequest req, string name)

@@ -34,6 +34,8 @@ public class AI_Queue
             param[14] = new SqlParameter("@MFLAG", "INSERT");
             param[15] = new SqlParameter("@ErrorMsg", SqlDbType.NVarChar, 1000);
             param[15].Direction = ParameterDirection.Output;
+            // SERVER_NAME (A18) — the server the job was submitted from; used to route the Docker Vision callback.
+            param[16] = new SqlParameter("@SERVER_NAME", (object)objUserBL.A18 ?? DBNull.Value);
             ds = Connection.Get_Dataset("PDF_AI_QUEUE_INSERT_UPDATE_SELECT", param);
         }
         catch (Exception ex) { Connection.Error_Msg(ex.Message); }

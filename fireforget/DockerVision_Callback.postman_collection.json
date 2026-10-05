@@ -1,0 +1,47 @@
+{
+  "info": {
+    "_postman_id": "7f1c2d9e-3b4a-4c8e-9a61-0d2f5e8b1a01",
+    "name": "FireForget - Docker Vision callback",
+    "description": "Test the Docker Vision callback endpoint. Set the processId variable to the GUID from the queue row, and choose the JSON file for the JsonResponse field.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:47204", "type": "string" },
+    { "key": "apiKey", "value": "LOCAL_TEST_KEY", "type": "string" },
+    { "key": "processId", "value": "00000000-0000-0000-0000-000000000000", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "POST docker-vision callback",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "X-Api-Key", "value": "{{apiKey}}", "type": "text" }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            { "key": "ServerName", "value": "Local", "type": "text" },
+            { "key": "CompanyID", "value": "ERI00001", "type": "text" },
+            { "key": "ProcessId", "value": "{{processId}}", "type": "text" },
+            { "key": "JobNo", "value": "JOB-0001", "type": "text" },
+            { "key": "FileName", "value": "sample.pdf", "type": "text" },
+            { "key": "UserID", "value": "ADMIN", "type": "text" },
+            { "key": "BranchCode", "value": "MAIN", "type": "text" },
+            { "key": "WorkingPeriod", "value": "2026-2027", "type": "text" },
+            { "key": "JobType", "value": "IMP", "type": "text" },
+            { "key": "PdfClientName", "value": "TIMKEN US", "type": "text" },
+            { "key": "JsonResponse", "type": "file", "src": [] }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/callback/docker-vision/",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "callback", "docker-vision", ""]
+        },
+        "description": "Expected: 202 Accepted with status READY or FAILED. 400 if a required field is missing, 401 if the API key is wrong, 422 if the JSON CompanyID does not match CompanyID."
+      },
+      "response": []
+    }
+  ]
+}
