@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Fire&Forget\\Auto Mail\\ERoyal.OCRDailyReportAutomation\\ERoyal.OCRDailyReportAutomation\\AI_MAIL_SCHEDULER.csproj": {}
+    "E:\\Fire& Forget_Last Host Complete BackUp\\Fire&Forget\\Auto Mail\\ERoyal.OCRDailyReportAutomation\\ERoyal.OCRDailyReportAutomation\\AI_MAIL_SCHEDULER.csproj": {}
   },
   "projects": {
-    "E:\\Fire&Forget\\Auto Mail\\ERoyal.OCRDailyReportAutomation\\ERoyal.OCRDailyReportAutomation\\AI_MAIL_SCHEDULER.csproj": {
+    "E:\\Fire& Forget_Last Host Complete BackUp\\Fire&Forget\\Auto Mail\\ERoyal.OCRDailyReportAutomation\\ERoyal.OCRDailyReportAutomation\\AI_MAIL_SCHEDULER.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Fire&Forget\\Auto Mail\\ERoyal.OCRDailyReportAutomation\\ERoyal.OCRDailyReportAutomation\\AI_MAIL_SCHEDULER.csproj",
+        "projectUniqueName": "E:\\Fire& Forget_Last Host Complete BackUp\\Fire&Forget\\Auto Mail\\ERoyal.OCRDailyReportAutomation\\ERoyal.OCRDailyReportAutomation\\AI_MAIL_SCHEDULER.csproj",
         "projectName": "AI_MAIL_SCHEDULER",
-        "projectPath": "E:\\Fire&Forget\\Auto Mail\\ERoyal.OCRDailyReportAutomation\\ERoyal.OCRDailyReportAutomation\\AI_MAIL_SCHEDULER.csproj",
+        "projectPath": "E:\\Fire& Forget_Last Host Complete BackUp\\Fire&Forget\\Auto Mail\\ERoyal.OCRDailyReportAutomation\\ERoyal.OCRDailyReportAutomation\\AI_MAIL_SCHEDULER.csproj",
         "packagesPath": "C:\\Users\\ROYAL D\\.nuget\\packages\\",
-        "outputPath": "E:\\Fire&Forget\\Auto Mail\\ERoyal.OCRDailyReportAutomation\\ERoyal.OCRDailyReportAutomation\\obj\\",
+        "outputPath": "E:\\Fire& Forget_Last Host Complete BackUp\\Fire&Forget\\Auto Mail\\ERoyal.OCRDailyReportAutomation\\ERoyal.OCRDailyReportAutomation\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

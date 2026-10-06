@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "oEdYz0AAyPA=",
+  "dgSpecHash": "xQVPjZeui7U=",
   "success": true,
-  "projectFilePath": "E:\\Fire&Forget\\Auto Mail\\ERoyal.OCRDailyReportAutomation\\ERoyal.OCRDailyReportAutomation\\AI_MAIL_SCHEDULER.csproj",
+  "projectFilePath": "E:\\Fire& Forget_Last Host Complete BackUp\\Fire&Forget\\Auto Mail\\ERoyal.OCRDailyReportAutomation\\ERoyal.OCRDailyReportAutomation\\AI_MAIL_SCHEDULER.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ROYAL D\\.nuget\\packages\\azure.core\\1.47.1\\azure.core.1.47.1.nupkg.sha512",
     "C:\\Users\\ROYAL D\\.nuget\\packages\\azure.identity\\1.14.2\\azure.identity.1.14.2.nupkg.sha512",
